@@ -11,3 +11,4 @@ class AdminDashboardController extends Controller
     {
         return view('pages.admin.dashboard');
     }
+}

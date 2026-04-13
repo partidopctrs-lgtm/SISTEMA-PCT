@@ -11,3 +11,4 @@ class FinanceController extends Controller
     {
         return view('pages.finance.dashboard');
     }
+}

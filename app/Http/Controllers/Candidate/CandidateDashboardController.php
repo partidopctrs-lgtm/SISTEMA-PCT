@@ -11,3 +11,4 @@ class CandidateDashboardController extends Controller
     {
         return view('pages.candidate.dashboard');
     }
+}

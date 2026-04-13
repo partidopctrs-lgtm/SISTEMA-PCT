@@ -17,3 +17,4 @@ class RegistrationController extends Controller
         // Validation and creation logic here
         return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso! Aguarde a aprovação.');
     }
+}

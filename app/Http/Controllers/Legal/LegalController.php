@@ -11,3 +11,4 @@ class LegalController extends Controller
     {
         return view('pages.legal.dashboard');
     }
+}

@@ -11,3 +11,4 @@ class AffiliateDashboardController extends Controller
     {
         return view('pages.affiliate.dashboard');
     }
+}

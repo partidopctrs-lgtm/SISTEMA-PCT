@@ -11,3 +11,4 @@ class CommitteeDashboardController extends Controller
     {
         return view('pages.committee.dashboard');
     }
+}
