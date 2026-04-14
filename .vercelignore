@@ -1,0 +1,12 @@
+# Ignorar arquivos de desenvolvimento (a Vercel não precisa deles)
+node_modules
+.git
+.github
+tests
+storage/app/public
+storage/debugbar
+storage/logs/*.log
+*.phar
+phpunit.xml
+.editorconfig
+composer.phar
