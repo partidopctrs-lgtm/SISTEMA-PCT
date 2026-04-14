@@ -1,15 +1,16 @@
 {
     "version": 2,
-    "framework": "laravel",
-    "public": true,
+    "buildCommand": "npm run build",
     "outputDirectory": "public",
-    "rewrites": [
-        { "source": "/(.*)", "destination": "/index.php" }
-    ],
-    "env": {
-        "APP_ENV": "production",
-        "APP_DEBUG": "false",
-        "LOG_CHANNEL": "stderr",
-        "DB_CONNECTION": "mysql"
-    }
+    "framework": "laravel",
+    "routes": [
+        {
+            "src": "/build/(.*)",
+            "dest": "/build/$1"
+        },
+        {
+            "src": "/(.*)",
+            "dest": "/index.php"
+        }
+    ]
 }
