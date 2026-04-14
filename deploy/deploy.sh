@@ -69,8 +69,11 @@ php $APP_DIR/artisan view:cache
 # --- 9. Permissões + Nginx ---
 echo "[9/9] Permissões e Nginx..."
 chown -R nginx:nginx $APP_DIR
-chmod -R 755 $APP_DIR/storage
-chmod -R 755 $APP_DIR/bootstrap/cache
+# PHP-FPM roda como apache — storage e cache precisam ser do apache
+chown -R apache:apache $APP_DIR/storage
+chown -R apache:apache $APP_DIR/bootstrap/cache
+chmod -R 775 $APP_DIR/storage
+chmod -R 775 $APP_DIR/bootstrap/cache
 
 # Instalar config do Nginx
 cp $APP_DIR/deploy/nginx-pct.conf /etc/nginx/conf.d/pct.hotdogdovini.com.br.conf
