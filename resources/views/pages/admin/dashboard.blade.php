@@ -40,16 +40,33 @@
         <!-- New Member Registration -->
         <div class="glass p-10 rounded-[2.5rem] shadow-sm bg-gradient-to-br from-white to-pct-green/5">
             <h3 class="text-xl font-black text-pct-blue mb-8">Cadastrar Novo Membro</h3>
-            <form action="#" method="POST" class="space-y-6">
+            
+            @if(session('success'))
+                <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-2xl text-sm font-medium">
+                    {{ session('success') }}
+                </div>
+            @endif
+
+            @if($errors->any())
+                <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-2xl text-sm font-medium">
+                    <ul class="list-disc list-inside">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('admin.storeMember') }}" method="POST" class="space-y-6">
                 @csrf
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                         <label class="block text-[10px] font-black text-pct-blue uppercase tracking-widest mb-2 opacity-60">Nome Completo</label>
-                        <input type="text" placeholder="Ex: Maria oliveira" class="w-full px-5 py-4 bg-white/50 border border-gray-100 rounded-2xl outline-none focus:ring-2 focus:ring-pct-green">
+                        <input type="text" name="name" required placeholder="Ex: Maria oliveira" class="w-full px-5 py-4 bg-white/50 border border-gray-100 rounded-2xl outline-none focus:ring-2 focus:ring-pct-green">
                     </div>
                     <div>
                         <label class="block text-[10px] font-black text-pct-blue uppercase tracking-widest mb-2 opacity-60">Cargo / Função</label>
-                        <select class="w-full px-5 py-4 bg-white/50 border border-gray-100 rounded-2xl outline-none focus:ring-2 focus:ring-pct-green">
+                        <select name="role" required class="w-full px-5 py-4 bg-white/50 border border-gray-100 rounded-2xl outline-none focus:ring-2 focus:ring-pct-green">
                             <option value="admin">Presidente / Nacional</option>
                             <option value="committee">Líder Regional</option>
                             <option value="finance">Tesoureiro</option>
@@ -60,7 +77,7 @@
                 </div>
                 <div>
                     <label class="block text-[10px] font-black text-pct-blue uppercase tracking-widest mb-2 opacity-60">E-mail de Acesso</label>
-                    <input type="email" placeholder="maria@pct.org.br" class="w-full px-5 py-4 bg-white/50 border border-gray-100 rounded-2xl outline-none focus:ring-2 focus:ring-pct-green">
+                    <input type="email" name="email" required placeholder="maria@pct.org.br" class="w-full px-5 py-4 bg-white/50 border border-gray-100 rounded-2xl outline-none focus:ring-2 focus:ring-pct-green">
                 </div>
                 <button type="submit" class="btn-primary w-full py-5 text-lg font-black rounded-2xl shadow-lg">SALVAR NOVO MEMBRO</button>
             </form>

@@ -9,4 +9,5 @@ Route::post('/admin/logout', [DepartmentLoginController::class, 'logout'])->name
 
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::post('/dashboard/member', [AdminDashboardController::class, 'storeMember'])->name('admin.storeMember');
 });
