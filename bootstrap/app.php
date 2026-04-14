@@ -10,19 +10,19 @@ return Application::configure(basePath: dirname(__DIR__))
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
         then: function () {
-            Route::middleware(['web', 'auth'])
+            Route::middleware('web')
                 ->group(base_path('routes/admin.php'));
-            Route::middleware(['web', 'auth'])
+            Route::middleware('web')
                 ->group(base_path('routes/affiliate.php'));
-            Route::middleware(['web', 'auth'])
+            Route::middleware('web')
                 ->group(base_path('routes/candidate.php'));
-            Route::middleware(['web', 'auth'])
+            Route::middleware('web')
                 ->group(base_path('routes/committee.php'));
-            Route::middleware(['web', 'auth'])
+            Route::middleware('web')
                 ->group(base_path('routes/finance.php'));
-            Route::middleware(['web', 'auth'])
+            Route::middleware('web')
                 ->group(base_path('routes/legal.php'));
-            Route::middleware(['web', 'auth'])
+            Route::middleware('web')
                 ->group(base_path('routes/communication.php'));
         },
     )

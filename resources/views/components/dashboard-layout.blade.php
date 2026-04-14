@@ -62,9 +62,9 @@
         </nav>
 
         <div class="p-4 border-t border-blue-800">
-            <form action="#" method="POST">
+            <form action="{{ route('admin.logout') }}" method="POST">
                 @csrf
-                <button class="flex items-center w-full px-4 py-3 rounded-xl hover:bg-red-600 hover:text-white transition-colors group">
+                <button type="submit" class="flex items-center w-full px-4 py-3 rounded-xl hover:bg-red-600 hover:text-white transition-colors group">
                     <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
                     <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Sair</span>
                 </button>

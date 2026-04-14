@@ -34,14 +34,14 @@ class UserSeeder extends Seeder
                 'email' => 'candidato@pct.org.br',
                 'password' => $password,
                 'role' => 'candidate',
-                'registration_number' => 'PCT003',
+                'registration_number' => 'PCT-RS-001',
             ],
             [
-                'name' => 'Comitê Porto Alegre',
+                'name' => 'Líder Comitê POA',
                 'email' => 'comite@pct.org.br',
                 'password' => $password,
                 'role' => 'committee',
-                'registration_number' => 'PCT004',
+                'registration_number' => 'PCT-POA-LID',
             ],
             [
                 'name' => 'Tesouraria PCT',

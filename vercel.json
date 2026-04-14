@@ -1,0 +1,15 @@
+{
+    "version": 2,
+    "framework": "laravel",
+    "public": true,
+    "outputDirectory": "public",
+    "rewrites": [
+        { "source": "/(.*)", "destination": "/index.php" }
+    ],
+    "env": {
+        "APP_ENV": "production",
+        "APP_DEBUG": "false",
+        "LOG_CHANNEL": "stderr",
+        "DB_CONNECTION": "mysql"
+    }
+}

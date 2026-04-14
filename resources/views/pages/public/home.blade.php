@@ -19,7 +19,7 @@
             </div>
             <div class="md:w-1/2 relative">
                 <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
-                    <img src="https://images.unsplash.com/photo-1541872703-74c5e443d1f5?auto=format&fit=crop&q=80&w=1000" alt="Brazil Worker" class="object-cover w-full h-[500px]">
+                    <img src="{{ asset('Bandeira do Movimento PCT em céu claro.png') }}" alt="Bandeira do Movimento PCT" class="object-cover w-full h-[500px]">
                 </div>
                 <!-- Decorative elements -->
                 <div class="absolute -top-10 -right-10 w-40 h-40 bg-pct-green/10 rounded-full blur-3xl"></div>
