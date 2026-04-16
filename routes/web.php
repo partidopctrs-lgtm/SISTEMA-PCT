@@ -1,4 +1,5 @@
 <?php
+/** PCT Platform Routes - v1.0.1 **/
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Public\HomeController;
