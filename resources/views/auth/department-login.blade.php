@@ -85,7 +85,7 @@
                             <label for="remember" class="ml-3 block text-xs text-pct-blue font-bold uppercase tracking-tighter cursor-pointer">Manter Conectado</label>
                         </div>
                         <div class="text-xs">
-                            <a href="#" onclick="alert('Funcionalidade em desenvolvimento. Entre em contato com admin@pct.org.br por enquanto.'); return false;" class="font-bold text-pct-green hover:underline">Recuperar dados</a>
+                            <a href="https://wa.me/5551933806899" target="_blank" class="font-bold text-pct-green hover:underline">Esqueci meus dados</a>
                         </div>
                     </div>
 
@@ -99,11 +99,15 @@
             </div>
 
             <!-- Back to Site Link -->
-            <div class="mt-12 text-center">
+            <div class="mt-12 text-center flex flex-col items-center space-y-4">
                 <a href="/" class="inline-flex items-center text-xs font-black text-pct-blue uppercase tracking-widest hover:text-pct-green transition-colors pb-1 border-b-2 border-transparent hover:border-pct-green">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
                     Voltar para o site principal
                 </a>
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">
+                    Suporte: (51) 93380-6899 • (51) 3786-6302
+                </p>
+                <p class="text-[9px] font-bold text-gray-300 uppercase tracking-tighter">Taquara, RS / Brasil</p>
             </div>
         </div>
     </div>

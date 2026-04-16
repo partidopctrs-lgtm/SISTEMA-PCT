@@ -65,8 +65,33 @@
         <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
             <main class="flex max-w-[335px] w-full flex-col-reverse lg:max-w-4xl lg:flex-row">
                 <div class="text-[13px] leading-[20px] flex-1 p-6 pb-12 lg:p-20 bg-white dark:bg-[#161615] dark:text-[#EDEDEC] shadow-[inset_0px_0px_0px_1px_rgba(26,26,0,0.16)] dark:shadow-[inset_0px_0px_0px_1px_#fffaed2d] rounded-bl-lg rounded-br-lg lg:rounded-tl-lg lg:rounded-br-none">
-                    <h1 class="mb-1 font-medium">Let's get started</h1>
-                    <p class="mb-2 text-[#706f6c] dark:text-[#A1A09A]">Laravel has an incredibly rich ecosystem. <br>We suggest starting with the following.</p>
+                    <h1 class="mb-1 font-medium text-2xl text-blue-900">PCT – Movimento Cidadania e Trabalho</h1>
+                    <p class="mb-6 text-[#706f6c] dark:text-[#A1A09A] text-base">Iniciativa nacional independente com sede em **Taquara, RS**. Focada no desenvolvimento do Brasil através do trabalho e liberdade.</p>
+                    
+                    <div class="mb-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <a href="https://wa.me/5551933806899" target="_blank" class="p-4 bg-emerald-50 border border-emerald-100 rounded-2xl flex items-center gap-3 hover:bg-emerald-100 transition-all">
+                            <span class="text-2xl">📱</span>
+                            <div>
+                                <p class="text-[10px] font-black uppercase text-emerald-600">WhatsApp Oficial</p>
+                                <p class="text-sm font-bold text-gray-800">(51) 93380-6899</p>
+                            </div>
+                        </a>
+                        <div class="p-4 bg-blue-50 border border-blue-100 rounded-2xl flex items-center gap-3">
+                            <span class="text-2xl">📞</span>
+                            <div>
+                                <p class="text-[10px] font-black uppercase text-blue-600">Telefone Fixo</p>
+                                <p class="text-sm font-bold text-gray-800">(51) 3786-6302</p>
+                            </div>
+                        </div>
+                        <a href="https://www.facebook.com/MovimentoPCT/" target="_blank" class="p-4 bg-blue-100 border border-blue-200 rounded-2xl flex items-center gap-3 hover:bg-blue-200 transition-all md:col-span-2">
+                             <span class="text-2xl">🌐</span>
+                             <div>
+                                <p class="text-[10px] font-black uppercase text-blue-800">Siga-nos no Facebook</p>
+                                <p class="text-sm font-bold text-gray-800">facebook.com/MovimentoPCT</p>
+                            </div>
+                        </a>
+                    </div>
+
                     <ul class="flex flex-col mb-4 lg:mb-6">
                         <li class="flex items-center gap-4 py-2 relative before:border-l before:border-[#e3e3e0] dark:before:border-[#3E3E3A] before:top-1/2 before:bottom-0 before:left-[0.4rem] before:absolute">
                             <span class="relative py-1 bg-white dark:bg-[#161615]">

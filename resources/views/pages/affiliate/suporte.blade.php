@@ -85,23 +85,40 @@
 
                 <div class="card-premium">
                     <h3 class="text-lg font-bold text-pct-blue mb-6">Canais Diretos</h3>
-                    <div class="space-y-6">
-                        <a href="#" class="flex items-center gap-4 group">
-                            <div class="h-10 w-10 bg-emerald-50 text-pct-green rounded-xl flex items-center justify-center group-hover:bg-pct-green group-hover:text-white transition-all">
+                    <div class="space-y-4">
+                        <a href="https://wa.me/5551933806899" target="_blank" class="flex items-center gap-4 p-4 bg-emerald-50 text-emerald-700 rounded-2xl group hover:bg-emerald-100 transition-all">
+                            <div class="h-10 w-10 bg-white text-pct-green rounded-xl flex items-center justify-center shadow-sm">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .004 5.408.001 12.045a11.811 11.811 0 001.591 5.976L0 24l6.117-1.604a11.83 11.83 0 005.93 1.597h.005c6.634 0 12.043-5.408 12.043-12.045a11.81 11.81 0 00-3.52-8.511z"></path></svg>
                             </div>
                             <div class="text-left">
-                                <p class="text-sm font-bold text-gray-900">WhatsApp Oficial</p>
-                                <p class="text-xs text-gray-500 font-medium">Resposta instantânea</p>
+                                <p class="text-sm font-black">Suporte WhatsApp</p>
+                                <p class="text-[10px] opacity-70 font-bold uppercase">Atendimento Direto</p>
                             </div>
                         </a>
-                        <a href="mailto:contato@pct.org.br" class="flex items-center gap-4 group">
-                            <div class="h-10 w-10 bg-blue-50 text-pct-blue rounded-xl flex items-center justify-center group-hover:bg-pct-blue group-hover:text-white transition-all">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+
+                        <a href="https://chat.whatsapp.com/Hw91zhGHumI5gtKM6S41OX" target="_blank" class="flex items-center gap-4 p-4 bg-blue-50 text-blue-700 rounded-2xl group hover:bg-blue-100 transition-all border border-blue-100">
+                            <div class="h-10 w-10 bg-white text-blue-600 rounded-xl flex items-center justify-center shadow-sm">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                             </div>
                             <div class="text-left">
-                                <p class="text-sm font-bold text-gray-900">E-mail Direto</p>
-                                <p class="text-xs text-gray-500 font-medium">contato@pct.org.br</p>
+                                <p class="text-sm font-black text-blue-900">Grupo de Discussão</p>
+                                <p class="text-[10px] opacity-70 font-bold uppercase">Comunidade no WhatsApp</p>
+                            </div>
+                        </a>
+
+                        <a href="https://www.facebook.com/share/g/1AxgCCJ8Mu/" target="_blank" class="flex items-center gap-4 p-4 bg-slate-50 text-slate-700 rounded-2xl group hover:bg-white border border-slate-100 transition-all hover:shadow-md">
+                            <div class="h-10 w-10 bg-blue-600 text-white rounded-xl flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform">
+                                <span class="font-black text-xs italic">f</span>
+                            </div>
+                            <div class="text-left">
+                                <p class="text-sm font-black text-slate-900">Grupo Facebook</p>
+                                <p class="text-[10px] opacity-70 font-bold uppercase">Fórum do Movimento</p>
+                            </div>
+                        </a>
+
+                        <a href="mailto:contato@pct.org.br" class="flex items-center gap-4 p-4 text-gray-500 hover:text-pct-blue transition-colors">
+                            <div class="text-left w-full">
+                                <p class="text-[10px] font-black uppercase text-center border-t border-gray-100 pt-4">contato@pct.org.br</p>
                             </div>
                         </a>
                     </div>
