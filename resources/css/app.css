@@ -6,28 +6,47 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Montserrat', 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
     
     --color-pct-blue: #1e3a8a;
+    --color-pct-blue-dark: #1e293b;
     --color-pct-green: #10b981;
+    --color-pct-green-light: #dcfce7;
     --color-pct-white: #ffffff;
-    --color-pct-gray: #f9fafb;
+    --color-pct-gray: #f8fafc;
 }
 
 @layer base {
     body {
-        @apply bg-[var(--color-pct-gray)] text-gray-900;
+        @apply bg-[var(--color-pct-gray)] text-slate-900 selection:bg-pct-green selection:text-white tracking-[0.015em];
     }
 }
 
 .glass {
-    @apply bg-white/80 backdrop-blur-md border border-white/20;
+    @apply bg-white/70 backdrop-blur-xl border border-white/40 shadow-sm;
+}
+
+.glass-dark {
+    @apply bg-pct-blue/10 backdrop-blur-lg border border-pct-blue/20;
 }
 
 .btn-primary {
-    @apply bg-[var(--color-pct-blue)] text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-800 transition-all shadow-md;
+    @apply bg-pct-blue text-white px-8 py-3 rounded-full font-bold hover:bg-pct-blue-dark transition-all shadow-lg hover:shadow-pct-blue/20 hover:-translate-y-0.5 active:translate-y-0;
 }
 
 .btn-secondary {
-    @apply bg-[var(--color-pct-green)] text-white px-6 py-2 rounded-lg font-semibold hover:bg-emerald-600 transition-all shadow-md;
+    @apply bg-pct-green text-white px-8 py-3 rounded-full font-bold hover:bg-emerald-600 transition-all shadow-lg hover:shadow-pct-green/20 hover:-translate-y-0.5 active:translate-y-0;
 }
+
+.accent-gradient {
+    @apply bg-gradient-to-br from-pct-blue via-pct-blue to-pct-green;
+}
+
+.text-gradient {
+    @apply bg-gradient-to-r from-pct-blue to-pct-green bg-clip-text text-transparent;
+}
+
+.card-premium {
+    @apply bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-xl shadow-slate-200/50 hover:shadow-2xl hover:shadow-pct-blue/5 transition-all duration-500 hover:-translate-y-2;
+}
+

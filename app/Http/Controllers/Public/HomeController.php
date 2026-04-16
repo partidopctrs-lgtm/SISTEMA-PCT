@@ -21,4 +21,9 @@ class HomeController extends Controller
     {
         return view('pages.public.proposals');
     }
+
+    public function ethics()
+    {
+        return view('pages.public.ethics');
+    }
 }

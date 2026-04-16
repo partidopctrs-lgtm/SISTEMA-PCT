@@ -1,0 +1,22 @@
+{
+    "name": "PCT - Movimento Cidadania e Trabalho",
+    "short_name": "PCT",
+    "description": "Movimento nacional independente focado no desenvolvimento do Brasil.",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#1e3a8a",
+    "icons": [
+        {
+            "src": "/logo.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

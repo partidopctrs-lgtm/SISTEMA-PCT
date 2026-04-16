@@ -49,7 +49,7 @@
                     <div class="flex items-center">
                         <input id="terms" name="terms" type="checkbox" required class="h-4 w-4 text-pct-blue focus:ring-pct-blue border-gray-300 rounded">
                         <label for="terms" class="ml-2 block text-sm text-gray-700">
-                            Eu concordo com o <a href="#" class="font-medium text-pct-green hover:text-emerald-600 underline">Estatuto e Manifesto</a> do PCT.
+                            Eu concordo com o <a target="_blank" href="{{ route('manifesto') }}" class="font-medium text-pct-green hover:text-emerald-600 underline">Estatuto e Manifesto</a> do PCT.
                         </label>
                     </div>
 

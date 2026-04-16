@@ -4,15 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ $title ?? 'PCT - Partido Cidadania e Trabalho' }}</title>
+    <title>{{ $title ?? 'PCT - Movimento Cidadania e Trabalho' }}</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1e3a8a">
+    <link rel="apple-touch-icon" href="/logo.png">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js');
+            });
+        }
+    </script>
+
     
     <style>
         [x-cloak] { display: none !important; }
@@ -33,7 +48,7 @@
                             <a href="{{ route('home') }}" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Home</a>
                             <a href="{{ route('manifesto') }}" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Manifesto</a>
                             <a href="{{ route('propostas') }}" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Propostas</a>
-                            <a href="#" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Transparência</a>
+                            <a href="#" onclick="alert('Área de Transparência em breve.'); return false;" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Transparência</a>
                         </div>
                     </div>
                     <div class="flex items-center space-x-4">
@@ -59,7 +74,7 @@
                             <span class="text-2xl font-bold tracking-tight text-white">PCT</span>
                         </div>
                         <p class="text-blue-100 max-w-sm">
-                            Partido Cidadania e Trabalho (Movimento). Um projeto focado na dignidade do cidadão e no valor transformador do trabalho.
+                            O PCT – Movimento Cidadania e Trabalho é uma iniciativa nacional independente focada no desenvolvimento do Brasil por meio do trabalho e da liberdade econômica.
                         </p>
                     </div>
                     <div>
@@ -68,6 +83,7 @@
                             <li><a href="{{ route('home') }}" class="hover:text-white transition-colors">Página Inicial</a></li>
                             <li><a href="{{ route('manifesto') }}" class="hover:text-white transition-colors">Manifesto</a></li>
                             <li><a href="{{ route('propostas') }}" class="hover:text-white transition-colors">Propostas</a></li>
+                            <li><a href="{{ route('ethics') }}" class="hover:text-white transition-colors">Código de Ética</a></li>
                             <li><a href="{{ route('register.index') }}" class="hover:text-white transition-colors">Filie-se</a></li>
                         </ul>
                     </div>

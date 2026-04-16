@@ -72,7 +72,7 @@
                             <label for="remember" class="ml-3 block text-xs text-pct-blue font-bold uppercase tracking-tighter cursor-pointer">Manter Conectado</label>
                         </div>
                         <div class="text-xs">
-                             <a href="#" class="font-bold text-pct-green hover:underline">Recuperar dados</a>
+                            <a href="#" onclick="alert('Funcionalidade em desenvolvimento. Entre em contato com admin@pct.org.br por enquanto.'); return false;" class="font-bold text-pct-green hover:underline">Recuperar dados</a>
                         </div>
                     </div>
 

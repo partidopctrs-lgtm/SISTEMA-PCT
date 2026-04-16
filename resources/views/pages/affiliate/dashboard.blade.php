@@ -40,13 +40,13 @@
         <div class="glass p-8 rounded-3xl shadow-sm border-t-4 border-pct-blue">
             <h3 class="text-xl font-bold text-pct-blue mb-4">Materiais</h3>
             <div class="space-y-4">
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer group">
+                <a href="https://docs.google.com/document/d/1ViPiyoq-IniGtDfZpdOjckftzqL29i1NKpoLLq4vEq8/export?format=pdf" target="_blank" class="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer group">
                     <div class="flex items-center space-x-3">
                         <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path d="M4 18a2 2 0 01-2-2V4a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H4zm0-2h12V4H4v12zm3-10h6v2H7V6zm0 4h6v2H7v-2zm0 4h3v2H7v-2z"></path></svg>
-                        <span class="text-sm font-semibold text-gray-800">Manifesto Oficial</span>
+                        <span class="text-sm font-semibold text-gray-800">Manifesto Oficial (PDF)</span>
                     </div>
                     <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                </div>
+                </a>
                 <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer group">
                     <div class="flex items-center space-x-3">
                         <svg class="w-6 h-6 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
@@ -54,13 +54,13 @@
                     </div>
                     <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                 </div>
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer group">
+                <a href="{{ route('affiliate.membership_form') }}" class="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer group">
                     <div class="flex items-center space-x-3">
                         <svg class="w-6 h-6 text-pct-green" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg>
                         <span class="text-sm font-semibold text-gray-800">Ficha de Apoio</span>
                     </div>
-                    <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                </div>
+                    <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                </a>
             </div>
         </div>
     </div>

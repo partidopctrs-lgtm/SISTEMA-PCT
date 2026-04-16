@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules\Password;
 
 class RegistrationController extends Controller
 {
@@ -14,7 +17,25 @@ class RegistrationController extends Controller
 
     public function store(Request $request)
     {
-        // Validation and creation logic here
-        return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso! Aguarde a aprovação.');
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'cpf' => 'required|string|max:14|unique:users',
+            'phone' => 'required|string|max:20',
+            'password' => ['required', Password::defaults()],
+        ]);
+
+        $user = User::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'cpf' => $validated['cpf'],
+            'phone' => $validated['phone'],
+            'password' => Hash::make($validated['password']),
+            'role' => 'affiliate',
+            'registration_number' => 'PCT-' . strtoupper(substr(uniqid(), -6)),
+            'status' => 'active', // Set to active for immediate login testing
+        ]);
+
+        return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso! Agora você pode acessar o Portal do Afiliado.');
     }
 }

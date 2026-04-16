@@ -114,6 +114,26 @@ return [
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
 
+        'vps' => [
+            'driver' => 'mariadb',
+            'url' => env('DB_URL'),
+            'host' => env('DB_VPS_HOST', '127.0.0.1'),
+            'port' => env('DB_VPS_PORT', '3306'),
+            'database' => env('DB_VPS_DATABASE', 'pct_db'),
+            'username' => env('DB_VPS_USERNAME', 'pct_user'),
+            'password' => env('DB_VPS_PASSWORD', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
+                PDO::ATTR_TIMEOUT => 3, // Short timeout for fallback detection
+            ]) : [],
+        ],
+
+
     ],
 
     /*

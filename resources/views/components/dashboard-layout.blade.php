@@ -10,9 +10,23 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- PWA Meta Tags -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#1e3a8a">
+    <link rel="apple-touch-icon" href="/logo.png">
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js');
+            });
+        }
+    </script>
+
     
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
@@ -31,33 +45,90 @@
         </div>
         
         <nav class="flex-grow overflow-y-auto py-6">
-            <div class="px-4 space-y-2">
-                <!-- Generic Links based on Role would go here -->
-                <a href="#" class="flex items-center px-4 py-3 rounded-xl hover:bg-blue-800 transition-colors group">
+            <div class="px-4 space-y-1">
+                @php 
+                    $role = auth()->user()->role ?? 'affiliate';
+                    $isAffiliate = $role === 'affiliate';
+                @endphp
+
+                <!-- Dashbaord (Geral) -->
+                <a href="{{ route($role . '.dashboard') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-blue-800 transition-all group {{ request()->routeIs($role . '.dashboard') ? 'bg-blue-800' : '' }}">
                     <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                     <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Dashboard</span>
                 </a>
+
+                @if($isAffiliate)
+                    <div class="pt-4 pb-1 px-4 uppercase text-[10px] font-black text-blue-400 tracking-[0.2em]" x-show="sidebarOpen">Identidade</div>
+                    
+                    <a href="{{ route('affiliate.profile') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-blue-800 transition-all group {{ request()->routeIs('affiliate.profile') ? 'bg-blue-800' : '' }}">
+                        <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Meu Perfil</span>
+                    </a>
+
+                    <a href="{{ route('affiliate.carteirinha') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-blue-800 transition-all group {{ request()->routeIs('affiliate.carteirinha') ? 'bg-blue-800' : '' }}">
+                        <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
+                        <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Carteirinha Digital</span>
+                    </a>
+
+                    <div class="pt-4 pb-1 px-4 uppercase text-[10px] font-black text-blue-400 tracking-[0.2em]" x-show="sidebarOpen">Formação & Missões</div>
+
+                    <a href="{{ route('affiliate.escola') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-blue-800 transition-all group {{ request()->routeIs('affiliate.escola') ? 'bg-blue-800' : '' }}">
+                        <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Escola PCT</span>
+                    </a>
+
+                    <a href="{{ route('affiliate.missoes') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-blue-800 transition-all group {{ request()->routeIs('affiliate.missoes') ? 'bg-blue-800' : '' }}">
+                        <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
+                        <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Atividades</span>
+                    </a>
+
+                    <div class="pt-4 pb-1 px-4 uppercase text-[10px] font-black text-blue-400 tracking-[0.2em]" x-show="sidebarOpen">Crescimento</div>
+
+                    <a href="{{ route('affiliate.convites') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-blue-800 transition-all group {{ request()->routeIs('affiliate.convites') ? 'bg-blue-800' : '' }}">
+                        <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+                        <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Indicações</span>
+                    </a>
+
+                    <a href="{{ route('affiliate.comunidade') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-blue-800 transition-all group {{ request()->routeIs('affiliate.comunidade') ? 'bg-blue-800' : '' }}">
+                        <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Comunidade</span>
+                    </a>
+
+                    <div class="pt-4 pb-1 px-4 uppercase text-[10px] font-black text-blue-400 tracking-[0.2em]" x-show="sidebarOpen">Gestão</div>
+
+                    <a href="{{ route('affiliate.documentos') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-blue-800 transition-all group {{ request()->routeIs('affiliate.documentos') ? 'bg-blue-800' : '' }}">
+                        <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Documentos</span>
+                    </a>
+
+                    <a href="{{ route('affiliate.eventos') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-blue-800 transition-all group {{ request()->routeIs('affiliate.eventos') ? 'bg-blue-800' : '' }}">
+                        <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Eventos</span>
+                    </a>
+
+                    <a href="{{ route('affiliate.financeiro') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-blue-800 transition-all group {{ request()->routeIs('affiliate.financeiro') ? 'bg-blue-800' : '' }}">
+                        <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Financeiro</span>
+                    </a>
+
+                    <a href="{{ route('affiliate.suporte') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-blue-800 transition-all group {{ request()->routeIs('affiliate.suporte') ? 'bg-blue-800' : '' }}">
+                        <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Suporte</span>
+                    </a>
+
+                    <a href="{{ route('affiliate.configuracoes') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-blue-800 transition-all group {{ request()->routeIs('affiliate.configuracoes') ? 'bg-blue-800' : '' }}">
+                        <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Configurações</span>
+                    </a>
+                @endif
                 
                 @if(auth()->user() && auth()->user()->role === 'admin')
-                    <div class="pt-4 pb-2 px-4 uppercase text-xs font-bold text-blue-400 tracking-wider" x-show="sidebarOpen">Gestão Partido</div>
-                    <a href="{{ route('admin.dashboard') }}" class="flex items-center px-4 py-3 rounded-xl hover:bg-blue-800 transition-colors group">
+                    <div class="pt-4 pb-1 px-4 uppercase text-[10px] font-black text-blue-400 tracking-[0.2em]" x-show="sidebarOpen">Administração</div>
+                    <a href="{{ route('admin.dashboard') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-blue-800 transition-all group">
                         <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                         <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Usuários</span>
                     </a>
                 @endif
-
-                @if(auth()->user() && (auth()->user()->role === 'finance' || auth()->user()->role === 'admin'))
-                    <a href="{{ route('finance.dashboard') }}" class="flex items-center px-4 py-3 rounded-xl hover:bg-blue-800 transition-colors group">
-                        <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Tesouraria</span>
-                    </a>
-                @endif
-                
-                <div class="pt-4 pb-2 px-4 uppercase text-xs font-bold text-blue-400 tracking-wider" x-show="sidebarOpen">Configurações</div>
-                 <a href="#" class="flex items-center px-4 py-3 rounded-xl hover:bg-blue-800 transition-colors group">
-                    <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                    <span class="ml-3 font-medium whitespace-nowrap" x-show="sidebarOpen">Meu Perfil</span>
-                </a>
             </div>
         </nav>
 
