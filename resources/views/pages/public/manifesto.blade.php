@@ -14,10 +14,14 @@
                 <p class="text-xl md:text-2xl text-slate-500 italic font-medium leading-relaxed mb-10">
                     "O PCT nasce com o propósito claro de fortalecer a cidadania ativa e promover soluções reais com base na liberdade e na transparência."
                 </p>
-                <div class="flex justify-center">
-                    <a href="https://docs.google.com/document/d/1ViPiyoq-IniGtDfZpdOjckftzqL29i1NKpoLLq4vEq8/export?format=pdf" target="_blank" class="inline-flex items-center px-8 py-3 bg-white border-2 border-pct-blue text-pct-blue font-bold rounded-full hover:bg-pct-blue hover:text-white transition-all shadow-lg hover:shadow-pct-blue/20">
-                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-                        Baixar Manifesto em PDF
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="{{ route('manifesto') }}" class="inline-flex items-center px-8 py-3 bg-white border-2 border-pct-blue text-pct-blue font-bold rounded-full hover:bg-pct-blue hover:text-white transition-all shadow-lg hover:shadow-pct-blue/20">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                        Ler Manifesto Online
+                    </a>
+                    <a href="{{ route('estatuto') }}" class="inline-flex items-center px-8 py-3 bg-white border-2 border-pct-green text-pct-green font-bold rounded-full hover:bg-pct-green hover:text-white transition-all shadow-lg hover:shadow-pct-green/20">
+                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                        Ver Estatuto Oficial
                     </a>
                 </div>
             </div>

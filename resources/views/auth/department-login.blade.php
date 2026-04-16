@@ -60,7 +60,7 @@
                     </div>
                 @endif
 
-                <form class="space-y-8" action="{{ url($path . '/login') }}" method="POST">
+                <form class="space-y-8" action="{{ ($path === 'login' || $path === 'login-diretorio') ? url($path) : url($path . '/login') }}" method="POST">
                     @csrf
                     <div class="space-y-6">
                         <div class="group">

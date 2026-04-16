@@ -8,4 +8,6 @@ Route::post('/candidate/login', [DepartmentLoginController::class, 'login']);
 
 Route::middleware(['auth', 'role:candidate'])->prefix('candidate')->group(function () {
     Route::get('/dashboard', [CandidateDashboardController::class, 'index'])->name('candidate.dashboard');
+    Route::get('/modelos-oficios', [CandidateDashboardController::class, 'modelosOficios'])->name('candidate.modelos_oficios');
+    Route::get('/ficha-filiacao', [CandidateDashboardController::class, 'fichaFiliacao'])->name('candidate.ficha_filiacao');
 });

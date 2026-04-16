@@ -122,6 +122,16 @@
                 </div>
             </div>
             <button class="w-full mt-8 py-3 bg-white text-pct-blue font-bold rounded-xl hover:bg-blue-50 transition-colors">Abrir Mural de Avisos</button>
+            <div class="mt-4 pt-4 border-t border-white/10 space-y-3">
+                <a href="{{ route('committee.modelos_oficios') }}" class="flex items-center justify-between text-xs font-bold text-white hover:text-pct-green transition-colors group">
+                    <span class="uppercase tracking-widest text-[10px]">Modelos de Ofícios</span>
+                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+                <a href="{{ route('committee.ficha_filiacao') }}" class="flex items-center justify-between text-xs font-bold text-white hover:text-pct-green transition-colors group">
+                    <span class="uppercase tracking-widest text-[10px]">Ficha de Filiação</span>
+                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
         </div>
     </div>
 </x-dashboard-layout>

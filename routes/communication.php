@@ -8,4 +8,6 @@ Route::post('/communication/login', [DepartmentLoginController::class, 'login'])
 
 Route::middleware(['auth', 'role:communication'])->prefix('communication')->group(function () {
     Route::get('/dashboard', [CommunicationController::class, 'index'])->name('communication.dashboard');
+    Route::get('/modelos-oficios', [CommunicationController::class, 'modelosOficios'])->name('communication.modelos_oficios');
+    Route::get('/ficha-filiacao', [CommunicationController::class, 'fichaFiliacao'])->name('communication.ficha_filiacao');
 });

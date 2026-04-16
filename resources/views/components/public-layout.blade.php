@@ -82,8 +82,10 @@
                         <ul class="space-y-2 text-blue-100">
                             <li><a href="{{ route('home') }}" class="hover:text-white transition-colors">Página Inicial</a></li>
                             <li><a href="{{ route('manifesto') }}" class="hover:text-white transition-colors">Manifesto</a></li>
+                            <li><a href="{{ route('estatuto') }}" class="hover:text-white transition-colors">Estatuto Oficial</a></li>
                             <li><a href="{{ route('propostas') }}" class="hover:text-white transition-colors">Propostas</a></li>
                             <li><a href="{{ route('ethics') }}" class="hover:text-white transition-colors">Código de Ética</a></li>
+                            <li><a href="{{ route('modelos-oficios') }}" class="hover:text-white transition-colors">Modelos de Ofícios</a></li>
                             <li><a href="{{ route('register.index') }}" class="hover:text-white transition-colors">Filie-se</a></li>
                         </ul>
                     </div>

@@ -39,6 +39,17 @@ class AdminDashboardController extends Controller
     public function missoes() { return view('pages.admin.missoes'); }
     public function comunidade() { return view('pages.admin.comunidade'); }
     public function documentos() { return view('pages.admin.documentos'); }
+
+    public function modelosOficios()
+    {
+        return view('pages.shared.modelos-oficios');
+    }
+
+    public function fichaFiliacao()
+    {
+        return view('pages.shared.ficha-filiacao');
+    }
+
     public function eventos() { return view('pages.admin.eventos'); }
     public function financeiro() { return view('pages.admin.financeiro'); }
     public function suporte() { return view('pages.admin.suporte'); }

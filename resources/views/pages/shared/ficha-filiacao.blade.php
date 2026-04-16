@@ -4,11 +4,11 @@
     <!-- UI Controls (Hidden on Print) -->
     <div class="mb-8 flex justify-between items-center print:hidden">
         <div>
-            <h1 class="text-2xl font-black text-pct-blue">Sua Ficha de Filiação</h1>
-            <p class="text-gray-500">Imprima este documento para formalizar sua participação oficial.</p>
+            <h1 class="text-2xl font-black text-pct-blue">Ficha de Filiação Nacional</h1>
+            <p class="text-gray-500">Imprima este documento para formalizar novas participações no movimento.</p>
         </div>
         <div class="flex gap-4">
-            <a href="{{ route('affiliate.documentos') }}" class="btn-secondary px-6">
+            <a href="{{ url()->previous() }}" class="btn-secondary px-6">
                 Voltar
             </a>
             <button onclick="window.print()" class="btn-primary px-8 flex items-center gap-2 shadow-lg shadow-pct-blue/20">
@@ -30,7 +30,6 @@
                         <p class="text-[10px] font-bold text-pct-green tracking-[0.3em] uppercase">Movimento Cidadania e Trabalho</p>
                     </div>
                 </div>
-                <!-- Foto 3x4 Placeholder -->
                 <div class="w-[3cm] h-[4cm] border-2 border-dashed border-gray-300 rounded flex items-center justify-center text-center p-2">
                     <p class="text-[8px] font-bold text-gray-300 uppercase">Foto 3×4</p>
                 </div>
@@ -56,7 +55,6 @@
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Data de Nascimento</p>
                         <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">___/___/______</p>
                     </div>
-
                     <div class="col-span-2">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">CPF</p>
                         <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">___.___.___-__</p>
@@ -69,7 +67,6 @@
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Nacionalidade</p>
                         <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">Brasileira</p>
                     </div>
-
                     <div class="col-span-2">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Estado Civil</p>
                         <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">_________________</p>
@@ -85,15 +82,6 @@
                     <div class="col-span-1">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Seção</p>
                         <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">____</p>
-                    </div>
-
-                    <div class="col-span-3">
-                        <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Profissão / Ocupação</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">_________________________</p>
-                    </div>
-                    <div class="col-span-3">
-                        <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Escolaridade</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">_________________________</p>
                     </div>
                 </div>
             </div>
@@ -112,7 +100,6 @@
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Bairro</p>
                         <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">_________________</p>
                     </div>
-
                     <div class="col-span-2">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Cidade</p>
                         <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">_________________</p>
@@ -133,21 +120,6 @@
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">E-mail</p>
                         <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">____________________________________________________________</p>
                     </div>
-                </div>
-            </div>
-
-            <!-- 03. Áreas de Interesse -->
-            <div class="mb-10">
-                <div class="bg-slate-100 p-2 px-4 rounded mb-4 print:bg-gray-100">
-                    <h4 class="text-xs font-black text-pct-blue uppercase tracking-widest">03. Áreas de Interesse / Atuação</h4>
-                </div>
-                <div class="grid grid-cols-3 gap-y-3 px-4">
-                    @foreach(['Educação política', 'Comunicação', 'Captação de membros', 'Eventos e mobilização', 'Propostas e projetos', 'Núcleo local', 'Redes sociais', 'Jurídico', 'Outra área'] as $area)
-                    <div class="flex items-center gap-2">
-                        <div class="w-4 h-4 border border-gray-400 rounded-sm"></div>
-                        <span class="text-[10px] font-bold text-gray-700">{{ $area }}</span>
-                    </div>
-                    @endforeach
                 </div>
             </div>
 
@@ -175,15 +147,8 @@
                         <p class="text-center text-[9px] font-black uppercase text-gray-800">Assinatura do Filiado</p>
                     </div>
                 </div>
-                
-                <div class="mt-12 flex justify-center">
-                    <div class="w-2/3 border-t border-dashed border-gray-300 pt-1 text-center font-bold uppercase text-[9px] text-gray-400">
-                        Responsável pelo cadastro
-                    </div>
-                </div>
             </div>
 
-            <!-- Footer -->
             <div class="mt-24 pt-8 border-t border-gray-100 flex justify-between items-center opacity-40">
                 <p class="text-[8px] font-bold uppercase tracking-widest text-gray-400">Documento Gerado em: {{ now()->format('d/m/Y H:i') }}</p>
                 <p class="text-[8px] font-bold uppercase tracking-widest text-gray-400">PCT.SOCIAL.BR</p>
@@ -200,36 +165,20 @@
             }
         }
         @media print {
-            /* Hide all UI elements */
             aside, header, nav, footer, .print-hidden, .btn-primary, .btn-secondary, .sidebar-toggle { 
                 display: none !important; 
             }
-
-            /* Reset layout constraints for printing */
             body, html {
                 background: white !important;
                 height: auto !important;
                 overflow: visible !important;
                 width: 100% !important;
             }
-
-            div.flex.h-screen {
-                display: block !important;
-                height: auto !important;
-                overflow: visible !important;
-            }
-
-            div.flex-grow.flex.flex-col {
-                display: block !important;
-                width: 100% !important;
-            }
-
             main {
                 padding: 0 !important;
                 margin: 0 !important;
                 overflow: visible !important;
             }
-
             .a4-sheet {
                 width: 100% !important;
                 margin: 0 !important;
@@ -237,8 +186,6 @@
                 border: 0 !important;
                 box-shadow: none !important;
             }
-
-            /* Ensure colors and backgrounds print correctly */
             * {
                 -webkit-print-color-adjust: exact !important;
                 print-color-adjust: exact !important;

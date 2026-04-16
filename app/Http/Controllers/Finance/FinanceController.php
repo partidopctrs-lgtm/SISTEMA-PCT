@@ -11,4 +11,14 @@ class FinanceController extends Controller
     {
         return view('pages.finance.dashboard');
     }
+
+    public function modelosOficios()
+    {
+        return view('pages.shared.modelos-oficios');
+    }
+
+    public function fichaFiliacao()
+    {
+        return view('pages.shared.ficha-filiacao');
+    }
 }

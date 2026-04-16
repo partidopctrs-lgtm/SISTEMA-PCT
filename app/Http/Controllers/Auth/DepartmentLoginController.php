@@ -14,12 +14,14 @@ class DepartmentLoginController extends Controller
         $path = $request->segment(1);
         $titles = [
             'admin' => 'Portal da Presidência (Admin)',
+            'login' => 'Portal do Afiliado',
             'affiliate' => 'Portal do Afiliado',
             'candidate' => 'Gabinete Digital do Candidato',
             'committee' => 'Painel do Comitê Regional',
             'finance' => 'Tesouraria Digital (Financeiro)',
             'legal' => 'Compliance & Jurídico',
             'communication' => 'Portal da Comunicação',
+            'login-diretorio' => 'Portal da Presidência (Admin)',
         ];
 
         $title = $titles[$path] ?? 'Portal PCT';
@@ -30,6 +32,11 @@ class DepartmentLoginController extends Controller
     public function login(Request $request)
     {
         $path = $request->segment(1);
+        $role = match($path) {
+            'login-diretorio' => 'admin',
+            'login' => 'affiliate',
+            default => $path
+        };
         
         $request->validate([
             'email' => 'required|email',
@@ -40,9 +47,14 @@ class DepartmentLoginController extends Controller
             $user = Auth::user();
 
             // Validate if user has the correct role OR is national admin
-            if ($user->role === $path || $user->role === 'admin') {
+            if ($user->role === $role || $user->role === 'admin') {
                 $request->session()->regenerate();
-                return redirect("/{$path}/dashboard");
+                $targetPath = match ($role) {
+                    'admin' => 'admin',
+                    'affiliate' => 'affiliate',
+                    default => $path
+                };
+                return redirect("/{$targetPath}/dashboard");
             }
 
             Auth::logout();

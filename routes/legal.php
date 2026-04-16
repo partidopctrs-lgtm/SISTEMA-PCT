@@ -8,4 +8,6 @@ Route::post('/legal/login', [DepartmentLoginController::class, 'login']);
 
 Route::middleware(['auth', 'role:legal'])->prefix('legal')->group(function () {
     Route::get('/dashboard', [LegalController::class, 'index'])->name('legal.dashboard');
+    Route::get('/modelos-oficios', [LegalController::class, 'modelosOficios'])->name('legal.modelos_oficios');
+    Route::get('/ficha-filiacao', [LegalController::class, 'fichaFiliacao'])->name('legal.ficha_filiacao');
 });

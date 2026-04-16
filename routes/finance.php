@@ -8,4 +8,6 @@ Route::post('/finance/login', [DepartmentLoginController::class, 'login']);
 
 Route::middleware(['auth', 'role:finance'])->prefix('finance')->group(function () {
     Route::get('/dashboard', [FinanceController::class, 'index'])->name('finance.dashboard');
+    Route::get('/modelos-oficios', [FinanceController::class, 'modelosOficios'])->name('finance.modelos_oficios');
+    Route::get('/ficha-filiacao', [FinanceController::class, 'fichaFiliacao'])->name('finance.ficha_filiacao');
 });

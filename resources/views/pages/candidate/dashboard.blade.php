@@ -104,6 +104,24 @@
                 </div>
             </div>
             <button class="w-full mt-10 py-3 text-gray-500 font-bold border-2 border-dashed border-gray-200 rounded-xl hover:border-pct-blue hover:text-pct-blue transition-all">Ver Agenda Completa</button>
+            <div class="mt-6 pt-6 border-t border-gray-100 space-y-3">
+                <a href="{{ route('candidate.modelos_oficios') }}" class="flex items-center justify-between p-4 bg-blue-50/50 rounded-2xl hover:bg-blue-100/50 transition-all group">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 bg-pct-blue text-white rounded-lg">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        <span class="text-xs font-black text-pct-blue uppercase tracking-widest">Modelos de Ofícios</span>
+                    </div>
+                </a>
+                <a href="{{ route('candidate.ficha_filiacao') }}" class="flex items-center justify-between p-4 bg-emerald-50/50 rounded-2xl hover:bg-emerald-100/50 transition-all group">
+                    <div class="flex items-center space-x-3">
+                        <div class="p-2 bg-pct-green text-white rounded-lg">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        <span class="text-xs font-black text-pct-blue uppercase tracking-widest">Ficha de Filiação</span>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </x-dashboard-layout>

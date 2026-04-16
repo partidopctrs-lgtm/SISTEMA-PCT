@@ -84,29 +84,88 @@
         </div>
 
         <!-- System Stats / Notifications -->
-        <div class="glass p-10 rounded-[2.5rem] shadow-sm">
-            <h3 class="text-xl font-black text-pct-blue mb-8">Saúde do Sistema</h3>
-            <div class="space-y-6">
-                <div class="flex items-center justify-between p-5 bg-blue-50/50 rounded-2xl">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-3 h-3 bg-pct-green rounded-full animate-pulse"></div>
-                        <span class="font-bold text-pct-blue tracking-tight">Base de Dados</span>
-                    </div>
-                    <span class="text-xs font-black text-pct-green">OPERACIONAL</span>
+        <div class="space-y-6">
+            <div class="glass p-10 rounded-[2.5rem] shadow-sm">
+                <h3 class="text-xl font-black text-pct-blue mb-8 uppercase tracking-widest text-sm">Documentos Úteis</h3>
+                <div class="space-y-4">
+                    <a href="{{ route('admin.modelos_oficios') }}" class="flex items-center justify-between p-5 bg-indigo-50/50 rounded-2xl hover:bg-indigo-100/50 transition-all group">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-2 bg-indigo-500 text-white rounded-lg">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-pct-blue">Modelo de Ofício</p>
+                                <p class="text-[10px] text-gray-400 font-black uppercase">Acessar Repositório</p>
+                            </div>
+                        </div>
+                        <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+
+                    <a href="{{ route('admin.ficha_filiacao') }}" class="flex items-center justify-between p-5 bg-emerald-50/50 rounded-2xl hover:bg-emerald-100/50 transition-all group">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-2 bg-pct-green text-white rounded-lg">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-pct-blue">Ficha de Filiação</p>
+                                <p class="text-[10px] text-gray-400 font-black uppercase">Visualizar para Impressão</p>
+                            </div>
+                        </div>
+                        <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                    
+                    <a href="{{ route('estatuto') }}" class="flex items-center justify-between p-5 bg-blue-50/50 rounded-2xl hover:bg-blue-100/50 transition-all group">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-2 bg-pct-blue text-white rounded-lg">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-pct-blue">Estatuto Oficial</p>
+                                <p class="text-[10px] text-gray-400 font-black uppercase">Ver Documento Interno</p>
+                            </div>
+                        </div>
+                        <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+
+                    <a href="{{ route('cartilha') }}" class="flex items-center justify-between p-5 bg-emerald-50/50 rounded-2xl hover:bg-emerald-100/50 transition-all group">
+                        <div class="flex items-center space-x-4">
+                            <div class="p-2 bg-pct-green text-white rounded-lg">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                            </div>
+                            <div>
+                                <p class="font-bold text-pct-blue">Cartilha do PCT</p>
+                                <p class="text-[10px] text-gray-400 font-black uppercase">Guia de Formação</p>
+                            </div>
+                        </div>
+                        <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
                 </div>
-                <div class="flex items-center justify-between p-5 bg-blue-50/50 rounded-2xl">
-                    <div class="flex items-center space-x-4">
-                         <div class="w-3 h-3 bg-pct-green rounded-full"></div>
-                        <span class="font-bold text-pct-blue tracking-tight">Fila de Disparos (Bulk)</span>
+            </div>
+
+            <div class="glass p-10 rounded-[2.5rem] shadow-sm">
+                <h3 class="text-xl font-black text-pct-blue mb-8 uppercase tracking-widest text-sm">Saúde do Sistema</h3>
+                <div class="space-y-6">
+                    <div class="flex items-center justify-between p-5 bg-blue-50/50 rounded-2xl">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-3 h-3 bg-pct-green rounded-full animate-pulse"></div>
+                            <span class="font-bold text-pct-blue tracking-tight">Base de Dados</span>
+                        </div>
+                        <span class="text-xs font-black text-pct-green">OPERACIONAL</span>
                     </div>
-                    <span class="text-xs font-black text-pct-green">EM ESPERA</span>
-                </div>
-                <div class="flex items-center justify-between p-5 bg-red-50/50 rounded-2xl">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-3 h-3 bg-red-400 rounded-full"></div>
-                        <span class="font-bold text-red-700 tracking-tight">Servidor de E-mail (Mercury)</span>
+                    <div class="flex items-center justify-between p-5 bg-blue-50/50 rounded-2xl">
+                        <div class="flex items-center space-x-4">
+                             <div class="w-3 h-3 bg-pct-green rounded-full"></div>
+                            <span class="font-bold text-pct-blue tracking-tight">Fila de Disparos (Bulk)</span>
+                        </div>
+                        <span class="text-xs font-black text-pct-green">EM ESPERA</span>
                     </div>
-                    <span class="text-xs font-black text-red-600">OFFLINE</span>
+                    <div class="flex items-center justify-between p-5 bg-red-50/50 rounded-2xl">
+                        <div class="flex items-center space-x-4">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <span class="font-bold text-red-700 tracking-tight">Servidor de E-mail (Mercury)</span>
+                        </div>
+                        <span class="text-xs font-black text-red-600">OFFLINE</span>
+                    </div>
                 </div>
             </div>
         </div>

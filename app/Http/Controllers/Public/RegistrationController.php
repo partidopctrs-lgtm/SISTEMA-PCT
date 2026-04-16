@@ -36,6 +36,11 @@ class RegistrationController extends Controller
             'status' => 'active', // Set to active for immediate login testing
         ]);
 
-        return redirect()->route('login')->with('success', 'Cadastro realizado com sucesso! Agora você pode acessar o Portal do Afiliado.');
+        return redirect()->route('register.success')->with('user_name', $user->name);
+    }
+
+    public function success()
+    {
+        return view('pages.public.registration-success');
     }
 }

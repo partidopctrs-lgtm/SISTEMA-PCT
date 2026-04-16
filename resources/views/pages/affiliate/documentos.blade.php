@@ -15,7 +15,7 @@
                 </div>
                 <h3 class="text-xl font-bold text-pct-blue mb-4">Estatuto Oficial</h3>
                 <p class="text-sm text-gray-500 mb-8 flex-grow">A base jurídica e organizacional do Movimento Cidadania e Trabalho – PCT. Regras, diretrizes e objetivos.</p>
-                <a href="#" class="w-full py-4 bg-pct-blue text-white rounded-2xl font-bold text-center hover:bg-pct-blue-dark transition-all shadow-lg shadow-pct-blue/20">Baixar Estatuto (PDF)</a>
+                <a href="{{ route('estatuto') }}" class="w-full py-4 bg-pct-blue text-white rounded-2xl font-bold text-center hover:bg-pct-blue-dark transition-all shadow-lg shadow-pct-blue/20 uppercase tracking-widest text-[10px]">Acessar Estatuto</a>
             </div>
 
             <!-- Código de Ética -->
@@ -35,7 +35,7 @@
                 </div>
                 <h3 class="text-xl font-bold text-pct-blue mb-4">Manifesto Político</h3>
                 <p class="text-sm text-gray-500 mb-8 flex-grow">Nossa visão para o Brasil. Os princípios de liberdade, trabalho e meritocracia que defendemos.</p>
-                <a href="https://docs.google.com/document/d/1ViPiyoq-IniGtDfZpdOjckftzqL29i1NKpoLLq4vEq8/export?format=pdf" target="_blank" class="w-full py-4 bg-slate-100 text-pct-blue rounded-2xl font-bold text-center hover:bg-slate-200 transition-all border border-slate-200">Baixar Manifesto</a>
+                <a href="{{ route('manifesto') }}" class="w-full py-4 bg-slate-100 text-pct-blue rounded-2xl font-bold text-center hover:bg-slate-200 transition-all border border-slate-200 uppercase tracking-widest text-[10px]">Acessar Manifesto</a>
             </div>
 
             <!-- Ficha de Filiação / Apoio -->
@@ -72,13 +72,13 @@
             </div>
 
             <!-- Ofícios e Modelos -->
-            <div class="card-premium flex flex-col h-full">
-                <div class="w-16 h-16 bg-slate-100 rounded-3xl flex items-center justify-center text-pct-blue mb-8">
-                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            <div class="card-premium flex flex-col h-full bg-gradient-to-br from-white to-indigo-50/30">
+                <div class="w-16 h-16 bg-indigo-100 rounded-3xl flex items-center justify-center text-indigo-600 mb-8">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                 </div>
                 <h3 class="text-xl font-bold text-pct-blue mb-4">Modelos de Ofícios</h3>
-                <p class="text-sm text-gray-500 mb-8 flex-grow">Materiais padronizados para comunicação oficial, solicitações e propostas em nível municipal.</p>
-                <div class="w-full py-4 bg-slate-100 text-gray-400 rounded-2xl font-bold text-center cursor-not-allowed">Em Breve</div>
+                <p class="text-sm text-gray-500 mb-8 flex-grow">Materiais padronizados para comunicação oficial, solicitações e propostas em nível municipal e estadual.</p>
+                <a href="{{ route('affiliate.modelos_oficios') }}" class="w-full py-4 bg-indigo-600 text-white rounded-2xl font-bold text-center hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20">Acessar Modelos</a>
             </div>
         </div>
     </div>

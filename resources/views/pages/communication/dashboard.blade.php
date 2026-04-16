@@ -63,4 +63,32 @@
             <span>Jan</span><span>Fev</span><span>Mar</span><span>Abr</span><span>Mai</span><span>Jun</span><span>Jul</span><span>Ago</span><span>Set</span><span>Out</span><span>Nov</span><span>Dez</span>
         </div>
     </div>
+    <!-- Footer Links -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="glass p-8 rounded-[2rem] flex items-center justify-between group hover:border-pct-blue transition-all">
+            <div class="flex items-center space-x-4">
+                <div class="p-3 bg-pct-blue/5 text-pct-blue rounded-2xl group-hover:bg-pct-blue group-hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-pct-blue">Modelos de Ofícios</h4>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-tight">Comunicação Oficial</p>
+                </div>
+            </div>
+            <a href="{{ route('communication.modelos_oficios') }}" class="btn-primary py-2 px-4 text-xs">Acessar</a>
+        </div>
+
+        <div class="glass p-8 rounded-[2rem] flex items-center justify-between group hover:border-pct-green transition-all">
+            <div class="flex items-center space-x-4">
+                <div class="p-3 bg-pct-green/5 text-pct-green rounded-2xl group-hover:bg-pct-green group-hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                </div>
+                <div>
+                    <h4 class="font-bold text-pct-blue">Ficha de Filiação</h4>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-tight">Material de Base</p>
+                </div>
+            </div>
+            <a href="{{ route('communication.ficha_filiacao') }}" class="py-2 px-4 text-xs font-bold text-pct-green border border-pct-green rounded-xl hover:bg-pct-green hover:text-white transition-all">Visualizar</a>
+        </div>
+    </div>
 </x-dashboard-layout>
