@@ -30,4 +30,17 @@ class AdminDashboardController extends Controller
 
         return redirect()->route('admin.dashboard')->with('success', 'Membro cadastrado com sucesso! A senha padrão é PCT@123456');
     }
+
+    // Management Modules
+    public function perfis() { return view('pages.admin.profiles'); }
+    public function carteirinhas() { return view('pages.admin.carteirinhas'); }
+    public function escola() { return view('pages.admin.escola'); }
+    public function referrals() { return view('pages.admin.referrals'); }
+    public function missoes() { return view('pages.admin.missoes'); }
+    public function comunidade() { return view('pages.admin.comunidade'); }
+    public function documentos() { return view('pages.admin.documentos'); }
+    public function eventos() { return view('pages.admin.eventos'); }
+    public function financeiro() { return view('pages.admin.financeiro'); }
+    public function suporte() { return view('pages.admin.suporte'); }
+    public function configuracoes() { return view('pages.admin.configuracoes'); }
 }
