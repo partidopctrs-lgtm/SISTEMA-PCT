@@ -38,6 +38,14 @@ class DepartmentLoginController extends Controller
             default => $path
         };
         
+        $email = $request->email;
+        // Map legacy admin e‑mail to the current one
+        if (strtolower($email) === 'admin@pct.org.br') {
+            $email = 'admin@pct.social.br';
+            $request->merge(['email' => $email]);
+        }
+
+        // Validate the (potentially updated) credentials
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -46,20 +54,21 @@ class DepartmentLoginController extends Controller
         if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
             $user = Auth::user();
 
-            // Validate if user has the correct role OR is national admin
-            if ($user->role === $role || $user->role === 'admin') {
+            if ($user->role === $role) {
                 $request->session()->regenerate();
+                
                 $targetPath = match ($role) {
                     'admin' => 'admin',
                     'affiliate' => 'affiliate',
                     default => $path
                 };
+                
                 return redirect("/{$targetPath}/dashboard");
             }
 
             Auth::logout();
             throw ValidationException::withMessages([
-                'email' => "Você não possui permissão para acessar o Portal " . ucfirst($path) . ".",
+                'email' => "Acesso negado: Você está tentando acessar um portal incompatível com o seu perfil. Verifique a URL correta do seu departamento.",
             ]);
         }
 
