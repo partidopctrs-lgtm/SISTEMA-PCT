@@ -1,13 +1,12 @@
 <?php
+
+use App\Http\Controllers\Legal\LegalDashboardController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Legal\LegalController;
-use App\Http\Controllers\Auth\DepartmentLoginController;
 
-Route::get('/legal/login', [DepartmentLoginController::class, 'showLoginForm'])->name('legal.login');
-Route::post('/legal/login', [DepartmentLoginController::class, 'login']);
-
-Route::middleware(['auth', 'role:legal'])->prefix('legal')->group(function () {
-    Route::get('/dashboard', [LegalController::class, 'index'])->name('legal.dashboard');
-    Route::get('/modelos-oficios', [LegalController::class, 'modelosOficios'])->name('legal.modelos_oficios');
-    Route::get('/ficha-filiacao', [LegalController::class, 'fichaFiliacao'])->name('legal.ficha_filiacao');
+Route::middleware(['auth'])->prefix('legal')->name('legal.')->group(function () {
+    Route::get('/', [LegalDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/requests', [LegalDashboardController::class, 'requests'])->name('requests');
+    Route::get('/requests/{id}', [LegalDashboardController::class, 'showRequest'])->name('requests.show');
+    Route::post('/requests/{id}/message', [LegalDashboardController::class, 'sendMessage'])->name('requests.message');
+    Route::post('/requests/{id}/status', [LegalDashboardController::class, 'updateStatus'])->name('requests.status');
 });

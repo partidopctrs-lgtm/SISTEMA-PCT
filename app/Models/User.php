@@ -3,7 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Database\Factories\UserFactory;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -11,7 +11,22 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasUuids;
+
+    public function uniqueIds(): array
+    {
+        return ['uuid'];
+    }
+
+    public function profiles()
+    {
+        return $this->hasMany(Profile::class);
+    }
+
+    public function memberships()
+    {
+        return $this->hasMany(Membership::class);
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -22,6 +37,30 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'phone',
+        'cpf',
+        'registration_number',
+        'role',
+        'status',
+        'photo',
+        'birth_date',
+        'rg',
+        'nationality',
+        'marital_status',
+        'voter_id',
+        'voter_zone',
+        'voter_section',
+        'profession',
+        'education',
+        'address',
+        'neighborhood',
+        'city',
+        'state',
+        'zip_code',
+        'zip_code',
+        'committee_city',
+        'referred_by',
+        'registration_document',
     ];
 
     /**
@@ -60,5 +99,20 @@ class User extends Authenticatable
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function referrals()
+    {
+        return $this->hasMany(User::class, 'referred_by');
+    }
+
+    public function inviter()
+    {
+        return $this->belongsTo(User::class, 'referred_by');
+    }
+
+    public function hasRole($role)
+    {
+        return $this->role === $role;
     }
 }

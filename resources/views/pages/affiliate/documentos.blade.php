@@ -15,7 +15,7 @@
                 </div>
                 <h3 class="text-xl font-bold text-pct-blue mb-4">Estatuto Oficial</h3>
                 <p class="text-sm text-gray-500 mb-8 flex-grow">A base jurídica e organizacional do Movimento Cidadania e Trabalho – PCT. Regras, diretrizes e objetivos.</p>
-                <a href="{{ route('estatuto') }}" class="w-full py-4 bg-pct-blue text-white rounded-2xl font-bold text-center hover:bg-pct-blue-dark transition-all shadow-lg shadow-pct-blue/20 uppercase tracking-widest text-[10px]">Acessar Estatuto</a>
+                <a href="https://drive.google.com/file/d/1i0UZreBix6cktRShr4DW2VE6GbrdmlFO/view?usp=sharing" target="_blank" class="w-full py-4 bg-pct-blue text-white rounded-2xl font-bold text-center hover:bg-pct-blue-dark transition-all shadow-lg shadow-pct-blue/20 uppercase tracking-widest text-[10px]">Baixar Estatuto</a>
             </div>
 
             <!-- Código de Ética -->
@@ -35,7 +35,7 @@
                 </div>
                 <h3 class="text-xl font-bold text-pct-blue mb-4">Manifesto Político</h3>
                 <p class="text-sm text-gray-500 mb-8 flex-grow">Nossa visão para o Brasil. Os princípios de liberdade, trabalho e meritocracia que defendemos.</p>
-                <a href="{{ route('manifesto') }}" class="w-full py-4 bg-slate-100 text-pct-blue rounded-2xl font-bold text-center hover:bg-slate-200 transition-all border border-slate-200 uppercase tracking-widest text-[10px]">Acessar Manifesto</a>
+                <a href="https://drive.google.com/file/d/1moePU2Yb2WIbb0cvEiSqvOvquEctHVr7/view?usp=sharing" target="_blank" class="w-full py-4 bg-slate-100 text-pct-blue rounded-2xl font-bold text-center hover:bg-slate-200 transition-all border border-slate-200 uppercase tracking-widest text-[10px]">Baixar Manifesto</a>
             </div>
 
             <!-- Ficha de Filiação / Apoio -->
@@ -62,7 +62,7 @@
                             <source src="{{ asset('PCT FORCA BRASIL.mp3') }}" type="audio/mpeg">
                             Seu navegador não suporta áudio.
                         </audio>
-                        <a href="{{ asset('PCT FORCA BRASIL.mp3') }}" download class="w-full py-3 bg-pct-green text-white rounded-xl font-bold text-center flex items-center justify-center gap-2 hover:bg-emerald-600 transition-all shadow-lg">
+                        <a href="https://drive.google.com/file/d/1_ZAi2Nx9soPkGJc9HXBoYMVG95sARDyt/view?usp=sharing" target="_blank" class="w-full py-3 bg-pct-green text-white rounded-xl font-bold text-center flex items-center justify-center gap-2 hover:bg-emerald-600 transition-all shadow-lg">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                             Baixar MP3
                         </a>
@@ -78,7 +78,7 @@
                 </div>
                 <h3 class="text-xl font-bold text-pct-blue mb-4">Modelos de Ofícios</h3>
                 <p class="text-sm text-gray-500 mb-8 flex-grow">Materiais padronizados para comunicação oficial, solicitações e propostas em nível municipal e estadual.</p>
-                <a href="{{ route('affiliate.modelos_oficios') }}" class="w-full py-4 bg-indigo-600 text-white rounded-2xl font-bold text-center hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20">Acessar Modelos</a>
+                <a href="https://docs.google.com/document/d/1L2887QLvuxrF3Ga9TYFCE4-f3tUAcqSz/edit?usp=sharing&ouid=111700861456647359974&rtpof=true&sd=true" target="_blank" class="w-full py-4 bg-indigo-600 text-white rounded-2xl font-bold text-center hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20">Abrir Documentos</a>
             </div>
         </div>
     </div>

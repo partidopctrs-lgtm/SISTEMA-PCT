@@ -1,114 +1,136 @@
 <x-dashboard-layout>
     <x-slot name="title">Área do Afiliado - PCT</x-slot>
 
-    <div class="mb-8">
-        <h1 class="text-3xl font-bold text-pct-blue">Olá, {{ auth()->user()->name ?? 'Afiliado' }}!</h1>
-        <p class="text-gray-500">Bem-vindo à sua área de mobilização. Vamos construir o PCT juntos.</p>
+    <div class="mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+            <div class="flex items-center gap-3 mb-2">
+                <h1 class="text-3xl font-black text-pct-blue tracking-tight">Olá, {{ $user->name }}!</h1>
+                @if($isFounder)
+                    <span class="px-4 py-1 bg-gradient-to-r from-amber-400 to-amber-600 text-white text-[10px] font-black rounded-full uppercase tracking-[0.2em] shadow-lg shadow-amber-500/20 border border-amber-300">Presidente Fundador</span>
+                @endif
+            </div>
+            <p class="text-gray-500 font-medium italic">Bem-vindo à sua área de liderança e mobilização nacional.</p>
+        </div>
+
+        @if(auth()->user()->role === 'admin' || auth()->user()->hasRole('admin'))
+        <div class="bg-slate-50 p-2 rounded-2xl border border-slate-100 flex gap-2">
+            <a href="{{ route('admin.dashboard') }}" class="px-4 py-2 bg-pct-blue text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-900 transition-all">Painel Admin</a>
+            <a href="{{ route('legal.dashboard') }}" class="px-4 py-2 bg-white text-gray-500 rounded-xl text-[10px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all">Painel Jurídico</a>
+            <a href="{{ route('committee.dashboard') }}" class="px-4 py-2 bg-white text-gray-500 rounded-xl text-[10px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all">Painel Comitê</a>
+        </div>
+        @endif
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-        <!-- Referral Card -->
-        <div class="lg:col-span-2 glass p-8 rounded-3xl shadow-sm bg-gradient-to-br from-white to-emerald-50 relative overflow-hidden">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <!-- Stats Card -->
+        <div class="lg:col-span-2 card-premium bg-gradient-to-br from-white to-blue-50 relative overflow-hidden">
             <div class="relative z-10">
-                <h3 class="text-xl font-bold text-pct-blue mb-2">Expanda o Movimento</h3>
-                <p class="text-gray-600 mb-6 max-w-md">Compartilhe seu link de indicação para trazer novos membros para o PCT e fortalecer nossa base.</p>
+                <h3 class="text-xl font-black text-pct-blue mb-8 uppercase tracking-tighter">Impacto Nacional em Tempo Real</h3>
                 
-                <div class="flex items-center space-x-2">
-                    <input type="text" readonly value="https://pct.org.br/indicar/{{ auth()->user()->registration_number ?? '12345' }}" class="bg-white border border-gray-200 rounded-xl px-4 py-3 text-sm w-full font-mono text-gray-500">
-                    <button class="btn-primary whitespace-nowrap px-4 hover:scale-105 transition-transform">Copiar Link</button>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="space-y-1">
+                        <p class="text-3xl font-black text-pct-blue">{{ number_format($stats['total_members'], 0, ',', '.') }}</p>
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest">Filiados Totais</p>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="text-3xl font-black text-pct-green">{{ $stats['my_referrals'] }}</p>
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest">Meus Indicados</p>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="text-3xl font-black text-amber-500">#{{ $stats['rank_national'] }}</p>
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest">Ranking Nacional</p>
+                    </div>
+                    <div class="space-y-1">
+                        <p class="text-3xl font-black text-indigo-600">{{ number_format($stats['my_points'], 0, ',', '.') }}</p>
+                        <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest">Meus Pontos</p>
+                    </div>
                 </div>
-                
-                <div class="mt-8 grid grid-cols-3 gap-4">
-                    <div class="text-center">
-                        <p class="text-2xl font-black text-pct-blue">12</p>
-                        <p class="text-xs font-bold text-gray-400 uppercase">Indicados</p>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-2xl font-black text-pct-green">5</p>
-                        <p class="text-xs font-bold text-gray-400 uppercase">Filiados</p>
-                    </div>
-                    <div class="text-center">
-                        <p class="text-2xl font-black text-yellow-500">450</p>
-                        <p class="text-xs font-bold text-gray-400 uppercase">Pontos</p>
+
+                <div class="mt-12 pt-8 border-t border-blue-100">
+                    <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">Seu Link de Expansão Nacional (ID: {{ auth()->user()->registration_number }})</p>
+                    <div class="flex items-center gap-3">
+                        <input type="text" readonly value="https://pct.org.br/indicar/{{ auth()->user()->registration_number }}" class="bg-white border border-blue-100 rounded-2xl px-6 py-4 text-xs w-full font-bold text-pct-blue outline-none shadow-sm">
+                        <button class="bg-pct-blue text-white p-4 rounded-2xl hover:bg-blue-900 transition-all shadow-lg shadow-blue-900/20">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                        </button>
                     </div>
                 </div>
             </div>
-            <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-pct-green/10 rounded-full"></div>
         </div>
 
-        <!-- Materials Card -->
-        <div class="glass p-8 rounded-3xl shadow-sm border-t-4 border-pct-blue">
-            <h3 class="text-xl font-bold text-pct-blue mb-4">Materiais</h3>
+        <!-- Quick Access Manuals -->
+        <div class="card-premium">
+            <h3 class="text-lg font-black text-pct-blue mb-8 uppercase tracking-widest">Minha Rede de Convites</h3>
             <div class="space-y-4">
-                <a href="{{ route('manifesto') }}" class="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer group">
-                    <div class="flex items-center space-x-3">
-                        <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path d="M4 18a2 2 0 01-2-2V4a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H4zm0-2h12V4H4v12zm3-10h6v2H7V6zm0 4h6v2H7v-2zm0 4h3v2H7v-2z"></path></svg>
-                        <span class="text-sm font-semibold text-gray-800">Manifesto Oficial</span>
+                @forelse($myReferrals as $referral)
+                <div class="flex items-center gap-4 p-3 bg-slate-50 rounded-2xl border border-slate-100">
+                    <div class="h-8 w-8 bg-white rounded-lg flex items-center justify-center text-[10px] font-black text-pct-blue">
+                        {{ substr($referral->name, 0, 1) }}
                     </div>
-                    <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </a>
-                <a href="{{ route('cartilha') }}" class="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer group">
-                    <div class="flex items-center space-x-3">
-                        <svg class="w-6 h-6 text-emerald-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.908 7.908 0 005.844 4c-2.147 0-4.133.85-5.603 2.395A1 1 0 000 7.076v9.066a1 1 0 001.242.969 5.927 5.927 0 012.602-.61c2.147 0 4.133.85 5.603 2.395A1 1 0 0011 18.076V9.01a1 1 0 00-2-2.196v6.526a7.923 7.923 0 00-3.344-.736c-2.147 0-4.133.85-5.603 2.395V7.61a5.927 5.927 0 012.602-.61c2.147 0 4.133.85 5.603 2.395V4.804z"></path></svg>
-                        <span class="text-sm font-semibold text-gray-800">Cartilha do PCT</span>
+                    <div>
+                        <p class="text-[10px] font-black text-pct-blue uppercase">{{ $referral->name }}</p>
+                        <p class="text-[8px] text-gray-400 font-bold">{{ $referral->created_at->diffForHumans() }}</p>
                     </div>
-                    <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </a>
-                <a href="{{ route('estatuto') }}" class="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer group">
-                    <div class="flex items-center space-x-3">
-                        <svg class="w-6 h-6 text-pct-green" fill="currentColor" viewBox="0 0 20 20"><path d="M9 4.804A7.908 7.908 0 005.844 4c-2.147 0-4.133.85-5.603 2.395A1 1 0 000 7.076v9.066a1 1 0 001.242.969 5.927 5.927 0 012.602-.61c2.147 0 4.133.85 5.603 2.395A1 1 0 0011 18.076V9.01a1 1 0 00-2-2.196v6.526a7.923 7.923 0 00-3.344-.736c-2.147 0-4.133.85-5.603 2.395V7.61a5.927 5.927 0 012.602-.61c2.147 0 4.133.85 5.603 2.395V4.804z"></path></svg>
-                        <span class="text-sm font-semibold text-gray-800">Estatuto do PCT</span>
-                    </div>
-                    <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </a>
-                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer group">
-                    <div class="flex items-center space-x-3">
-                        <svg class="w-6 h-6 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
-                        <span class="text-sm font-semibold text-gray-800">Kit Redes Sociais</span>
-                    </div>
-                    <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                 </div>
-                <a href="{{ route('affiliate.membership_form') }}" class="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer group">
-                    <div class="flex items-center space-x-3">
-                        <svg class="w-6 h-6 text-pct-green" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg>
-                        <span class="text-sm font-semibold text-gray-800">Ficha de Filiação Nacional</span>
-                    </div>
-                    <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </a>
-                <a href="{{ route('affiliate.modelos_oficios') }}" class="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer group">
-                    <div class="flex items-center space-x-3">
-                        <svg class="w-6 h-6 text-indigo-500" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"></path></svg>
-                        <span class="text-sm font-semibold text-gray-800">Modelo de Ofício (Editável)</span>
-                    </div>
-                    <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </a>
+                @empty
+                <div class="py-6 text-center">
+                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Nenhuma indicação ainda</p>
+                    <p class="text-[9px] text-gray-300 mt-1">Use seu link acima para convidar!</p>
+                </div>
+                @endforelse
             </div>
         </div>
     </div>
 
-    <!-- Activity Stream -->
-    <div class="glass p-8 rounded-3xl shadow-sm">
-        <h3 class="text-xl font-bold text-pct-blue mb-6">Minha Participação</h3>
-        <div class="space-y-6">
-            <div class="flex space-x-4">
-                <div class="relative">
-                    <div class="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
-                        <svg class="w-6 h-6 text-pct-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                    </div>
-                    <div class="absolute h-full w-0.5 bg-gray-200 left-1/2 -ml-px top-10"></div>
-                </div>
-                <div class="pb-6">
-                    <p class="text-sm font-bold text-gray-900">Vinculado ao Comitê de Porto Alegre</p>
-                    <p class="text-xs text-gray-500 mt-1">Há 2 dias • Status: Ativo</p>
+    <!-- Missions Section -->
+    <div class="mb-12">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-xl font-black text-pct-blue uppercase tracking-tighter">Missões Prioritárias</h2>
+            <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest bg-slate-100 px-3 py-1 rounded-full">Novas Missões Hoje</span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Educação -->
+            <div class="card-premium group hover:border-indigo-200 transition-all">
+                <p class="text-[9px] font-black text-indigo-600 uppercase tracking-widest mb-2">Educação</p>
+                <h4 class="text-sm font-black text-pct-blue mb-2">Estudar Manifesto</h4>
+                <p class="text-[10px] text-gray-500 font-medium mb-6">Leia o manifesto completo e responda ao quiz.</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-black text-indigo-600">+100 pts</span>
+                    <a href="{{ route('affiliate.mission.show', 'educacao') }}" class="px-4 py-2 bg-indigo-50 text-indigo-600 font-black text-[9px] uppercase tracking-widest rounded-xl group-hover:bg-indigo-600 group-hover:text-white transition-all">Participar</a>
                 </div>
             </div>
-            <div class="flex space-x-4">
-                <div class="h-10 w-10 rounded-full bg-pct-green flex items-center justify-center">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+
+            <!-- Marketing -->
+            <div class="card-premium group hover:border-pink-200 transition-all">
+                <p class="text-[9px] font-black text-pink-600 uppercase tracking-widest mb-2">Marketing</p>
+                <h4 class="text-sm font-black text-pct-blue mb-2">Divulgação Digital</h4>
+                <p class="text-[10px] text-gray-500 font-medium mb-6">Compartilhe o vídeo em 3 redes sociais.</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-black text-pink-600">+150 pts</span>
+                    <a href="{{ route('affiliate.mission.show', 'marketing') }}" class="px-4 py-2 bg-pink-50 text-pink-600 font-black text-[9px] uppercase tracking-widest rounded-xl group-hover:bg-pink-600 group-hover:text-white transition-all">Participar</a>
                 </div>
-                <div class="pb-0">
-                    <p class="text-sm font-bold text-gray-900">Cadastro Aprovado</p>
-                    <p class="text-xs text-gray-500 mt-1">Há 1 semana • Membro #45902</p>
+            </div>
+
+            <!-- Social -->
+            <div class="card-premium group hover:border-emerald-200 transition-all">
+                <p class="text-[9px] font-black text-pct-green uppercase tracking-widest mb-2">Social</p>
+                <h4 class="text-sm font-black text-pct-blue mb-2">Ação Comunitária</h4>
+                <p class="text-[10px] text-gray-500 font-medium mb-6">Sugira uma solução liberal para sua cidade.</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-black text-pct-green">+300 pts</span>
+                    <a href="{{ route('affiliate.mission.show', 'social') }}" class="px-4 py-2 bg-emerald-50 text-pct-green font-black text-[9px] uppercase tracking-widest rounded-xl group-hover:bg-pct-green group-hover:text-white transition-all">Participar</a>
+                </div>
+            </div>
+
+            <!-- Expansão -->
+            <div class="card-premium group hover:border-amber-200 transition-all">
+                <p class="text-[9px] font-black text-amber-600 uppercase tracking-widest mb-2">Expansão</p>
+                <h4 class="text-sm font-black text-pct-blue mb-2">Indicação Diária</h4>
+                <p class="text-[10px] text-gray-500 font-medium mb-6">Envie seu link para 5 novos contatos hoje.</p>
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-black text-amber-600">+50 pts</span>
+                    <a href="{{ route('affiliate.mission.show', 'expansao') }}" class="px-4 py-2 bg-amber-50 text-amber-600 font-black text-[9px] uppercase tracking-widest rounded-xl group-hover:bg-amber-600 group-hover:text-white transition-all">Participar</a>
                 </div>
             </div>
         </div>

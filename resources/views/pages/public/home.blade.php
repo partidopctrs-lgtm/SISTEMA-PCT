@@ -148,33 +148,45 @@
         </div>
     </section>
 
-    <!-- O Que Fazemos -->
+    <!-- Documentos Públicos -->
     <section class="py-32 bg-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-20">
-                <h2 class="text-5xl font-black text-pct-blue mb-4">O que fazemos</h2>
-                <p class="text-xl text-slate-500 font-medium italic">Ações concretas para uma mudança real.</p>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-pct-green font-black tracking-[0.3em] uppercase mb-4 block">Transparência</span>
+                <h2 class="text-5xl font-black text-pct-blue tracking-tighter">Documentos Oficiais</h2>
+                <div class="h-1.5 w-20 bg-pct-green mx-auto mt-6 rounded-full"></div>
             </div>
 
-            <div class="space-y-6">
-                @php
-                    $acoes = [
-                        'Formação política por meio de conteúdo digital',
-                        'Desenvolvimento de lideranças locais e nacionais',
-                        'Incentivo à participação cidadã',
-                        'Apoio à construção de projetos e propostas públicas',
-                        'Criação de uma rede nacional de pessoas comprometidas'
-                    ];
-                @endphp
-
-                @foreach($acoes as $index => $acao)
-                <div class="flex items-center gap-6 p-6 rounded-3xl border border-slate-100 hover:border-pct-green/30 hover:bg-slate-50 transition-all cursor-default group">
-                    <span class="flex-shrink-0 w-12 h-12 rounded-2xl bg-slate-100 text-pct-blue flex items-center justify-center font-black text-xl group-hover:bg-pct-green group-hover:text-white transition-all">
-                        {{ $index + 1 }}
-                    </span>
-                    <p class="text-xl font-bold text-slate-700">{{ $acao }}</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Cartilha -->
+                <div class="p-8 bg-slate-50 rounded-[3rem] border border-slate-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-2xl hover:shadow-pct-blue/10 transition-all duration-500">
+                    <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-pct-blue mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-black text-pct-blue mb-4 uppercase tracking-tight">Cartilha Oficial</h3>
+                    <p class="text-slate-500 text-sm mb-8 font-medium">Entenda os pilares e a forma de atuação do nosso movimento.</p>
+                    <a href="https://drive.google.com/file/d/1aGtnjECienMe3hjDoFSYeeMm8e7n6Wvo/view?usp=sharing" target="_blank" class="px-6 py-3 bg-white border-2 border-pct-blue/10 text-pct-blue font-bold rounded-2xl hover:bg-pct-blue hover:text-white transition-all text-xs uppercase tracking-widest">Download PDF</a>
                 </div>
-                @endforeach
+
+                <!-- Estatuto -->
+                <div class="p-8 bg-slate-50 rounded-[3rem] border border-slate-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-2xl hover:shadow-pct-blue/10 transition-all duration-500">
+                    <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-pct-blue mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-black text-pct-blue mb-4 uppercase tracking-tight">Estatuto Social</h3>
+                    <p class="text-slate-500 text-sm mb-8 font-medium">As regras fundamentais que regem nossa organização nacional.</p>
+                    <a href="https://drive.google.com/file/d/1i0UZreBix6cktRShr4DW2VE6GbrdmlFO/view?usp=sharing" target="_blank" class="px-6 py-3 bg-white border-2 border-pct-blue/10 text-pct-blue font-bold rounded-2xl hover:bg-pct-blue hover:text-white transition-all text-xs uppercase tracking-widest">Acessar Documento</a>
+                </div>
+
+                <!-- Ética -->
+                <div class="p-8 bg-slate-50 rounded-[3rem] border border-slate-100 flex flex-col items-center text-center group hover:bg-white hover:shadow-2xl hover:shadow-pct-blue/10 transition-all duration-500">
+                    <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center text-pct-green mb-6 group-hover:scale-110 transition-transform">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-black text-pct-blue mb-4 uppercase tracking-tight">Código de Ética</h3>
+                    <p class="text-slate-500 text-sm mb-8 font-medium">Nosso compromisso inabalável com a integridade e conduta.</p>
+                    <a href="{{ route('ethics') }}" class="px-6 py-3 bg-pct-green text-white font-bold rounded-2xl hover:bg-emerald-600 transition-all text-xs uppercase tracking-widest">Ler Online</a>
+                </div>
             </div>
         </div>
     </section>

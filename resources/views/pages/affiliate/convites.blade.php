@@ -42,26 +42,71 @@
                     </div>
                 </div>
 
+                <!-- Cadastro Manual (Ficha de Campo) -->
+                <div class="card-premium bg-gradient-to-r from-pct-blue to-blue-900 border-0 mb-8">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-pct-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white">Ficha de Campo (Cadastro Manual)</h3>
+                            <p class="text-xs text-blue-200">Cadastre um novo filiado agora mesmo. A senha gerada será os 6 primeiros dígitos do CPF.</p>
+                        </div>
+                    </div>
+                    <form action="{{ route('affiliate.convites.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+                        @csrf
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] font-black text-blue-200 uppercase tracking-widest mb-2">Nome Completo</label>
+                                <input type="text" name="name" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-300/50 text-sm focus:outline-none focus:ring-2 focus:ring-pct-green" placeholder="Ex: João da Silva">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-black text-blue-200 uppercase tracking-widest mb-2">CPF</label>
+                                <input type="text" name="cpf" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-300/50 text-sm focus:outline-none focus:ring-2 focus:ring-pct-green" placeholder="Ex: 000.000.000-00">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-black text-blue-200 uppercase tracking-widest mb-2">Email</label>
+                                <input type="email" name="email" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-300/50 text-sm focus:outline-none focus:ring-2 focus:ring-pct-green" placeholder="Ex: joao@email.com">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-black text-blue-200 uppercase tracking-widest mb-2">WhatsApp</label>
+                                <input type="text" name="phone" required class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-blue-300/50 text-sm focus:outline-none focus:ring-2 focus:ring-pct-green" placeholder="Ex: (00) 90000-0000">
+                            </div>
+                            <div class="md:col-span-2">
+                                <label class="block text-[10px] font-black text-blue-200 uppercase tracking-widest mb-2">Ficha de Filiação (Obrigatório)</label>
+                                <input type="file" name="document" accept=".pdf,.doc,.docx" required class="w-full px-4 py-3 bg-white/5 border border-white/20 border-dashed rounded-xl text-blue-200 text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-[10px] file:font-black file:uppercase file:tracking-widest file:bg-pct-green file:text-white hover:file:bg-emerald-600 focus:outline-none cursor-pointer">
+                                <p class="text-[9px] text-blue-300 mt-2">* Envie a ficha escaneada ou preenchida em PDF/DOCX. Este documento ficará arquivado no comitê para controle nacional.</p>
+                            </div>
+                        </div>
+                        <div class="pt-2 text-right">
+                            <button type="submit" class="px-8 py-3 bg-pct-green text-white font-black rounded-xl text-[10px] uppercase tracking-widest hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-600/20">Cadastrar e Enviar Ficha</button>
+                        </div>
+                    </form>
+                </div>
+
                 <!-- Recent Referrals -->
                 <div class="card-premium">
                     <h3 class="text-xl font-bold text-pct-blue mb-8">Quem entrou pelo seu convite</h3>
                     <div class="space-y-4">
-                        @foreach([['Ricardo Santos', 'Porto Alegre', 'Há 2 horas'], ['Maria Oliveira', 'Canoas', 'Há 1 dia'], ['José Almeida', 'Novo Hamburgo', 'Há 3 dias']] as $ref)
+                        @forelse($myReferrals as $ref)
                         <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100 hover:bg-white hover:shadow-lg hover:shadow-pct-blue/5 transition-all group">
                             <div class="flex items-center gap-4">
                                 <div class="h-10 w-10 rounded-full bg-pct-blue/10 flex items-center justify-center text-pct-blue font-bold">
-                                    {{ substr($ref[0], 0, 1) }}
+                                    {{ substr($ref->name, 0, 1) }}
                                 </div>
                                 <div>
-                                    <p class="text-sm font-bold text-gray-900">{{ $ref[0] }}</p>
-                                    <p class="text-xs text-gray-500">{{ $ref[1] }}</p>
+                                    <p class="text-sm font-bold text-gray-900">{{ $ref->name }}</p>
+                                    <p class="text-xs text-gray-500">{{ $ref->city ?? 'Sem Cidade' }}</p>
                                 </div>
                             </div>
-                            <span class="text-xs font-medium text-gray-400">{{ $ref[2] }}</span>
+                            <span class="text-xs font-medium text-gray-400">{{ $ref->created_at->diffForHumans() }}</span>
                         </div>
-                        @endforeach
+                        @empty
+                        <div class="text-center py-6">
+                            <p class="text-[10px] text-gray-400 font-black uppercase tracking-widest">Você ainda não possui indicações.</p>
+                        </div>
+                        @endforelse
                     </div>
-                    <button class="w-full mt-8 text-sm font-bold text-pct-blue hover:underline">Ver todos os indicados</button>
                 </div>
             </div>
 

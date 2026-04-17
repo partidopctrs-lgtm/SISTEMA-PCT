@@ -10,37 +10,96 @@
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
             <!-- Contact Channels -->
             <div class="lg:col-span-2 space-y-8">
+            <!-- Contact Channels -->
+            <div class="lg:col-span-2 space-y-8">
                 <div class="card-premium">
-                    <h3 class="text-xl font-bold text-pct-blue mb-6">Abrir um Chamado</h3>
-                    <form action="#" method="POST" class="space-y-6">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Assunto</label>
-                                <select class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-pct-blue transition-all">
-                                    <option>Dúvida sobre Filiação</option>
-                                    <option>Problemas com a Escola PCT</option>
-                                    <option>Sugestão de Atividade</option>
-                                    <option>Suporte Técnico do Painel</option>
-                                    <option>Outros</option>
-                                </select>
+                    <div class="flex gap-4 mb-8 border-b border-slate-50 pb-4">
+                        <button onclick="switchTab('geral')" id="tab-geral" class="text-sm font-black uppercase tracking-widest text-pct-blue border-b-2 border-pct-blue pb-2 transition-all">Suporte Geral</button>
+                        <button onclick="switchTab('legal')" id="tab-legal" class="text-sm font-black uppercase tracking-widest text-gray-400 border-b-2 border-transparent pb-2 hover:text-pct-blue transition-all">Canal Jurídico ⚖️</button>
+                    </div>
+
+                    <!-- Suporte Geral -->
+                    <div id="content-geral">
+                        <h3 class="text-xl font-bold text-pct-blue mb-6">Abrir um Chamado</h3>
+                        <form action="#" method="POST" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Assunto</label>
+                                    <select class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-pct-blue transition-all">
+                                        <option>Dúvida sobre Filiação</option>
+                                        <option>Problemas com a Escola PCT</option>
+                                        <option>Sugestão de Atividade</option>
+                                        <option>Suporte Técnico do Painel</option>
+                                        <option>Outros</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Prioridade</label>
+                                    <select class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-pct-blue transition-all">
+                                        <option>Baixa</option>
+                                        <option>Média</option>
+                                        <option>Alta</option>
+                                    </select>
+                                </div>
                             </div>
                             <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Prioridade</label>
-                                <select class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-pct-blue transition-all">
-                                    <option>Baixa</option>
-                                    <option>Média</option>
-                                    <option>Alta</option>
-                                </select>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Mensagem</label>
+                                <textarea rows="5" placeholder="Descreva sua solicitação em detalhes..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-pct-blue transition-all resize-none"></textarea>
                             </div>
+                            <div class="flex justify-end">
+                                <button type="submit" class="btn-primary px-12">Enviar Chamado</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Canal Jurídico -->
+                    <div id="content-legal" class="hidden">
+                        <div class="flex items-center gap-3 mb-6">
+                            <h3 class="text-xl font-bold text-pct-blue">Solicitação Jurídica Oficial</h3>
+                            <span class="px-3 py-1 bg-blue-50 text-pct-blue text-[9px] font-black rounded-full uppercase border border-blue-100">Hierarquia Local/Estadual/Nacional</span>
                         </div>
-                        <div>
-                            <label class="block text-sm font-bold text-gray-700 mb-2">Mensagem</label>
-                            <textarea rows="5" placeholder="Descreva sua solicitação em detalhes..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-pct-blue transition-all resize-none"></textarea>
-                        </div>
-                        <div class="flex justify-end">
-                            <button type="submit" class="btn-primary px-12">Enviar Chamado</button>
-                        </div>
-                    </form>
+                        <form action="{{ route('affiliate.suporte.legal.store') }}" method="POST" class="space-y-6">
+                            @csrf
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Título da Demanda</label>
+                                    <input type="text" name="title" required placeholder="Ex: Dúvida sobre fundação de diretório" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-pct-blue transition-all">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Tipo de Questão</label>
+                                    <select name="request_type" required class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-pct-blue transition-all">
+                                        <option value="legal_question">Dúvida Jurídica Geral</option>
+                                        <option value="document_review">Revisão de Documento</option>
+                                        <option value="internal_conflict">Conflito Interno / Disciplinar</option>
+                                        <option value="compliance_issue">Questão de Conformidade</option>
+                                        <option value="candidate_support">Apoio Jurídico a Candidato</option>
+                                    </select>
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-sm font-bold text-gray-700 mb-2">Prioridade de Urgência</label>
+                                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                        @foreach(['low' => 'Baixa', 'medium' => 'Média', 'high' => 'Alta', 'urgent' => 'Urgente'] as $val => $label)
+                                        <label class="flex items-center gap-3 p-4 border border-slate-100 rounded-2xl cursor-pointer hover:bg-slate-50 transition-all">
+                                            <input type="radio" name="priority" value="{{ $val }}" {{ $val == 'medium' ? 'checked' : '' }} class="text-pct-blue focus:ring-pct-blue">
+                                            <span class="text-xs font-bold text-gray-600">{{ $label }}</span>
+                                        </label>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Descrição Detalhada</label>
+                                <textarea name="description" rows="5" required placeholder="Forneça todos os detalhes necessários para que o jurídico possa analisar o caso..." class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 outline-none focus:ring-2 focus:ring-pct-blue transition-all resize-none"></textarea>
+                            </div>
+                            <div class="p-4 bg-amber-50 rounded-2xl border border-amber-100 flex items-start gap-4">
+                                <svg class="w-5 h-5 text-amber-600 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                <p class="text-[10px] text-amber-900 font-bold leading-relaxed">Conforme o manual <span class="text-pct-blue">PCT-JUR-001</span>, sua solicitação será analisada inicialmente pelo jurídico local. Caso não haja resposta em 48h, será automaticamente escalada para o nível estadual.</p>
+                            </div>
+                            <div class="flex justify-end">
+                                <button type="submit" class="bg-pct-blue text-white font-black px-12 py-4 rounded-2xl hover:bg-blue-900 transition-all shadow-lg shadow-blue-900/20">Protocolar Solicitação</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
                 <!-- FAQ Teaser -->
@@ -65,21 +124,42 @@
             <div class="space-y-8">
                 <div class="card-premium bg-gradient-to-br from-pct-blue to-blue-900 text-white relative overflow-hidden">
                     <div class="relative z-10">
-                        <h3 class="text-lg font-black mb-6 uppercase tracking-widest text-pct-green">Status dos Chamados</h3>
+                        <h3 class="text-lg font-black mb-6 uppercase tracking-widest text-pct-green">Status Jurídico</h3>
                         <div class="space-y-4 mb-8">
                             <div class="flex items-center justify-between text-sm py-2">
-                                <span class="opacity-60 font-medium">Chamados Abertos</span>
-                                <span class="font-bold">0</span>
+                                <span class="opacity-60 font-medium">Solicitações Ativas</span>
+                                <span class="font-bold">{{ $activeLegalRequests->count() }}</span>
                             </div>
                             <div class="flex items-center justify-between text-sm py-2">
-                                <span class="opacity-60 font-medium">Em Resolução</span>
-                                <span class="font-bold">0</span>
+                                <span class="opacity-60 font-medium">Total Histórico</span>
+                                <span class="font-bold">{{ $legalRequestsCount }}</span>
                             </div>
                         </div>
-                        <p class="text-[10px] text-blue-200 font-bold leading-relaxed mb-6">Tempo médio de resposta: <span class="text-white">24 horas úteis</span></p>
+                        <p class="text-[10px] text-blue-200 font-bold leading-relaxed mb-6">SLA Nível Local: <span class="text-white">48 horas</span></p>
                         <div class="h-2 w-full bg-white/10 rounded-full">
-                            <div class="h-full bg-pct-green w-[100%] rounded-full"></div>
+                            <div class="h-full bg-pct-green w-[{{ $activeLegalRequests->count() > 0 ? 50 : 100 }}%] rounded-full"></div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- Manuais Institucionais -->
+                <div class="card-premium">
+                    <h3 class="text-lg font-bold text-pct-blue mb-6">Manuais Oficiais</h3>
+                    <div class="space-y-3">
+                        @foreach([
+                            ['Jurídico', route('manual.legal'), 'bg-blue-50 text-pct-blue'],
+                            ['Diretórios', route('manual.directories'), 'bg-emerald-50 text-pct-green'],
+                            ['Governança', route('manual.governance'), 'bg-red-50 text-red-600'],
+                            ['Expansão', route('manual.expansion'), 'bg-amber-50 text-amber-600'],
+                            ['Mobilização', route('manual.mobilization'), 'bg-blue-50 text-blue-600'],
+                            ['Ética', route('manual.ethics'), 'bg-indigo-50 text-indigo-600'],
+                            ['Disciplinar', route('manual.disciplinary'), 'bg-slate-50 text-gray-400']
+                        ] as $doc)
+                        <a href="{{ $doc[1] }}" class="flex items-center justify-between p-3 {{ $doc[2] }} rounded-xl font-bold text-[10px] uppercase tracking-widest hover:scale-[1.02] transition-all">
+                            {{ $doc[0] }}
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                        @endforeach
                     </div>
                 </div>
 
@@ -126,4 +206,29 @@
             </div>
         </div>
     </div>
+    <script>
+        function switchTab(tab) {
+            const contentGeral = document.getElementById('content-geral');
+            const contentLegal = document.getElementById('content-legal');
+            const tabGeral = document.getElementById('tab-geral');
+            const tabLegal = document.getElementById('tab-legal');
+
+            if (tab === 'geral') {
+                contentGeral.classList.remove('hidden');
+                contentLegal.classList.add('hidden');
+                tabGeral.classList.add('text-pct-blue', 'border-pct-blue');
+                tabGeral.classList.remove('text-gray-400', 'border-transparent');
+                tabLegal.classList.remove('text-pct-blue', 'border-pct-blue');
+                tabLegal.classList.add('text-gray-400', 'border-transparent');
+            } else {
+                contentGeral.classList.add('hidden');
+                contentLegal.classList.remove('hidden');
+                tabLegal.classList.add('text-pct-blue', 'border-pct-blue');
+                tabLegal.classList.remove('text-gray-400', 'border-transparent');
+                tabGeral.classList.remove('text-pct-blue', 'border-pct-blue');
+                tabGeral.classList.add('text-gray-400', 'border-transparent');
+            }
+        }
+    </script>
 </x-dashboard-layout>
+

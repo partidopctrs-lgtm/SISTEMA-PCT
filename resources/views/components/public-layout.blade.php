@@ -46,9 +46,8 @@
                         </a>
                         <div class="hidden md:ml-10 md:flex md:space-x-8">
                             <a href="{{ route('home') }}" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Home</a>
-                            <a href="{{ route('manifesto') }}" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Manifesto</a>
-                            <a href="{{ route('propostas') }}" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Propostas</a>
-                            <a href="#" onclick="alert('Área de Transparência em breve.'); return false;" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Transparência</a>
+                            <a href="https://drive.google.com/file/d/1aGtnjECienMe3hjDoFSYeeMm8e7n6Wvo/view?usp=sharing" target="_blank" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Cartilha</a>
+                            <a href="https://drive.google.com/file/d/1i0UZreBix6cktRShr4DW2VE6GbrdmlFO/view?usp=sharing" target="_blank" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Estatuto</a>
                         </div>
                     </div>
                     <div class="flex items-center space-x-4">
@@ -81,12 +80,10 @@
                         <h4 class="text-lg font-semibold mb-4">Links Úteis</h4>
                         <ul class="space-y-2 text-blue-100">
                             <li><a href="{{ route('home') }}" class="hover:text-white transition-colors">Página Inicial</a></li>
-                            <li><a href="{{ route('manifesto') }}" class="hover:text-white transition-colors">Manifesto</a></li>
-                            <li><a href="{{ route('estatuto') }}" class="hover:text-white transition-colors">Estatuto Oficial</a></li>
-                            <li><a href="{{ route('propostas') }}" class="hover:text-white transition-colors">Propostas</a></li>
+                            <li><a href="https://drive.google.com/file/d/1aGtnjECienMe3hjDoFSYeeMm8e7n6Wvo/view?usp=sharing" target="_blank" class="hover:text-white transition-colors">Cartilha Oficial</a></li>
+                            <li><a href="https://drive.google.com/file/d/1i0UZreBix6cktRShr4DW2VE6GbrdmlFO/view?usp=sharing" target="_blank" class="hover:text-white transition-colors">Estatuto Social</a></li>
                             <li><a href="{{ route('ethics') }}" class="hover:text-white transition-colors">Código de Ética</a></li>
-                            <li><a href="{{ route('modelos-oficios') }}" class="hover:text-white transition-colors">Modelos de Ofícios</a></li>
-                            <li><a href="{{ route('register.index') }}" class="hover:text-white transition-colors">Filie-se</a></li>
+                            <li><a href="{{ route('register.index') }}" class="hover:text-white transition-colors">Filie-se ao PCT</a></li>
                         </ul>
                     </div>
                     <div>

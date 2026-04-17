@@ -5,17 +5,96 @@ namespace App\Http\Controllers\Affiliate;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ModuleProgress;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AffiliateDashboardController extends Controller
 {
     public function index()
     {
-        return view('pages.affiliate.dashboard');
+        $user = auth()->user();
+        $isFounder = ($user->email === 'viniamaral2026@gmail.com');
+        
+        $stats = [
+            'total_members' => \App\Models\User::count(),
+            'total_directories' => \App\Models\Directory::count(),
+            'my_referrals' => $user->referrals()->count(),
+            'my_points' => $user->referrals()->count() * 50, // 50 points per referral
+            'rank_national' => 1,
+        ];
+
+        $myReferrals = $user->referrals()->latest()->limit(5)->get();
+
+        return view('pages.affiliate.dashboard', compact('user', 'isFounder', 'stats', 'myReferrals'));
     }
 
     public function profile()
     {
         return view('pages.affiliate.profile');
+    }
+
+    public function updateProfile(Request $request)
+    {
+        $user = auth()->user();
+        
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'birth_date' => 'nullable|date',
+            'phone' => 'nullable|string|max:20',
+            'cpf' => 'nullable|string|max:20',
+            'rg' => 'nullable|string|max:20',
+            'nationality' => 'nullable|string|max:50',
+            'marital_status' => 'nullable|string|max:50',
+            'voter_id' => 'nullable|string|max:30',
+            'voter_zone' => 'nullable|string|max:10',
+            'voter_section' => 'nullable|string|max:10',
+            'profession' => 'nullable|string|max:100',
+            'education' => 'nullable|string|max:100',
+            'address' => 'nullable|string|max:255',
+            'neighborhood' => 'nullable|string|max:100',
+            'city' => 'nullable|string|max:100',
+            'state' => 'nullable|string|max:2',
+            'zip_code' => 'nullable|string|max:15',
+            'committee_city' => 'nullable|string|max:100',
+        ]);
+
+        $user->update($validated);
+
+        return back()->with('success', 'Perfil atualizado com sucesso!');
+    }
+
+    public function updatePhoto(Request $request)
+    {
+        $request->validate([
+            'photo' => 'required|string', // Base64 image from cropper
+        ]);
+
+        $user = auth()->user();
+        
+        // Remove old photo if exists
+        if ($user->photo) {
+            Storage::disk('public')->delete($user->photo);
+        }
+
+        $image = $request->photo;
+        $image = str_replace('data:image/png;base64,', '', $image);
+        $image = str_replace(' ', '+', $image);
+        $imageName = 'avatars/' . Str::random(10) . '_' . time() . '.png';
+
+        if (!Storage::disk('public')->exists('avatars')) {
+            Storage::disk('public')->makeDirectory('avatars');
+        }
+
+        Storage::disk('public')->put($imageName, base64_decode($image));
+
+        $user->update([
+            'photo' => $imageName
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'photo_url' => asset('storage/' . $imageName)
+        ]);
     }
 
     public function carteirinha()
@@ -283,7 +362,84 @@ class AffiliateDashboardController extends Controller
 
     public function convites()
     {
-        return view('pages.affiliate.convites');
+        $myReferrals = auth()->user()->referrals()->latest()->get();
+        return view('pages.affiliate.convites', compact('myReferrals'));
+    }
+
+    public function storeManualRegistration(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'cpf' => 'required|string|max:20|unique:users',
+            'phone' => 'required|string|max:20',
+            'document' => 'required|mimes:pdf,doc,docx|max:5120', // Max 5MB
+        ]);
+
+        $affiliate = auth()->user();
+        
+        // Handle document upload
+        $documentPath = null;
+        if ($request->hasFile('document')) {
+            $documentPath = $request->file('document')->store('registration_documents', 'public');
+        }
+
+        // Generate a standard password based on the first 6 digits of the CPF
+        $cpfDigits = preg_replace('/[^0-9]/', '', $request->cpf);
+        $passwordStr = substr($cpfDigits, 0, 6);
+        if (strlen($passwordStr) < 6) {
+            $passwordStr = 'pct2026';
+        }
+
+        // Generate PCT ID
+        $lastUser = \App\Models\User::orderBy('id', 'desc')->first();
+        $nextId = $lastUser ? $lastUser->id + 1 : 1;
+        $pctId = 'PCT-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
+
+        $newUser = \App\Models\User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => \Illuminate\Support\Facades\Hash::make($passwordStr),
+            'cpf' => $request->cpf,
+            'phone' => $request->phone,
+            'role' => 'affiliate',
+            'pct_id' => $pctId,
+            'referred_by' => $affiliate->id,
+            'registration_document' => $documentPath,
+            // Inherit location data from the affiliate
+            'city' => $affiliate->city,
+            'state' => $affiliate->state,
+            'committee_city' => $affiliate->committee_city,
+            'committee_id' => $affiliate->committee_id,
+        ]);
+
+        // Create Profile and Membership
+        $newUser->profiles()->create([
+            'profile_type' => 'affiliate',
+            'level' => 'local',
+            'is_primary' => true
+        ]);
+
+        $newUser->memberships()->create([
+            'directory_id' => $affiliate->committee_id,
+            'membership_status' => 'active',
+            'joined_at' => now(),
+            'source' => 'manual_referral'
+        ]);
+
+        // Notify the Committee (if exists)
+        if ($affiliate->committee_id) {
+            \App\Models\Notification::create([
+                'user_id' => 1, // Let's assume user_id 1 is the national admin or we target the committee presidents. For now we use the general relation.
+                'related_module' => 'committee',
+                'related_id' => $affiliate->committee_id,
+                'title' => 'Novo Filiado Registrado (Campo)',
+                'message' => "O afiliado {$affiliate->name} registrou manualmente {$newUser->name}.",
+                'type' => 'info'
+            ]);
+        }
+
+        return redirect()->route('affiliate.convites')->with('success', "Filiado {$newUser->name} registrado com sucesso! A senha padrão de acesso dele são os 6 primeiros dígitos do CPF.");
     }
 
     public function comunidade()
@@ -308,17 +464,74 @@ class AffiliateDashboardController extends Controller
 
     public function eventos()
     {
-        return view('pages.affiliate.eventos');
+        $events = \App\Models\Event::where('start_time', '>=', now())
+            ->orderBy('start_time', 'asc')
+            ->get();
+            
+        return view('pages.affiliate.eventos', compact('events'));
     }
 
     public function financeiro()
     {
-        return view('pages.affiliate.financeiro');
+        $user = auth()->user();
+        
+        // Se o afiliado estiver em um comitê, mostra as finanças do comitê. 
+        // Caso contrário, mostra o Nacional
+        $committeeId = $user->committee_id;
+
+        $query = \App\Models\FinancialRecord::where('status', 'approved');
+        
+        if ($committeeId) {
+            $query->where('directory_id', $committeeId);
+        } else {
+            $query->whereNull('directory_id');
+        }
+
+        $records = $query->latest()->get();
+
+        $totalIncome = $records->where('type', 'income')->sum('amount');
+        $totalExpense = $records->where('type', 'expense')->sum('amount');
+        $balance = $totalIncome - $totalExpense;
+
+        $schoolInvestment = $records->where('type', 'expense')->where('category', 'education')->sum('amount');
+        $reserveFund = $records->where('type', 'income')->where('category', 'reserve')->sum('amount'); // or static logic for now
+
+        return view('pages.affiliate.financeiro', compact('records', 'totalIncome', 'totalExpense', 'balance', 'schoolInvestment', 'reserveFund'));
     }
 
     public function suporte()
     {
-        return view('pages.affiliate.suporte');
+        $legalRequestsCount = \App\Models\LegalRequest::where('requester_id', auth()->id())->count();
+        $activeLegalRequests = \App\Models\LegalRequest::where('requester_id', auth()->id())
+            ->whereNotIn('status', ['completed', 'cancelled'])
+            ->get();
+
+        return view('pages.affiliate.suporte', compact('legalRequestsCount', 'activeLegalRequests'));
+    }
+
+    public function storeLegalRequest(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'request_type' => 'required|string',
+            'priority' => 'required|string|in:low,medium,high,urgent',
+        ]);
+
+        $legalRequest = \App\Models\LegalRequest::create([
+            'request_code' => 'JUR-' . strtoupper(bin2hex(random_bytes(3))),
+            'requester_id' => auth()->id(),
+            'requester_profile_type' => 'affiliate',
+            'directory_id' => auth()->user()->committee_id, // Associar ao comitê do usuário se houver
+            'title' => $request->title,
+            'description' => $request->description,
+            'request_type' => $request->request_type,
+            'priority' => $request->priority,
+            'status' => 'new',
+            'level' => 'local',
+        ]);
+
+        return redirect()->back()->with('success', 'Sua solicitação jurídica foi enviada com sucesso ao departamento.');
     }
 
     public function configuracoes()

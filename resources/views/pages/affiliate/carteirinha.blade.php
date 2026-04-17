@@ -25,9 +25,13 @@
 
                     <!-- Photo Section -->
                     <div class="relative z-10 flex flex-col items-center mb-8">
-                        <div class="w-32 h-32 rounded-3xl bg-white/10 p-1 ring-4 ring-white/20">
-                            <div class="w-full h-full rounded-2xl bg-pct-blue-dark flex items-center justify-center text-3xl font-black">
-                                {{ substr(auth()->user()->name, 0, 1) }}
+                        <div class="w-32 h-32 rounded-3xl bg-white/10 p-1 ring-4 ring-white/20 overflow-hidden">
+                            <div class="w-full h-full rounded-2xl bg-pct-blue-dark flex items-center justify-center text-3xl font-black overflow-hidden">
+                                @if(auth()->user()->photo)
+                                    <img src="{{ asset('storage/' . auth()->user()->photo) }}" alt="Avatar" class="w-full h-full object-cover">
+                                @else
+                                    {{ substr(auth()->user()->name, 0, 1) }}
+                                @endif
                             </div>
                         </div>
                     </div>

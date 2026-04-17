@@ -38,7 +38,7 @@
 
             <div class="text-center mb-10">
                 <h3 class="text-xl font-black text-gray-800 uppercase tracking-tight">Ficha Nacional de Filiação</h3>
-                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">ID de Registro <span class="text-pct-blue font-black">(Uso Interno)</span>: _________________</p>
+                <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">ID de Registro <span class="text-pct-blue font-black">(Uso Interno)</span>: <span class="text-gray-900">{{ auth()->user()->registration_number }}</span></p>
             </div>
 
             <!-- 01. Dados Pessoais -->
@@ -50,20 +50,20 @@
                 <div class="grid grid-cols-6 gap-y-5 gap-x-6 px-2">
                     <div class="col-span-4">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Nome Completo</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">____________________________________________________________</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm uppercase">{{ auth()->user()->name }}</p>
                     </div>
                     <div class="col-span-2">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Data de Nascimento</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">___/___/______</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic">{{ auth()->user()->birth_date ? \Carbon\Carbon::parse(auth()->user()->birth_date)->format('d / m / Y') : '__ / __ / ____' }}</p>
                     </div>
 
                     <div class="col-span-2">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">CPF</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">___.___.___-__</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic">{{ auth()->user()->cpf ?? '___.___.___-__' }}</p>
                     </div>
                     <div class="col-span-2">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">RG / Órgão Emissor</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">_________________</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic">{{ auth()->user()->rg ?? '_________________' }}</p>
                     </div>
                     <div class="col-span-2">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Nacionalidade</p>
@@ -72,28 +72,28 @@
 
                     <div class="col-span-2">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Estado Civil</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">_________________</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic">{{ auth()->user()->marital_status ?? '_________________' }}</p>
                     </div>
                     <div class="col-span-2">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Título de Eleitor</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">_________________</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic">{{ auth()->user()->voter_id ?? '_________________' }}</p>
                     </div>
                     <div class="col-span-1">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Zona</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">____</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic">{{ auth()->user()->voter_zone ?? '____' }}</p>
                     </div>
                     <div class="col-span-1">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Seção</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">____</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic">{{ auth()->user()->voter_section ?? '____' }}</p>
                     </div>
 
                     <div class="col-span-3">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Profissão / Ocupação</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">_________________________</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic">{{ auth()->user()->profession ?? '_________________________' }}</p>
                     </div>
                     <div class="col-span-3">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Escolaridade</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">_________________________</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic">{{ auth()->user()->education ?? '_________________________' }}</p>
                     </div>
                 </div>
             </div>
@@ -106,32 +106,32 @@
                 <div class="grid grid-cols-6 gap-y-5 gap-x-6 px-2">
                     <div class="col-span-4">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Endereço Completo (Rua, Número, Complemento)</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-xs italic text-gray-300">____________________________________________________________</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic uppercase">{{ auth()->user()->address ?? '____________________________________________________________' }}</p>
                     </div>
                     <div class="col-span-2">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Bairro</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">_________________</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic uppercase">{{ auth()->user()->neighborhood ?? '_________________' }}</p>
                     </div>
 
                     <div class="col-span-2">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Cidade</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">_________________</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic uppercase">{{ auth()->user()->city ?? '_________________' }}</p>
                     </div>
                     <div class="col-span-1">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Estado</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">____</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic uppercase">{{ auth()->user()->state ?? '____' }}</p>
                     </div>
                     <div class="col-span-1">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">CEP</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">_____-___</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic">{{ auth()->user()->zip_code ?? '_____-___' }}</p>
                     </div>
                     <div class="col-span-2">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">Telefone / WhatsApp</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">(__) _____-____</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic">{{ auth()->user()->phone ?? '(__) _____-____' }}</p>
                     </div>
                     <div class="col-span-6">
                         <p class="text-[9px] font-black text-gray-400 uppercase mb-0.5">E-mail</p>
-                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic text-gray-300">____________________________________________________________</p>
+                        <p class="border-b border-gray-300 pb-0.5 font-bold text-gray-800 text-sm italic">{{ auth()->user()->email }}</p>
                     </div>
                 </div>
             </div>

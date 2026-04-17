@@ -1,136 +1,128 @@
 <x-dashboard-layout>
-    <x-slot name="title">Gestão de Comitê - PCT</x-slot>
+    <x-slot name="title">Painel do Comitê - {{ $directory->name ?? 'Gestão Local' }} - PCT</x-slot>
 
-    <div class="mb-8 overflow-hidden rounded-3xl bg-pct-blue text-white p-8 relative shadow-lg">
-        <div class="relative z-10">
-            <span class="px-3 py-1 bg-white/20 rounded-full text-xs font-bold uppercase tracking-widest">Unidade Regional</span>
-            <h1 class="text-3xl font-bold mt-4">Comitê Municipal: Porto Alegre / RS</h1>
-            <p class="text-blue-100 mt-2">Gestão operacional, mobilização de base e coordenação de tarefas locais.</p>
-        </div>
-        <div class="absolute right-0 top-0 w-64 h-64 bg-pct-green/20 rounded-full -mr-20 -mt-20 blur-3xl"></div>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-        <!-- Members List -->
-        <div class="lg:col-span-1 glass p-6 rounded-3xl shadow-sm">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="font-bold text-pct-blue text-lg">Membros do Comitê</h3>
-                <span class="px-2 py-0.5 bg-blue-50 text-pct-blue text-xs font-bold rounded-full">18 Total</span>
-            </div>
-            <div class="space-y-4">
-                <div class="flex items-center space-x-3 p-2 hover:bg-white/50 rounded-xl transition-colors cursor-pointer">
-                    <div class="h-10 w-10 rounded-full bg-pct-blue flex items-center justify-center text-white text-xs font-bold text-xs">JS</div>
-                    <div>
-                        <p class="text-sm font-bold text-gray-900">João Silva</p>
-                        <p class="text-[10px] text-gray-500 font-bold uppercase">Coordenador Geral</p>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-3 p-2 hover:bg-white/50 rounded-xl transition-colors cursor-pointer">
-                    <div class="h-10 w-10 rounded-full bg-pct-green flex items-center justify-center text-white text-xs font-bold font-bold">MP</div>
-                    <div>
-                        <p class="text-sm font-bold text-gray-900">Maria Paula</p>
-                        <p class="text-[10px] text-gray-500 font-bold uppercase">Tesoureira Local</p>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-3 p-2 hover:bg-white/50 rounded-xl transition-colors cursor-pointer">
-                    <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 text-xs font-bold">AL</div>
-                    <div>
-                        <p class="text-sm font-bold text-gray-900">André Lima</p>
-                        <p class="text-[10px] text-gray-500 font-bold uppercase">Mobilizador</p>
-                    </div>
-                </div>
-            </div>
-            <button class="w-full mt-6 py-2 text-xs font-bold text-pct-blue border border-pct-blue rounded-lg hover:bg-pct-blue hover:text-white transition-all">Gerenciar Membros</button>
-        </div>
-
-        <!-- Task Board Preview -->
-        <div class="lg:col-span-2 glass p-8 rounded-3xl shadow-sm">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="font-bold text-pct-blue text-lg">Quadro de Tarefas Operacionais</h3>
-                <button class="text-xs font-bold text-pct-green flex items-center space-x-1">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                    <span>Nova Tarefa</span>
-                </button>
+    <div class="max-w-7xl mx-auto py-8 px-4">
+        <!-- Unit Header -->
+        <div class="bg-white rounded-[2.5rem] p-10 shadow-sm border border-slate-100 mb-12 relative overflow-hidden">
+            <div class="absolute top-0 right-0 p-10 opacity-10">
+                <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7v11l10 5 10-5V7L12 2zm0 18l-8-4V8.5l8 4 8-4V16l-8 4z"></path></svg>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="p-4 bg-white border border-gray-100 rounded-2xl shadow-sm group hover:border-pct-blue transition-colors">
-                    <div class="flex justify-between mb-2">
-                        <span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-[10px] font-bold rounded uppercase">Pendente</span>
-                        <span class="text-[10px] text-gray-400 font-bold">15/04</span>
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-4 py-1 bg-emerald-100 text-pct-green text-[10px] font-black rounded-full uppercase tracking-widest border border-emerald-200">{{ $directory->directory_type ?? 'Municipal' }}</span>
+                        <span class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Ativo desde {{ $directory->created_at->format('M/Y') ?? '2026' }}</span>
                     </div>
-                    <p class="text-sm font-bold text-gray-800">Organizar panfletagem no centro</p>
-                    <div class="mt-4 flex -space-x-2">
-                        <div class="h-6 w-6 rounded-full border-2 border-white bg-blue-500"></div>
-                        <div class="h-6 w-6 rounded-full border-2 border-white bg-green-500"></div>
-                    </div>
+                    <h1 class="text-4xl font-black text-pct-blue tracking-tight">{{ $directory->name ?? 'Diretório Municipal PCT' }}</h1>
+                    <p class="text-gray-500 font-medium mt-2 flex items-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        {{ $directory->city ?? 'Cidade' }} / {{ $directory->state ?? 'UF' }}
+                    </p>
                 </div>
-                <div class="p-4 bg-white border border-gray-100 rounded-2xl shadow-sm group hover:border-pct-blue transition-colors">
-                    <div class="flex justify-between mb-2">
-                        <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-[10px] font-bold rounded uppercase">Em execução</span>
-                        <span class="text-[10px] text-gray-400 font-bold">Hoje</span>
-                    </div>
-                    <p class="text-sm font-bold text-gray-800">Revisão do balancete mensal local</p>
-                    <div class="mt-4 flex -space-x-2">
-                        <div class="h-6 w-6 rounded-full border-2 border-white bg-gray-400"></div>
-                    </div>
-                </div>
-                <div class="p-4 bg-pct-green/5 border border-pct-green/20 rounded-2xl shadow-sm">
-                    <div class="flex justify-between mb-2">
-                        <span class="px-2 py-0.5 bg-pct-green text-white text-[10px] font-bold rounded uppercase">Concluído</span>
-                        <span class="text-[10px] text-gray-400 font-bold">10/04</span>
-                    </div>
-                    <p class="text-sm font-bold text-gray-400 line-through">Protocolar ata da última reunião</p>
+                
+                <div class="flex gap-4">
+                    <a href="{{ route('committee.members') }}" class="btn-primary flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                        Gestão de Membros
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Communication & Local Reports -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div class="lg:col-span-2 glass p-8 rounded-3xl shadow-sm">
-            <h3 class="text-xl font-bold text-pct-blue mb-6">Relatório de Desempenho Local</h3>
-            <div class="flex h-48 items-end space-x-4">
-                <div class="flex-grow bg-pct-blue/10 rounded-t-lg relative" style="height: 40%">
-                    <span class="absolute -top-6 left-0 right-0 text-center text-[10px] font-bold text-pct-blue text-xs tracking-tighter">Jan</span>
-                </div>
-                <div class="flex-grow bg-pct-blue/20 rounded-t-lg relative" style="height: 60%">
-                    <span class="absolute -top-6 left-0 right-0 text-center text-[10px] font-bold text-pct-blue text-xs tracking-tighter">Fev</span>
-                </div>
-                <div class="flex-grow bg-pct-blue/40 rounded-t-lg relative" style="height: 55%">
-                    <span class="absolute -top-6 left-0 right-0 text-center text-[10px] font-bold text-pct-blue text-xs tracking-tighter">Mar</span>
-                </div>
-                <div class="flex-grow bg-pct-blue/60 rounded-t-lg relative" style="height: 85%">
-                    <span class="absolute -top-6 left-0 right-0 text-center text-[10px] font-bold text-pct-blue text-xs tracking-tighter">Abr</span>
-                </div>
-                <div class="flex-grow bg-pct-green rounded-t-lg relative" style="height: 100%">
-                    <span class="absolute -top-6 left-0 right-0 text-center text-[10px] font-bold text-pct-green text-xs tracking-tighter">Meta</span>
+        <!-- Local Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="card-premium">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Membros Locais</p>
+                <p class="text-3xl font-black text-pct-blue">{{ $stats['members'] }}</p>
+                <div class="h-1 w-full bg-slate-100 rounded-full mt-4">
+                    <div class="h-full bg-pct-blue w-[60%] rounded-full"></div>
                 </div>
             </div>
-            <p class="text-xs text-center text-gray-400 mt-6 font-bold uppercase tracking-widest">Custo de Aquisição por Filiado (CAC Político)</p>
+            <div class="card-premium">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Receita (Mês)</p>
+                <p class="text-3xl font-black text-pct-green">R$ {{ number_format($stats['revenue'], 2, ',', '.') }}</p>
+            </div>
+            <div class="card-premium">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Despesas (Mês)</p>
+                <p class="text-3xl font-black text-red-600">R$ {{ number_format($stats['expenses'], 2, ',', '.') }}</p>
+            </div>
+            <div class="card-premium">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Tarefas Pendentes</p>
+                <p class="text-3xl font-black text-amber-600">{{ $stats['pending_tasks'] }}</p>
+            </div>
         </div>
-        <div class="glass p-8 rounded-3xl shadow-sm bg-pct-blue text-white">
-            <h3 class="text-xl font-bold mb-4">Avisos Nacionais</h3>
-            <div class="space-y-4">
-                <div class="p-4 bg-white/10 rounded-2xl">
-                    <p class="text-xs font-bold text-blue-300">Há 1 hora</p>
-                    <p class="text-sm font-medium mt-1">Atualização no módulo Jurídico: novas regras para coleta de assinaturas TSE.</p>
+
+        <!-- Local Actions & Support -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 space-y-8">
+                <!-- Routine Actions -->
+                <div class="card-premium">
+                    <h3 class="text-xl font-bold text-pct-blue mb-8">Ações de Rotina</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <a href="{{ route('committee.financial') }}" class="p-6 bg-slate-50 rounded-[2rem] border border-slate-100 hover:bg-white hover:shadow-lg transition-all group flex items-center gap-4">
+                            <div class="h-12 w-12 bg-white rounded-2xl flex items-center justify-center text-pct-blue shadow-sm group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-black text-pct-blue uppercase">Prestação de Contas</h4>
+                                <p class="text-[10px] text-gray-400 font-bold">Enviar recibos e balancete</p>
+                            </div>
+                        </a>
+                        <a href="{{ route('committee.modelos_oficios') }}" class="p-6 bg-slate-50 rounded-[2rem] border border-slate-100 hover:bg-white hover:shadow-lg transition-all group flex items-center gap-4">
+                            <div class="h-12 w-12 bg-white rounded-2xl flex items-center justify-center text-pct-blue shadow-sm group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-black text-pct-blue uppercase">Modelos Oficiais</h4>
+                                <p class="text-[10px] text-gray-400 font-bold">Ofícios, Atas e Documentos</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
-                <div class="p-4 bg-white/10 rounded-2xl">
-                    <p class="text-xs font-bold text-blue-300">Ontem</p>
-                    <p class="text-sm font-medium mt-1">Convocação para Assembleia Nacional de Comitês Regionais.</p>
+
+                <!-- Manual Guidelines -->
+                <div class="card-premium">
+                    <h3 class="text-xl font-bold text-pct-blue mb-8">Diretrizes de Diretório (ORG-001)</h3>
+                    <div class="space-y-4">
+                        @foreach([
+                            ['Estrutura Mínima', 'Presidente, Secretário e Tesoureiro são obrigatórios.'],
+                            ['Prestação Mensal', 'Todo dia 05 deve ser enviado o balancete ao estadual.'],
+                            ['Mobilização Local', 'Mínimo de 1 ação de rua ou evento por mês.']
+                        ] as $rule)
+                        <div class="p-6 border border-slate-100 rounded-3xl flex items-start gap-4">
+                            <div class="h-6 w-6 bg-blue-50 text-pct-blue rounded-full flex items-center justify-center text-[10px] font-black flex-shrink-0">✓</div>
+                            <div>
+                                <h4 class="text-xs font-black text-pct-blue uppercase">{{ $rule[0] }}</h4>
+                                <p class="text-xs text-gray-500 font-medium leading-relaxed">{{ $rule[1] }}</p>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
-            <button class="w-full mt-8 py-3 bg-white text-pct-blue font-bold rounded-xl hover:bg-blue-50 transition-colors">Abrir Mural de Avisos</button>
-            <div class="mt-4 pt-4 border-t border-white/10 space-y-3">
-                <a href="{{ route('committee.modelos_oficios') }}" class="flex items-center justify-between text-xs font-bold text-white hover:text-pct-green transition-colors group">
-                    <span class="uppercase tracking-widest text-[10px]">Modelos de Ofícios</span>
-                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </a>
-                <a href="{{ route('committee.ficha_filiacao') }}" class="flex items-center justify-between text-xs font-bold text-white hover:text-pct-green transition-colors group">
-                    <span class="uppercase tracking-widest text-[10px]">Ficha de Filiação</span>
-                    <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </a>
+
+            <div class="space-y-8">
+                <!-- Internal Support -->
+                <div class="card-premium bg-slate-900 text-white p-10">
+                    <h3 class="text-xl font-black mb-6 uppercase tracking-tighter">Suporte à Gestão</h3>
+                    <p class="text-xs text-slate-400 font-medium leading-relaxed mb-10">Precisa de apoio jurídico ou institucional para o diretório? Abra uma solicitação oficial.</p>
+                    <div class="space-y-3">
+                        <a href="{{ route('affiliate.suporte') }}#legal" class="block w-full text-center bg-blue-600 text-white font-black py-4 rounded-2xl hover:bg-blue-700 transition-all shadow-lg shadow-blue-600/20">Apoio Jurídico</a>
+                        <a href="{{ route('manual.directories') }}" class="block w-full text-center bg-white/10 text-white font-black py-4 rounded-2xl hover:bg-white/20 transition-all border border-white/10">Manual de Gestão</a>
+                    </div>
+                </div>
+
+                <!-- KPI Tracker Teaser -->
+                <div class="card-premium border-t-4 border-t-pct-green">
+                    <h3 class="text-lg font-black text-pct-blue mb-4 uppercase tracking-widest">Ranking Nacional</h3>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase mb-6">Sua posição atual</p>
+                    <div class="text-center py-6">
+                        <span class="text-5xl font-black text-pct-blue">#124</span>
+                        <p class="text-xs font-bold text-pct-green mt-2 uppercase tracking-widest">Top 15% Nacional</p>
+                    </div>
+                    <a href="{{ route('manual.governance') }}" class="block text-center text-[10px] font-black text-blue-600 uppercase tracking-widest mt-6 hover:underline">Como subir no ranking?</a>
+                </div>
             </div>
         </div>
     </div>

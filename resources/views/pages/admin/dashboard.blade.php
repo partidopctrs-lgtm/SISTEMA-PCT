@@ -1,170 +1,114 @@
 <x-dashboard-layout>
-    <x-slot name="title">Portal da Presidência (Admin) - PCT</x-slot>
+    <x-slot name="title">Dashboard Administrativo Nacional - PCT</x-slot>
 
-    <div class="mb-12 flex justify-between items-end">
-        <div>
-            <h1 class="text-4xl font-black text-pct-blue tracking-tight mb-2 italic underline decoration-pct-green decoration-8 underline-offset-8">Gabinete Presidencial</h1>
-            <p class="text-gray-500 font-medium tracking-wide">Bem-vindo ao centro de comando estratégico do PCT.</p>
+    <div class="max-w-7xl mx-auto py-8 px-4">
+        <div class="mb-12">
+            <h1 class="text-3xl font-black text-pct-blue tracking-tight mb-2">Governança Nacional</h1>
+            <p class="text-gray-500 font-medium italic">Monitoramento em tempo real do ecossistema PCT.</p>
         </div>
-        <div class="flex space-x-3">
-             <button class="btn-secondary px-6 py-3 flex items-center space-x-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                <span>Relatório Executivo</span>
-            </button>
-        </div>
-    </div>
 
-    <!-- Quick Access Shortcuts -->
-    <div class="mb-16">
-        <h3 class="text-xs font-black text-pct-blue uppercase tracking-[0.2em] mb-8 border-b border-gray-100 pb-4">Acesso Direto aos Portais</h3>
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            @foreach([
-                ['name' => 'Afiliado', 'route' => '/affiliate/dashboard', 'icon' => 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z'],
-                ['name' => 'Candidato', 'route' => '/candidate/dashboard', 'icon' => 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z'],
-                ['name' => 'Comitê', 'route' => '/committee/dashboard', 'icon' => 'M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4'],
-                ['name' => 'Financeiro', 'route' => '/finance/dashboard', 'icon' => 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z'],
-                ['name' => 'Jurídico', 'route' => '/legal/dashboard', 'icon' => 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z'],
-                ['name' => 'Comunicação', 'route' => '/communication/dashboard', 'icon' => 'M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z']
-            ] as $shortcut)
-                <a href="{{ $shortcut['route'] }}" class="glass p-6 rounded-3xl flex flex-col items-center justify-center hover:bg-white hover:shadow-xl transition-all group border border-transparent hover:border-pct-green/40">
-                    <div class="p-3 bg-pct-blue/5 text-pct-blue rounded-2xl mb-3 group-hover:scale-110 transition-transform">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="{{ $shortcut['icon'] }}"></path></svg>
+        <!-- Global Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="card-premium bg-gradient-to-br from-pct-blue to-blue-900 text-white border-none">
+                <p class="text-[10px] font-black opacity-60 uppercase tracking-[0.2em] mb-2">Total de Membros</p>
+                <p class="text-4xl font-black">{{ number_format($stats['total_members'], 0, ',', '.') }}</p>
+                <div class="mt-4 flex items-center gap-2">
+                    <span class="text-[10px] bg-pct-green/20 text-pct-green px-2 py-0.5 rounded font-black">+12%</span>
+                    <span class="text-[9px] opacity-40 uppercase font-black tracking-widest text-white">Crescimento Mensal</span>
+                </div>
+            </div>
+            <div class="card-premium">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">Diretórios Ativos</p>
+                <p class="text-4xl font-black text-pct-blue">{{ $stats['total_directories'] }}</p>
+                <p class="text-[9px] text-gray-400 font-bold uppercase mt-4">Em {{ \App\Models\User::distinct('state')->count() }} estados</p>
+            </div>
+            <div class="card-premium">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">Receita Global</p>
+                <p class="text-4xl font-black text-pct-green">R$ {{ number_format($stats['total_revenue'], 0, ',', '.') }}</p>
+                <p class="text-[9px] text-gray-400 font-bold uppercase mt-4">Aprovado por Auditoria</p>
+            </div>
+            <div class="card-premium">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">Alertas Jurídicos</p>
+                <p class="text-4xl font-black text-red-600">{{ $stats['legal_requests_new'] }}</p>
+                <p class="text-[9px] text-gray-400 font-bold uppercase mt-4">Aguardando Triagem</p>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left: Top Directories Ranking -->
+            <div class="lg:col-span-2 card-premium">
+                <div class="flex items-center justify-between mb-10 pb-6 border-b border-slate-50">
+                    <h3 class="text-xl font-bold text-pct-blue uppercase tracking-tighter">Ranking de Diretórios (Top 5)</h3>
+                    <a href="{{ route('manual.governance') }}" class="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline">Ver Critérios de Pontuação</a>
+                </div>
+
+                <div class="space-y-6">
+                    @foreach($topDirectories as $index => $dir)
+                    <div class="flex items-center justify-between p-6 bg-slate-50 rounded-[2.5rem] border border-slate-100 hover:bg-white hover:shadow-xl transition-all group">
+                        <div class="flex items-center gap-6">
+                            <div class="h-12 w-12 rounded-2xl flex items-center justify-center font-black text-lg {{ $index == 0 ? 'bg-amber-100 text-amber-600 shadow-lg shadow-amber-600/20' : 'bg-white text-gray-400 border border-slate-100' }}">
+                                #{{ $index + 1 }}
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-black text-pct-blue uppercase">{{ $dir->name }}</h4>
+                                <p class="text-[10px] text-gray-400 font-bold uppercase">{{ $dir->city }} / {{ $dir->state }}</p>
+                            </div>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-lg font-black text-pct-blue">{{ $dir->memberships_count }}</p>
+                            <p class="text-[9px] text-gray-400 font-bold uppercase">Membros</p>
+                        </div>
                     </div>
-                    <span class="text-[10px] font-black text-pct-blue uppercase tracking-widest text-center">{{ $shortcut['name'] }}</span>
-                </a>
-            @endforeach
-        </div>
-    </div>
-
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        <!-- New Member Registration -->
-        <div class="glass p-10 rounded-[2.5rem] shadow-sm bg-gradient-to-br from-white to-pct-green/5">
-            <h3 class="text-xl font-black text-pct-blue mb-8">Cadastrar Novo Membro</h3>
-            
-            @if(session('success'))
-                <div class="mb-6 p-4 bg-green-50 border border-green-200 text-green-700 rounded-2xl text-sm font-medium">
-                    {{ session('success') }}
-                </div>
-            @endif
-
-            @if($errors->any())
-                <div class="mb-6 p-4 bg-red-50 border border-red-200 text-red-700 rounded-2xl text-sm font-medium">
-                    <ul class="list-disc list-inside">
-                        @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <form action="{{ route('admin.storeMember') }}" method="POST" class="space-y-6">
-                @csrf
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-[10px] font-black text-pct-blue uppercase tracking-widest mb-2 opacity-60">Nome Completo</label>
-                        <input type="text" name="name" required placeholder="Ex: Maria oliveira" class="w-full px-5 py-4 bg-white/50 border border-gray-100 rounded-2xl outline-none focus:ring-2 focus:ring-pct-green">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-black text-pct-blue uppercase tracking-widest mb-2 opacity-60">Cargo / Função</label>
-                        <select name="role" required class="w-full px-5 py-4 bg-white/50 border border-gray-100 rounded-2xl outline-none focus:ring-2 focus:ring-pct-green">
-                            <option value="admin">Presidente / Nacional</option>
-                            <option value="committee">Líder Regional</option>
-                            <option value="finance">Tesoureiro</option>
-                            <option value="legal">Consultor Jurídico</option>
-                            <option value="communication">Comunicação</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label class="block text-[10px] font-black text-pct-blue uppercase tracking-widest mb-2 opacity-60">E-mail de Acesso</label>
-                    <input type="email" name="email" required placeholder="maria@pct.org.br" class="w-full px-5 py-4 bg-white/50 border border-gray-100 rounded-2xl outline-none focus:ring-2 focus:ring-pct-green">
-                </div>
-                <button type="submit" class="btn-primary w-full py-5 text-lg font-black rounded-2xl shadow-lg">SALVAR NOVO MEMBRO</button>
-            </form>
-        </div>
-
-        <!-- System Stats / Notifications -->
-        <div class="space-y-6">
-            <div class="glass p-10 rounded-[2.5rem] shadow-sm">
-                <h3 class="text-xl font-black text-pct-blue mb-8 uppercase tracking-widest text-sm">Documentos Úteis</h3>
-                <div class="space-y-4">
-                    <a href="{{ route('admin.modelos_oficios') }}" class="flex items-center justify-between p-5 bg-indigo-50/50 rounded-2xl hover:bg-indigo-100/50 transition-all group">
-                        <div class="flex items-center space-x-4">
-                            <div class="p-2 bg-indigo-500 text-white rounded-lg">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                            </div>
-                            <div>
-                                <p class="font-bold text-pct-blue">Modelo de Ofício</p>
-                                <p class="text-[10px] text-gray-400 font-black uppercase">Acessar Repositório</p>
-                            </div>
-                        </div>
-                        <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </a>
-
-                    <a href="{{ route('admin.ficha_filiacao') }}" class="flex items-center justify-between p-5 bg-emerald-50/50 rounded-2xl hover:bg-emerald-100/50 transition-all group">
-                        <div class="flex items-center space-x-4">
-                            <div class="p-2 bg-pct-green text-white rounded-lg">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                            </div>
-                            <div>
-                                <p class="font-bold text-pct-blue">Ficha de Filiação</p>
-                                <p class="text-[10px] text-gray-400 font-black uppercase">Visualizar para Impressão</p>
-                            </div>
-                        </div>
-                        <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </a>
-                    
-                    <a href="{{ route('estatuto') }}" class="flex items-center justify-between p-5 bg-blue-50/50 rounded-2xl hover:bg-blue-100/50 transition-all group">
-                        <div class="flex items-center space-x-4">
-                            <div class="p-2 bg-pct-blue text-white rounded-lg">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                            </div>
-                            <div>
-                                <p class="font-bold text-pct-blue">Estatuto Oficial</p>
-                                <p class="text-[10px] text-gray-400 font-black uppercase">Ver Documento Interno</p>
-                            </div>
-                        </div>
-                        <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </a>
-
-                    <a href="{{ route('cartilha') }}" class="flex items-center justify-between p-5 bg-emerald-50/50 rounded-2xl hover:bg-emerald-100/50 transition-all group">
-                        <div class="flex items-center space-x-4">
-                            <div class="p-2 bg-pct-green text-white rounded-lg">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5s3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
-                            </div>
-                            <div>
-                                <p class="font-bold text-pct-blue">Cartilha do PCT</p>
-                                <p class="text-[10px] text-gray-400 font-black uppercase">Guia de Formação</p>
-                            </div>
-                        </div>
-                        <svg class="w-5 h-5 text-gray-400 group-hover:text-pct-blue transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    </a>
+                    @endforeach
                 </div>
             </div>
 
-            <div class="glass p-10 rounded-[2.5rem] shadow-sm">
-                <h3 class="text-xl font-black text-pct-blue mb-8 uppercase tracking-widest text-sm">Saúde do Sistema</h3>
-                <div class="space-y-6">
-                    <div class="flex items-center justify-between p-5 bg-blue-50/50 rounded-2xl">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-3 h-3 bg-pct-green rounded-full animate-pulse"></div>
-                            <span class="font-bold text-pct-blue tracking-tight">Base de Dados</span>
+            <!-- Right: System Integrity & Logs -->
+            <div class="space-y-8">
+                <div class="card-premium border-t-4 border-t-indigo-600">
+                    <h3 class="text-lg font-black text-pct-blue mb-6 uppercase tracking-widest">Integridade do Sistema</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between text-xs py-3 border-b border-slate-50">
+                            <span class="text-gray-500 font-bold">Uptime Servidor</span>
+                            <span class="text-pct-green font-black uppercase">99.9%</span>
                         </div>
-                        <span class="text-xs font-black text-pct-green">OPERACIONAL</span>
+                        <div class="flex items-center justify-between text-xs py-3 border-b border-slate-50">
+                            <span class="text-gray-500 font-bold">Versão do Core</span>
+                            <span class="text-gray-400 font-black uppercase">v2.0.4-PRO</span>
+                        </div>
+                        <div class="flex items-center justify-between text-xs py-3">
+                            <span class="text-gray-500 font-bold">Banco de Dados</span>
+                            <span class="text-pct-green font-black uppercase">Sincronizado</span>
+                        </div>
                     </div>
-                    <div class="flex items-center justify-between p-5 bg-blue-50/50 rounded-2xl">
-                        <div class="flex items-center space-x-4">
-                             <div class="w-3 h-3 bg-pct-green rounded-full"></div>
-                            <span class="font-bold text-pct-blue tracking-tight">Fila de Disparos (Bulk)</span>
+                </div>
+
+                <!-- Recent Registrations -->
+                <div class="card-premium">
+                    <h3 class="text-lg font-black text-pct-blue mb-6 uppercase tracking-widest">Novos Membros</h3>
+                    <div class="space-y-4">
+                        @foreach($recentUsers as $user)
+                        <div class="flex items-center gap-4">
+                            <div class="h-8 w-8 bg-slate-100 rounded-lg flex items-center justify-center text-[10px] font-black text-gray-400 uppercase">
+                                {{ substr($user->full_name, 0, 1) }}
+                            </div>
+                            <div>
+                                <p class="text-[11px] font-black text-pct-blue">{{ $user->full_name }}</p>
+                                <p class="text-[9px] text-gray-400 font-bold">{{ $user->created_at->diffForHumans() }}</p>
+                            </div>
                         </div>
-                        <span class="text-xs font-black text-pct-green">EM ESPERA</span>
+                        @endforeach
                     </div>
-                    <div class="flex items-center justify-between p-5 bg-red-50/50 rounded-2xl">
-                        <div class="flex items-center space-x-4">
-                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
-                            <span class="font-bold text-red-700 tracking-tight">Servidor de E-mail (Mercury)</span>
-                        </div>
-                        <span class="text-xs font-black text-red-600">OFFLINE</span>
+                    <a href="{{ route('admin.members') }}" class="block text-center text-[10px] font-black text-blue-600 uppercase tracking-widest mt-8 hover:underline">Ver Todos os Membros</a>
+                </div>
+
+                <!-- Fast Access to Modules -->
+                <div class="card-premium bg-slate-50 border-none shadow-none">
+                    <h3 class="text-sm font-black text-pct-blue mb-6 uppercase tracking-[0.2em]">Seletor de Visão</h3>
+                    <div class="space-y-2">
+                        <a href="{{ route('legal.dashboard') }}" class="block w-full text-center bg-white border border-slate-100 text-gray-600 font-black py-4 rounded-2xl text-[10px] uppercase tracking-widest hover:bg-pct-blue hover:text-white transition-all">Visão Jurídica</a>
+                        <a href="{{ route('committee.dashboard') }}" class="block w-full text-center bg-white border border-slate-100 text-gray-600 font-black py-4 rounded-2xl text-[10px] uppercase tracking-widest hover:bg-pct-blue hover:text-white transition-all">Visão Comitês</a>
+                        <a href="{{ route('affiliate.dashboard') }}" class="block w-full text-center bg-white border border-slate-100 text-gray-600 font-black py-4 rounded-2xl text-[10px] uppercase tracking-widest hover:bg-pct-blue hover:text-white transition-all">Visão Afiliado</a>
                     </div>
                 </div>
             </div>

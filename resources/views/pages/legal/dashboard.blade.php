@@ -1,125 +1,101 @@
 <x-dashboard-layout>
-    <x-slot name="title">Módulo Jurídico - PCT</x-slot>
+    <x-slot name="title">Painel Jurídico - PCT</x-slot>
 
-    <div class="mb-8 flex justify-between items-end">
-        <div>
-            <h1 class="text-3xl font-bold text-pct-blue">Jurídico & Compliance</h1>
-            <p class="text-gray-500">Gestão de estatutos, atas e conformidade com o TSE.</p>
+    <div class="max-w-7xl mx-auto py-8 px-4">
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
+            <div>
+                <h1 class="text-3xl font-black text-pct-blue tracking-tight mb-2">Painel Jurídico Nacional</h1>
+                <p class="text-gray-500 font-medium">Gestão de conformidade, solicitações e integridade institucional.</p>
+            </div>
+            <div class="flex gap-4">
+                <a href="{{ route('legal.requests') }}" class="btn-primary flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                    Ver Todas Solicitações
+                </a>
+            </div>
         </div>
-        <div class="flex space-x-3">
-             <button class="btn-secondary flex items-center space-x-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path></svg>
-                <span>Exportar Dados TSE</span>
-            </button>
-            <button class="btn-primary flex items-center space-x-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                <span>Novo Documento</span>
-            </button>
-        </div>
-    </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-        <!-- Signature Progress -->
-        <div class="lg:col-span-1 glass p-8 rounded-3xl shadow-sm border-t-4 border-pct-green">
-            <h3 class="text-xl font-bold text-pct-blue mb-6">Coleta de Assinaturas</h3>
-            <div class="flex flex-col items-center">
-                <div class="relative w-40 h-40 flex items-center justify-center mb-6">
-                    <svg class="w-full h-full transform -rotate-90">
-                        <circle cx="80" cy="80" r="70" stroke="currentColor" stroke-width="8" fill="transparent" class="text-gray-100" />
-                        <circle cx="80" cy="80" r="70" stroke="currentColor" stroke-width="8" fill="transparent" class="text-pct-green" stroke-dasharray="440" stroke-dashoffset="110" />
-                    </svg>
-                    <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <span class="text-2xl font-black text-pct-blue">75%</span>
-                        <span class="text-[10px] text-gray-400 font-bold uppercase">Concluído</span>
-                    </div>
-                </div>
-                <div class="text-center">
-                    <p class="text-sm font-bold text-gray-700">368.502 / 492.000</p>
-                    <p class="text-xs text-gray-400 mt-1 italic">Meta para protocolo no TSE</p>
-                </div>
-                <div class="mt-8 w-full p-4 bg-emerald-50 rounded-2xl border border-emerald-100">
-                    <div class="flex items-center space-x-3">
-                        <div class="h-8 w-8 rounded-lg bg-pct-green flex items-center justify-center">
-                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"></path></svg>
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+            <div class="card-premium border-l-4 border-l-blue-500">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Total de Solicitações</p>
+                <p class="text-3xl font-black text-pct-blue">{{ $stats['total'] }}</p>
+            </div>
+            <div class="card-premium border-l-4 border-l-pct-green">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Novas / Pendentes</p>
+                <p class="text-3xl font-black text-pct-blue">{{ $stats['new'] }}</p>
+            </div>
+            <div class="card-premium border-l-4 border-l-amber-500">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Em Análise</p>
+                <p class="text-3xl font-black text-pct-blue">{{ $stats['in_progress'] }}</p>
+            </div>
+            <div class="card-premium border-l-4 border-l-red-500">
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">Críticas / Urgentes</p>
+                <p class="text-3xl font-black text-red-600">{{ $stats['critical'] }}</p>
+            </div>
+        </div>
+
+        <!-- Latest Requests & Manual Links -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Latest Requests -->
+            <div class="lg:col-span-2 card-premium">
+                <h3 class="text-xl font-bold text-pct-blue mb-8">Solicitações Recentes</h3>
+                <div class="space-y-4">
+                    @forelse($latestRequests as $request)
+                    <a href="{{ route('legal.requests.show', $request->id) }}" class="flex items-center justify-between p-6 bg-slate-50 rounded-[2rem] border border-slate-100 hover:bg-white hover:shadow-lg transition-all group">
+                        <div class="flex items-center gap-6">
+                            <div class="h-12 w-12 bg-white rounded-2xl flex items-center justify-center text-pct-blue shadow-sm group-hover:bg-indigo-600 group-hover:text-white transition-all">
+                                <span class="text-xs font-black">{{ substr($request->request_code, -4) }}</span>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-black text-pct-blue">{{ $request->title }}</h4>
+                                <div class="flex items-center gap-3 mt-1">
+                                    <span class="text-[10px] text-gray-400 font-bold uppercase">{{ $request->requester->full_name }}</span>
+                                    <span class="h-1 w-1 bg-gray-300 rounded-full"></span>
+                                    <span class="text-[10px] text-gray-400 font-bold uppercase">{{ $request->created_at->diffForHumans() }}</span>
+                                </div>
+                            </div>
                         </div>
-                        <div>
-                            <p class="text-xs font-bold text-pct-green uppercase">Validação Gov.br</p>
-                            <p class="text-xs text-emerald-800">Ativa e operando normal.</p>
+                        <div class="flex items-center gap-4">
+                            <span class="px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest 
+                                {{ $request->status == 'new' ? 'bg-blue-100 text-blue-600' : 
+                                   ($request->status == 'in_progress' ? 'bg-amber-100 text-amber-600' : 'bg-pct-green/10 text-pct-green') }}">
+                                {{ $request->status }}
+                            </span>
+                            <span class="px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border border-slate-200 text-slate-400">
+                                {{ $request->level }}
+                            </span>
                         </div>
-                    </div>
+                    </a>
+                    @empty
+                    <p class="text-center py-12 text-gray-400 font-medium">Nenhuma solicitação encontrada.</p>
+                    @endforelse
                 </div>
             </div>
-        </div>
 
-        <!-- Document List -->
-        <div class="lg:col-span-2 glass rounded-3xl shadow-sm overflow-hidden">
-            <div class="p-6 border-b border-gray-100">
-                <h3 class="font-bold text-pct-blue text-lg">Acervo Documental</h3>
-            </div>
-            <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
-                    <thead>
-                        <tr class="bg-gray-50 text-gray-500 text-[10px] uppercase tracking-wider">
-                            <th class="px-6 py-4 font-bold border-b border-gray-100">Documento</th>
-                            <th class="px-6 py-4 font-bold border-b border-gray-100">Tipo</th>
-                            <th class="px-6 py-4 font-bold border-b border-gray-100">Última Modificação</th>
-                            <th class="px-6 py-4 font-bold border-b border-gray-100 text-center">Status</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-sm">
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4 border-b border-gray-50">
-                                <div class="flex items-center space-x-3">
-                                    <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                                    <span class="font-bold text-gray-800">Estatuto do PCT - Final</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 border-b border-gray-50 font-medium text-gray-500 italic">Estatutário</td>
-                            <td class="px-6 py-4 border-b border-gray-50">12/04/2026</td>
-                            <td class="px-6 py-4 border-b border-gray-50 text-center">
-                                <span class="px-2 py-1 bg-pct-green text-white text-[10px] font-bold rounded-md uppercase">Registrado</span>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4 border-b border-gray-50">
-                                <div class="flex items-center space-x-3">
-                                    <svg class="w-8 h-8 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                                    <span class="font-bold text-gray-800">Ata de Fundação Nacional</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 border-b border-gray-50 font-medium text-gray-500 italic">Atas</td>
-                            <td class="px-6 py-4 border-b border-gray-50">10/04/2026</td>
-                            <td class="px-6 py-4 border-b border-gray-50 text-center">
-                                <span class="px-2 py-1 bg-pct-green text-white text-[10px] font-bold rounded-md uppercase">Registrado</span>
-                            </td>
-                        </tr>
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-6 py-4 border-b border-gray-50">
-                                <div class="flex items-center space-x-3">
-                                    <svg class="w-8 h-8 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                                    <span class="font-bold text-gray-800">Regimento de Candidaturas</span>
-                                </div>
-                            </td>
-                            <td class="px-6 py-4 border-b border-gray-50 font-medium text-gray-500 italic">Normativo</td>
-                            <td class="px-6 py-4 border-b border-gray-50">05/04/2026</td>
-                            <td class="px-6 py-4 border-b border-gray-50 text-center">
-                                <span class="px-2 py-1 bg-yellow-100 text-yellow-700 text-[10px] font-bold rounded-md uppercase">Revisão</span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <div class="p-6 bg-gray-50 flex flex-col space-y-4 lg:flex-row lg:space-y-0 lg:items-center lg:justify-between">
-                <p class="text-xs text-gray-400 font-medium italic">Todos os documentos possuem validade jurídica via assinatura digital certificado padrão ICP-Brasil.</p>
-                <div class="flex space-x-6">
-                    <a href="{{ route('legal.modelos_oficios') }}" class="flex items-center space-x-2 text-pct-blue hover:text-pct-green transition-colors group">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        <span class="text-xs font-black uppercase tracking-widest">Modelos de Ofícios</span>
-                    </a>
-                    <a href="{{ route('legal.ficha_filiacao') }}" class="flex items-center space-x-2 text-pct-green hover:text-pct-blue transition-colors group">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        <span class="text-xs font-black uppercase tracking-widest">Ficha de Filiação</span>
-                    </a>
+            <!-- Sidebar -->
+            <div class="space-y-8">
+                <!-- Manual Jurídico Link -->
+                <div class="card-premium bg-gradient-to-br from-pct-blue to-blue-900 text-white p-10">
+                    <h3 class="text-xl font-black mb-4 uppercase tracking-tighter">Manual JUR-001</h3>
+                    <p class="text-xs text-blue-200 font-medium leading-relaxed mb-8">Consulte as diretrizes nacionais, prazos de SLA e fluxos de atendimento oficial do PCT.</p>
+                    <a href="{{ route('manual.legal') }}" class="block w-full text-center bg-pct-green text-pct-blue font-black py-4 rounded-2xl hover:bg-white transition-all">Acessar Manual</a>
+                </div>
+
+                <!-- Ethics & Integrity -->
+                <div class="card-premium">
+                    <h3 class="text-lg font-bold text-pct-blue mb-6">Integridade</h3>
+                    <div class="space-y-4">
+                        <a href="{{ route('manual.ethics') }}" class="flex items-center justify-between p-4 bg-indigo-50 text-indigo-700 rounded-2xl font-bold text-xs hover:bg-indigo-100 transition-all">
+                            Canais de Denúncia
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                        <a href="{{ route('manual.disciplinary') }}" class="flex items-center justify-between p-4 bg-slate-50 text-slate-700 rounded-2xl font-bold text-xs hover:bg-slate-100 transition-all">
+                            Código Disciplinar
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

@@ -40,10 +40,10 @@
                     <h3 class="text-2xl font-black text-pct-blue tracking-tight">Atividades Disponíveis</h3>
                     @php
                         $missoes = [
-                            ['Estudar Manifesto', 'Leia o manifesto completo e responda ao quiz de avaliação.', '+100 pts', 'Educação'],
-                            ['Divulgação Digital', 'Compartilhe o vídeo institucional em 3 redes sociais diferentes.', '+150 pts', 'Marketing'],
-                            ['Ação Comunitária', 'Identifique um problema local e sugira uma solução liberal no fórum.', '+300 pts', 'Social'],
-                            ['Indicação Diária', 'Envie seu link de convite para 5 novos contatos hoje.', '+50 pts', 'Expansão']
+                            ['Estudar Manifesto', 'Leia o manifesto completo e responda ao quiz de avaliação.', '+100 pts', 'Educação', 'educacao'],
+                            ['Divulgação Digital', 'Compartilhe o vídeo institucional em 3 redes sociais diferentes.', '+150 pts', 'Marketing', 'marketing'],
+                            ['Ação Comunitária', 'Identifique um problema local e sugira uma solução liberal no fórum.', '+300 pts', 'Social', 'social'],
+                            ['Indicação Diária', 'Envie seu link de convite para 5 novos contatos hoje.', '+50 pts', 'Expansão', 'expansao']
                         ];
                     @endphp
 
@@ -61,7 +61,7 @@
                         </div>
                         <div class="flex flex-col items-center md:items-end gap-3 min-w-[120px]">
                             <span class="text-lg font-black text-pct-blue">{{ $m[2] }}</span>
-                            <button class="px-6 py-2 bg-slate-100 text-pct-blue text-xs font-black uppercase tracking-widest rounded-lg hover:bg-pct-blue hover:text-white transition-all">Participar</button>
+                            <a href="{{ route('affiliate.mission.show', $m[4]) }}" class="px-6 py-2 bg-slate-100 text-pct-blue text-xs font-black uppercase tracking-widest rounded-lg hover:bg-pct-blue hover:text-white transition-all">Participar</a>
                         </div>
                     </div>
                     @endforeach

@@ -9,7 +9,22 @@ class AdminDashboardController extends Controller
 {
     public function index()
     {
-        return view('pages.admin.dashboard');
+        $stats = [
+            'total_members' => \App\Models\User::count(),
+            'total_directories' => \App\Models\Directory::count(),
+            'total_revenue' => \App\Models\FinancialRecord::where('type', 'revenue')->where('status', 'approved')->sum('amount'),
+            'total_expenses' => \App\Models\FinancialRecord::where('type', 'expense')->where('status', 'approved')->sum('amount'),
+            'legal_requests_new' => \App\Models\LegalRequest::where('status', 'new')->count(),
+        ];
+
+        $topDirectories = \App\Models\Directory::withCount('memberships')
+            ->orderBy('memberships_count', 'desc')
+            ->limit(5)
+            ->get();
+
+        $recentUsers = \App\Models\User::orderBy('created_at', 'desc')->limit(5)->get();
+
+        return view('pages.admin.dashboard', compact('stats', 'topDirectories', 'recentUsers'));
     }
 
     public function storeMember(Request $request)
@@ -32,6 +47,26 @@ class AdminDashboardController extends Controller
     }
 
     // Management Modules
+    public function members(Request $request)
+    {
+        $query = \App\Models\User::with(['memberships.directory']);
+
+        if ($request->has('search')) {
+            $query->where('name', 'like', '%' . $request->search . '%')
+                  ->orWhere('email', 'like', '%' . $request->search . '%')
+                  ->orWhere('cpf', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->has('state')) {
+            $query->where('state', $request->state);
+        }
+
+        $members = $query->orderBy('created_at', 'desc')->paginate(50);
+        $states = \App\Models\User::distinct()->whereNotNull('state')->pluck('state');
+
+        return view('pages.admin.members', compact('members', 'states'));
+    }
+
     public function perfis() { return view('pages.admin.profiles'); }
     public function carteirinhas() { return view('pages.admin.carteirinhas'); }
     public function escola() { return view('pages.admin.escola'); }

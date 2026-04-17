@@ -25,18 +25,42 @@ class RegistrationController extends Controller
             'password' => ['required', Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $validated['name'],
-            'email' => $validated['email'],
-            'cpf' => $validated['cpf'],
-            'phone' => $validated['phone'],
-            'password' => Hash::make($validated['password']),
-            'role' => 'affiliate',
-            'registration_number' => 'PCT-' . strtoupper(substr(uniqid(), -6)),
-            'status' => 'active', // Set to active for immediate login testing
-        ]);
+        \Illuminate\Support\Facades\DB::transaction(function () use ($validated) {
+            $nextId = User::count() + 1;
+            $regNumber = 'PCT-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
 
-        return redirect()->route('register.success')->with('user_name', $user->name);
+            $user = User::create([
+                'name' => $validated['name'],
+                'email' => $validated['email'],
+                'cpf' => $validated['cpf'],
+                'phone' => $validated['phone'],
+                'password' => Hash::make($validated['password']),
+                'role' => 'affiliate',
+                'registration_number' => $regNumber,
+                'status' => 'active',
+            ]);
+
+            // 1. Criar Perfil de Afiliado
+            $user->profiles()->create([
+                'profile_type' => 'affiliate',
+                'level' => 'local',
+                'is_primary' => true,
+            ]);
+
+            // 2. Vincular a um diretório (ex: Taquara)
+            $directory = \App\Models\Directory::where('city', 'Taquara')->first();
+            if ($directory) {
+                \App\Models\Membership::create([
+                    'user_id' => $user->id,
+                    'directory_id' => $directory->id,
+                    'membership_status' => 'active',
+                    'joined_at' => now(),
+                    'source' => 'web_registration',
+                ]);
+            }
+        });
+
+        return redirect()->route('register.success')->with('user_name', $validated['name']);
     }
 
     public function success()
