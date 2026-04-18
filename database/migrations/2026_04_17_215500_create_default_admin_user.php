@@ -10,12 +10,12 @@ use Illuminate\Support\Facades\DB;
 return new class extends Migration {
     public function up(): void {
         // verifica se já existe
-        $exists = DB::table('users')->where('email', 'admin@pct.social.br')->exists();
+        $exists = DB::table('users')->where('email', 'admin@pct.org.br')->exists();
         if (! $exists) {
             DB::table('users')->insert([
                 'name'               => 'Presidente Fundador',
-                'email'              => 'admin@pct.social.br',
-                'password'           => Hash::make('pct2026'),
+                'email'              => 'admin@pct.org.br',
+                'password'           => Hash::make('PCT@Forte2026!'), // Senha do Admin conforme solicitado
                 'cpf'                => '00000000000',
                 'phone'              => '0000000000',
                 'role'               => 'admin',
@@ -27,7 +27,7 @@ return new class extends Migration {
     }
 
     public function down(): void {
-        DB::table('users')->where('email', 'admin@pct.social.br')->delete();
+        DB::table('users')->where('email', 'admin@pct.org.br')->delete();
     }
 };
 ?>

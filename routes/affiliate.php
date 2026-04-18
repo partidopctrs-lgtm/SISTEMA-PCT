@@ -11,6 +11,7 @@ Route::middleware(['auth', 'role:affiliate'])->prefix('affiliate')->group(functi
     Route::post('/perfil', [AffiliateDashboardController::class, 'updateProfile'])->name('affiliate.profile.update');
     Route::post('/perfil/photo', [AffiliateDashboardController::class, 'updatePhoto'])->name('affiliate.profile.photo');
     Route::get('/carteirinha', [AffiliateDashboardController::class, 'carteirinha'])->name('affiliate.carteirinha');
+    Route::get('/carteirinha/comprovante', [AffiliateDashboardController::class, 'comprovante'])->name('affiliate.carteirinha.comprovante');
     Route::get('/escola', [AffiliateDashboardController::class, 'escola'])->name('affiliate.escola');
     Route::get('/escola/aula/{id}', [AffiliateDashboardController::class, 'aula'])->name('affiliate.escola.aula');
     Route::post('/escola/aula/{id}/check', [AffiliateDashboardController::class, 'checkAula'])->name('affiliate.escola.aula.check');
@@ -40,4 +41,12 @@ Route::middleware(['auth', 'role:affiliate'])->prefix('affiliate')->group(functi
     // Módulo de Quiz e Avaliação
     Route::get('/quiz/manifesto', [\App\Http\Controllers\Affiliate\QuizController::class, 'manifesto'])->name('affiliate.quiz.manifesto');
     Route::post('/quiz/manifesto/submit', [\App\Http\Controllers\Affiliate\QuizController::class, 'submitManifesto'])->name('affiliate.quiz.manifesto.submit');
+
+    // Módulo Partido em Formação (Assinaturas)
+    Route::get('/assinaturas', [\App\Http\Controllers\Affiliate\PartySignatureController::class, 'create'])->name('affiliate.signatures.create');
+    Route::post('/assinaturas', [\App\Http\Controllers\Affiliate\PartySignatureController::class, 'store'])->name('affiliate.signatures.store');
+
+    // Módulo Demandas da População
+    Route::get('/demandas', [\App\Http\Controllers\Affiliate\PublicDemandController::class, 'create'])->name('affiliate.demands.create');
+    Route::post('/demandas', [\App\Http\Controllers\Affiliate\PublicDemandController::class, 'store'])->name('affiliate.demands.store');
 });

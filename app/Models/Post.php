@@ -9,6 +9,8 @@ class Post extends Model
 {
     use HasUuids;
 
+    protected $table = 'community_posts';
+
     protected $fillable = ['content', 'user_id', 'topic_id'];
 
     public function user()

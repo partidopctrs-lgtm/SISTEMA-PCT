@@ -19,7 +19,7 @@
                         </div>
                         <div>
                             <label class="block text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-3">URL Base (HTTPS)</label>
-                            <input type="text" value="https://portal.pct.org.br" class="w-full px-5 py-3 bg-blue-50/50 border border-gray-100 rounded-2xl font-medium text-pct-blue opacity-60" readonly>
+                            <input type="text" value="https://portal.pct.social.br" class="w-full px-5 py-3 bg-blue-50/50 border border-gray-100 rounded-2xl font-medium text-pct-blue opacity-60" readonly>
                         </div>
                     </div>
                     <div class="flex items-center justify-between p-6 bg-blue-50/30 rounded-3xl">

@@ -1,0 +1,525 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+.stage{
+  display:flex;flex-direction:column;align-items:center;gap:28px;
+  padding:2rem 1rem 2.5rem;background:#2a2a2a;border-radius:12px;
+}
+.section-lbl{
+  font-family:'Barlow',sans-serif;font-size:10px;font-weight:600;
+  letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,0.3);
+  width:680px;text-align:center;padding-bottom:6px;
+  border-bottom:0.5px solid rgba(255,255,255,0.08);
+}
+/* ═══ CARD WRAPPER ═══ */
+.card{
+  width:680px;height:270px;border-radius:6px;
+  display:flex;overflow:hidden;
+  border:2px solid #1B4FA8;
+  font-family:'Barlow',sans-serif;
+  position:relative;
+}
+/* Faixa lateral vertical esquerda */
+.side-strip{
+  width:32px;background:#1B4FA8;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;position:relative;
+}
+.side-text{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:10px;font-weight:900;letter-spacing:3px;
+  color:#fff;text-transform:uppercase;
+  writing-mode:vertical-rl;transform:rotate(180deg);
+  white-space:nowrap;
+}
+/* ═══ FRENTE ═══ */
+.front-body{display:flex;flex:1;flex-direction:column;}
+
+/* Topo verde */
+.front-header{
+  background:#228B2F;padding:4px 10px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.org-full{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:11px;font-weight:800;letter-spacing:1px;
+  color:#fff;text-transform:uppercase;line-height:1.2;
+}
+.cnpj-line{
+  font-family:'Roboto Mono',monospace;
+  font-size:9px;color:rgba(255,255,255,0.8);
+}
+
+/* Faixa azul título */
+.front-title-bar{
+  background:#1B4FA8;padding:5px 10px;
+  display:flex;flex-direction:column;
+}
+.title-big{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:15px;font-weight:900;color:#E8A800;
+  letter-spacing:1px;text-transform:uppercase;line-height:1;
+}
+.title-sub{
+  font-family:'Barlow',sans-serif;
+  font-size:9px;color:rgba(255,255,255,0.85);
+  letter-spacing:0.3px;line-height:1.3;
+}
+
+/* Conteúdo principal */
+.front-main{
+  display:flex;flex:1;padding:8px 10px;gap:10px;
+  background:#fff;
+}
+
+/* Coluna foto */
+.photo-col{
+  display:flex;flex-direction:column;align-items:center;gap:6px;
+  flex-shrink:0;
+}
+.photo-frame{
+  width:82px;height:100px;
+  border:2px solid #1B4FA8;
+  background:#e8edf5;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  position:relative;overflow:hidden;
+}
+.photo-person{display:flex;flex-direction:column;align-items:center;gap:0;}
+.ph-head{width:30px;height:30px;border-radius:50%;background:#b0bcd8;}
+.ph-body{width:52px;height:30px;border-radius:20px 20px 0 0;background:#b0bcd8;margin-top:2px;}
+.photo-lbl{
+  font-family:'Barlow Condensed',sans-serif;font-size:8px;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;color:#1B4FA8;
+  border:1px solid #1B4FA8;padding:1px 4px;border-radius:2px;text-align:center;
+}
+.photo-stamp{
+  font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:800;
+  color:#228B2F;border:1.5px solid #228B2F;padding:2px 5px;
+  border-radius:2px;text-align:center;letter-spacing:0.5px;
+  transform:rotate(-8deg);margin-top:2px;
+}
+
+/* Coluna dados */
+.data-col{flex:1;display:flex;flex-direction:column;gap:4px;}
+
+.field-row{display:flex;flex-direction:column;gap:1px;}
+.field-row.inline{flex-direction:row;gap:8px;}
+.field-row.inline .field-group{flex:1;}
+
+.field-group{display:flex;flex-direction:column;gap:1px;}
+
+.f-label{
+  font-family:'Barlow',sans-serif;font-size:7.5px;font-weight:700;
+  text-transform:uppercase;letter-spacing:0.8px;color:#1B4FA8;
+}
+.f-value{
+  font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;
+  color:#111;letter-spacing:0.2px;line-height:1.1;
+  border-bottom:1px solid #ccc;padding-bottom:1px;
+}
+.f-value.big{font-size:15px;}
+.f-value.sm{font-size:11px;}
+.f-value.mono{font-family:'Roboto Mono',monospace;font-size:11px;}
+
+.validity-box{
+  background:#1B4FA8;padding:3px 6px;border-radius:3px;
+  display:inline-flex;flex-direction:column;align-items:center;
+}
+.validity-lbl{font-family:'Barlow',sans-serif;font-size:7px;color:rgba(255,255,255,0.7);letter-spacing:1px;text-transform:uppercase;}
+.validity-val{font-family:'Roboto Mono',monospace;font-size:10px;color:#E8A800;font-weight:700;}
+
+/* Rodapé frente */
+.front-footer{
+  background:#0D3A8C;padding:3px 10px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.footer-legal{font-family:'Barlow',sans-serif;font-size:7px;color:rgba(255,255,255,0.7);line-height:1.3;max-width:480px;}
+.footer-slogan{
+  font-family:'Barlow Condensed',sans-serif;font-size:9px;font-weight:800;
+  color:#E8A800;letter-spacing:2px;text-transform:uppercase;white-space:nowrap;
+}
+
+/* ═══ VERSO ═══ */
+.back-body{display:flex;flex:1;flex-direction:column;}
+
+.back-header{
+  background:#228B2F;padding:4px 10px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+
+/* Faixa vermelha título verso */
+.back-title-bar{
+  background:#1B4FA8;padding:5px 10px;
+}
+.back-title-big{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:14px;font-weight:900;color:#fff;
+  letter-spacing:1px;text-transform:uppercase;
+}
+
+.back-main{
+  display:flex;flex:1;padding:6px 10px;gap:10px;background:#fff;
+}
+
+.back-left{flex:1;display:flex;flex-direction:column;gap:4px;}
+.back-right{width:160px;display:flex;flex-direction:column;gap:4px;border-left:1.5px solid #ddd;padding-left:10px;}
+
+/* Bloco declaração */
+.declaration{
+  font-family:'Barlow',sans-serif;font-size:8px;color:#333;
+  line-height:1.5;border:1px solid #1B4FA8;
+  border-radius:3px;padding:5px 7px;background:#f0f4ff;
+}
+.declaration strong{color:#1B4FA8;}
+
+/* Campos verso */
+.v-field{display:flex;flex-direction:column;gap:1px;margin-bottom:3px;}
+.v-label{font-family:'Barlow',sans-serif;font-size:7px;font-weight:700;text-transform:uppercase;letter-spacing:0.8px;color:#1B4FA8;}
+.v-value{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;color:#111;border-bottom:1px solid #ccc;padding-bottom:1px;}
+.v-value.mono{font-family:'Roboto Mono',monospace;font-size:10px;}
+
+/* Bloco assinatura */
+.sig-block{margin-top:auto;display:flex;flex-direction:column;gap:2px;}
+.sig-line-rule{border-top:1.5px solid #333;margin-top:16px;}
+.sig-name{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;color:#1B4FA8;text-align:center;}
+.sig-role{font-family:'Barlow',sans-serif;font-size:8px;color:#555;text-align:center;letter-spacing:0.5px;}
+
+/* Selos lado direito */
+.seal-box{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:4px;
+}
+.pct-seal{
+  width:64px;height:64px;border-radius:50%;
+  background:#1B4FA8;border:3px solid #E8A800;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1px;
+}
+.seal-pct{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:#fff;line-height:1;letter-spacing:-1px;}
+.seal-pct span{color:#E8A800;}
+.seal-stars{display:flex;gap:2px;}
+.s-star{width:7px;height:7px;background:#E8A800;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);}
+.seal-sub{font-family:'Barlow',sans-serif;font-size:5.5px;color:rgba(255,255,255,0.7);letter-spacing:0.5px;text-transform:uppercase;text-align:center;}
+
+.reg-number{
+  font-family:'Roboto Mono',monospace;font-size:10px;font-weight:700;
+  color:#1B4FA8;letter-spacing:1px;text-align:center;
+  border:1px solid #1B4FA8;padding:2px 6px;border-radius:3px;
+}
+
+/* Barcode */
+.barcode-wrap{display:flex;flex-direction:column;align-items:center;gap:2px;}
+.barcode{display:flex;gap:1px;height:24px;align-items:stretch;}
+.b-b{border-radius:0.5px;background:#222;}
+.barcode-num{font-family:'Roboto Mono',monospace;font-size:7px;color:#555;letter-spacing:1px;}
+
+/* Verso rodapé */
+.back-footer{
+  background:#0D3A8C;padding:3px 10px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.back-footer-text{font-family:'Barlow',sans-serif;font-size:7px;color:rgba(255,255,255,0.7);line-height:1.3;}
+.brasil-bar{
+  height:3px;
+  background:linear-gradient(90deg,#1B4FA8 33%,#228B2F 33%,#228B2F 66%,#E8A800 66%);
+}
+
+/* ═══ EDITOR ═══ */
+.editor{
+  background:rgba(255,255,255,0.05);border:0.5px solid rgba(255,255,255,0.1);
+  border-radius:10px;padding:1rem 1.25rem;width:680px;
+}
+.ed-title{
+  font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;
+  letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);margin-bottom:10px;
+}
+.ed-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px;}
+.ed-group{display:flex;flex-direction:column;gap:3px;}
+.ed-lbl{font-family:'Barlow',sans-serif;font-size:10px;color:rgba(255,255,255,0.4);}
+.ed-inp{
+  background:rgba(255,255,255,0.07);border:0.5px solid rgba(255,255,255,0.15);
+  border-radius:5px;padding:6px 8px;font-family:'Barlow',sans-serif;
+  font-size:12px;color:#fff;outline:none;width:100%;
+}
+.ed-inp:focus{border-color:#E8A800;}
+.btn-up{
+  width:100%;padding:9px;background:#E8A800;color:#0a0f1e;border:none;
+  border-radius:6px;font-family:'Barlow Condensed',sans-serif;
+  font-size:13px;font-weight:800;letter-spacing:2px;text-transform:uppercase;cursor:pointer;
+}
+.btn-up:hover{background:#F5C200;}
+</style>
+
+<div class="stage">
+
+<div class="section-lbl">Frente</div>
+
+<!-- ══════ FRENTE ══════ -->
+<div class="card">
+  <!-- Faixa lateral -->
+  <div class="side-strip">
+    <span class="side-text">Documento de Identificação · PCT</span>
+  </div>
+
+  <div class="front-body">
+    <!-- Header verde -->
+    <div class="front-header">
+      <div>
+        <div class="org-full">PCT – Movimento Cidadania e Trabalho</div>
+        <div class="org-full" style="font-size:9px;font-weight:400;color:rgba(255,255,255,0.8);">Diretório Municipal de Taquara – Rio Grande do Sul</div>
+      </div>
+      <div class="cnpj-line" id="f-cnpj">CNPJ 00.000.000/0001-00</div>
+    </div>
+
+    <!-- Faixa azul título -->
+    <div class="front-title-bar">
+      <div class="title-big" id="f-title">Filiado / Membro da Diretoria</div>
+      <div class="title-sub" id="f-subtitle">Atividade reconhecida pelo Estatuto Social do PCT – Taquara/RS</div>
+    </div>
+
+    <!-- Main -->
+    <div class="front-main">
+      <!-- Foto -->
+      <div class="photo-col">
+        <div class="photo-frame">
+          <div class="photo-person">
+            <div class="ph-head"></div>
+            <div class="ph-body"></div>
+          </div>
+        </div>
+        <div class="photo-lbl">3x4</div>
+        <div class="photo-stamp">MEMBRO<br>ATIVO</div>
+      </div>
+
+      <!-- Dados -->
+      <div class="data-col">
+        <div class="field-row">
+          <div class="field-group">
+            <span class="f-label">Nome do Filiado</span>
+            <span class="f-value big" id="f-nome">Marcos Vinicius Dresbach do Amaral</span>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <span class="f-label">Cargo / Função</span>
+            <span class="f-value" id="f-cargo">Presidente – Diretório Municipal de Taquara/RS</span>
+          </div>
+        </div>
+        <div class="field-row inline">
+          <div class="field-group">
+            <span class="f-label">Nº de Registro</span>
+            <span class="f-value mono" id="f-reg">PCT-2026-00001</span>
+          </div>
+          <div class="field-group">
+            <span class="f-label">Data de Filiação</span>
+            <span class="f-value sm" id="f-data">Abril / 2026</span>
+          </div>
+          <div class="field-group" style="flex:0;">
+            <span class="f-label">Validade</span>
+            <div class="validity-box">
+              <span class="validity-lbl">Válido até</span>
+              <span class="validity-val" id="f-val">12/2028</span>
+            </div>
+          </div>
+        </div>
+        <div class="field-row inline">
+          <div class="field-group">
+            <span class="f-label">Município</span>
+            <span class="f-value sm">Taquara</span>
+          </div>
+          <div class="field-group">
+            <span class="f-label">Estado</span>
+            <span class="f-value sm">Rio Grande do Sul</span>
+          </div>
+          <div class="field-group">
+            <span class="f-label">Mandato</span>
+            <span class="f-value sm">2026 – 2028</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rodapé frente -->
+    <div class="front-footer">
+      <div class="footer-legal">Válido para identificação como membro do PCT em conformidade com o Estatuto Social do Movimento. Taquara – RS.</div>
+      <div class="footer-slogan">Unir · Defender · Transformar</div>
+    </div>
+    <div class="brasil-bar"></div>
+  </div>
+</div>
+
+<div class="section-lbl">Verso</div>
+
+<!-- ══════ VERSO ══════ -->
+<div class="card">
+  <div class="side-strip" style="background:#228B2F;">
+    <span class="side-text">Apresentar somente quando solicitado</span>
+  </div>
+
+  <div class="back-body">
+    <!-- Header verde -->
+    <div class="back-header">
+      <div class="org-full">PCT – Movimento Cidadania e Trabalho</div>
+      <div class="cnpj-line" id="b-cnpj">CNPJ 00.000.000/0001-00</div>
+    </div>
+
+    <!-- Faixa título verso -->
+    <div class="back-title-bar">
+      <div class="back-title-big">Carteira de Identificação de Membro</div>
+    </div>
+
+    <!-- Main verso -->
+    <div class="back-main">
+      <div class="back-left">
+        <!-- Declaração -->
+        <div class="declaration">
+          O PCT – Movimento Cidadania e Trabalho declara que o portador desta carteira é <strong>membro devidamente filiado</strong> ao Movimento, tendo concluído o processo de admissão com aprovação da Diretoria Executiva, em conformidade com o <strong>Art. 9º do Estatuto Social</strong>. O portador tem direito de participar das atividades, votar e ser votado, apresentar propostas e solicitar informações sobre a gestão do movimento.
+        </div>
+
+        <!-- Campos verso -->
+        <div style="display:flex;gap:8px;margin-top:4px;">
+          <div class="v-field" style="flex:1;">
+            <span class="v-label">CPF</span>
+            <span class="v-value mono" id="b-cpf">000.000.000-00</span>
+          </div>
+          <div class="v-field" style="flex:1;">
+            <span class="v-label">Estado Civil</span>
+            <span class="v-value" id="b-estadocivil">Solteiro(a)</span>
+          </div>
+          <div class="v-field" style="flex:1;">
+            <span class="v-label">Tipo Sanguíneo</span>
+            <span class="v-value" id="b-tipo">O+</span>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:8px;">
+          <div class="v-field" style="flex:1;">
+            <span class="v-label">Naturalidade</span>
+            <span class="v-value sm" id="b-nat">Taquara – RS</span>
+          </div>
+          <div class="v-field" style="flex:1;">
+            <span class="v-label">Nacionalidade</span>
+            <span class="v-value sm">Brasileiro(a)</span>
+          </div>
+        </div>
+
+        <!-- Assinatura -->
+        <div class="sig-block">
+          <div class="sig-line-rule"></div>
+          <div class="sig-name">Marcos Vinicius Dresbach do Amaral</div>
+          <div class="sig-role">Presidente – PCT Diretório Taquara/RS</div>
+        </div>
+      </div>
+
+      <!-- Direita: selos -->
+      <div class="back-right">
+        <div class="seal-box">
+          <div class="pct-seal">
+            <div class="seal-stars"><div class="s-star"></div><div class="s-star"></div><div class="s-star"></div></div>
+            <div class="seal-pct">P<span>C</span>T</div>
+            <div class="seal-sub">Cidadania<br>e Trabalho</div>
+          </div>
+          <div class="reg-number" id="b-reg">PCT-2026-00001</div>
+          <div style="font-family:'Barlow',sans-serif;font-size:7.5px;color:#555;text-align:center;line-height:1.4;">
+            Emitido em<br><strong style="color:#1B4FA8;">Abril / 2026</strong>
+          </div>
+          <div class="barcode-wrap">
+            <div class="barcode" id="barcode"></div>
+            <div class="barcode-num" id="b-barnum">PCT202600001</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rodapé verso -->
+    <div class="back-footer">
+      <div class="back-footer-text">O PORTADOR DESTA CARTEIRA NÃO TEM PODER DE POLÍCIA.<br>Taquara – RS | Sede: Taquara – Rio Grande do Sul</div>
+      <div class="footer-slogan">Unir · Defender · Transformar</div>
+    </div>
+    <div class="brasil-bar"></div>
+  </div>
+</div>
+
+<!-- EDITOR -->
+<div class="editor">
+  <div class="ed-title">Personalizar dados da carteirinha</div>
+  <div class="ed-grid">
+    <div class="ed-group" style="grid-column:span 2;">
+      <span class="ed-lbl">Nome completo</span>
+      <input class="ed-inp" id="in-nome" value="Marcos Vinicius Dresbach do Amaral">
+    </div>
+    <div class="ed-group">
+      <span class="ed-lbl">Cargo / Função</span>
+      <input class="ed-inp" id="in-cargo" value="Presidente – Diretório Taquara/RS">
+    </div>
+  </div>
+  <div class="ed-grid">
+    <div class="ed-group">
+      <span class="ed-lbl">Nº de Registro</span>
+      <input class="ed-inp" id="in-reg" value="PCT-2026-00001">
+    </div>
+    <div class="ed-group">
+      <span class="ed-lbl">CPF</span>
+      <input class="ed-inp" id="in-cpf" value="000.000.000-00">
+    </div>
+    <div class="ed-group">
+      <span class="ed-lbl">Validade</span>
+      <input class="ed-inp" id="in-val" value="12/2028">
+    </div>
+  </div>
+  <div class="ed-grid">
+    <div class="ed-group">
+      <span class="ed-lbl">Estado Civil</span>
+      <input class="ed-inp" id="in-ec" value="Solteiro(a)">
+    </div>
+    <div class="ed-group">
+      <span class="ed-lbl">Tipo Sanguíneo</span>
+      <input class="ed-inp" id="in-ts" value="O+">
+    </div>
+    <div class="ed-group">
+      <span class="ed-lbl">Naturalidade</span>
+      <input class="ed-inp" id="in-nat" value="Taquara – RS">
+    </div>
+  </div>
+  <button class="btn-up" onclick="atualizar()">Atualizar carteirinha</button>
+</div>
+
+</div>
+
+<script>
+(function(){
+  const bcs=[2,1,3,1,2,1,1,3,2,1,2,2,1,1,3,1,2,1,3,2,1,1,2,3,1,2,1,1,3,2];
+  const bc=document.getElementById('barcode');
+  bcs.forEach((w,i)=>{
+    const b=document.createElement('div');
+    b.className='b-b';
+    b.style.width=w+'px';
+    b.style.opacity=i%2===0?'1':'0';
+    bc.appendChild(b);
+  });
+})();
+
+function atualizar(){
+  const nome=document.getElementById('in-nome').value;
+  const cargo=document.getElementById('in-cargo').value;
+  const reg=document.getElementById('in-reg').value;
+  const cpf=document.getElementById('in-cpf').value;
+  const val=document.getElementById('in-val').value;
+  const ec=document.getElementById('in-ec').value;
+  const ts=document.getElementById('in-ts').value;
+  const nat=document.getElementById('in-nat').value;
+
+  document.getElementById('f-nome').textContent=nome;
+  document.getElementById('f-cargo').textContent=cargo;
+  document.getElementById('f-reg').textContent=reg;
+  document.getElementById('f-val').textContent=val;
+  document.getElementById('b-reg').textContent=reg;
+  document.getElementById('b-cpf').textContent=cpf;
+  document.getElementById('b-estadocivil').textContent=ec;
+  document.getElementById('b-tipo').textContent=ts;
+  document.getElementById('b-nat').textContent=nat;
+  document.getElementById('b-barnum').textContent=reg.replace(/-/g,'');
+}
+</script>

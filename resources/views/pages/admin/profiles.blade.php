@@ -51,9 +51,9 @@
             </thead>
             <tbody class="text-sm">
                 @foreach([
-                    ['name' => 'Maria Oliveira', 'email' => 'maria@pct.org.br', 'ref' => 'PCT-8892', 'role' => 'Líder Regional', 'status' => 'Ativo'],
-                    ['name' => 'João Silva', 'email' => 'joao@pct.org.br', 'ref' => 'PCT-1123', 'role' => 'Afiliado Fundador', 'status' => 'Pendente'],
-                    ['name' => 'Ricardo Santos', 'email' => 'ricardo@pct.org.br', 'ref' => 'PCT-0042', 'role' => 'Tesoureiro', 'status' => 'Ativo'],
+                    ['name' => 'Maria Oliveira', 'email' => 'maria@pct.social.br', 'ref' => 'PCT-8892', 'role' => 'Líder Regional', 'status' => 'Ativo'],
+                    ['name' => 'João Silva', 'email' => 'joao@pct.social.br', 'ref' => 'PCT-1123', 'role' => 'Afiliado Fundador', 'status' => 'Pendente'],
+                    ['name' => 'Ricardo Santos', 'email' => 'ricardo@pct.social.br', 'ref' => 'PCT-0042', 'role' => 'Tesoureiro', 'status' => 'Ativo'],
                 ] as $member)
                 <tr class="hover:bg-pct-green/5 transition-colors group">
                     <td class="px-8 py-6 border-b border-gray-50">

@@ -89,7 +89,7 @@
                     <div>
                         <h4 class="text-lg font-semibold mb-4">Canais Oficiais</h4>
                         <ul class="space-y-2 text-blue-100">
-                            <li><a href="mailto:contato@pct.org.br" class="hover:text-white transition-all">contato@pct.org.br</a></li>
+                            <li><a href="mailto:contato@pct.social.br" class="hover:text-white transition-all">contato@pct.social.br</a></li>
                             <li><a href="https://wa.me/5551933806899" target="_blank" class="hover:text-white transition-all">(51) 93380-6899 (WhatsApp)</a></li>
                             <li>(51) 3786-6302 (Fixo)</li>
                             <li class="pt-2"><a href="https://www.facebook.com/MovimentoPCT/" target="_blank" class="px-4 py-2 bg-blue-700/50 rounded-lg text-xs font-bold hover:bg-blue-600 transition-all inline-block mt-2">Página no Facebook</a></li>

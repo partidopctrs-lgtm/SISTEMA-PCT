@@ -64,7 +64,7 @@
                             Sua missão hoje é trazer 5 novos contatos. Use seu link de indicação exclusivo e envie para amigos ou grupos que buscam uma alternativa política séria e organizada.
                         </div>
                         <div class="bg-white border border-blue-100 p-4 rounded-2xl flex items-center justify-between">
-                            <code class="text-xs font-bold text-pct-blue">https://pct.org.br/indicar/{{ auth()->user()->registration_number }}</code>
+                            <code class="text-xs font-bold text-pct-blue">https://pct.social.br/indicar/{{ auth()->user()->registration_number }}</code>
                             <button class="text-pct-blue font-black text-[10px] uppercase">Copiar</button>
                         </div>
                     @endif

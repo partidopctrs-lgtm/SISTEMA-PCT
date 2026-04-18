@@ -15,6 +15,8 @@ class AdminDashboardController extends Controller
             'total_revenue' => \App\Models\FinancialRecord::where('type', 'revenue')->where('status', 'approved')->sum('amount'),
             'total_expenses' => \App\Models\FinancialRecord::where('type', 'expense')->where('status', 'approved')->sum('amount'),
             'legal_requests_new' => \App\Models\LegalRequest::where('status', 'new')->count(),
+            'hino_plays' => \App\Models\AudioInteraction::where('type', 'play')->count(),
+            'hino_downloads' => \App\Models\AudioInteraction::where('type', 'download')->count(),
         ];
 
         $topDirectories = \App\Models\Directory::withCount('memberships')
@@ -25,6 +27,11 @@ class AdminDashboardController extends Controller
         $recentUsers = \App\Models\User::orderBy('created_at', 'desc')->limit(5)->get();
 
         return view('pages.admin.dashboard', compact('stats', 'topDirectories', 'recentUsers'));
+    }
+
+    public function commandCenter()
+    {
+        return view('pages.admin.command-center');
     }
 
     public function storeMember(Request $request)
@@ -67,26 +74,86 @@ class AdminDashboardController extends Controller
         return view('pages.admin.members', compact('members', 'states'));
     }
 
-    public function perfis() { return view('pages.admin.profiles'); }
-    public function carteirinhas() { return view('pages.admin.carteirinhas'); }
-    public function escola() { return view('pages.admin.escola'); }
-    public function referrals() { return view('pages.admin.referrals'); }
-    public function missoes() { return view('pages.admin.missoes'); }
-    public function comunidade() { return view('pages.admin.comunidade'); }
-    public function documentos() { return view('pages.admin.documentos'); }
-
-    public function modelosOficios()
+    // --- 1. Partido em Formação (Assinaturas) ---
+    public function partyFormation()
     {
-        return view('pages.shared.modelos-oficios');
+        $signatures = \App\Models\PartySignature::latest()->paginate(15);
+        $totalSignatures = \App\Models\PartySignature::count();
+        $goal = 500000;
+        return view('pages.admin.party', compact('signatures', 'totalSignatures', 'goal'));
     }
 
-    public function fichaFiliacao()
+    // --- 2. Demandas da População ---
+    public function publicDemands()
     {
-        return view('pages.shared.ficha-filiacao');
+        $demands = \App\Models\PublicDemand::latest()->paginate(15);
+        $urgentDemands = \App\Models\PublicDemand::where('is_urgent', true)->count();
+        return view('pages.admin.demands', compact('demands', 'urgentDemands'));
     }
 
-    public function eventos() { return view('pages.admin.eventos'); }
-    public function financeiro() { return view('pages.admin.financeiro'); }
-    public function suporte() { return view('pages.admin.suporte'); }
-    public function configuracoes() { return view('pages.admin.configuracoes'); }
+    // --- 3. Gestão de Diretórios ---
+    public function directories()
+    {
+        $committees = \App\Models\Directory::withCount('memberships')->paginate(15);
+        return view('pages.admin.directories', compact('committees'));
+    }
+
+    // --- 4. Governança Interna ---
+    public function governance()
+    {
+        $positions = \App\Models\InternalPosition::orderBy('hierarchy_weight', 'desc')->get();
+        $totalPositions = \App\Models\InternalPosition::count();
+        $occupiedPositions = \App\Models\User::whereNotNull('position_id')->count();
+        
+        return view('pages.admin.governance', compact('positions', 'totalPositions', 'occupiedPositions'));
+    }
+
+    // --- 5. Comunicação e Mobilização ---
+    public function communication()
+    {
+        return view('pages.admin.communication');
+    }
+
+    // --- 6. Inteligência e Controle ---
+    public function intelligence()
+    {
+        $totalUsers = \App\Models\User::count();
+        $newUsersThisMonth = \App\Models\User::whereMonth('created_at', now()->month)->count();
+        $newUsersLastMonth = \App\Models\User::whereMonth('created_at', now()->subMonth()->month)->count();
+        
+        $growth = 0;
+        if ($newUsersLastMonth > 0) {
+            $growth = (($newUsersThisMonth - $newUsersLastMonth) / $newUsersLastMonth) * 100;
+        } elseif ($newUsersThisMonth > 0) {
+            $growth = 100;
+        }
+
+        $efficiency = \App\Models\Goal::avg(\DB::raw('(current_members / target_members) * 10')) ?? 0;
+        $totalPoints = \App\Models\Point::sum('amount');
+        
+        $topDirectories = \App\Models\Directory::withCount('memberships')
+            ->orderBy('memberships_count', 'desc')
+            ->limit(5)
+            ->get();
+
+        return view('pages.admin.intelligence', compact('totalUsers', 'newUsersThisMonth', 'growth', 'topDirectories', 'efficiency', 'totalPoints'));
+    }
+
+    // --- 7. Jurídico Institucional ---
+    public function legal()
+    {
+        $complaints = \App\Models\LegalComplaint::latest()->paginate(10);
+        $activeProcesses = \App\Models\LegalDisciplinaryProcess::where('status', '!=', 'concluido')->count();
+        return view('pages.admin.legal', compact('complaints', 'activeProcesses'));
+    }
+
+    public function issueCertificate()
+    {
+        return view('pages.admin.issue-certificate');
+    }
+
+    public function configuracoes()
+    {
+        return view('pages.admin.configuracoes');
+    }
 }

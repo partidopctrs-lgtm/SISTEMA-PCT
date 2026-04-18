@@ -1,8 +1,8 @@
-<x-public-layout>
-    <x-slot name="title">Sistema de Governança Nacional - PCT</x-slot>
+<x-dashboard-layout>
+    <x-slot name="title">Governança Nacional - PCT</x-slot>
 
-    <div class="bg-slate-50 min-h-screen py-20">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="py-10">
+        <div class="max-w-4xl mx-auto">
             <!-- Header do Documento -->
             <div class="bg-white rounded-[2.5rem] p-12 shadow-sm border border-slate-100 mb-10 relative overflow-hidden">
                 <div class="absolute top-0 right-0 p-8">
@@ -37,7 +37,7 @@
             </div>
 
             <!-- Conteúdo -->
-            <div class="space-y-8">
+            <div class="space-y-8 text-slate-700">
                 <!-- 2. Pilares -->
                 <section class="bg-white rounded-[2rem] p-10 shadow-sm border border-slate-100">
                     <h2 class="text-xl font-bold text-pct-blue mb-8 flex items-center gap-3">
@@ -151,4 +151,4 @@
             </div>
         </div>
     </div>
-</x-public-layout>
+</x-dashboard-layout>

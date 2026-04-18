@@ -1,6 +1,6 @@
 #!/bin/bash
 # =============================================================
-# Deploy PCT - pct.hotdogdovini.com.br
+# Deploy PCT - pct.social.br
 # VPS: 187.127.17.241 | AlmaLinux 9 | Nginx | MariaDB
 # =============================================================
 set -e
@@ -8,11 +8,12 @@ set -e
 APP_DIR="/var/www/pct"
 DB_NAME="pct_db"
 DB_USER="pct_user"
-DB_PASS="PCT@Forte2026!"
+DB_PASS="NJXwf9N?VP#DI&r"
 REPO_URL="https://github.com/dresbach-records/pct-political-platform.git"
+DOMAINS="pct.social.br,administrativo.pct.social.br,afiliado.pct.social.br,candidato.pct.social.br,tesouraria.pct.social.br,juridico.pct.social.br,diretorio.taquara.pct.social.br"
 
 echo "=========================================="
-echo "  DEPLOY PCT - pct.hotdogdovini.com.br"
+echo "  DEPLOY PCT - pct.social.br"
 echo "=========================================="
 
 # --- 1. Verificar PHP ---
@@ -53,7 +54,13 @@ echo "  → Banco $DB_NAME e usuário $DB_USER criados com sucesso!"
 
 # --- 6. Configurar .env ---
 echo "[6/9] Configurando .env..."
-cp $APP_DIR/.env.example $APP_DIR/.env
+if [ -f "$APP_DIR/.env.vps" ]; then
+    cp $APP_DIR/.env.vps $APP_DIR/.env
+    echo "  → .env configurado a partir de .env.vps"
+else
+    cp $APP_DIR/.env.example $APP_DIR/.env
+    echo "  → .env configurado a partir de .env.example (AVISO: Verifique as chaves!)"
+fi
 php $APP_DIR/artisan key:generate --force
 
 # --- 7. Migrations ---
@@ -69,23 +76,24 @@ php $APP_DIR/artisan view:cache
 # --- 9. Permissões + Nginx ---
 echo "[9/9] Permissões e Nginx..."
 chown -R nginx:nginx $APP_DIR
-# PHP-FPM roda como apache — storage e cache precisam ser do apache
-chown -R apache:apache $APP_DIR/storage
-chown -R apache:apache $APP_DIR/bootstrap/cache
+# PHP-FPM roda como apache/nginx dependendo da config da VPS
+# No AlmaLinux do Vini costuma ser nginx:nginx ou apache:apache
+chown -R nginx:nginx $APP_DIR/storage
+chown -R nginx:nginx $APP_DIR/bootstrap/cache
 chmod -R 775 $APP_DIR/storage
 chmod -R 775 $APP_DIR/bootstrap/cache
 
 # Instalar config do Nginx
-cp $APP_DIR/deploy/nginx-pct.conf /etc/nginx/conf.d/pct.hotdogdovini.com.br.conf
+cp $APP_DIR/deploy/nginx-pct.conf /etc/nginx/conf.d/pct.social.br.conf
 nginx -t && systemctl reload nginx
 
 # SSL
 echo ""
-echo "Obtendo certificado SSL..."
-certbot --nginx -d pct.hotdogdovini.com.br --non-interactive --agree-tos -m admin@pct.org.br
+echo "Obtendo certificado SSL para todos os subdomínios..."
+certbot --nginx -d pct.social.br -d administrativo.pct.social.br -d afiliado.pct.social.br -d candidato.pct.social.br -d tesouraria.pct.social.br -d juridico.pct.social.br -d diretorio.taquara.pct.social.br --non-interactive --agree-tos -m admin@pct.org.br
 
 echo ""
 echo "=========================================="
 echo "  ✅ DEPLOY CONCLUÍDO!"
-echo "  🌐 https://pct.hotdogdovini.com.br"
+echo "  🌐 https://pct.social.br"
 echo "=========================================="

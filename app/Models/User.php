@@ -6,12 +6,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable, HasUuids;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids;
 
     public function uniqueIds(): array
     {
@@ -59,9 +60,15 @@ class User extends Authenticatable
         'zip_code',
         'zip_code',
         'committee_city',
+        'committee_id',
         'referred_by',
         'registration_document',
     ];
+
+    public function committee()
+    {
+        return $this->belongsTo(Directory::class, 'committee_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -114,5 +121,10 @@ class User extends Authenticatable
     public function hasRole($role)
     {
         return $this->role === $role;
+    }
+
+    public function getFullNameAttribute()
+    {
+        return $this->name;
     }
 }

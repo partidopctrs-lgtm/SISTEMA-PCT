@@ -40,9 +40,9 @@ class DepartmentLoginController extends Controller
         
         $email = $request->email;
         // Map legacy admin e‑mail to the current one
-        if (strtolower($email) === 'admin@pct.org.br') {
-            $email = 'admin@pct.social.br';
-            $request->merge(['email' => $email]);
+        if (strtolower($email) === 'admin@pct.org.br' || strtolower($email) === 'admin@pct.social.br') {
+            // Ensure we use the exact email in the database if needed, 
+            // but for now we just allow the attempt with what's provided.
         }
 
         // Validate the (potentially updated) credentials
@@ -54,9 +54,10 @@ class DepartmentLoginController extends Controller
         if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
             $user = Auth::user();
 
-            if ($user->role === $role) {
+            if ($user->hasRole('admin') || $user->role === $role) {
                 $request->session()->regenerate();
                 
+                // Se o usuário é admin mas logou pelo portal de afiliado, direciona pro afiliado
                 $targetPath = match ($role) {
                     'admin' => 'admin',
                     'affiliate' => 'affiliate',

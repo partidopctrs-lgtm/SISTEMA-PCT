@@ -196,9 +196,9 @@
                             </div>
                         </a>
 
-                        <a href="mailto:contato@pct.org.br" class="flex items-center gap-4 p-4 text-gray-500 hover:text-pct-blue transition-colors">
+                        <a href="mailto:contato@pct.social.br" class="flex items-center gap-4 p-4 text-gray-500 hover:text-pct-blue transition-colors">
                             <div class="text-left w-full">
-                                <p class="text-[10px] font-black uppercase text-center border-t border-gray-100 pt-4">contato@pct.org.br</p>
+                                <p class="text-[10px] font-black uppercase text-center border-t border-gray-100 pt-4">contato@pct.social.br</p>
                             </div>
                         </a>
                     </div>

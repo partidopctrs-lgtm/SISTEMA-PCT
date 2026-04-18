@@ -1,8 +1,8 @@
-<x-public-layout>
-    <x-slot name="title">Manual do Núcleo Jurídico - PCT</x-slot>
+<x-dashboard-layout>
+    <x-slot name="title">Manual Jurídico - PCT</x-slot>
 
-    <div class="bg-slate-50 min-h-screen py-20">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="py-10">
+        <div class="max-w-4xl mx-auto">
             <!-- Header do Documento -->
             <div class="bg-white rounded-[2.5rem] p-12 shadow-sm border border-slate-100 mb-10 relative overflow-hidden">
                 <div class="absolute top-0 right-0 p-8">
@@ -37,7 +37,7 @@
             </div>
 
             <!-- Conteúdo -->
-            <div class="space-y-8">
+            <div class="space-y-8 text-slate-700">
                 <!-- 1. Finalidade -->
                 <section class="bg-white rounded-[2rem] p-10 shadow-sm border border-slate-100">
                     <h2 class="text-xl font-bold text-pct-blue mb-6 flex items-center gap-3">
@@ -68,7 +68,7 @@
                     </h2>
                     
                     <div class="space-y-6">
-                        <div class="p-6 bg-gradient-to-r from-pct-blue to-blue-900 rounded-[2rem] text-white">
+                        <div class="p-6 bg-gradient-to-r from-pct-blue to-blue-900 rounded-[2rem] text-white shadow-lg">
                             <div class="flex items-center gap-4 mb-4">
                                 <span class="px-3 py-1 bg-pct-green text-pct-blue text-[9px] font-black rounded-full uppercase">Nível Nacional</span>
                                 <h3 class="text-lg font-black uppercase tracking-widest">Coordenação Jurídica Nacional</h3>
@@ -108,8 +108,8 @@
                                 ['Solicitante', 'Afiliado/Comitê', 'bg-white border-slate-200'],
                                 ['Jurídico Local', 'Primeira Análise', 'bg-emerald-50 border-emerald-100 text-pct-green'],
                                 ['Jurídico Estadual', 'Supervisão', 'bg-blue-50 border-blue-100 text-pct-blue'],
-                                ['Jurídico Nacional', 'Estratégico', 'bg-pct-blue text-white'],
-                                ['Resposta Final', 'Encerramento', 'bg-pct-green text-white']
+                                ['Jurídico Nacional', 'Estratégico', 'bg-pct-blue text-white shadow-md'],
+                                ['Resposta Final', 'Encerramento', 'bg-pct-green text-white shadow-md']
                             ] as $step)
                             <div class="p-4 rounded-2xl border flex flex-col items-center text-center {{ $step[2] }}">
                                 <span class="text-[9px] font-black uppercase mb-1 opacity-70">{{ $step[0] }}</span>
@@ -146,4 +146,4 @@
             </div>
         </div>
     </div>
-</x-public-layout>
+</x-dashboard-layout>

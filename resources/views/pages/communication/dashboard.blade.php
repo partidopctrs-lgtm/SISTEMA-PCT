@@ -3,6 +3,7 @@
 
     <div class="mb-8 flex justify-between items-end">
         <div>
+            <p class="text-[10px] font-black text-pct-blue uppercase tracking-[0.3em] mb-2 opacity-60">Portal da Comunicação</p>
             <h1 class="text-3xl font-bold text-pct-blue">Comunicação & Marketing</h1>
             <p class="text-gray-500">Gerência de campanhas, redes sociais e disparos.</p>
         </div>
@@ -71,11 +72,11 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                 </div>
                 <div>
-                    <h4 class="font-bold text-pct-blue">Modelos de Ofícios</h4>
-                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-tight">Comunicação Oficial</p>
+                    <h4 class="font-bold text-pct-blue">Repositório de Mídia</h4>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-tight">Documentos e Ativos</p>
                 </div>
             </div>
-            <a href="{{ route('communication.modelos_oficios') }}" class="btn-primary py-2 px-4 text-xs">Acessar</a>
+            <a href="{{ route('shared.documents', ['portal' => 'communication']) }}" class="btn-primary py-2 px-4 text-xs">Acessar Central</a>
         </div>
 
         <div class="glass p-8 rounded-[2rem] flex items-center justify-between group hover:border-pct-green transition-all">
@@ -84,11 +85,11 @@
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                 </div>
                 <div>
-                    <h4 class="font-bold text-pct-blue">Ficha de Filiação</h4>
+                    <h4 class="font-bold text-pct-blue">Fichas e Modelos</h4>
                     <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-tight">Material de Base</p>
                 </div>
             </div>
-            <a href="{{ route('communication.ficha_filiacao') }}" class="py-2 px-4 text-xs font-bold text-pct-green border border-pct-green rounded-xl hover:bg-pct-green hover:text-white transition-all">Visualizar</a>
+            <a href="{{ route('shared.documents', ['portal' => 'communication']) }}" class="py-2 px-4 text-xs font-bold text-pct-green border border-pct-green rounded-xl hover:bg-pct-green hover:text-white transition-all">Visualizar</a>
         </div>
     </div>
 </x-dashboard-layout>

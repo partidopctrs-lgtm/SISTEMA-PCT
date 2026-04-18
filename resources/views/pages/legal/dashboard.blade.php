@@ -5,6 +5,7 @@
         <!-- Header -->
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-12">
             <div>
+                <p class="text-[10px] font-black text-pct-blue uppercase tracking-[0.3em] mb-2 opacity-60">Compliance & Jurídico</p>
                 <h1 class="text-3xl font-black text-pct-blue tracking-tight mb-2">Painel Jurídico Nacional</h1>
                 <p class="text-gray-500 font-medium">Gestão de conformidade, solicitações e integridade institucional.</p>
             </div>

@@ -12,6 +12,10 @@ class CommunicationController extends Controller
         return view('pages.communication.dashboard');
     }
 
+    public function broadcast() { return $this->index(); }
+    public function social() { return $this->index(); }
+    public function press() { return $this->index(); }
+
     public function modelosOficios()
     {
         return view('pages.shared.modelos-oficios');

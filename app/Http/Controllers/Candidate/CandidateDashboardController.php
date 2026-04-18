@@ -12,6 +12,10 @@ class CandidateDashboardController extends Controller
         return view('pages.candidate.dashboard');
     }
 
+    public function votes() { return view('pages.candidate.votes'); }
+    public function team() { return view('pages.candidate.team'); }
+    public function materials() { return $this->index(); }
+
     public function modelosOficios()
     {
         return view('pages.shared.modelos-oficios');

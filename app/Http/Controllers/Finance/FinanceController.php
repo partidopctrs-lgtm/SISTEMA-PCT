@@ -12,6 +12,21 @@ class FinanceController extends Controller
         return view('pages.finance.dashboard');
     }
 
+    public function transparency()
+    {
+        return view('pages.finance.transparency');
+    }
+
+    public function donors()
+    {
+        return view('pages.finance.donors');
+    }
+
+    public function reconciliation()
+    {
+        return view('pages.finance.reconciliation');
+    }
+
     public function modelosOficios()
     {
         return view('pages.shared.modelos-oficios');

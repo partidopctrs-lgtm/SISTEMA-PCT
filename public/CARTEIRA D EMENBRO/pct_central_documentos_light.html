@@ -1,0 +1,443 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600&family=Roboto+Mono:wght@400;500&display=swap');
+*{box-sizing:border-box;margin:0;padding:0;}
+
+.app{background:#f4f6fb;min-height:600px;border-radius:12px;overflow:hidden;border:1px solid #dde3f0;}
+
+.topbar{background:#1B4FA8;padding:10px 16px;display:flex;align-items:center;gap:12px;}
+.top-seal{width:36px;height:36px;border-radius:50%;background:#fff;border:2px solid #E8A800;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;}
+.seal-pct{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;color:#1B4FA8;line-height:1;letter-spacing:-0.5px;}
+.seal-pct span{color:#E8A800;}
+.seal-stars{display:flex;gap:1px;margin-bottom:1px;}
+.s-star{width:4px;height:4px;background:#E8A800;clip-path:polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%);}
+.top-title{font-family:'Barlow Condensed',sans-serif;font-size:16px;font-weight:800;color:#fff;letter-spacing:0.5px;flex:1;}
+.top-sub{font-size:11px;color:rgba(255,255,255,0.75);font-family:'Barlow',sans-serif;}
+.top-count{background:rgba(255,255,255,0.2);border-radius:20px;padding:3px 10px;font-size:11px;color:#fff;font-family:'Barlow',sans-serif;white-space:nowrap;}
+
+.layout{display:flex;min-height:560px;}
+
+/* SIDEBAR */
+.sidebar{width:190px;background:#fff;flex-shrink:0;padding:12px 0;border-right:1px solid #dde3f0;}
+.sb-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#aab0c0;padding:4px 14px 2px;}
+.portal-btn{
+  width:100%;padding:7px 14px;text-align:left;background:none;border:none;cursor:pointer;
+  display:flex;align-items:center;gap:8px;
+  font-family:'Barlow',sans-serif;font-size:12px;color:#555;
+  border-left:3px solid transparent;
+}
+.portal-btn:hover{background:#f0f4ff;color:#1B4FA8;}
+.portal-btn.active{background:#eef2ff;color:#1B4FA8;border-left-color:#E8A800;font-weight:600;}
+.pb-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.pb-name{font-size:11.5px;line-height:1.2;}
+.pb-count{margin-left:auto;font-size:10px;background:#eef2ff;border-radius:10px;padding:1px 6px;color:#1B4FA8;font-weight:600;}
+.portal-btn.active .pb-count{background:#1B4FA8;color:#fff;}
+.sb-divider{height:1px;background:#eef0f5;margin:6px 14px;}
+
+/* MAIN */
+.main{flex:1;padding:16px;background:#f4f6fb;}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px;}
+.stat-card{background:#fff;border-radius:8px;padding:10px 12px;border:1px solid #dde3f0;}
+.stat-num{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:800;color:#1a1f2e;line-height:1;}
+.stat-lbl{font-size:9px;color:#888;text-transform:uppercase;letter-spacing:1px;margin-top:2px;}
+.stat-sub{font-size:10px;color:#bbb;margin-top:1px;}
+
+/* PORTAL HEADER */
+.portal-header{border-radius:8px;padding:12px 16px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;border:1px solid #dde3f0;}
+.ph-title{font-family:'Barlow Condensed',sans-serif;font-size:20px;font-weight:900;color:#1a1f2e;letter-spacing:0.5px;}
+.ph-desc{font-size:11px;color:#666;margin-top:2px;}
+.ph-badge{font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:1px;text-transform:uppercase;white-space:nowrap;}
+
+/* CATEGORIES */
+.cat-section{margin-bottom:14px;}
+.cat-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#aab0c0;margin-bottom:6px;padding-left:2px;}
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:8px;}
+
+/* DOC CARD */
+.doc-card{
+  background:#fff;border:1px solid #dde3f0;
+  border-radius:8px;padding:10px 12px;cursor:pointer;
+  display:flex;flex-direction:column;gap:4px;
+}
+.doc-card:hover{border-color:#1B4FA8;background:#fafbff;}
+.dc-top{display:flex;align-items:center;justify-content:space-between;gap:6px;}
+.dc-icon{width:24px;height:24px;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.dc-icon svg{width:14px;height:14px;}
+.dc-status{font-size:9px;font-weight:700;padding:2px 6px;border-radius:10px;letter-spacing:0.5px;text-transform:uppercase;white-space:nowrap;}
+.dc-name{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:#1a1f2e;line-height:1.2;}
+.dc-type{font-size:9px;color:#aaa;letter-spacing:0.3px;}
+.dc-actions{display:flex;gap:4px;margin-top:6px;}
+.btn-view,.btn-print{
+  flex:1;padding:5px;border:none;border-radius:4px;cursor:pointer;
+  font-family:'Barlow',sans-serif;font-size:10px;font-weight:600;letter-spacing:0.5px;
+}
+.btn-view{background:#eef2ff;color:#1B4FA8;border:1px solid #c8d4f5;}
+.btn-view:hover{background:#dde8ff;}
+.btn-print{background:#fff8e6;color:#854F0B;border:1px solid #f5d888;}
+.btn-print:hover{background:#fef0c0;}
+
+/* MODAL */
+.modal-bg{display:none;min-height:700px;background:rgba(0,0,0,0.4);align-items:flex-start;justify-content:center;padding:20px 0;}
+.modal-bg.open{display:flex;}
+.modal{background:#fff;width:640px;border-radius:8px;overflow:hidden;border:1px solid #dde3f0;}
+.doc-topbar{padding:8px 14px;display:flex;align-items:center;justify-content:space-between;}
+.doc-topbar-title{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:800;color:#fff;text-transform:uppercase;letter-spacing:1px;}
+.doc-topbar-btns{display:flex;gap:6px;}
+.tbtn{padding:4px 12px;border:none;border-radius:4px;cursor:pointer;font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;}
+.tbtn-print{background:#E8A800;color:#0a0f1e;}
+.tbtn-close{background:rgba(255,255,255,0.2);color:#fff;}
+
+/* DOC RENDER */
+.doc-render{padding:24px 28px;color:#111;font-size:12px;line-height:1.6;background:#fff;}
+.doc-render h1{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:#1B4FA8;text-align:center;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;}
+.doc-render h2{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:#1B4FA8;text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px;border-bottom:1.5px solid #E8A800;padding-bottom:3px;}
+.doc-render .subtitle{text-align:center;font-size:11px;color:#666;margin-bottom:16px;letter-spacing:1px;}
+.doc-render .doc-body-text{text-align:justify;color:#222;margin-bottom:8px;}
+.doc-render .field-row{display:flex;gap:12px;margin-bottom:6px;}
+.doc-render .field{flex:1;border-bottom:1px solid #ccc;padding-bottom:2px;}
+.doc-render .field label{display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#1B4FA8;margin-bottom:2px;}
+.doc-render .field span{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:#111;}
+.doc-render .sig-row{display:flex;gap:20px;margin-top:20px;}
+.doc-render .sig{flex:1;border-top:1.5px solid #333;padding-top:4px;text-align:center;}
+.doc-render .sig-name{font-size:11px;font-weight:700;color:#1B4FA8;}
+.doc-render .sig-role{font-size:9px;color:#666;}
+.doc-render .art{margin-bottom:6px;}
+.doc-render .art strong{color:#1B4FA8;}
+.doc-render .header-doc{display:flex;align-items:flex-start;justify-content:space-between;border-bottom:2px solid #1B4FA8;padding-bottom:10px;margin-bottom:14px;}
+.doc-render .hd-org{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;color:#1B4FA8;text-transform:uppercase;}
+.doc-render .hd-sub{font-size:9px;color:#666;}
+.doc-render .brasil-bar{height:4px;background:linear-gradient(90deg,#1B4FA8 33%,#228B2F 33%,#228B2F 66%,#E8A800 66%);margin-bottom:12px;border-radius:2px;}
+.doc-render .info-box{background:#f0f4ff;border:1px solid #b0c0e8;border-radius:4px;padding:8px 12px;margin:8px 0;font-size:11px;color:#222;}
+.doc-render .info-box strong{color:#1B4FA8;}
+.doc-render table{width:100%;border-collapse:collapse;margin:8px 0;font-size:11px;}
+.doc-render table th{background:#1B4FA8;color:#fff;padding:5px 8px;text-align:left;font-size:10px;font-weight:700;letter-spacing:0.5px;}
+.doc-render table td{padding:5px 8px;border-bottom:0.5px solid #ddd;color:#222;}
+.doc-render table tr:nth-child(even) td{background:#f8f9ff;}
+</style>
+
+<div class="app">
+
+<div class="topbar">
+  <div class="top-seal">
+    <div class="seal-stars"><div class="s-star"></div><div class="s-star"></div><div class="s-star"></div></div>
+    <div class="seal-pct">P<span>C</span>T</div>
+  </div>
+  <div>
+    <div class="top-title">Central de Documentos · PCT</div>
+    <div class="top-sub">Movimento Cidadania e Trabalho — Taquara / RS</div>
+  </div>
+  <div class="top-count" id="total-count">42 documentos · 7 portais</div>
+</div>
+
+<div class="layout">
+<div class="sidebar" id="sidebar-btns"></div>
+<div class="main" id="main-content">
+  <div class="stats-row" id="stats-row"></div>
+  <div id="portal-content"></div>
+</div>
+</div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal-bg">
+  <div class="modal">
+    <div class="doc-topbar" id="modal-topbar">
+      <div class="doc-topbar-title" id="modal-title">Documento</div>
+      <div class="doc-topbar-btns">
+        <button class="tbtn tbtn-print" onclick="printDoc()">Imprimir</button>
+        <button class="tbtn tbtn-close" onclick="closeModal()">Fechar</button>
+      </div>
+    </div>
+    <div class="doc-render" id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+const PORTALS=[
+  {id:'institucional',name:'Institucional',color:'#1B4FA8',dot:'#1B4FA8',desc:'Representação pública e valores do PCT',badge:'Público externo',badgeColor:'#eef2ff',badgeText:'#1B4FA8',
+    cats:[
+      {name:'Identidade',docs:[
+        {name:'Manifesto do Movimento',type:'Manifesto',status:'Aprovado',tpl:'manifesto'},
+        {name:'Missão, Visão e Valores',type:'Institucional',status:'Aprovado',tpl:'missao'},
+        {name:'Carta de Princípios',type:'Carta',status:'Aprovado',tpl:'carta_principios'},
+        {name:'Apresentação Institucional',type:'Apresentação',status:'Rascunho',tpl:'gen'},
+      ]},
+      {name:'Regulamentos',docs:[
+        {name:'Política de Privacidade',type:'Política',status:'Revisão',tpl:'gen'},
+        {name:'Termos de Uso',type:'Termo',status:'Aprovado',tpl:'gen'},
+        {name:'Regulamento Geral',type:'Regulamento',status:'Aprovado',tpl:'gen'},
+      ]}
+    ]},
+  {id:'administrativo',name:'Administrativo',color:'#534AB7',dot:'#534AB7',desc:'Centro de controle operacional',badge:'Uso interno',badgeColor:'#f0eeff',badgeText:'#534AB7',
+    cats:[
+      {name:'Governança',docs:[
+        {name:'Regimento Interno',type:'Regimento',status:'Aprovado',tpl:'regimento'},
+        {name:'Manual de Operação do Sistema',type:'Manual',status:'Rascunho',tpl:'gen'},
+        {name:'Política de Cargos e Hierarquia',type:'Política',status:'Aprovado',tpl:'gen'},
+        {name:'Política de Acesso e Permissões',type:'Política',status:'Revisão',tpl:'gen'},
+      ]},
+      {name:'Operação',docs:[
+        {name:'Procedimentos Administrativos',type:'Procedimento',status:'Aprovado',tpl:'gen'},
+        {name:'Manual de Diretórios',type:'Manual',status:'Aprovado',tpl:'gen'},
+        {name:'Normas de Atuação Local',type:'Norma',status:'Rascunho',tpl:'gen'},
+      ]},
+      {name:'Estratégia',docs:[
+        {name:'Planejamento Estratégico',type:'Planejamento',status:'Revisão',tpl:'gen'},
+        {name:'Plano de Expansão',type:'Plano',status:'Rascunho',tpl:'gen'},
+        {name:'Plano de Metas',type:'Plano',status:'Aprovado',tpl:'gen'},
+      ]}
+    ]},
+  {id:'diretorio',name:'Diretório',color:'#228B2F',dot:'#228B2F',desc:'Gestão e operação local — Taquara/RS',badge:'Local',badgeColor:'#edfaf0',badgeText:'#228B2F',
+    cats:[
+      {name:'Gestão Local',docs:[
+        {name:'Ata de Fundação do Diretório',type:'Ata',status:'Aprovado',tpl:'ata_fundacao'},
+        {name:'Lista de Membros',type:'Registro',status:'Aprovado',tpl:'lista_membros'},
+        {name:'Ata de Reunião',type:'Ata',status:'Aprovado',tpl:'ata_reuniao'},
+        {name:'Plano Local de Atuação',type:'Plano',status:'Revisão',tpl:'gen'},
+      ]},
+      {name:'Operação',docs:[
+        {name:'Relatório Mensal de Atividades',type:'Relatório',status:'Aprovado',tpl:'relatorio_mensal'},
+        {name:'Controle de Presença',type:'Controle',status:'Aprovado',tpl:'controle_presenca'},
+        {name:'Pauta de Reunião',type:'Pauta',status:'Aprovado',tpl:'pauta_reuniao'},
+      ]},
+      {name:'Política Local',docs:[
+        {name:'Demandas da População',type:'Registro',status:'Rascunho',tpl:'gen'},
+        {name:'Ofício Enviado',type:'Ofício',status:'Aprovado',tpl:'oficio'},
+        {name:'Relatório de Problemas Públicos',type:'Relatório',status:'Rascunho',tpl:'gen'},
+      ]}
+    ]},
+  {id:'tesouraria',name:'Tesouraria',color:'#854F0B',dot:'#854F0B',desc:'Controle financeiro e transparência',badge:'Financeiro',badgeColor:'#fff8ed',badgeText:'#854F0B',
+    cats:[
+      {name:'Controle',docs:[
+        {name:'Registro de Receitas',type:'Registro',status:'Aprovado',tpl:'receitas'},
+        {name:'Registro de Despesas',type:'Registro',status:'Aprovado',tpl:'despesas'},
+        {name:'Fluxo de Caixa',type:'Controle',status:'Aprovado',tpl:'fluxo_caixa'},
+        {name:'Controle de Doações',type:'Controle',status:'Aprovado',tpl:'gen'},
+      ]},
+      {name:'Transparência',docs:[
+        {name:'Relatório Financeiro Mensal',type:'Relatório',status:'Aprovado',tpl:'gen'},
+        {name:'Prestação de Contas',type:'Prestação',status:'Revisão',tpl:'gen'},
+        {name:'Demonstrativo Financeiro',type:'Demonstrativo',status:'Rascunho',tpl:'gen'},
+      ]},
+      {name:'Jurídico-Financeiro',docs:[
+        {name:'Termo de Doação',type:'Termo',status:'Aprovado',tpl:'termo_doacao'},
+        {name:'Política Financeira',type:'Política',status:'Aprovado',tpl:'gen'},
+        {name:'Normas de Uso de Recursos',type:'Norma',status:'Aprovado',tpl:'gen'},
+      ]}
+    ]},
+  {id:'candidato',name:'Candidato',color:'#993556',dot:'#993556',desc:'Gestão de candidatos e pré-candidatos',badge:'Eleitoral',badgeColor:'#fdf0f4',badgeText:'#993556',
+    cats:[
+      {name:'Cadastro',docs:[
+        {name:'Ficha de Candidatura',type:'Ficha',status:'Aprovado',tpl:'ficha_candidatura'},
+        {name:'Declaração de Intenção',type:'Declaração',status:'Aprovado',tpl:'decl_intencao'},
+        {name:'Termo de Compromisso',type:'Termo',status:'Aprovado',tpl:'gen'},
+      ]},
+      {name:'Avaliação',docs:[
+        {name:'Análise de Perfil',type:'Análise',status:'Rascunho',tpl:'gen'},
+        {name:'Relatório de Desempenho',type:'Relatório',status:'Rascunho',tpl:'gen'},
+        {name:'Histórico Político',type:'Histórico',status:'Rascunho',tpl:'gen'},
+      ]},
+      {name:'Campanha',docs:[
+        {name:'Plano de Campanha',type:'Plano',status:'Rascunho',tpl:'gen'},
+        {name:'Estratégia Local',type:'Estratégia',status:'Rascunho',tpl:'gen'},
+        {name:'Relatório de Campanha',type:'Relatório',status:'Rascunho',tpl:'gen'},
+      ]}
+    ]},
+  {id:'juridico',name:'Jurídico',color:'#0F6E56',dot:'#0F6E56',desc:'Validação legal e compliance',badge:'Legal',badgeColor:'#edfaf6',badgeText:'#0F6E56',
+    cats:[
+      {name:'Fundação',docs:[
+        {name:'Ata de Fundação do PCT',type:'Ata',status:'Aprovado',tpl:'ata_fundacao_pct'},
+        {name:'Estatuto Social',type:'Estatuto',status:'Aprovado',tpl:'estatuto'},
+        {name:'Lista de Fundadores',type:'Registro',status:'Aprovado',tpl:'gen'},
+      ]},
+      {name:'Operação',docs:[
+        {name:'Parecer Jurídico',type:'Parecer',status:'Revisão',tpl:'gen'},
+        {name:'Revisão de Documentos',type:'Revisão',status:'Rascunho',tpl:'gen'},
+        {name:'Validação Formal',type:'Validação',status:'Rascunho',tpl:'gen'},
+      ]},
+      {name:'Compliance',docs:[
+        {name:'Termo de Filiação',type:'Termo',status:'Aprovado',tpl:'termo_filiacao'},
+        {name:'Termo de Responsabilidade',type:'Termo',status:'Aprovado',tpl:'gen'},
+        {name:'Política de Dados (LGPD)',type:'Política',status:'Revisão',tpl:'gen'},
+      ]}
+    ]},
+  {id:'comunicacao',name:'Comunicação',color:'#993C1D',dot:'#993C1D',desc:'Mensagem, mobilização e campanhas',badge:'Transversal',badgeColor:'#fdf3ef',badgeText:'#993C1D',
+    cats:[
+      {name:'Planejamento',docs:[
+        {name:'Plano de Comunicação',type:'Plano',status:'Revisão',tpl:'gen'},
+        {name:'Manual de Linguagem',type:'Manual',status:'Aprovado',tpl:'gen'},
+        {name:'Roteiro de Campanha',type:'Roteiro',status:'Rascunho',tpl:'gen'},
+      ]},
+      {name:'Publicações',docs:[
+        {name:'Modelos de Post',type:'Modelo',status:'Aprovado',tpl:'gen'},
+        {name:'Comunicado Oficial',type:'Comunicado',status:'Aprovado',tpl:'comunicado'},
+        {name:'Nota Pública',type:'Nota',status:'Aprovado',tpl:'nota_publica'},
+      ]}
+    ]}
+];
+
+const SC={
+  'Aprovado':{bg:'#edfaf0',color:'#1a7a30'},
+  'Revisão':{bg:'#fff8e6',color:'#854F0B'},
+  'Rascunho':{bg:'#f4f5f8',color:'#888'},
+};
+
+const ICON=`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="1" width="10" height="14" rx="1.5"/><line x1="5.5" y1="5" x2="10.5" y2="5"/><line x1="5.5" y1="8" x2="10.5" y2="8"/><line x1="5.5" y1="11" x2="8" y2="11"/></svg>`;
+
+const TEMPLATES={
+  manifesto:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Movimento Cidadania e Trabalho</div><div class="hd-sub">Diretório Municipal de Taquara – RS</div></div><div style="font-size:10px;color:#888;text-align:right;">Versão 1.0 · Abril/2026<br>Código: PCT-INST-001</div></div><h1>Manifesto do Movimento</h1><p class="subtitle">PCT – Unir · Defender · Transformar</p><h2>Nossa Declaração</h2><p class="doc-body-text">O PCT – Movimento Cidadania e Trabalho nasce da convicção de que a política deve servir ao povo. Somos um movimento de cidadãos comprometidos com a transformação da realidade municipal, guiados pelos valores da ética, da participação democrática e do desenvolvimento social.</p><h2>Nossas Causas</h2><div class="info-box"><strong>1. Cidadania ativa:</strong> Todo cidadão tem o direito e o dever de participar das decisões que afetam sua comunidade.<br><strong>2. Trabalho digno:</strong> Defendemos políticas que gerem emprego, renda e desenvolvimento econômico local.<br><strong>3. Transparência:</strong> Exigimos gestão pública honesta, transparente e responsável.</div><h2>Nosso Compromisso</h2><p class="doc-body-text">Comprometemo-nos a atuar com integridade, ouvir a população, defender os direitos fundamentais e construir pontes entre cidadãos e poder público.</p><div class="sig-row"><div class="sig" style="margin-top:30px;"><div class="sig-name">Marcos V. Dresbach do Amaral</div><div class="sig-role">Presidente – PCT Taquara/RS</div></div></div>`,
+
+  missao:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Movimento Cidadania e Trabalho</div><div class="hd-sub">Missão, Visão e Valores Institucionais</div></div><div style="font-size:10px;color:#888;text-align:right;">Versão 1.0 · Abril/2026<br>Código: PCT-INST-002</div></div><h1>Missão, Visão e Valores</h1><h2>Missão</h2><p class="doc-body-text">Promover a cidadania ativa, incentivar a participação social e política, desenvolver ações educacionais e comunitárias, fomentando a formação de lideranças comprometidas com princípios éticos, democráticos e sociais.</p><h2>Visão</h2><p class="doc-body-text">Ser referência em formação política e cidadã no município de Taquara e região, consolidando-se como um movimento plural, ético e transformador da realidade local.</p><h2>Valores</h2><table><tr><th>Valor</th><th>Descrição</th></tr><tr><td><strong>Legalidade</strong></td><td>Atuação dentro dos marcos legais e constitucionais</td></tr><tr><td><strong>Moralidade</strong></td><td>Conduta ética e íntegra em todas as ações</td></tr><tr><td><strong>Transparência</strong></td><td>Prestação de contas e acesso público às informações</td></tr><tr><td><strong>Participação</strong></td><td>Democracia interna e escuta ativa dos membros</td></tr><tr><td><strong>Dignidade</strong></td><td>Respeito incondicional à pessoa humana</td></tr></table>`,
+
+  carta_principios:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Movimento Cidadania e Trabalho</div><div class="hd-sub">Carta de Princípios</div></div><div style="font-size:10px;color:#888;text-align:right;">Versão 1.0 · Abril/2026<br>Código: PCT-INST-003</div></div><h1>Carta de Princípios</h1><p class="doc-body-text">O PCT fundamenta sua atuação nos seguintes princípios inegociáveis:</p><div class="info-box"><strong>Art. 1º — Democracia:</strong> O PCT defende a democracia plena como único sistema legítimo de organização política.<br><br><strong>Art. 2º — Igualdade:</strong> Todos os cidadãos são iguais em direitos e deveres, sem distinção de raça, gênero, religião ou origem.<br><br><strong>Art. 3º — Participação:</strong> A participação popular é condição essencial para a legitimidade de qualquer decisão política.<br><br><strong>Art. 4º — Responsabilidade:</strong> Todo dirigente responde por seus atos perante os membros e a sociedade.</div><div class="sig-row"><div class="sig" style="margin-top:30px;"><div class="sig-name">Marcos V. Dresbach do Amaral</div><div class="sig-role">Presidente</div></div><div class="sig" style="margin-top:30px;"><div class="sig-name">[Secretário(a) Geral]</div><div class="sig-role">Secretário(a) Geral</div></div></div>`,
+
+  regimento:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Movimento Cidadania e Trabalho</div><div class="hd-sub">Regimento Interno</div></div><div style="font-size:10px;color:#888;text-align:right;">Versão 1.0 · Abril/2026<br>Código: PCT-ADM-001</div></div><h1>Regimento Interno</h1><h2>Capítulo I – Disposições Gerais</h2><p class="doc-body-text art"><strong>Art. 1º</strong> – O presente Regimento Interno disciplina o funcionamento operacional do PCT, complementando o Estatuto Social.</p><p class="doc-body-text art"><strong>Art. 2º</strong> – As reuniões da Diretoria Executiva realizar-se-ão quinzenalmente, em data e local definidos pelo Presidente.</p><h2>Capítulo II – Das Reuniões</h2><p class="doc-body-text art"><strong>Art. 3º</strong> – O quórum mínimo para deliberações é de maioria simples (50%+1) dos membros da Diretoria.</p><p class="doc-body-text art"><strong>Art. 4º</strong> – As decisões serão registradas em ata, assinada por todos os presentes.</p><h2>Capítulo III – Das Responsabilidades</h2><p class="doc-body-text art"><strong>Art. 5º</strong> – Cada dirigente é responsável pelas ações de sua área, devendo prestar contas mensalmente.</p>`,
+
+  ata_fundacao:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Diretório Municipal de Taquara/RS</div><div class="hd-sub">Ata de Fundação do Diretório</div></div><div style="font-size:10px;color:#888;text-align:right;">Código: PCT-DIR-001<br>Aprovado: Abril/2026</div></div><h1>Ata de Fundação do Diretório</h1><p class="doc-body-text">Aos _____ dias do mês de ____________ de 2026, reuniram-se os signatários abaixo, com o objetivo de fundar o Diretório Municipal do PCT – Movimento Cidadania e Trabalho, com sede no município de Taquara, Estado do Rio Grande do Sul.</p><h2>Deliberações</h2><p class="doc-body-text art"><strong>1.</strong> Aprovação da constituição do Diretório Municipal de Taquara/RS.</p><p class="doc-body-text art"><strong>2.</strong> Eleição da Diretoria Executiva provisória.</p><p class="doc-body-text art"><strong>3.</strong> Aprovação do Plano Local de Atuação.</p><h2>Fundadores</h2><table><tr><th>Nome</th><th>CPF</th><th>Cargo</th><th>Assinatura</th></tr><tr><td>Marcos V. Dresbach do Amaral</td><td>___.___.___-__</td><td>Presidente</td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td><td></td></tr></table><div class="sig-row"><div class="sig" style="margin-top:20px;"><div class="sig-name">Marcos V. Dresbach do Amaral</div><div class="sig-role">Presidente Fundador</div></div></div>`,
+
+  lista_membros:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Diretório Municipal de Taquara/RS</div><div class="hd-sub">Lista Oficial de Membros</div></div><div style="font-size:10px;color:#888;text-align:right;">Atualização: ___/2026<br>Código: PCT-DIR-002</div></div><h1>Lista de Membros</h1><table><tr><th>#</th><th>Nome Completo</th><th>CPF</th><th>Cargo</th><th>Filiação</th><th>Status</th></tr><tr><td>1</td><td>Marcos V. Dresbach do Amaral</td><td>___.___.___-__</td><td>Presidente</td><td>Abr/2026</td><td>Ativo</td></tr><tr><td>2</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>5</td><td></td><td></td><td></td><td></td><td></td></tr></table><div class="sig-row"><div class="sig" style="margin-top:20px;"><div class="sig-name">[Secretário(a) Geral]</div><div class="sig-role">Responsável pelo Registro</div></div></div>`,
+
+  ata_reuniao:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Diretório Municipal de Taquara/RS</div><div class="hd-sub">Ata de Reunião da Diretoria Executiva</div></div><div style="font-size:10px;color:#888;text-align:right;">Código: PCT-DIR-ATA-___<br>Data: ___/___/2026</div></div><h1>Ata de Reunião</h1><h2>Identificação</h2><div class="field-row"><div class="field"><label>Data</label><span>___/___/2026</span></div><div class="field"><label>Horário</label><span>___h___</span></div><div class="field"><label>Local</label><span>________________________</span></div></div><div class="field-row"><div class="field"><label>Tipo</label><span>Ordinária / Extraordinária</span></div><div class="field"><label>Nº de Presentes</label><span>_________</span></div></div><h2>Presença</h2><table><tr><th>Nome</th><th>Cargo</th><th>Assinatura</th></tr><tr><td>Marcos V. Dresbach do Amaral</td><td>Presidente</td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr><tr><td>&nbsp;</td><td></td><td></td></tr></table><h2>Pauta e Deliberações</h2><p class="doc-body-text">1. ___________________________________________________________________________</p><p class="doc-body-text">2. ___________________________________________________________________________</p><h2>Encerramento</h2><p class="doc-body-text">Nada mais havendo a tratar, encerrou-se a reunião às ___h___, da qual lavrei a presente ata.</p><div class="sig-row"><div class="sig" style="margin-top:20px;"><div class="sig-name">Marcos V. Dresbach do Amaral</div><div class="sig-role">Presidente</div></div><div class="sig" style="margin-top:20px;"><div class="sig-name">[Secretário(a) Geral]</div><div class="sig-role">Secretário(a) Geral</div></div></div>`,
+
+  pauta_reuniao:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Diretório Municipal de Taquara/RS</div><div class="hd-sub">Pauta de Reunião</div></div><div style="font-size:10px;color:#888;text-align:right;">Código: PCT-DIR-PAU-___</div></div><h1>Pauta de Reunião</h1><div class="field-row"><div class="field"><label>Data</label><span>___/___/2026</span></div><div class="field"><label>Horário</label><span>___h___</span></div><div class="field"><label>Local</label><span>_________________</span></div></div><h2>Itens da Pauta</h2><table><tr><th>#</th><th>Item</th><th>Responsável</th><th>Tempo</th></tr><tr><td>1</td><td>Abertura e verificação de quórum</td><td>Presidente</td><td>5 min</td></tr><tr><td>2</td><td>Aprovação da ata anterior</td><td>Secretário(a)</td><td>5 min</td></tr><tr><td>3</td><td>Informe da Presidência</td><td>Presidente</td><td>10 min</td></tr><tr><td>4</td><td>___________________________</td><td>_____________</td><td>___</td></tr><tr><td>5</td><td>___________________________</td><td>_____________</td><td>___</td></tr><tr><td>6</td><td>Informes gerais</td><td>Todos</td><td>10 min</td></tr><tr><td>7</td><td>Encerramento</td><td>Presidente</td><td>5 min</td></tr></table>`,
+
+  controle_presenca:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Diretório Municipal de Taquara/RS</div><div class="hd-sub">Lista de Presença</div></div><div style="font-size:10px;color:#888;text-align:right;">Data: ___/___/2026</div></div><h1>Controle de Presença</h1><div class="field-row"><div class="field"><label>Evento / Reunião</label><span>__________________________________</span></div><div class="field"><label>Data</label><span>___/___/2026</span></div></div><table><tr><th>#</th><th>Nome Completo</th><th>CPF</th><th>Cargo</th><th>Assinatura</th></tr><tr><td>1</td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td></tr><tr><td>5</td><td></td><td></td><td></td><td></td></tr><tr><td>6</td><td></td><td></td><td></td><td></td></tr><tr><td>7</td><td></td><td></td><td></td><td></td></tr><tr><td>8</td><td></td><td></td><td></td><td></td></tr></table><div class="sig-row"><div class="sig" style="margin-top:20px;"><div class="sig-name">[Responsável pelo Evento]</div><div class="sig-role">Assinatura e Carimbo</div></div></div>`,
+
+  relatorio_mensal:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Diretório Municipal de Taquara/RS</div><div class="hd-sub">Relatório Mensal de Atividades</div></div><div style="font-size:10px;color:#888;text-align:right;">Referência: ___/2026<br>Código: PCT-DIR-REL-001</div></div><h1>Relatório Mensal</h1><div class="field-row"><div class="field"><label>Mês/Ano</label><span>_____________</span></div><div class="field"><label>Responsável</label><span>_______________________</span></div></div><h2>Atividades Realizadas</h2><table><tr><th>Data</th><th>Atividade</th><th>Local</th><th>Participantes</th><th>Resultado</th></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td><td></td><td></td></tr></table><h2>Indicadores</h2><div class="field-row"><div class="field"><label>Novos filiados</label><span>_______</span></div><div class="field"><label>Reuniões realizadas</label><span>_______</span></div><div class="field"><label>Eventos</label><span>_______</span></div></div><div class="sig-row"><div class="sig" style="margin-top:20px;"><div class="sig-name">Marcos V. Dresbach do Amaral</div><div class="sig-role">Presidente</div></div></div>`,
+
+  oficio:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Movimento Cidadania e Trabalho</div><div class="hd-sub">Diretório Municipal de Taquara – RS</div></div><div style="font-size:10px;color:#888;text-align:right;">Ofício nº ___/2026<br>Taquara, ___/___/2026</div></div><h1>Ofício</h1><div class="field-row"><div class="field"><label>Destinatário</label><span>__________________________________</span></div></div><div class="field-row"><div class="field"><label>Cargo</label><span>___________________</span></div><div class="field"><label>Instituição</label><span>___________________</span></div></div><h2>Assunto</h2><p class="doc-body-text"><strong>Ref.:</strong> ______________________________________________</p><h2>Texto</h2><p class="doc-body-text">Senhor(a),</p><p class="doc-body-text">O PCT – Movimento Cidadania e Trabalho, por meio de sua Diretoria Executiva, vem respeitosamente a Vossa Senhoria ____________________________________________________________________________________________________________________________________</p><p class="doc-body-text">Certos de vossa atenção, subscrevemo-nos.</p><div class="sig-row"><div class="sig" style="margin-top:30px;"><div class="sig-name">Marcos V. Dresbach do Amaral</div><div class="sig-role">Presidente – PCT Diretório Taquara/RS</div></div></div>`,
+
+  receitas:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Tesouraria · Diretório Taquara/RS</div><div class="hd-sub">Registro de Receitas</div></div><div style="font-size:10px;color:#888;text-align:right;">Mês: _______/2026<br>Código: PCT-FIN-001</div></div><h1>Registro de Receitas</h1><table><tr><th>#</th><th>Data</th><th>Descrição</th><th>Origem</th><th>Valor (R$)</th><th>Comprovante</th></tr><tr><td>1</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan="4" style="font-weight:700;text-align:right;">Total:</td><td style="font-weight:700;">R$ _______</td><td></td></tr></table><div class="sig-row"><div class="sig" style="margin-top:20px;"><div class="sig-name">[Diretor(a) Financeiro(a)]</div><div class="sig-role">Tesouraria</div></div><div class="sig" style="margin-top:20px;"><div class="sig-name">Marcos V. Dresbach do Amaral</div><div class="sig-role">Presidente</div></div></div>`,
+
+  despesas:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Tesouraria · Diretório Taquara/RS</div><div class="hd-sub">Registro de Despesas</div></div><div style="font-size:10px;color:#888;text-align:right;">Mês: _______/2026<br>Código: PCT-FIN-002</div></div><h1>Registro de Despesas</h1><table><tr><th>#</th><th>Data</th><th>Descrição</th><th>Categoria</th><th>Valor (R$)</th><th>NF/Recibo</th></tr><tr><td>1</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>2</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>3</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td>4</td><td></td><td></td><td></td><td></td><td></td></tr><tr><td colspan="4" style="font-weight:700;text-align:right;color:#c00;">Total:</td><td style="font-weight:700;color:#c00;">R$ _______</td><td></td></tr></table><div class="sig-row"><div class="sig" style="margin-top:20px;"><div class="sig-name">[Diretor(a) Financeiro(a)]</div><div class="sig-role">Tesouraria</div></div><div class="sig" style="margin-top:20px;"><div class="sig-name">Marcos V. Dresbach do Amaral</div><div class="sig-role">Presidente</div></div></div>`,
+
+  fluxo_caixa:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Tesouraria · Diretório Taquara/RS</div><div class="hd-sub">Fluxo de Caixa</div></div><div style="font-size:10px;color:#888;text-align:right;">Mês: _______/2026<br>Código: PCT-FIN-003</div></div><h1>Fluxo de Caixa</h1><table><tr><th>Item</th><th>Previsto (R$)</th><th>Realizado (R$)</th><th>Diferença</th></tr><tr><td><strong>Saldo inicial</strong></td><td></td><td></td><td></td></tr><tr><td>Total de Receitas</td><td></td><td></td><td></td></tr><tr><td>Total de Despesas</td><td></td><td></td><td></td></tr><tr><td><strong>Saldo Final</strong></td><td style="font-weight:700;"></td><td style="font-weight:700;"></td><td style="font-weight:700;"></td></tr></table><div class="sig-row"><div class="sig" style="margin-top:20px;"><div class="sig-name">[Diretor(a) Financeiro(a)]</div><div class="sig-role">Tesouraria</div></div></div>`,
+
+  termo_doacao:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Tesouraria · Compliance</div><div class="hd-sub">Termo de Doação</div></div><div style="font-size:10px;color:#888;text-align:right;">Código: PCT-FIN-TER-001</div></div><h1>Termo de Doação</h1><div class="field-row"><div class="field"><label>Doador(a)</label><span>______________________________</span></div><div class="field"><label>CPF/CNPJ</label><span>___.___.___-__</span></div></div><div class="field-row"><div class="field"><label>Valor Doado</label><span>R$ ___________</span></div><div class="field"><label>Data</label><span>___/___/2026</span></div></div><h2>Declaração</h2><div class="info-box">Eu, identificado(a) acima, declaro que realizei doação voluntária ao PCT – Movimento Cidadania e Trabalho, sem qualquer contraprestação, em conformidade com o Art. 24 do Estatuto Social do PCT, que prevê que o patrimônio será constituído por doações e contribuições voluntárias. Declaro ainda que os recursos são de origem lícita.</div><div class="sig-row"><div class="sig" style="margin-top:30px;"><div class="sig-name">[Doador(a)]</div><div class="sig-role">Assinatura</div></div><div class="sig" style="margin-top:30px;"><div class="sig-name">Marcos V. Dresbach do Amaral</div><div class="sig-role">Presidente – PCT</div></div></div>`,
+
+  ficha_candidatura:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Portal do Candidato</div><div class="hd-sub">Ficha de Pré-Candidatura</div></div><div style="font-size:10px;color:#888;text-align:right;">Código: PCT-CAND-001<br>Data: ___/___/2026</div></div><h1>Ficha de Candidatura</h1><h2>Dados Pessoais</h2><div class="field-row"><div class="field"><label>Nome Completo</label><span>______________________________</span></div><div class="field"><label>CPF</label><span>___.___.___-__</span></div></div><div class="field-row"><div class="field"><label>Nascimento</label><span>___/___/____</span></div><div class="field"><label>Naturalidade</label><span>________________</span></div><div class="field"><label>Profissão</label><span>________________</span></div></div><h2>Dados da Candidatura</h2><div class="field-row"><div class="field"><label>Cargo Pretendido</label><span>______________________________</span></div><div class="field"><label>Zona/Bairro de Atuação</label><span>________________</span></div></div><div class="field-row"><div class="field"><label>Experiência Política Anterior</label><span>______________________________</span></div></div><h2>Declaração</h2><div class="info-box">Declaro que as informações acima são verdadeiras e que me comprometo a atuar em conformidade com o Estatuto e os princípios do PCT.</div><div class="sig-row"><div class="sig" style="margin-top:20px;"><div class="sig-name">[Candidato(a)]</div><div class="sig-role">Assinatura</div></div><div class="sig" style="margin-top:20px;"><div class="sig-name">Marcos V. Dresbach do Amaral</div><div class="sig-role">Presidente</div></div></div>`,
+
+  decl_intencao:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Portal do Candidato</div><div class="hd-sub">Declaração de Intenção de Candidatura</div></div><div style="font-size:10px;color:#888;text-align:right;">Código: PCT-CAND-002</div></div><h1>Declaração de Intenção</h1><div class="field-row"><div class="field"><label>Nome</label><span>______________________________</span></div><div class="field"><label>CPF</label><span>___.___.___-__</span></div></div><h2>Declaração</h2><p class="doc-body-text">Eu, identificado(a) acima, declaro minha intenção de concorrer ao cargo de <strong>______________________________</strong> pelo PCT – Movimento Cidadania e Trabalho, Diretório Municipal de Taquara/RS, comprometendo-me a:</p><div class="info-box">1. Atuar em conformidade com o Estatuto Social e os princípios do PCT;<br>2. Submeter minha pré-candidatura à avaliação da Diretoria Executiva;<br>3. Apresentar meu plano de atuação e proposta de campanha;<br>4. Acatar as decisões do Movimento quanto à viabilidade de minha candidatura.</div><div class="sig-row"><div class="sig" style="margin-top:30px;"><div class="sig-name">[Declarante]</div><div class="sig-role">Assinatura</div></div><div class="sig" style="margin-top:30px;"><div class="sig-name">Marcos V. Dresbach do Amaral</div><div class="sig-role">Presidente</div></div></div>`,
+
+  ata_fundacao_pct:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Movimento Cidadania e Trabalho</div><div class="hd-sub">Ata de Fundação – Documento Original</div></div><div style="font-size:10px;color:#888;text-align:right;">Código: PCT-JUR-001<br>Taquara/RS · 2026</div></div><h1>Ata de Fundação do PCT</h1><p class="doc-body-text">Aos _____ dias do mês de ____________ de 2026, na cidade de Taquara, Estado do Rio Grande do Sul, reuniram-se os cidadãos abaixo identificados, com o objetivo de constituir o <strong>PCT – Movimento Cidadania e Trabalho</strong>, associação civil de direito privado, sem fins lucrativos, nos termos do Código Civil Brasileiro.</p><h2>Deliberações da Assembleia de Fundação</h2><p class="doc-body-text art"><strong>1.</strong> Aprovação da denominação: PCT – Movimento Cidadania e Trabalho.</p><p class="doc-body-text art"><strong>2.</strong> Aprovação do Estatuto Social.</p><p class="doc-body-text art"><strong>3.</strong> Eleição da primeira Diretoria Executiva.</p><p class="doc-body-text art"><strong>4.</strong> Fixação da sede no município de Taquara/RS.</p><h2>Diretoria Eleita</h2><table><tr><th>Cargo</th><th>Nome</th><th>CPF</th></tr><tr><td>Presidente</td><td>Marcos V. Dresbach do Amaral</td><td>___.___.___-__</td></tr><tr><td>Vice-Presidente</td><td></td><td></td></tr><tr><td>Secretário(a) Geral</td><td></td><td></td></tr><tr><td>Diretor(a) Financeiro(a)</td><td></td><td></td></tr></table>`,
+
+  estatuto:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Movimento Cidadania e Trabalho</div><div class="hd-sub">Estatuto Social – Versão Oficial</div></div><div style="font-size:10px;color:#888;text-align:right;">Código: PCT-JUR-002<br>Aprovado: Abril/2026</div></div><h1>Estatuto Social</h1><p class="subtitle">PCT – Unir · Defender · Transformar · Sede: Taquara/RS</p><h2>Capítulo I – Da Denominação e Finalidade</h2><p class="doc-body-text art"><strong>Art. 1º</strong> – O PCT é uma associação civil de direito privado, sem fins lucrativos, com sede em Taquara/RS, constituída por prazo indeterminado.</p><p class="doc-body-text art"><strong>Art. 2º</strong> – Tem por finalidade promover a cidadania, incentivar a participação social e política e desenvolver ações educacionais e comunitárias.</p><p class="doc-body-text art"><strong>Art. 4º</strong> – O PCT não possui fins lucrativos, sendo vedada a distribuição de lucros a seus membros.</p><p class="doc-body-text art"><strong>Art. 5º</strong> – O PCT não possui natureza de partido político, atuando como organização da sociedade civil.</p><h2>Capítulo II – Dos Princípios</h2><p class="doc-body-text art"><strong>Art. 6º</strong> – O PCT orienta suas atividades pelos princípios da legalidade, moralidade, transparência, ética e responsabilidade social.</p><h2>Capítulo III – Dos Membros</h2><p class="doc-body-text art"><strong>Art. 8º</strong> – Poderão integrar o PCT todas as pessoas físicas maiores de 16 anos.</p><p class="doc-body-text art"><strong>Art. 9º</strong> – A admissão de novos membros será realizada mediante cadastro formal e aprovação da Diretoria Executiva.</p><p class="doc-body-text art"><strong>Art. 10º</strong> – Os membros têm direito de participar das atividades, votar e ser votados.</p>`,
+
+  termo_filiacao:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Jurídico · Compliance</div><div class="hd-sub">Termo de Filiação</div></div><div style="font-size:10px;color:#888;text-align:right;">Código: PCT-JUR-COMP-001</div></div><h1>Termo de Filiação</h1><div class="field-row"><div class="field"><label>Nome</label><span>______________________________</span></div><div class="field"><label>CPF</label><span>___.___.___-__</span></div></div><div class="field-row"><div class="field"><label>Data de Nascimento</label><span>___/___/____</span></div><div class="field"><label>Naturalidade</label><span>________________</span></div></div><h2>Declaração</h2><div class="info-box">Eu, identificado(a) acima, declaro meu desejo de filiar-me ao PCT – Movimento Cidadania e Trabalho, afirmando que:<br><br>1. Li e aceito integralmente o Estatuto Social do PCT;<br>2. Comprometo-me a cumprir as decisões da Assembleia Geral e da Diretoria Executiva;<br>3. Atuarei com ética e respeito aos princípios do Movimento;<br>4. Estou ciente de que meus dados serão tratados conforme a LGPD.</div><div class="sig-row"><div class="sig" style="margin-top:30px;"><div class="sig-name">[Filiado(a)]</div><div class="sig-role">Assinatura</div></div><div class="sig" style="margin-top:30px;"><div class="sig-name">Marcos V. Dresbach do Amaral</div><div class="sig-role">Presidente</div></div></div>`,
+
+  comunicado:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Movimento Cidadania e Trabalho</div><div class="hd-sub">Comunicado Oficial</div></div><div style="font-size:10px;color:#888;text-align:right;">Nº ___/2026<br>Taquara, ___/___/2026</div></div><h1>Comunicado Oficial</h1><h2>Assunto</h2><p class="doc-body-text"><strong>Ref.:</strong> _____________________________________________</p><h2>Comunicamos</h2><p class="doc-body-text">O PCT – Movimento Cidadania e Trabalho comunica a todos os membros, filiados e parceiros que ______________________________________________________________________________________________________________________________________.</p><p class="doc-body-text">Informações adicionais poderão ser obtidas junto à Secretaria do Diretório.</p><div class="sig-row"><div class="sig" style="margin-top:30px;"><div class="sig-name">Marcos V. Dresbach do Amaral</div><div class="sig-role">Presidente – PCT Taquara/RS</div></div></div>`,
+
+  nota_publica:`<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Movimento Cidadania e Trabalho</div><div class="hd-sub">Nota Pública</div></div><div style="font-size:10px;color:#888;text-align:right;">Taquara, ___/___/2026</div></div><h1>Nota Pública</h1><p class="doc-body-text">O PCT – Movimento Cidadania e Trabalho, por meio de sua Diretoria Executiva, vem a público manifestar sua posição sobre _______________________________________________.</p><p class="doc-body-text">_____________________________________________________________________________________________________________________________.</p><p class="doc-body-text">O PCT reafirma seu compromisso com a democracia, a transparência e os interesses da população de Taquara e região.</p><div class="sig-row"><div class="sig" style="margin-top:30px;"><div class="sig-name">Diretoria Executiva – PCT</div><div class="sig-role">Diretório Municipal de Taquara/RS</div></div></div>`,
+};
+
+function getTpl(tpl,name){
+  if(TEMPLATES[tpl]) return TEMPLATES[tpl];
+  return `<div class="brasil-bar"></div><div class="header-doc"><div><div class="hd-org">PCT – Movimento Cidadania e Trabalho</div><div class="hd-sub">${name}</div></div><div style="font-size:10px;color:#888;text-align:right;">Versão 1.0 · Abril/2026</div></div><h1>${name}</h1><p class="subtitle">PCT – Diretório Municipal de Taquara/RS</p><h2>Identificação</h2><div class="field-row"><div class="field"><label>Responsável</label><span>______________________________</span></div><div class="field"><label>Data</label><span>___/___/2026</span></div><div class="field"><label>Versão</label><span>1.0</span></div></div><div class="field-row"><div class="field"><label>Status</label><span>Rascunho / Revisão / Aprovado</span></div><div class="field"><label>Vínculo</label><span>Taquara – RS</span></div></div><h2>Conteúdo</h2><p class="doc-body-text">_______________________________________________________________________________________________________________</p><p class="doc-body-text">_______________________________________________________________________________________________________________</p><h2>Histórico de Alterações</h2><table><tr><th>Versão</th><th>Data</th><th>Alteração</th><th>Responsável</th></tr><tr><td>1.0</td><td>___/2026</td><td>Criação do documento</td><td>_____________</td></tr></table><div class="sig-row"><div class="sig" style="margin-top:30px;"><div class="sig-name">______________________</div><div class="sig-role">Responsável</div></div><div class="sig" style="margin-top:30px;"><div class="sig-name">Marcos V. Dresbach do Amaral</div><div class="sig-role">Presidente</div></div></div>`;
+}
+
+let curPortal=0, curDocName='';
+
+function renderSidebar(){
+  document.getElementById('sidebar-btns').innerHTML=`
+    <div class="sb-label">Portais</div>`+
+    PORTALS.map((p,i)=>`<button class="portal-btn${i===curPortal?' active':''}" onclick="selPortal(${i})">
+      <div class="pb-dot" style="background:${p.dot}"></div>
+      <span class="pb-name">${p.name}</span>
+      <span class="pb-count">${p.cats.reduce((a,c)=>a+c.docs.length,0)}</span>
+    </button>`).join('');
+}
+
+function renderStats(){
+  const tot=PORTALS.reduce((a,p)=>a+p.cats.reduce((b,c)=>b+c.docs.length,0),0);
+  const apv=PORTALS.reduce((a,p)=>a+p.cats.reduce((b,c)=>b+c.docs.filter(d=>d.status==='Aprovado').length,0),0);
+  const rev=PORTALS.reduce((a,p)=>a+p.cats.reduce((b,c)=>b+c.docs.filter(d=>d.status==='Revisão').length,0),0);
+  const rsc=PORTALS.reduce((a,p)=>a+p.cats.reduce((b,c)=>b+c.docs.filter(d=>d.status==='Rascunho').length,0),0);
+  document.getElementById('stats-row').innerHTML=`
+    <div class="stat-card"><div class="stat-num">${tot}</div><div class="stat-lbl">Total de documentos</div><div class="stat-sub">7 portais ativos</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:#1a7a30">${apv}</div><div class="stat-lbl">Aprovados</div><div class="stat-sub">prontos para uso</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:#854F0B">${rev}</div><div class="stat-lbl">Em revisão</div><div class="stat-sub">aguardando aprovação</div></div>
+    <div class="stat-card"><div class="stat-num" style="color:#bbb">${rsc}</div><div class="stat-lbl">Rascunho</div><div class="stat-sub">em elaboração</div></div>`;
+  document.getElementById('total-count').textContent=`${tot} documentos · 7 portais`;
+}
+
+function renderPortal(idx){
+  const p=PORTALS[idx];
+  let h=`<div class="portal-header" style="background:${p.badgeColor};border-color:${p.color}30;">
+    <div><div class="ph-title">${p.name}</div><div class="ph-desc">${p.desc}</div></div>
+    <div class="ph-badge" style="background:${p.badgeColor};color:${p.badgeText};border:1px solid ${p.color}40;">${p.badge}</div>
+  </div>`;
+  p.cats.forEach(cat=>{
+    h+=`<div class="cat-section"><div class="cat-label">${cat.name}</div><div class="doc-grid">`;
+    cat.docs.forEach(doc=>{
+      const sc=SC[doc.status];
+      h+=`<div class="doc-card">
+        <div class="dc-top">
+          <div class="dc-icon" style="background:${p.badgeColor};color:${p.dot}">${ICON}</div>
+          <div class="dc-status" style="background:${sc.bg};color:${sc.color}">${doc.status}</div>
+        </div>
+        <div class="dc-name">${doc.name}</div>
+        <div class="dc-type">${doc.type}</div>
+        <div class="dc-actions">
+          <button class="btn-view" onclick="openDoc('${doc.tpl}','${doc.name}','${p.color}','${p.name}')">Visualizar</button>
+          <button class="btn-print" onclick="openDoc('${doc.tpl}','${doc.name}','${p.color}','${p.name}',true)">Imprimir</button>
+        </div>
+      </div>`;
+    });
+    h+=`</div></div>`;
+  });
+  document.getElementById('portal-content').innerHTML=h;
+}
+
+function selPortal(idx){curPortal=idx;renderSidebar();renderPortal(idx);}
+
+function openDoc(tpl,name,color,portal,print=false){
+  curDocName=name;
+  document.getElementById('modal-topbar').style.background=color;
+  document.getElementById('modal-title').textContent=name+' · '+portal;
+  document.getElementById('modal-body').innerHTML=getTpl(tpl,name);
+  document.getElementById('modal-bg').classList.add('open');
+  if(print) setTimeout(printDoc,300);
+}
+
+function closeModal(){document.getElementById('modal-bg').classList.remove('open');}
+
+function printDoc(){
+  const content=document.getElementById('modal-body').innerHTML;
+  const w=window.open('','_blank','width=820,height=950');
+  w.document.write(`<!DOCTYPE html><html><head><title>${curDocName} – PCT</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800;900&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>*{box-sizing:border-box;margin:0;padding:0;}body{font-family:'Barlow',sans-serif;font-size:12px;color:#111;padding:32px 40px;line-height:1.6;background:#fff;}
+  h1{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;color:#1B4FA8;text-align:center;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;}
+  h2{font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:800;color:#1B4FA8;text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px;border-bottom:1.5px solid #E8A800;padding-bottom:3px;}
+  .brasil-bar{height:5px;background:linear-gradient(90deg,#1B4FA8 33%,#228B2F 33%,#228B2F 66%,#E8A800 66%);margin-bottom:14px;border-radius:2px;}
+  .header-doc{display:flex;justify-content:space-between;border-bottom:2px solid #1B4FA8;padding-bottom:10px;margin-bottom:14px;}
+  .hd-org{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:900;color:#1B4FA8;text-transform:uppercase;}
+  .hd-sub{font-size:9px;color:#666;}
+  .subtitle{text-align:center;font-size:11px;color:#666;margin-bottom:16px;}
+  .doc-body-text{text-align:justify;color:#222;margin-bottom:8px;}
+  .field-row{display:flex;gap:12px;margin-bottom:6px;}
+  .field{flex:1;border-bottom:1px solid #ccc;padding-bottom:2px;}
+  .field label{display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#1B4FA8;margin-bottom:2px;}
+  .field span{font-family:'Barlow Condensed',sans-serif;font-size:13px;font-weight:700;color:#111;}
+  .sig-row{display:flex;gap:20px;margin-top:20px;}
+  .sig{flex:1;border-top:1.5px solid #333;padding-top:4px;text-align:center;}
+  .sig-name{font-size:11px;font-weight:700;color:#1B4FA8;}
+  .sig-role{font-size:9px;color:#666;}
+  .art strong{color:#1B4FA8;}
+  .info-box{background:#f0f4ff;border:1px solid #b0c0e8;border-radius:4px;padding:8px 12px;margin:8px 0;font-size:11px;color:#222;}
+  .info-box strong{color:#1B4FA8;}
+  table{width:100%;border-collapse:collapse;margin:8px 0;font-size:11px;}
+  table th{background:#1B4FA8;color:#fff;padding:5px 8px;text-align:left;font-size:10px;}
+  table td{padding:5px 8px;border-bottom:0.5px solid #ddd;color:#222;}
+  table tr:nth-child(even) td{background:#f8f9ff;}
+  .footer-print{margin-top:28px;border-top:1px solid #E8A800;padding-top:8px;display:flex;justify-content:space-between;font-size:9px;color:#888;}
+  @media print{body{padding:20px 24px;}@page{margin:1cm;}}</style></head>
+  <body>${content}<div class="footer-print"><span>PCT – Movimento Cidadania e Trabalho · Diretório Municipal de Taquara/RS</span><span>Emitido em ${new Date().toLocaleDateString('pt-BR')} · UNIR · DEFENDER · TRANSFORMAR</span></div>
+  <script>window.onload=function(){window.print();}<\/script></body></html>`);
+  w.document.close();
+}
+
+renderSidebar();renderStats();renderPortal(0);
+</script>

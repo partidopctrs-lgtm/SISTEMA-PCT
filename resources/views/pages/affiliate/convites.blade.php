@@ -16,7 +16,7 @@
                         <p class="text-sm text-gray-500 mb-8">Todos que se cadastrarem através deste link serão vinculados à sua rede de mobilização.</p>
                         
                         <div class="flex flex-col sm:flex-row items-stretch gap-4">
-                            <input type="text" id="inviteLink" readonly value="https://pct.org.br/unir/{{ auth()->user()->id }}" class="flex-grow bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-blue-900 font-bold outline-none focus:ring-2 focus:ring-pct-blue transition-all">
+                            <input type="text" id="inviteLink" readonly value="https://pct.social.br/unir/{{ auth()->user()->id }}" class="flex-grow bg-slate-50 border border-slate-200 rounded-2xl px-6 py-4 text-blue-900 font-bold outline-none focus:ring-2 focus:ring-pct-blue transition-all">
                             <button onclick="copyLink()" class="btn-primary flex items-center justify-center gap-3">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 00-2 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
                                 Copiar Link

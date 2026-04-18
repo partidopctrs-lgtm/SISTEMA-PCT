@@ -3,20 +3,38 @@
 
     <div class="mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div>
-            <div class="flex items-center gap-3 mb-2">
+            <p class="text-[10px] font-black text-pct-blue uppercase tracking-[0.3em] mb-2 opacity-60">Área do Afiliado</p>
+            <div class="flex flex-wrap items-center gap-3 mb-2">
                 <h1 class="text-3xl font-black text-pct-blue tracking-tight">Olá, {{ $user->name }}!</h1>
                 @if($isFounder)
                     <span class="px-4 py-1 bg-gradient-to-r from-amber-400 to-amber-600 text-white text-[10px] font-black rounded-full uppercase tracking-[0.2em] shadow-lg shadow-amber-500/20 border border-amber-300">Presidente Fundador</span>
+                @endif
+
+                @php $hasSigned = \App\Models\PartySignature::where('user_id', auth()->id())->exists(); @endphp
+                @if($hasSigned)
+                    <span class="flex items-center gap-2 px-4 py-1.5 bg-gradient-to-br from-amber-200 via-yellow-500 to-amber-600 text-white text-[11px] font-black rounded-full uppercase tracking-[0.15em] shadow-xl shadow-amber-500/30 border border-yellow-200 ring-2 ring-amber-400/20 animate-pulse-slow">
+                        <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                        # EU APOIO PARTIDO PCT - SELO OURO
+                    </span>
                 @endif
             </div>
             <p class="text-gray-500 font-medium italic">Bem-vindo à sua área de liderança e mobilização nacional.</p>
         </div>
 
         @if(auth()->user()->role === 'admin' || auth()->user()->hasRole('admin'))
-        <div class="bg-slate-50 p-2 rounded-2xl border border-slate-100 flex gap-2">
-            <a href="{{ route('admin.dashboard') }}" class="px-4 py-2 bg-pct-blue text-white rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-900 transition-all">Painel Admin</a>
-            <a href="{{ route('legal.dashboard') }}" class="px-4 py-2 bg-white text-gray-500 rounded-xl text-[10px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all">Painel Jurídico</a>
-            <a href="{{ route('committee.dashboard') }}" class="px-4 py-2 bg-white text-gray-500 rounded-xl text-[10px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all">Painel Comitê</a>
+        <div class="bg-slate-50 p-4 rounded-[2rem] border border-slate-100 w-full lg:w-auto">
+            <p class="text-[9px] font-black text-pct-blue uppercase tracking-widest mb-3 px-2 opacity-50">Acesso Multicanais (Admin)</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2">
+                <a href="{{ route('admin.dashboard') }}" class="px-3 py-2 bg-pct-blue text-white rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-blue-900 transition-all text-center">Admin</a>
+                <a href="{{ route('candidate.dashboard') }}" class="px-3 py-2 bg-white text-gray-500 rounded-xl text-[9px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all text-center">Candidato</a>
+                <a href="{{ route('committee.dashboard') }}" class="px-3 py-2 bg-white text-gray-500 rounded-xl text-[9px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all text-center">Comitê</a>
+                <a href="{{ route('finance.dashboard') }}" class="px-3 py-2 bg-white text-gray-500 rounded-xl text-[9px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all text-center">Financeiro</a>
+                <a href="{{ route('legal.dashboard') }}" class="px-3 py-2 bg-white text-gray-500 rounded-xl text-[9px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all text-center">Jurídico</a>
+                <a href="{{ route('communication.dashboard') }}" class="px-3 py-2 bg-white text-gray-500 rounded-xl text-[9px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all text-center">Comunicação</a>
+                <a href="{{ route('advogado.dashboard') }}" class="px-3 py-2 bg-white text-gray-500 rounded-xl text-[9px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all text-center">Advogado</a>
+                <a href="{{ route('dev.dashboard') }}" class="px-3 py-2 bg-red-500 text-white rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-red-700 transition-all text-center">Dev</a>
+                <a href="/" class="px-3 py-2 bg-slate-200 text-gray-700 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-slate-300 transition-all text-center">Portal</a>
+            </div>
         </div>
         @endif
     </div>
@@ -49,7 +67,7 @@
                 <div class="mt-12 pt-8 border-t border-blue-100">
                     <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">Seu Link de Expansão Nacional (ID: {{ auth()->user()->registration_number }})</p>
                     <div class="flex items-center gap-3">
-                        <input type="text" readonly value="https://pct.org.br/indicar/{{ auth()->user()->registration_number }}" class="bg-white border border-blue-100 rounded-2xl px-6 py-4 text-xs w-full font-bold text-pct-blue outline-none shadow-sm">
+                        <input type="text" readonly value="https://pct.social.br/indicar/{{ auth()->user()->registration_number }}" class="bg-white border border-blue-100 rounded-2xl px-6 py-4 text-xs w-full font-bold text-pct-blue outline-none shadow-sm">
                         <button class="bg-pct-blue text-white p-4 rounded-2xl hover:bg-blue-900 transition-all shadow-lg shadow-blue-900/20">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
                         </button>

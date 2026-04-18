@@ -16,15 +16,15 @@ return new class extends Migration
             $table->string('title');
             $table->text('content');
             $table->string('category')->default('geral');
-            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('status')->default('active');
             $table->timestamps();
         });
 
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('community_posts', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->text('content');
-            $table->foreignUuid('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignUuid('topic_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

@@ -13,4 +13,8 @@ class Directory extends Model
         'state',
         'status',
     ];
+    public function memberships()
+    {
+        return $this->hasMany(Membership::class);
+    }
 }

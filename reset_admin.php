@@ -6,7 +6,7 @@ require __DIR__.'/vendor/autoload.php';
 $app = require __DIR__.'/bootstrap/app.php';
 $app->make(Illuminate\Contracts\Console\Kernel::class)->bootstrap();
 
-$adminEmail = 'admin@pct.org.br';
+$adminEmail = 'admin@pct.social.br';
 $adminPassword = 'pct2026';
 
 $user = User::where('email', $adminEmail)->first();

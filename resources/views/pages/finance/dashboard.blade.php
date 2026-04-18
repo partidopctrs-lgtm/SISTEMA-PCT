@@ -3,6 +3,7 @@
 
     <div class="mb-8 flex justify-between items-end">
         <div>
+            <p class="text-[10px] font-black text-pct-blue uppercase tracking-[0.3em] mb-2 opacity-60">Tesouraria Digital</p>
             <h1 class="text-3xl font-bold text-pct-blue">Tesouraria Digital</h1>
             <p class="text-gray-500">Gestão financeira completa, transparente e auditável.</p>
         </div>
@@ -66,7 +67,7 @@
                     </tr>
                     <tr class="hover:bg-gray-50 transition-colors">
                         <td class="px-6 py-4 border-b border-gray-50 font-medium">10/04/2026</td>
-                        <td class="px-6 py-4 border-b border-gray-50">Aluguel Sede Municipal - PoA</td>
+                        <td class="px-6 py-4 border-b border-gray-50">Aluguel Sede Municipal - Taquara/RS</td>
                         <td class="px-6 py-4 border-b border-gray-50"><span class="px-2 py-1 bg-red-100 text-red-700 rounded-md text-[10px] font-bold uppercase">Saída</span></td>
                         <td class="px-6 py-4 border-b border-gray-50 text-right font-bold text-red-500">- R$ 1.200,00</td>
                         <td class="px-6 py-4 border-b border-gray-50 text-center">
@@ -94,19 +95,11 @@
     </div>
 
     <div class="mt-8 flex justify-end space-x-4">
-        <a href="{{ route('finance.ficha_filiacao') }}" class="inline-flex items-center space-x-3 px-6 py-3 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md hover:border-pct-green transition-all group">
+        <a href="{{ route('shared.documents', ['portal' => 'finance']) }}" class="inline-flex items-center space-x-3 px-6 py-3 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md hover:border-pct-green transition-all group">
             <div class="p-2 bg-emerald-50 text-pct-green rounded-lg group-hover:bg-pct-green group-hover:text-white transition-colors">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
             </div>
-            <span class="text-xs font-black text-pct-blue uppercase tracking-widest">Ficha de Filiação</span>
-        </a>
-
-        <a href="{{ route('finance.modelos_oficios') }}" class="inline-flex items-center space-x-3 px-6 py-3 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md hover:border-pct-blue transition-all group">
-            <div class="p-2 bg-indigo-50 text-indigo-600 rounded-lg group-hover:bg-pct-blue group-hover:text-white transition-colors">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-            </div>
-            <span class="text-xs font-black text-pct-blue uppercase tracking-widest">Modelos de Ofícios</span>
-            <svg class="w-4 h-4 text-gray-400 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+            <span class="text-xs font-black text-pct-blue uppercase tracking-widest">Central de Documentos</span>
         </a>
     </div>
 </x-dashboard-layout>

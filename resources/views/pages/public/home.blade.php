@@ -191,6 +191,42 @@
         </div>
     </section>
 
+    <!-- Hino do Movimento -->
+    <section class="py-32 bg-slate-50 relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pct-blue via-pct-green to-pct-blue"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <span class="text-pct-blue font-black tracking-[0.4em] uppercase mb-4 block opacity-60">Símbolos Oficiais</span>
+            <h2 class="text-6xl font-black text-pct-blue mb-12 tracking-tighter">Conheça o Hino do PCT</h2>
+            
+            <div class="max-w-2xl mx-auto bg-white p-12 rounded-[4rem] shadow-2xl border border-slate-100 flex flex-col items-center group hover:scale-[1.02] transition-transform duration-500">
+                <div class="w-24 h-24 bg-pct-blue rounded-[2rem] flex items-center justify-center text-white mb-8 shadow-xl shadow-blue-600/20 group-hover:rotate-6 transition-transform">
+                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                </div>
+                
+                <h3 class="text-2xl font-black text-pct-blue mb-4 uppercase">Cidadania & Trabalho</h3>
+                <p class="text-slate-500 font-medium mb-12 leading-relaxed italic">
+                    "O hino que embala nossa marcha em direção a um Brasil mais livre e próspero. Ouça e sinta a força da nossa união."
+                </p>
+
+                <div class="w-full flex flex-col items-center gap-6">
+                    <audio id="hino-publico" src="{{ asset('audio/hino-pct.mp3') }}" preload="metadata"></audio>
+                    
+                    <div class="flex items-center gap-4">
+                        <button onclick="document.getElementById('hino-publico').play()" class="px-10 py-5 bg-pct-blue text-white rounded-full font-black uppercase tracking-widest text-sm flex items-center hover:bg-blue-900 transition-all shadow-xl shadow-blue-900/20">
+                            <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            Ouvir Agora
+                        </button>
+                        <a href="{{ asset('audio/hino-pct.mp3') }}" 
+                           onclick="trackAudio('download')"
+                           download class="p-5 border-2 border-slate-100 text-slate-400 rounded-full hover:bg-slate-50 hover:text-pct-blue transition-all">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Junte-se -->
     <section class="py-32 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -230,4 +266,17 @@
             animation: float 6s ease-in-out infinite;
         }
     </style>
+    <script>
+        function trackAudio(type) {
+            fetch('{{ route('audio.track') }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ type: type, metadata: { page: 'public_home' } })
+            });
+        }
+        document.getElementById('hino-publico').addEventListener('play', () => trackAudio('play'));
+    </script>
 </x-public-layout>

@@ -141,9 +141,9 @@
                         <div class="space-y-6 pt-8 border-t border-slate-50">
                             <h4 class="text-xs font-black text-blue-400 uppercase tracking-[0.2em] mb-4">04. Vínculo Institucional</h4>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
+                                <div class="md:col-span-2">
                                     <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-2">Comitê Municipal Principal</label>
-                                    <input type="text" name="committee_city" value="{{ auth()->user()->committee_city ?? 'Taquara' }}" class="input-premium w-full bg-slate-100 cursor-not-allowed" readonly>
+                                    <input type="text" name="committee_city" value="{{ auth()->user()->committee_city ?? 'Taquara' }}" class="input-premium w-full {{ auth()->user()->hasRole('admin') ? '' : 'bg-slate-100 cursor-not-allowed' }}" {{ auth()->user()->hasRole('admin') ? '' : 'readonly' }}>
                                     <p class="text-[10px] text-gray-400 mt-2 italic">* O comitê principal de registro é Taquara/RS por padrão.</p>
                                 </div>
                                 <div>

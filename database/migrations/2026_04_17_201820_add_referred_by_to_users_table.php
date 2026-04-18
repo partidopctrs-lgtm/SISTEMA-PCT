@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->uuid('referred_by')->nullable()->after('id');
-            $table->foreign('referred_by')->references('id')->on('users')->onDelete('set null');
+            $table->foreignId('referred_by')->nullable()->after('id')->constrained('users')->onDelete('set null');
         });
     }
 

@@ -15,12 +15,17 @@ class AffiliateDashboardController extends Controller
         $user = auth()->user();
         $isFounder = ($user->email === 'viniamaral2026@gmail.com');
         
+        $rankNational = \App\Models\User::withCount('referrals')
+            ->orderBy('referrals_count', 'desc')
+            ->get()
+            ->search(fn($u) => $u->id === $user->id) + 1;
+
         $stats = [
-            'total_members' => \App\Models\User::count(),
+            'total_members' => \App\Models\User::where('role', 'affiliate')->count(),
             'total_directories' => \App\Models\Directory::count(),
             'my_referrals' => $user->referrals()->count(),
-            'my_points' => $user->referrals()->count() * 50, // 50 points per referral
-            'rank_national' => 1,
+            'my_points' => $user->referrals()->count() * 50,
+            'rank_national' => $rankNational,
         ];
 
         $myReferrals = $user->referrals()->latest()->limit(5)->get();
@@ -100,6 +105,11 @@ class AffiliateDashboardController extends Controller
     public function carteirinha()
     {
         return view('pages.affiliate.carteirinha');
+    }
+
+    public function comprovante()
+    {
+        return view('pages.affiliate.comprovante');
     }
 
     public function escola()
@@ -403,7 +413,7 @@ class AffiliateDashboardController extends Controller
             'cpf' => $request->cpf,
             'phone' => $request->phone,
             'role' => 'affiliate',
-            'pct_id' => $pctId,
+            'registration_number' => $pctId,
             'referred_by' => $affiliate->id,
             'registration_document' => $documentPath,
             // Inherit location data from the affiliate
@@ -489,12 +499,12 @@ class AffiliateDashboardController extends Controller
 
         $records = $query->latest()->get();
 
-        $totalIncome = $records->where('type', 'income')->sum('amount');
+        $totalIncome = $records->where('type', 'revenue')->sum('amount');
         $totalExpense = $records->where('type', 'expense')->sum('amount');
         $balance = $totalIncome - $totalExpense;
 
         $schoolInvestment = $records->where('type', 'expense')->where('category', 'education')->sum('amount');
-        $reserveFund = $records->where('type', 'income')->where('category', 'reserve')->sum('amount'); // or static logic for now
+        $reserveFund = $records->where('type', 'revenue')->where('category', 'reserve')->sum('amount'); // or static logic for now
 
         return view('pages.affiliate.financeiro', compact('records', 'totalIncome', 'totalExpense', 'balance', 'schoolInvestment', 'reserveFund'));
     }

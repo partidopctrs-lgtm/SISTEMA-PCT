@@ -3,6 +3,7 @@
 
     <div class="max-w-7xl mx-auto py-8 px-4">
         <div class="mb-12">
+            <p class="text-[10px] font-black text-pct-blue uppercase tracking-[0.3em] mb-2 opacity-60">Painel da Presidência</p>
             <h1 class="text-3xl font-black text-pct-blue tracking-tight mb-2">Governança Nacional</h1>
             <p class="text-gray-500 font-medium italic">Monitoramento em tempo real do ecossistema PCT.</p>
         </div>

@@ -7,12 +7,6 @@ use App\Http\Controllers\Public\RegistrationController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 
-require __DIR__.'/admin.php';
-require __DIR__.'/committee.php';
-require __DIR__.'/candidate.php';
-require __DIR__.'/affiliate.php';
-require __DIR__.'/legal.php';
-
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/manifesto', [HomeController::class, 'manifesto'])->name('manifesto');
 Route::get('/estatuto', [HomeController::class, 'estatuto'])->name('estatuto');
@@ -44,31 +38,39 @@ Route::get('/storage/{path}', function ($path) {
     return Response::file($fullPath);
 })->where('path', '.*');
 
-// Manuais Institucionais
-Route::get('/manuais/juridico', function () {
-    return view('pages.shared.manuals.legal-manual');
-})->name('manual.legal');
+// Manuais Institucionais (Internos)
+Route::middleware(['auth'])->group(function () {
+    Route::get('/manuais/juridico', function () {
+        return view('pages.shared.manuals.legal-manual');
+    })->name('manual.legal');
 
-Route::get('/manuais/diretorios', function () {
-    return view('pages.shared.manuals.directories-manual');
-})->name('manual.directories');
+    Route::get('/manuais/diretorios', function () {
+        return view('pages.shared.manuals.directories-manual');
+    })->name('manual.directories');
 
-Route::get('/manuais/governanca', function () {
-    return view('pages.shared.manuals.governance-manual');
-})->name('manual.governance');
+    Route::get('/manuais/governanca', function () {
+        return view('pages.shared.manuals.governance-manual');
+    })->name('manual.governance');
 
-Route::get('/manuais/expansao', function () {
-    return view('pages.shared.manuals.expansion-manual');
-})->name('manual.expansion');
+    Route::get('/manuais/expansao', function () {
+        return view('pages.shared.manuals.expansion-manual');
+    })->name('manual.expansion');
 
-Route::get('/manuais/mobilizacao', function () {
-    return view('pages.shared.manuals.mobilization-manual');
-})->name('manual.mobilization');
+    Route::get('/manuais/mobilizacao', function () {
+        return view('pages.shared.manuals.mobilization-manual');
+    })->name('manual.mobilization');
 
-Route::get('/manuais/etica', function () {
-    return view('pages.shared.manuals.ethics-manual');
-})->name('manual.ethics');
+    Route::get('/manuais/etica', function () {
+        return view('pages.shared.manuals.ethics-manual');
+    })->name('manual.ethics');
 
-Route::get('/manuais/disciplinar', function () {
-    return view('pages.shared.manuals.disciplinary-code');
-})->name('manual.disciplinary');
+    Route::get('/manuais/disciplinar', function () {
+        return view('pages.shared.manuals.disciplinary-code');
+    })->name('manual.disciplinary');
+
+    // Central de Documentos Compartilhada
+    Route::get('/central-documentos', [\App\Http\Controllers\Shared\DocumentController::class, 'index'])->name('shared.documents');
+
+    // Rastreamento de Áudio
+    Route::post('/track-audio', [\App\Http\Controllers\Shared\AudioTrackingController::class, 'track'])->name('audio.track');
+});

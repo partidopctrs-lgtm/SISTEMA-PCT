@@ -42,7 +42,7 @@
             <!-- Branding Header -->
             <div class="text-center mb-10">
                 <a href="/" class="inline-flex items-center justify-center p-4 bg-white rounded-3xl shadow-sm mb-8 hover:scale-105 transition-transform duration-300">
-                    <img class="h-16 w-auto" src="{{ asset('logo.png') }}" alt="PCT Logo">
+                    <img class="h-16 w-auto object-contain" style="max-height: 80px;" src="{{ asset('logo.png') }}" alt="PCT Logo">
                 </a>
                 <h2 class="text-3xl font-black text-pct-blue tracking-tight leading-tight mb-3">
                     {{ $title }}
@@ -67,7 +67,7 @@
                             <label for="email" class="block text-[10px] font-black text-pct-blue uppercase tracking-widest mb-2 ml-1 opacity-70 group-focus-within:opacity-100 transition-opacity">E-mail de Acesso</label>
                             <input id="email" name="email" type="email" value="{{ old('email') }}" required auto-complete="email"
                                 class="appearance-none block w-full px-6 py-4 bg-white/40 border-2 border-transparent rounded-[1.25rem] shadow-sm placeholder-gray-300 focus:outline-none focus:ring-4 focus:ring-pct-green/10 focus:border-pct-green transition-all sm:text-sm font-medium" 
-                                placeholder="colaborador@pct.org.br">
+                                placeholder="colaborador@pct.social.br">
                         </div>
                         <div class="group">
                             <div class="flex justify-between items-center mb-2 ml-1">
