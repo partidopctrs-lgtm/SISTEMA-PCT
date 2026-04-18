@@ -173,29 +173,36 @@
         }
 
         @media print {
-            body{background:#fff;padding:0;}
-            .no-print{display:none !important;}
-            .stage{background:#fff; display: block !important; max-width: none !important;}
+            body { background: #fff !important; padding: 0 !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            .no-print { display: none !important; }
+            .stage { background: #fff !important; display: block !important; max-width: none !important; padding: 0 !important; }
             .card-perspective {
-                perspective: none;
-                width: 340px;
-                height: auto;
-                margin: 0;
+                perspective: none !important;
+                width: 340px !important;
+                height: auto !important;
+                margin: 20px auto !important;
             }
             .card-inner {
                 transform: none !important;
-                transform-style: flat;
-                height: auto;
+                transform-style: flat !important;
+                height: auto !important;
             }
-            .card-front, .card-back {
+            .card {
                 position: relative !important;
                 display: block !important;
                 transform: none !important;
                 backface-visibility: visible !important;
-                margin-bottom: 30px !important;
-                page-break-inside: avoid;
+                margin-bottom: 50px !important;
+                page-break-inside: avoid !important;
+                box-shadow: none !important;
+                border: 0.5px solid #eee !important;
             }
-            .label-section { display: block !important; margin-bottom: 10px; }
+            .card-back {
+                transform: none !important;
+                left: 0 !important;
+                top: 0 !important;
+            }
+            .label-section { display: block !important; margin-bottom: 10px; color: #000 !important; font-weight: bold !important; border-bottom: 1px solid #eee !important; }
         }
     </style>
 </head>

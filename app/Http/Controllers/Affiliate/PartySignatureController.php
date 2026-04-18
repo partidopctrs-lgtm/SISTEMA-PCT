@@ -15,11 +15,12 @@ class PartySignatureController extends Controller
         $signatures = PartySignature::where('user_id', $user->id)->get();
         $goal = 500000;
         
-        // Contabiliza apenas as assinaturas reais validadas/pendentes na tabela party_signatures
+        // Contabiliza APENAS as assinaturas oficiais na tabela party_signatures
         $current = PartySignature::count();
+        $remaining = $goal - $current;
         $progress = ($current / $goal) * 100;
         
-        return view('pages.affiliate.signatures.create', compact('signatures', 'goal', 'current', 'progress'));
+        return view('pages.affiliate.signatures.create', compact('signatures', 'goal', 'current', 'progress', 'remaining'));
     }
 
     public function store(Request $request)
@@ -33,7 +34,7 @@ class PartySignatureController extends Controller
 
         $request->validate([
             'full_name' => 'required|string|max:255',
-            'cpf' => 'required|string', // A unique check for PartySignature will happen below if we want, or just let them update
+            'cpf' => 'required|string',
             'voter_title' => 'required|string',
             'voter_zone' => 'required|string',
             'voter_section' => 'required|string',
@@ -46,19 +47,9 @@ class PartySignatureController extends Controller
             return redirect()->back()->with('error', 'Este CPF já foi utilizado em outra assinatura.');
         }
 
-        // Atualiza os dados do usuário com o que ele preencheu, caso estejam vazios ou tenham mudado
-        $user->update([
-            'name' => $request->full_name,
-            'cpf' => $request->cpf,
-            'voter_id' => $request->voter_title,
-            'voter_zone' => $request->voter_zone,
-            'voter_section' => $request->voter_section,
-            'city' => $request->city,
-            'state' => strtoupper($request->state),
-        ]);
-
         $protocol = strtoupper(Str::random(10));
 
+        // Salva EXCLUSIVAMENTE na tabela de apoios, sem alterar o cadastro principal do usuário
         PartySignature::create([
             'user_id' => $user->id,
             'full_name' => $request->full_name,

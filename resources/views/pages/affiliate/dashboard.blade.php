@@ -82,8 +82,12 @@
             <div class="space-y-4">
                 @forelse($myReferrals as $referral)
                 <div class="flex items-center gap-4 p-3 bg-slate-50 rounded-2xl border border-slate-100">
-                    <div class="h-8 w-8 bg-white rounded-lg flex items-center justify-center text-[10px] font-black text-pct-blue">
-                        {{ substr($referral->name, 0, 1) }}
+                    <div class="h-8 w-8 bg-white rounded-lg flex items-center justify-center text-[10px] font-black text-pct-blue overflow-hidden">
+                        @if($referral->photo)
+                            <img src="{{ asset('storage/' . $referral->photo) }}" class="w-full h-full object-cover">
+                        @else
+                            {{ substr($referral->name, 0, 1) }}
+                        @endif
                     </div>
                     <div>
                         <p class="text-[10px] font-black text-pct-blue uppercase">{{ $referral->name }}</p>

@@ -61,7 +61,13 @@ class AffiliateDashboardController extends Controller
             'state' => 'nullable|string|max:2',
             'zip_code' => 'nullable|string|max:15',
             'committee_city' => 'nullable|string|max:100',
+            'email' => 'required|email|unique:users,email,' . auth()->id(),
         ]);
+
+        // Se não for admin, não permite mudar o comitê via perfil para evitar sobrescrever com null
+        if (!$user->hasRole('admin')) {
+            unset($validated['committee_city']);
+        }
 
         $user->update($validated);
 
@@ -86,11 +92,11 @@ class AffiliateDashboardController extends Controller
         $image = str_replace(' ', '+', $image);
         $imageName = 'avatars/' . Str::random(10) . '_' . time() . '.png';
 
-        if (!Storage::disk('public')->exists('avatars')) {
-            Storage::disk('public')->makeDirectory('avatars');
+        if (!file_exists(public_path('storage/avatars'))) {
+            mkdir(public_path('storage/avatars'), 0755, true);
         }
 
-        Storage::disk('public')->put($imageName, base64_decode($image));
+        file_put_contents(public_path('storage/' . $imageName), base64_decode($image));
 
         $user->update([
             'photo' => $imageName
@@ -464,7 +470,7 @@ class AffiliateDashboardController extends Controller
 
     public function membershipForm()
     {
-        return view('pages.shared.ficha-filiacao');
+        return response()->file(public_path('CARTEIRA D EMENBRO/Ficha_Filiacao_PCT_Oficial.pdf'));
     }
 
     public function modelosOficios()

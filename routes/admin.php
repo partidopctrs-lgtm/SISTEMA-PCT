@@ -19,8 +19,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     // 2. Demandas da População
     Route::get('/demandas', [AdminDashboardController::class, 'publicDemands'])->name('admin.demands');
     
-    // 3. Gestão de Diretórios
     Route::get('/diretorios', [AdminDashboardController::class, 'directories'])->name('admin.directories');
+    Route::post('/diretorios/store', [AdminDashboardController::class, 'storeDirectory'])->name('admin.directories.store');
+    Route::post('/diretorios/{directory}/update', [AdminDashboardController::class, 'updateDirectory'])->name('admin.directories.update');
+    Route::get('/diretorios/{directory}/export', [AdminDashboardController::class, 'exportDirectory'])->name('admin.directories.export');
     
     // 4. Governança Interna
     Route::get('/governanca', [AdminDashboardController::class, 'governance'])->name('admin.governance');
@@ -30,6 +32,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     
     // 6. Inteligência e Controle
     Route::get('/inteligencia', [AdminDashboardController::class, 'intelligence'])->name('admin.intelligence');
+    Route::get('/inteligencia/relatorio', [AdminDashboardController::class, 'intelligenceReport'])->name('admin.reports.intelligence');
     
     // 7. Jurídico Institucional
     Route::get('/juridico', [AdminDashboardController::class, 'legal'])->name('admin.legal');

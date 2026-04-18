@@ -47,7 +47,7 @@
                                 </div>
                                 <div>
                                     <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-2">Data de Nascimento</label>
-                                    <input type="date" name="birth_date" value="{{ auth()->user()->birth_date }}" class="input-premium w-full">
+                                    <input type="date" name="birth_date" value="{{ auth()->user()->birth_date?->format('Y-m-d') }}" class="input-premium w-full">
                                 </div>
                                 <div>
                                     <label class="block text-xs font-black text-gray-500 uppercase tracking-widest mb-2">Estado Civil</label>

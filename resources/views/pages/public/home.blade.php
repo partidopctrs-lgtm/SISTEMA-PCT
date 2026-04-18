@@ -191,6 +191,90 @@
         </div>
     </section>
 
+    <!-- Nossa Força Nacional (Transparência Real-time) -->
+    <section class="py-32 bg-slate-900 text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20">
+            <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-pct-blue rounded-full blur-[150px] -translate-y-1/2 translate-x-1/2"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20">
+                <span class="text-pct-green font-black tracking-[0.4em] uppercase mb-4 block">Nossa Força Nacional</span>
+                <h2 class="text-5xl md:text-7xl font-black mb-6 tracking-tighter">Transparência em Tempo Real</h2>
+                <p class="text-blue-100/60 max-w-2xl mx-auto font-medium">Acompanhe a adesão oficial ao movimento em cada canto do Brasil. Dados atualizados instantaneamente conforme novos apoios são registrados.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                <!-- Meta Global -->
+                <div class="lg:col-span-1 flex flex-col justify-center bg-white/5 p-12 rounded-[4rem] border border-white/10 backdrop-blur-xl">
+                    <p class="text-[10px] font-black text-blue-300 uppercase tracking-widest mb-4">Total de Apoios Oficiais</p>
+                    <div class="text-7xl font-black text-white mb-2 counter-value">{{ number_format($stats['total_signatures'], 0, ',', '.') }}</div>
+                    <p class="text-sm font-medium text-blue-100/40 mb-10 italic">Rumo ao registro oficial do Partido.</p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between text-xs font-black uppercase tracking-widest">
+                            <span class="text-blue-300">Meta TSE</span>
+                            <span class="text-pct-green">{{ number_format($stats['goal'], 0, ',', '.') }}</span>
+                        </div>
+                        <div class="h-4 bg-white/10 rounded-full overflow-hidden p-1">
+                            <div class="h-full bg-pct-green rounded-full shadow-[0_0_20px_rgba(34,139,47,0.5)] transition-all duration-1000" style="width: {{ max(1, $stats['progress']) }}%"></div>
+                        </div>
+                        <p class="text-[10px] font-bold text-blue-100/30 text-center uppercase tracking-[0.2em]">Sua assinatura faz este número crescer!</p>
+                    </div>
+
+                    <a href="{{ route('register.index') }}" class="mt-12 w-full py-5 bg-pct-green text-white text-center rounded-2xl font-black uppercase tracking-widest hover:scale-[1.02] transition-all shadow-xl shadow-pct-green/20">
+                        Quero Apoiar Agora
+                    </a>
+                </div>
+
+                <!-- Estados e Cidades -->
+                <div class="lg:col-span-2 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Estados -->
+                    <div class="bg-white/5 p-10 rounded-[4rem] border border-white/10">
+                        <h4 class="text-lg font-black text-blue-300 uppercase tracking-widest mb-8 flex items-center gap-3">
+                            <span class="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center text-blue-400">#</span>
+                            Ranking por Estado
+                        </h4>
+                        <div class="space-y-4">
+                            @forelse($stats['by_state'] as $state)
+                            <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors">
+                                <div class="flex items-center gap-4">
+                                    <span class="w-8 font-black text-blue-300/40">{{ $loop->iteration }}º</span>
+                                    <span class="text-sm font-black uppercase tracking-widest">{{ $state->state }}</span>
+                                </div>
+                                <span class="px-4 py-1 bg-pct-blue/30 text-blue-300 rounded-full text-xs font-black">{{ number_format($state->total, 0, ',', '.') }}</span>
+                            </div>
+                            @empty
+                            <p class="text-sm text-white/20 italic font-medium">Aguardando primeiros apoios estaduais...</p>
+                            @endforelse
+                        </div>
+                    </div>
+
+                    <!-- Cidades -->
+                    <div class="bg-white/5 p-10 rounded-[4rem] border border-white/10">
+                        <h4 class="text-lg font-black text-pct-green uppercase tracking-widest mb-8 flex items-center gap-3">
+                            <span class="w-8 h-8 bg-pct-green/20 rounded-lg flex items-center justify-center text-pct-green">📍</span>
+                            Cidades em Destaque
+                        </h4>
+                        <div class="space-y-4">
+                            @forelse($stats['by_city'] as $city)
+                            <div class="flex items-center justify-between p-4 bg-white/5 rounded-2xl border border-white/5 hover:bg-white/10 transition-colors">
+                                <div>
+                                    <p class="text-xs font-black uppercase tracking-tight">{{ $city->city }}</p>
+                                    <p class="text-[9px] font-bold text-white/30 uppercase">{{ $city->state }}</p>
+                                </div>
+                                <span class="text-sm font-black text-pct-green">{{ number_format($city->total, 0, ',', '.') }}</span>
+                            </div>
+                            @empty
+                            <p class="text-sm text-white/20 italic font-medium">Aguardando mobilização municipal...</p>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Hino do Movimento -->
     <section class="py-32 bg-slate-50 relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-pct-blue via-pct-green to-pct-blue"></div>

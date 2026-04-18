@@ -113,7 +113,8 @@
                 <div class="bg-gradient-to-br from-pct-blue to-blue-900 rounded-[2rem] p-8 text-white shadow-xl shadow-blue-900/20">
                     <h3 class="text-[10px] font-black text-blue-300 uppercase tracking-[0.2em] mb-4">Meta Nacional</h3>
                     <p class="text-4xl font-black mb-1">{{ number_format($current, 0, ',', '.') }}</p>
-                    <p class="text-xs font-medium text-blue-200 mb-6">de {{ number_format($goal, 0, ',', '.') }} assinaturas</p>
+                    <p class="text-xs font-medium text-blue-200 mb-1">assinaturas oficiais coletadas</p>
+                    <p class="text-[10px] font-black text-pct-green uppercase tracking-widest mb-6">Faltam {{ number_format($remaining, 0, ',', '.') }} apoios formais</p>
                     
                     <div class="h-2 bg-blue-950/50 rounded-full overflow-hidden mb-2">
                         <div class="h-full bg-pct-green rounded-full" style="width: {{ min(100, $progress) }}%"></div>

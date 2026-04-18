@@ -58,12 +58,17 @@ class User extends Authenticatable
         'city',
         'state',
         'zip_code',
-        'zip_code',
         'committee_city',
         'committee_id',
         'referred_by',
         'registration_document',
+        'position_id',
     ];
+
+    public function position()
+    {
+        return $this->belongsTo(InternalPosition::class, 'position_id');
+    }
 
     public function committee()
     {
@@ -90,6 +95,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'birth_date' => 'date',
         ];
     }
 

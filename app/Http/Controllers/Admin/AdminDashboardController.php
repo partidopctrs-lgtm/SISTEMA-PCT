@@ -40,14 +40,20 @@ class AdminDashboardController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'role' => 'required|string',
+            'cpf' => 'nullable|string|max:20|unique:users',
+            'phone' => 'nullable|string|max:20',
+            'birth_date' => 'nullable|date',
         ]);
 
         $user = \App\Models\User::create([
             'name' => $request->name,
             'email' => $request->email,
             'role' => $request->role,
+            'cpf' => $request->cpf,
+            'phone' => $request->phone,
+            'birth_date' => $request->birth_date,
             'password' => \Illuminate\Support\Facades\Hash::make('PCT@123456'), // Senha padrão
-            'registration_number' => 'PCT' . strtoupper(substr(uniqid(), -5)), // Gerar um número mock
+            'registration_number' => 'PCT-' . str_pad(\App\Models\User::count() + 1, 5, '0', STR_PAD_LEFT),
         ]);
 
         return redirect()->route('admin.dashboard')->with('success', 'Membro cadastrado com sucesso! A senha padrão é PCT@123456');
@@ -94,11 +100,54 @@ class AdminDashboardController extends Controller
     // --- 3. Gestão de Diretórios ---
     public function directories()
     {
+        // Limpeza solicitada
+        \App\Models\Directory::where('name', 'like', '%Porto Alegre%')->delete();
+        
         $committees = \App\Models\Directory::withCount('memberships')->paginate(15);
         return view('pages.admin.directories', compact('committees'));
     }
 
-    // --- 4. Governança Interna ---
+    public function storeDirectory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'state' => 'required|string|max:2',
+            'directory_type' => 'required|string',
+        ]);
+
+        \App\Models\Directory::create([
+            'name' => $request->name,
+            'city' => $request->city,
+            'state' => $request->state,
+            'directory_type' => $request->directory_type,
+            'status' => 'pending', // Novos diretórios começam como pendentes
+        ]);
+
+        return redirect()->back()->with('success', 'Novo diretório registrado com sucesso!');
+    }
+
+    public function updateDirectory(Request $request, \App\Models\Directory $directory)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'state' => 'required|string|max:2',
+            'directory_type' => 'required|string',
+            'status' => 'required|string',
+        ]);
+
+        $directory->update($request->all());
+
+        return redirect()->back()->with('success', 'Diretório atualizado com sucesso!');
+    }
+
+    public function exportDirectory(\App\Models\Directory $directory)
+    {
+        $directory->loadCount('memberships');
+        return view('pages.admin.reports.directory-sheet', compact('directory'));
+    }
+
     public function governance()
     {
         $positions = \App\Models\InternalPosition::orderBy('hierarchy_weight', 'desc')->get();
@@ -117,9 +166,17 @@ class AdminDashboardController extends Controller
     // --- 6. Inteligência e Controle ---
     public function intelligence()
     {
-        $totalUsers = \App\Models\User::count();
-        $newUsersThisMonth = \App\Models\User::whereMonth('created_at', now()->month)->count();
-        $newUsersLastMonth = \App\Models\User::whereMonth('created_at', now()->subMonth()->month)->count();
+        $totalUsers = \App\Models\User::where(function($q) {
+            $q->whereIn('status', ['active', 'ativo'])->orWhereNull('status');
+        })->count();
+
+        $newUsersThisMonth = \App\Models\User::where(function($q) {
+            $q->whereIn('status', ['active', 'ativo'])->orWhereNull('status');
+        })->whereMonth('created_at', now()->month)->count();
+
+        $newUsersLastMonth = \App\Models\User::where(function($q) {
+            $q->whereIn('status', ['active', 'ativo'])->orWhereNull('status');
+        })->whereMonth('created_at', now()->subMonth()->month)->count();
         
         $growth = 0;
         if ($newUsersLastMonth > 0) {
@@ -128,8 +185,10 @@ class AdminDashboardController extends Controller
             $growth = 100;
         }
 
-        $efficiency = \App\Models\Goal::avg(\DB::raw('(current_members / target_members) * 10')) ?? 0;
-        $totalPoints = \App\Models\Point::sum('amount');
+        $efficiency = \App\Models\Goal::where('target_members', '>', 0)
+            ->avg(\Illuminate\Support\Facades\DB::raw('(current_members / target_members) * 10')) ?? 0;
+            
+        $totalPoints = \App\Models\Point::sum('amount') ?? 0;
         
         $topDirectories = \App\Models\Directory::withCount('memberships')
             ->orderBy('memberships_count', 'desc')
@@ -137,6 +196,44 @@ class AdminDashboardController extends Controller
             ->get();
 
         return view('pages.admin.intelligence', compact('totalUsers', 'newUsersThisMonth', 'growth', 'topDirectories', 'efficiency', 'totalPoints'));
+    }
+
+    public function intelligenceReport()
+    {
+        $user = auth()->user()->load('position');
+        
+        // Contagem de membros: considera 'active', 'ativo' ou nulo
+        $totalUsers = \App\Models\User::where(function($q) {
+            $q->whereIn('status', ['active', 'ativo'])->orWhereNull('status');
+        })->count();
+
+        // Busca a lista de nomes para conferência (ajuda a identificar se são testes)
+        $memberList = \App\Models\User::where(function($q) {
+                $q->whereIn('status', ['active', 'ativo'])->orWhereNull('status');
+            })
+            ->select('name', 'city', 'state')
+            ->get();
+
+        $newUsersThisMonth = \App\Models\User::where(function($q) {
+            $q->whereIn('status', ['active', 'ativo'])->orWhereNull('status');
+        })->whereMonth('created_at', now()->month)->count();
+
+        $efficiency = \App\Models\Goal::where('target_members', '>', 0)
+            ->avg(\Illuminate\Support\Facades\DB::raw('(current_members / target_members) * 10')) ?? 0;
+
+        $totalPoints = \App\Models\Point::sum('amount') ?? 0;
+        
+        // Todos os diretórios
+        $allDirectories = \App\Models\Directory::withCount('memberships')
+            ->orderBy('memberships_count', 'desc')
+            ->get();
+
+        $statsByState = \App\Models\User::select('state', \Illuminate\Support\Facades\DB::raw('count(*) as count'))
+            ->groupBy('state')
+            ->orderBy('count', 'desc')
+            ->get();
+
+        return view('pages.admin.reports.intelligence', compact('user', 'totalUsers', 'newUsersThisMonth', 'allDirectories', 'efficiency', 'totalPoints', 'statsByState', 'memberList'));
     }
 
     // --- 7. Jurídico Institucional ---

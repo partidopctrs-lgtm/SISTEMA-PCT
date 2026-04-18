@@ -43,20 +43,38 @@
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
         <!-- Mapa de Calor (Simulado) -->
-        <div class="lg:col-span-2 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-8 overflow-hidden relative">
+        <div class="lg:col-span-2 bg-white rounded-[2.5rem] border border-slate-100 shadow-sm p-8 overflow-hidden relative" x-data="{ zoomed: true }">
             <div class="flex items-center justify-between mb-8">
-                <h2 class="text-lg font-black text-pct-blue uppercase tracking-widest">Distribuição Territorial</h2>
-                <div class="flex gap-2">
-                    <span class="px-3 py-1 bg-slate-100 text-pct-blue text-[9px] font-black rounded-full uppercase">Brasil</span>
-                    <span class="px-3 py-1 bg-slate-50 text-gray-400 text-[9px] font-black rounded-full uppercase">Regiões</span>
+                <div class="flex flex-col">
+                    <h2 class="text-lg font-black text-pct-blue uppercase tracking-widest">Distribuição Territorial Detalhada</h2>
+                    <p class="text-[10px] text-gray-400 font-bold uppercase tracking-tight">Visão Geral e Regional (Zoom Ativo)</p>
                 </div>
             </div>
             
-            <div class="h-96 bg-slate-50 rounded-3xl flex items-center justify-center relative overflow-hidden group">
-                <img src="https://img.freepik.com/free-vector/map-brazil-with-states_23-2148286944.jpg?t=st=1713444534~exp=1713448134~hmac=807e155465e9c9f807f8a7a8d5f66c8d7c9f8e7f6e5d4c3b2a1" class="opacity-10 grayscale group-hover:opacity-20 transition-opacity">
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <p class="text-gray-400 font-black text-xs uppercase tracking-[0.3em]">Mapeamento Inteligente Ativo</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Mapa Brasil Mudo -->
+                <div class="bg-slate-50 rounded-[2rem] flex items-center justify-center relative overflow-hidden transition-all duration-700 h-[500px] border border-slate-100">
+                    <img src="https://mundomapa.com/wp-content/uploads/mapa-de-brasil-mudo-1536x1486.jpg" 
+                         class="transition-all duration-700 object-contain w-full h-full scale-125 hover:scale-150 cursor-crosshair">
+                    <div class="absolute top-4 left-4 bg-pct-blue/10 backdrop-blur px-3 py-1 rounded-full">
+                        <span class="text-[9px] font-black text-pct-blue uppercase">Visão Base</span>
+                    </div>
                 </div>
+
+                <!-- Mapa Brasil com Nomes -->
+                <div class="bg-slate-50 rounded-[2rem] flex items-center justify-center relative overflow-hidden transition-all duration-700 h-[500px] border border-slate-100">
+                    <img src="https://mundomapa.com/wp-content/uploads/Mapa-de-brasil-con-nombres-1536x1486.jpg" 
+                         class="transition-all duration-700 object-contain w-full h-full scale-125 hover:scale-150 cursor-crosshair">
+                    <div class="absolute top-4 left-4 bg-pct-green/10 backdrop-blur px-3 py-1 rounded-full">
+                        <span class="text-[9px] font-black text-pct-green uppercase">Identificação Regional</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 flex items-center gap-2 text-[10px] text-gray-400 font-bold uppercase justify-center">
+                <span class="w-2 h-2 bg-pct-green rounded-full animate-ping"></span>
+                Sincronização Territorial Ativa em Tempo Real
+            </div>
                 
                 <!-- Pontos de Calor -->
                 <div class="absolute top-1/4 left-1/3 h-4 w-4 bg-pct-green rounded-full animate-ping opacity-75"></div>
@@ -82,9 +100,24 @@
                 </div>
                 @endforeach
             </div>
-            <button class="w-full py-4 mt-8 bg-slate-100 text-pct-blue text-[10px] font-black uppercase tracking-widest rounded-2xl hover:bg-slate-200 transition-all">
-                Relatório Completo
-            </button>
+            <a href="{{ route('admin.reports.intelligence') }}" target="_blank" class="w-full py-4 mt-8 bg-pct-blue text-white text-[10px] font-black uppercase tracking-widest rounded-2xl hover:bg-blue-900 transition-all shadow-lg shadow-blue-900/20 flex items-center justify-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+                Gerar Relatório Executivo
+            </a>
         </div>
     </div>
+
+    <style>
+        @media print {
+            .no-print, nav, aside, button { display: none !important; }
+            main { margin: 0 !important; padding: 0 !important; }
+            .lg\:col-span-2, .lg\:col-span-1 { width: 100% !important; display: block !important; margin-bottom: 2rem !important; }
+            .grid { display: block !important; }
+            .bg-white { border: none !important; box-shadow: none !important; }
+            h1 { font-size: 28px !important; text-align: center; margin-bottom: 2rem !important; }
+            .card-premium, .bg-white { page-break-inside: avoid; border: 1px solid #eee !important; margin-bottom: 1rem; }
+            .h-96, .h-[500px] { height: auto !important; max-height: 400px; }
+            img { max-width: 100%; height: auto !important; }
+        }
+    </style>
 </x-dashboard-layout>

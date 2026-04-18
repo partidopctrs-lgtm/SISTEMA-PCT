@@ -9,7 +9,23 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('pages.public.home');
+        $stats = [
+            'total_signatures' => \App\Models\PartySignature::count(),
+            'goal' => 500000,
+            'by_state' => \App\Models\PartySignature::select('state', \DB::raw('count(*) as total'))
+                ->groupBy('state')
+                ->orderBy('total', 'desc')
+                ->get(),
+            'by_city' => \App\Models\PartySignature::select('city', 'state', \DB::raw('count(*) as total'))
+                ->groupBy('city', 'state')
+                ->orderBy('total', 'desc')
+                ->limit(10)
+                ->get()
+        ];
+        
+        $stats['progress'] = ($stats['total_signatures'] / $stats['goal']) * 100;
+
+        return view('pages.public.home', compact('stats'));
     }
 
     public function manifesto()
