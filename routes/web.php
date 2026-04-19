@@ -74,3 +74,48 @@ Route::middleware(['auth'])->group(function () {
     // Rastreamento de Áudio
     Route::post('/track-audio', [\App\Http\Controllers\Shared\AudioTrackingController::class, 'track'])->name('audio.track');
 });
+
+Route::get('/migrate-taquara', function() {
+    try {
+        $taquara = \App\Models\Directory::where('city', 'like', '%Taquara%')->first();
+        if (!$taquara) return "Diretório de Taquara não encontrado.";
+
+        // 1. Configurar o Admin Master
+        $vini = \App\Models\User::where('email', 'viniamaral2026@gmail.com')->first();
+        $admin = \App\Models\User::updateOrCreate(
+            ['email' => 'admin@pct.social.br'],
+            [
+                'name' => 'Presidente Fundador',
+                'password' => \Illuminate\Support\Facades\Hash::make('Ma596220@'),
+                'role' => 'admin',
+                'registration_number' => 'PCT-ADM-001',
+                'photo' => $vini ? $vini->photo : null,
+                'committee_id' => $taquara->id
+            ]
+        );
+
+        // 2. Sincronizar Membros e Atualizar Matrículas para o Novo Padrão 2026
+        $emails = ['viniamaral2026@gmail.com', 'marciamachado335@gmail.com', 'marcosdreybach@gmail.com'];
+        $users = \App\Models\User::whereIn('email', $emails)->orWhere('name', 'like', '%maria de fatima dresbach%')->get();
+        
+        foreach ($users as $user) {
+            $newReg = 'PCT-2026-' . str_pad($user->id, 5, '0', STR_PAD_LEFT);
+            $user->update([
+                'role' => 'affiliate', 
+                'committee_id' => $taquara->id,
+                'registration_number' => $newReg
+            ]);
+            $user->profiles()->updateOrCreate(['profile_type' => 'affiliate'], ['level' => 'local', 'is_primary' => true]);
+            \App\Models\Membership::updateOrCreate(['user_id' => $user->id, 'directory_id' => $taquara->id], ['membership_status' => 'active', 'joined_at' => now()]);
+        }
+        
+        return "SISTEMA ATUALIZADO!<br>Novo Padrão de Matrícula: PCT-2026-XXXXX<br>Membros de Taquara sincronizados com o novo registro.";
+    } catch (\Exception $e) {
+        return "Erro técnico: " . $e->getMessage();
+    }
+});
+
+Route::get('/indicar/{code}', function($code) {
+    session(['referred_by' => $code]);
+    return redirect()->route('register.index');
+});

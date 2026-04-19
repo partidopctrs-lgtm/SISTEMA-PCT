@@ -9,6 +9,9 @@ Route::post('/committee/login', [DepartmentLoginController::class, 'login']);
 Route::middleware(['auth', 'role:committee'])->prefix('committee')->group(function () {
     Route::get('/dashboard', [CommitteeDashboardController::class, 'index'])->name('committee.dashboard');
     Route::get('/members', [CommitteeDashboardController::class, 'members'])->name('committee.members');
+    Route::post('/members/store', [CommitteeDashboardController::class, 'storeMember'])->name('committee.members.store');
+    Route::get('/member/{user}/pdf', [\App\Http\Controllers\Admin\SignaturePdfController::class, 'exportMemberPdf'])->name('committee.member.pdf');
+    Route::get('/members/impersonate/{id}', [CommitteeDashboardController::class, 'impersonate'])->name('committee.members.impersonate');
     
     // Módulo de Documentos
     Route::get('/documents', [CommitteeDashboardController::class, 'documents'])->name('committee.documents');

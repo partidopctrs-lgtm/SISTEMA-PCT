@@ -24,12 +24,12 @@
         
         <div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 p-8 flex flex-col justify-center">
             <h3 class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">Ações em Lote</h3>
-            <button class="w-full py-3 bg-slate-100 text-pct-blue font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-slate-200 transition-colors mb-3">
+            <a href="{{ route('admin.party.export-pdf') }}" class="w-full py-3 bg-slate-100 text-pct-blue font-black text-center text-[10px] uppercase tracking-widest rounded-xl hover:bg-slate-200 transition-colors mb-3">
                 Gerar PDF (Todas)
-            </button>
-            <button class="w-full py-3 bg-emerald-50 text-emerald-600 font-black text-[10px] uppercase tracking-widest rounded-xl hover:bg-emerald-100 transition-colors">
+            </a>
+            <a href="{{ route('admin.party.export-csv') }}" class="w-full py-3 bg-emerald-50 text-emerald-600 font-black text-center text-[10px] uppercase tracking-widest rounded-xl hover:bg-emerald-100 transition-colors">
                 Exportar CSV para TSE
-            </button>
+            </a>
         </div>
     </div>
 
@@ -66,7 +66,16 @@
                             <span class="px-3 py-1 bg-amber-100 text-amber-700 text-[9px] font-black rounded-full uppercase border border-amber-200">{{ $sig->status }}</span>
                         </td>
                         <td class="px-8 py-4">
-                            <button class="text-[10px] font-black text-blue-600 hover:text-blue-800 uppercase tracking-widest">Ver PDF</button>
+                            <div class="flex items-center gap-3">
+                                <a href="{{ route('admin.party.pdf', $sig->id) }}" class="text-[10px] font-black text-blue-600 hover:text-blue-800 uppercase tracking-widest">Ver Ficha</a>
+                                
+                                @if($sig->status === 'pendente')
+                                <form action="{{ route('admin.party.approve', $sig->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="text-[10px] font-black text-pct-green hover:text-emerald-700 uppercase tracking-widest bg-emerald-50 px-3 py-1 rounded-lg border border-emerald-100">Aceitar Apoio</button>
+                                </form>
+                                @endif
+                            </div>
                         </td>
                     </tr>
                     @empty

@@ -8,6 +8,31 @@
                 <p class="text-gray-500 font-medium">Auditoria, filtragem e gestão de todos os afiliados do movimento.</p>
             </div>
             
+            @if(session('success'))
+            <div class="flex-1 max-w-md bg-emerald-50 border border-emerald-100 p-4 rounded-2xl flex items-center gap-3 animate-bounce">
+                <div class="bg-emerald-500 text-white p-1 rounded-full">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                </div>
+                <p class="text-emerald-700 text-xs font-black uppercase tracking-widest">{{ session('success') }}</p>
+            </div>
+            @endif
+
+            @if($errors->any())
+            <div class="flex-1 max-w-md bg-red-50 border border-red-100 p-4 rounded-2xl">
+                <div class="flex items-center gap-3 mb-2">
+                    <div class="bg-red-500 text-white p-1 rounded-full">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </div>
+                    <p class="text-red-700 text-xs font-black uppercase tracking-widest">Erro no Cadastro</p>
+                </div>
+                <ul class="text-[10px] text-red-600 font-bold list-disc list-inside">
+                    @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            
             <div class="flex gap-4">
                 <button @click="showCreateMember = true" class="px-6 py-3 bg-pct-blue text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-blue-900 transition-all shadow-lg shadow-blue-900/20 flex items-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path></svg>

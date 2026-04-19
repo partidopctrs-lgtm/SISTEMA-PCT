@@ -85,6 +85,48 @@ class CommitteeDashboardController extends Controller
         return view('pages.committee.members.index', compact('members'));
     }
 
+    public function storeMember(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'cpf' => 'nullable|string|max:20|unique:users',
+            'phone' => 'nullable|string|max:20',
+            'birth_date' => 'nullable|date',
+            'role' => 'required|string',
+        ]);
+
+        $directoryId = $this->getDirectoryId();
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'cpf' => $request->cpf,
+            'phone' => $request->phone,
+            'birth_date' => $request->birth_date,
+            'password' => \Illuminate\Support\Facades\Hash::make('PCT@2026'), // Senha padrão atualizada
+            'role' => 'affiliate', // Mudado para affiliate para dar acesso à área
+            'committee_id' => $directoryId,
+            'registration_number' => 'PCT-2026-' . str_pad(User::max('id') + 1, 5, '0', STR_PAD_LEFT),
+        ]);
+
+        // Criar o Perfil de Afiliado para garantir acesso à área
+        $user->profiles()->create([
+            'profile_type' => 'affiliate',
+            'level' => 'local',
+            'is_primary' => true
+        ]);
+
+        Membership::create([
+            'user_id' => $user->id,
+            'directory_id' => $directoryId,
+            'membership_status' => 'active',
+            'joined_at' => now(),
+        ]);
+
+        return redirect()->back()->with('success', 'Membro cadastrado com sucesso e vinculado ao seu diretório!');
+    }
+
     // Módulo de Documentos
     public function documents()
     {
@@ -244,4 +286,21 @@ class CommitteeDashboardController extends Controller
 
     public function modelosOficios() { return view('pages.shared.manuals.governance-manual'); }
     public function fichaFiliacao() { return view('pages.shared.ficha-filiacao'); }
+
+    public function impersonate($id)
+    {
+        $user = User::findOrFail($id);
+        
+        // Verificar se o usuário pertence ao diretório do gestor atual
+        if ($user->committee_id !== $this->getDirectoryId() && !auth()->user()->hasRole('admin')) {
+            abort(403);
+        }
+
+        // Salvar o ID do gestor na sessão para permitir "voltar" depois se quisermos implementar
+        session(['impersonator_id' => auth()->id()]);
+        
+        auth()->login($user);
+        
+        return redirect()->route('affiliate.dashboard');
+    }
 }

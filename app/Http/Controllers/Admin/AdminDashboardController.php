@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class AdminDashboardController extends Controller
 {
@@ -56,7 +57,7 @@ class AdminDashboardController extends Controller
             'registration_number' => 'PCT-' . str_pad(\App\Models\User::count() + 1, 5, '0', STR_PAD_LEFT),
         ]);
 
-        return redirect()->route('admin.dashboard')->with('success', 'Membro cadastrado com sucesso! A senha padrão é PCT@123456');
+        return redirect()->route('admin.members')->with('success', 'Membro cadastrado com sucesso! A senha padrão é PCT@123456');
     }
 
     // Management Modules
@@ -87,6 +88,78 @@ class AdminDashboardController extends Controller
         $totalSignatures = \App\Models\PartySignature::count();
         $goal = 500000;
         return view('pages.admin.party', compact('signatures', 'totalSignatures', 'goal'));
+    }
+
+    public function exportSignaturesCsv()
+    {
+        $fileName = 'apoios_partido_pct_' . date('Y-m-d') . '.csv';
+        $signatures = \App\Models\PartySignature::all();
+
+        $headers = array(
+            "Content-type"        => "text/csv; charset=UTF-8",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        );
+
+        $columns = ['Protocolo', 'Nome Completo', 'CPF', 'Titulo de Eleitor', 'Municipio', 'UF', 'Status', 'Data'];
+
+        $callback = function() use($signatures, $columns) {
+            $file = fopen('php://output', 'w');
+            // Add UTF-8 BOM for Excel compatibility
+            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+            fputcsv($file, $columns, ';');
+
+            foreach ($signatures as $sig) {
+                fputcsv($file, [
+                    $sig->protocol_number,
+                    $sig->full_name,
+                    $sig->cpf,
+                    $sig->voter_title,
+                    $sig->city,
+                    $sig->state,
+                    $sig->status,
+                    $sig->created_at->format('d/m/Y H:i')
+                ], ';');
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
+    public function exportSignaturesPdf()
+    {
+        $signatures = \App\Models\PartySignature::all();
+        $data = [
+            'signatures' => $signatures,
+            'date' => date('d/m/Y H:i'),
+            'total' => $signatures->count()
+        ];
+
+        $pdf = Pdf::loadView('pages.admin.reports.signatures-pdf', $data);
+        return $pdf->download('relatorio_apoios_pct.pdf');
+    }
+
+    public function approveSignature(\App\Models\PartySignature $signature)
+    {
+        $signature->update(['status' => 'validado']);
+        return redirect()->back()->with('success', 'Apoio de ' . $signature->full_name . ' validado com sucesso!');
+    }
+
+    public function exportSingleSignaturePdf(\App\Models\PartySignature $signature)
+    {
+        $signature->load('user');
+        $data = [
+            'sig' => $signature,
+            'user' => $signature->user,
+            'date' => date('d/m/Y H:i')
+        ];
+
+        $pdf = Pdf::loadView('pages.admin.reports.single-signature-pdf', $data);
+        return $pdf->download('ficha_apoio_' . $signature->protocol_number . '.pdf');
     }
 
     // --- 2. Demandas da População ---

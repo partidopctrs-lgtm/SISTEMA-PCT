@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\SignaturePdfController;
 use App\Http\Controllers\Auth\DepartmentLoginController;
 
 Route::get('/admin/login', [DepartmentLoginController::class, 'showLoginForm'])->name('admin.login');
@@ -12,9 +13,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/command-center', [AdminDashboardController::class, 'commandCenter'])->name('admin.command_center');
     Route::get('/members', [AdminDashboardController::class, 'members'])->name('admin.members');
     Route::post('/member/store', [AdminDashboardController::class, 'storeMember'])->name('admin.member.store');
+    Route::get('/member/{user}/pdf', [SignaturePdfController::class, 'exportMemberPdf'])->name('admin.member.pdf');
     
     // 1. Partido em Formação (Assinaturas)
     Route::get('/partido', [AdminDashboardController::class, 'partyFormation'])->name('admin.party');
+    Route::get('/partido/export-csv', [AdminDashboardController::class, 'exportSignaturesCsv'])->name('admin.party.export-csv');
+    Route::get('/partido/export-pdf', [SignaturePdfController::class, 'exportSignaturesPdf'])->name('admin.party.export-pdf');
+    Route::post('/partido/{signature}/approve', [AdminDashboardController::class, 'approveSignature'])->name('admin.party.approve');
+    Route::get('/partido/{signature}/pdf', [SignaturePdfController::class, 'exportOnePdf'])->name('admin.party.pdf');
     
     // 2. Demandas da População
     Route::get('/demandas', [AdminDashboardController::class, 'publicDemands'])->name('admin.demands');
