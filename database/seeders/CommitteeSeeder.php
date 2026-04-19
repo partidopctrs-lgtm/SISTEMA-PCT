@@ -20,7 +20,9 @@ class CommitteeSeeder extends Seeder
             'directory_type' => 'municipal',
             'city' => 'Porto Alegre',
             'state' => 'RS',
-            'status' => 'ativo',
+            'operational_status' => 'active',
+            'affiliation_status' => 'official',
+            'legal_status' => 'regular',
         ]);
 
         // 2. Criar Usuário do Comitê (Presidente Local)

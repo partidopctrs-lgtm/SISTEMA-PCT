@@ -26,9 +26,16 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
     Route::get('/demandas', [AdminDashboardController::class, 'publicDemands'])->name('admin.demands');
     
     Route::get('/diretorios', [AdminDashboardController::class, 'directories'])->name('admin.directories');
-    Route::post('/diretorios/store', [AdminDashboardController::class, 'storeDirectory'])->name('admin.directories.store');
-    Route::post('/diretorios/{directory}/update', [AdminDashboardController::class, 'updateDirectory'])->name('admin.directories.update');
-    Route::get('/diretorios/{directory}/export', [AdminDashboardController::class, 'exportDirectory'])->name('admin.directories.export');
+    Route::post('/directories', [AdminDashboardController::class, 'storeDirectory'])->name('admin.directories.store');
+    Route::get('/directories/{directory}', [AdminDashboardController::class, 'showDirectory'])->name('admin.directories.show');
+    Route::post('/directories/{directory}/members', [AdminDashboardController::class, 'assignMember'])->name('admin.directories.members.store');
+    Route::delete('/directories/{directory}/members/{member}', [AdminDashboardController::class, 'removeMember'])->name('admin.directories.members.destroy');
+    Route::post('/directories/{directory}/update', [AdminDashboardController::class, 'updateDirectory'])->name('admin.directories.update');
+    Route::post('/directories/{directory}/approve', [AdminDashboardController::class, 'approveDirectory'])->name('admin.directories.approve');
+    Route::post('/directories/{directory}/release', [AdminDashboardController::class, 'releaseDirectory'])->name('admin.directories.release');
+    Route::post('/directories/{directory}/block', [AdminDashboardController::class, 'blockDirectory'])->name('admin.directories.block');
+    Route::post('/directories/{directory}/reject', [AdminDashboardController::class, 'rejectDirectory'])->name('admin.directories.reject');
+    Route::get('/directories/{directory}/export', [AdminDashboardController::class, 'exportDirectory'])->name('admin.directories.export');
     
     // 4. Governança Interna
     Route::get('/governanca', [AdminDashboardController::class, 'governance'])->name('admin.governance');
@@ -45,6 +52,31 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
 
     // 8. Escola de Formação
     Route::get('/certificados', [AdminDashboardController::class, 'issueCertificate'])->name('admin.certificates');
+
+    // 9. Sistema de E-mail (PCT Mail)
+    Route::prefix('mail')->group(function () {
+        Route::get('/dashboard', [\App\Http\Controllers\Admin\Mail\MailController::class, 'dashboard'])->name('admin.mail.dashboard');
+        Route::post('/send', [\App\Http\Controllers\Admin\Mail\MailController::class, 'send'])->name('admin.mail.send');
+        Route::get('/logs', [\App\Http\Controllers\Admin\Mail\MailController::class, 'logs'])->name('admin.mail.logs');
+        
+        Route::apiResource('/templates', \App\Http\Controllers\Admin\Mail\TemplateController::class)->names([
+            'index' => 'admin.mail.templates.index',
+            'store' => 'admin.mail.templates.store',
+            'show' => 'admin.mail.templates.show',
+            'update' => 'admin.mail.templates.update',
+            'destroy' => 'admin.mail.templates.destroy',
+        ]);
+        
+        Route::apiResource('/campaigns', \App\Http\Controllers\Admin\Mail\CampaignController::class)->names([
+            'index' => 'admin.mail.campaigns.index',
+            'store' => 'admin.mail.campaigns.store',
+            'show' => 'admin.mail.campaigns.show',
+            'update' => 'admin.mail.campaigns.update',
+            'destroy' => 'admin.mail.campaigns.destroy',
+        ]);
+        
+        Route::post('/campaigns/{campaign}/dispatch', [\App\Http\Controllers\Admin\Mail\CampaignController::class, 'dispatch'])->name('admin.mail.campaigns.dispatch');
+    });
 
     // Configurações Gerais
     Route::get('/configuracoes', [AdminDashboardController::class, 'configuracoes'])->name('admin.configuracoes');

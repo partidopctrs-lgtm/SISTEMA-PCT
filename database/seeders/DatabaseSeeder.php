@@ -89,7 +89,9 @@ class DatabaseSeeder extends Seeder
             'scheduled_at' => now()->addDays(2),
         ]);
 
+        $this->call(MailTemplateSeeder::class);
         $this->call(GovernanceSeeder::class);
+        $this->call(DirectorySeeder::class);
 
         $this->command->info('Database populated with success!');
     }

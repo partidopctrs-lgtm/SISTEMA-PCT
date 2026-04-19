@@ -51,8 +51,12 @@
         <nav class="flex-grow overflow-y-auto py-6 custom-scrollbar">
             <div class="px-4 space-y-4">
                 @php 
-                    $role = auth()->user()->role ?? 'affiliate';
-                    $isAdmin = auth()->user()->hasRole('admin');
+                    $user = auth()->user();
+                    $role = $user->role ?? 'affiliate';
+                    $isAdmin = $user->hasRole('admin');
+                    $committee = $user->committee;
+                    $isApplicant = $committee && $committee->affiliation_status === 'applicant';
+
                     $currentRoute = request()->route() ? request()->route()->getName() : '';
                     
                     // Decidir qual menu mostrar com base na rota atual
@@ -150,18 +154,27 @@
                         <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
                         <span class="ml-3 font-bold text-sm whitespace-nowrap" x-show="sidebarOpen">Gestão Local</span>
                     </a>
-                    <a href="{{ route('committee.members') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('committee.members') ? 'bg-white/10' : '' }}">
-                        <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                        <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Membros Locais</span>
-                    </a>
-                    <a href="{{ route('committee.signatures') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('committee.signatures') ? 'bg-white/10' : '' }}">
-                        <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Assinaturas</span>
-                    </a>
-                    <a href="#" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
-                        <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Sede e Eventos</span>
-                    </a>
+
+                    @if($isApplicant)
+                        <div class="px-4 py-4 bg-amber-500/10 border border-amber-500/20 rounded-2xl mx-2 mb-4">
+                            <p class="text-[9px] font-black text-amber-400 uppercase tracking-widest leading-tight">Operação Bloqueada</p>
+                            <p class="text-[8px] text-amber-100/60 uppercase mt-1 font-medium">Aguardando aprovação institucional para liberar recursos.</p>
+                        </div>
+                    @else
+                        <a href="{{ route('committee.members') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('committee.members') ? 'bg-white/10' : '' }}">
+                            <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                            <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Membros Locais</span>
+                        </a>
+                        <a href="{{ route('committee.signatures') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('committee.signatures') ? 'bg-white/10' : '' }}">
+                            <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Assinaturas</span>
+                        </a>
+                        <a href="#" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
+                            <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Sede e Eventos</span>
+                        </a>
+                    @endif
+
                     <a href="{{ route('shared.documents', ['portal' => 'committee']) }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
                         <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                         <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Documentos</span>

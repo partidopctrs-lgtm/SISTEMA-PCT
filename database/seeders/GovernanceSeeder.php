@@ -18,7 +18,9 @@ class GovernanceSeeder extends Seeder
             [
                 'name' => 'Diretório Municipal de Taquara',
                 'directory_type' => 'municipal',
-                'status' => 'ativo'
+                'operational_status' => 'active',
+                'affiliation_status' => 'official',
+                'legal_status' => 'regular'
             ]
         );
 
@@ -27,7 +29,9 @@ class GovernanceSeeder extends Seeder
             [
                 'name' => 'Diretório Metropolitano de Porto Alegre',
                 'directory_type' => 'municipal',
-                'status' => 'ativo'
+                'operational_status' => 'active',
+                'affiliation_status' => 'official',
+                'legal_status' => 'regular'
             ]
         );
 

@@ -1,0 +1,620 @@
+[
+  {
+    "slug": "auth_welcome",
+    "nome": "Boas-vindas ao sistema",
+    "categoria": "autenticacao",
+    "assunto": "Bem-vindo(a) ao PCT, {{nome}}!"
+  },
+  {
+    "slug": "auth_email_verification",
+    "nome": "Confirmação de e-mail",
+    "categoria": "autenticacao",
+    "assunto": "Confirme seu e-mail – PCT"
+  },
+  {
+    "slug": "auth_account_activated",
+    "nome": "Conta ativada",
+    "categoria": "autenticacao",
+    "assunto": "Sua conta PCT está ativa, {{nome}}!"
+  },
+  {
+    "slug": "auth_password_reset_request",
+    "nome": "Redefinição de senha solicitada",
+    "categoria": "autenticacao",
+    "assunto": "Redefinição de senha solicitada – PCT"
+  },
+  {
+    "slug": "auth_password_reset_success",
+    "nome": "Senha redefinida com sucesso",
+    "categoria": "autenticacao",
+    "assunto": "Sua senha PCT foi redefinida com sucesso"
+  },
+  {
+    "slug": "auth_password_changed",
+    "nome": "Alteração de senha confirmada",
+    "categoria": "autenticacao",
+    "assunto": "Senha da sua conta PCT foi alterada"
+  },
+  {
+    "slug": "auth_login_alert",
+    "nome": "Novo login detectado",
+    "categoria": "autenticacao",
+    "assunto": "Novo acesso detectado na sua conta PCT"
+  },
+  {
+    "slug": "auth_login_suspicious",
+    "nome": "Login suspeito detectado",
+    "categoria": "autenticacao",
+    "assunto": "🚨 Atividade suspeita detectada – PCT"
+  },
+  {
+    "slug": "auth_account_locked",
+    "nome": "Conta bloqueada",
+    "categoria": "autenticacao",
+    "assunto": "Sua conta PCT foi bloqueada temporariamente"
+  },
+  {
+    "slug": "auth_account_unlocked",
+    "nome": "Conta desbloqueada",
+    "categoria": "autenticacao",
+    "assunto": "Sua conta PCT foi desbloqueada"
+  },
+  {
+    "slug": "filiacao_recebida",
+    "nome": "Filiação recebida",
+    "categoria": "filiacao",
+    "assunto": "Recebemos sua solicitação de filiação ao PCT, {{nome}}"
+  },
+  {
+    "slug": "filiacao_aprovada",
+    "nome": "Filiação aprovada",
+    "categoria": "filiacao",
+    "assunto": "🎉 Sua filiação ao PCT foi aprovada, {{nome}}!"
+  },
+  {
+    "slug": "filiacao_rejeitada",
+    "nome": "Filiação rejeitada",
+    "categoria": "filiacao",
+    "assunto": "Atualização sobre sua solicitação de filiação – PCT"
+  },
+  {
+    "slug": "filiacao_pendente",
+    "nome": "Filiação pendente",
+    "categoria": "filiacao",
+    "assunto": "Sua filiação PCT precisa de atenção, {{nome}}"
+  },
+  {
+    "slug": "filiacao_termo_aceito",
+    "nome": "Termo de filiação aceito",
+    "categoria": "filiacao",
+    "assunto": "Termo de filiação aceito – PCT"
+  },
+  {
+    "slug": "filiacao_documento_pendente",
+    "nome": "Documento pendente na filiação",
+    "categoria": "filiacao",
+    "assunto": "Documento necessário para sua filiação PCT"
+  },
+  {
+    "slug": "apoio_registrado",
+    "nome": "Apoio registrado",
+    "categoria": "apoio_partido",
+    "assunto": "✅ Seu apoio ao PCT foi registrado, {{nome}}!"
+  },
+  {
+    "slug": "apoio_ficha_envio",
+    "nome": "Envio da ficha de apoio",
+    "categoria": "apoio_partido",
+    "assunto": "📋 Sua ficha de apoio ao PCT está pronta!"
+  },
+  {
+    "slug": "apoio_lembrete_assinatura",
+    "nome": "Lembrete para assinar ficha",
+    "categoria": "apoio_partido",
+    "assunto": "⏰ Lembrete: sua ficha de apoio ainda não foi assinada"
+  },
+  {
+    "slug": "apoio_ficha_reenviar",
+    "nome": "Reenvio da ficha de apoio",
+    "categoria": "apoio_partido",
+    "assunto": "📋 Reenviando sua ficha de apoio ao PCT"
+  },
+  {
+    "slug": "apoio_confirmado",
+    "nome": "Apoio validado",
+    "categoria": "apoio_partido",
+    "assunto": "✅ Seu apoio ao PCT foi validado oficialmente!"
+  },
+  {
+    "slug": "apoio_rejeitado",
+    "nome": "Apoio inválido",
+    "categoria": "apoio_partido",
+    "assunto": "⚠️ Problema identificado no seu apoio ao PCT"
+  },
+  {
+    "slug": "apoio_dados_inconsistentes",
+    "nome": "Problema nos dados do apoio",
+    "categoria": "apoio_partido",
+    "assunto": "⚠️ Dados inconsistentes no seu apoio – PCT"
+  },
+  {
+    "slug": "apoio_meta_cidade_alerta",
+    "nome": "Cidade abaixo da meta",
+    "categoria": "apoio_partido",
+    "assunto": "⚠️ {{cidade}} está abaixo da meta de apoios ao PCT"
+  },
+  {
+    "slug": "apoio_meta_cidade_batida",
+    "nome": "Meta da cidade atingida",
+    "categoria": "apoio_partido",
+    "assunto": "🎯 {{cidade}} atingiu a meta de apoios ao PCT!"
+  },
+  {
+    "slug": "votacao_aberta",
+    "nome": "Nova votação aberta",
+    "categoria": "votacao",
+    "assunto": "🗳️ Nova votação disponível no PCT: {{titulo}}"
+  },
+  {
+    "slug": "votacao_lembrete",
+    "nome": "Lembrete de votação",
+    "categoria": "votacao",
+    "assunto": "⏰ Lembrete: você ainda não votou em \"{{titulo}}\""
+  },
+  {
+    "slug": "votacao_encerrada",
+    "nome": "Votação encerrada",
+    "categoria": "votacao",
+    "assunto": "Votação encerrada: {{titulo}}"
+  },
+  {
+    "slug": "votacao_resultado",
+    "nome": "Resultado da votação",
+    "categoria": "votacao",
+    "assunto": "📊 Resultado oficial da votação: {{titulo}}"
+  },
+  {
+    "slug": "votacao_quorum_insuficiente",
+    "nome": "Quorum insuficiente",
+    "categoria": "votacao",
+    "assunto": "⚠️ Quorum insuficiente na votação: {{titulo}}"
+  },
+  {
+    "slug": "eleicao_aberta",
+    "nome": "Eleição aberta",
+    "categoria": "votacao",
+    "assunto": "🗳️ Eleição interna aberta no PCT: {{titulo}}"
+  },
+  {
+    "slug": "eleicao_resultado",
+    "nome": "Resultado da eleição",
+    "categoria": "votacao",
+    "assunto": "📊 Resultado oficial da eleição: {{titulo}}"
+  },
+  {
+    "slug": "eleicao_posse",
+    "nome": "Posse confirmada",
+    "categoria": "votacao",
+    "assunto": "📌 Sua posse no cargo foi confirmada – PCT"
+  },
+  {
+    "slug": "cargo_promocao_sugerida",
+    "nome": "Promoção sugerida",
+    "categoria": "governanca",
+    "assunto": "💡 Promoção de cargo sugerida para você – PCT"
+  },
+  {
+    "slug": "cargo_promocao_aprovada",
+    "nome": "Promoção aprovada",
+    "categoria": "governanca",
+    "assunto": "🏅 Parabéns! Você foi promovido(a) no PCT"
+  },
+  {
+    "slug": "cargo_promocao_rejeitada",
+    "nome": "Promoção rejeitada",
+    "categoria": "governanca",
+    "assunto": "Atualização sobre proposta de promoção – PCT"
+  },
+  {
+    "slug": "cargo_nomeacao",
+    "nome": "Nomeação para cargo",
+    "categoria": "governanca",
+    "assunto": "📌 Você foi nomeado(a) para um cargo no PCT"
+  },
+  {
+    "slug": "cargo_remocao",
+    "nome": "Remoção de cargo",
+    "categoria": "governanca",
+    "assunto": "Atualização de cargo no sistema PCT"
+  },
+  {
+    "slug": "diretorio_novo_membro",
+    "nome": "Novo membro na cidade",
+    "categoria": "diretorio",
+    "assunto": "👤 Novo membro registrado em {{cidade}}"
+  },
+  {
+    "slug": "diretorio_novo_apoio",
+    "nome": "Novo apoio registrado no diretório",
+    "categoria": "diretorio",
+    "assunto": "✅ Novo apoio registrado em {{cidade}}"
+  },
+  {
+    "slug": "diretorio_meta_atualizada",
+    "nome": "Meta do diretório atualizada",
+    "categoria": "diretorio",
+    "assunto": "🎯 Meta do diretório atualizada – {{cidade}}"
+  },
+  {
+    "slug": "diretorio_meta_baixa",
+    "nome": "Meta em risco",
+    "categoria": "diretorio",
+    "assunto": "⚠️ Meta em risco no diretório de {{cidade}}"
+  },
+  {
+    "slug": "diretorio_meta_atingida",
+    "nome": "Meta do diretório atingida",
+    "categoria": "diretorio",
+    "assunto": "🎯 O diretório de {{cidade}} atingiu sua meta!"
+  },
+  {
+    "slug": "diretorio_sem_atividade",
+    "nome": "Diretório inativo",
+    "categoria": "diretorio",
+    "assunto": "⚠️ O diretório de {{cidade}} está sem atividade"
+  },
+  {
+    "slug": "diretorio_relatorio_disponivel",
+    "nome": "Relatório do diretório disponível",
+    "categoria": "diretorio",
+    "assunto": "📊 Relatório do diretório disponível – {{cidade}}"
+  },
+  {
+    "slug": "tarefa_nova",
+    "nome": "Nova tarefa atribuída",
+    "categoria": "tarefas",
+    "assunto": "📝 Nova tarefa atribuída a você: {{titulo}}"
+  },
+  {
+    "slug": "tarefa_prazo_proximo",
+    "nome": "Prazo de tarefa próximo",
+    "categoria": "tarefas",
+    "assunto": "⏰ Prazo se aproximando: {{titulo}}"
+  },
+  {
+    "slug": "tarefa_atrasada",
+    "nome": "Tarefa atrasada",
+    "categoria": "tarefas",
+    "assunto": "🚨 Tarefa em atraso: {{titulo}}"
+  },
+  {
+    "slug": "tarefa_concluida",
+    "nome": "Tarefa concluída",
+    "categoria": "tarefas",
+    "assunto": "✅ Tarefa concluída: {{titulo}}"
+  },
+  {
+    "slug": "tarefa_cancelada",
+    "nome": "Tarefa cancelada",
+    "categoria": "tarefas",
+    "assunto": "❌ Tarefa cancelada: {{titulo}}"
+  },
+  {
+    "slug": "demanda_nova",
+    "nome": "Nova demanda registrada",
+    "categoria": "demandas",
+    "assunto": "📣 Nova demanda registrada em {{cidade}}"
+  },
+  {
+    "slug": "demanda_urgente",
+    "nome": "Demanda urgente",
+    "categoria": "demandas",
+    "assunto": "🚨 URGENTE: Nova demanda crítica em {{cidade}}"
+  },
+  {
+    "slug": "demanda_encaminhada",
+    "nome": "Demanda encaminhada",
+    "categoria": "demandas",
+    "assunto": "📤 Demanda encaminhada: {{titulo}}"
+  },
+  {
+    "slug": "demanda_resposta",
+    "nome": "Resposta à demanda",
+    "categoria": "demandas",
+    "assunto": "💬 Resposta recebida para sua demanda: {{titulo}}"
+  },
+  {
+    "slug": "doc_criado",
+    "nome": "Documento criado",
+    "categoria": "documentos",
+    "assunto": "📄 Novo documento criado: {{titulo}}"
+  },
+  {
+    "slug": "doc_em_revisao",
+    "nome": "Documento em revisão",
+    "categoria": "documentos",
+    "assunto": "🔍 Documento em revisão: {{titulo}}"
+  },
+  {
+    "slug": "doc_aprovado",
+    "nome": "Documento aprovado",
+    "categoria": "documentos",
+    "assunto": "✅ Documento aprovado: {{titulo}}"
+  },
+  {
+    "slug": "doc_rejeitado",
+    "nome": "Documento rejeitado",
+    "categoria": "documentos",
+    "assunto": "⚠️ Documento devolvido: {{titulo}}"
+  },
+  {
+    "slug": "doc_juridico_pendente",
+    "nome": "Jurídico pendente",
+    "categoria": "documentos",
+    "assunto": "⚖️ Documento aguardando análise jurídica: {{titulo}}"
+  },
+  {
+    "slug": "doc_assinatura_pendente",
+    "nome": "Assinatura pendente",
+    "categoria": "documentos",
+    "assunto": "✍️ Documento aguardando sua assinatura: {{titulo}}"
+  },
+  {
+    "slug": "juridico_novo_documento",
+    "nome": "Novo documento para análise",
+    "categoria": "juridico",
+    "assunto": "⚖️ Novo documento para análise jurídica: {{titulo}}"
+  },
+  {
+    "slug": "juridico_parecer_emitido",
+    "nome": "Parecer jurídico emitido",
+    "categoria": "juridico",
+    "assunto": "⚖️ Parecer jurídico emitido: {{titulo}}"
+  },
+  {
+    "slug": "juridico_pendencia",
+    "nome": "Pendência jurídica",
+    "categoria": "juridico",
+    "assunto": "⚖️ Pendência jurídica: {{titulo}}"
+  },
+  {
+    "slug": "juridico_aprovado",
+    "nome": "Documento validado pelo jurídico",
+    "categoria": "juridico",
+    "assunto": "✅ Documento validado pelo jurídico: {{titulo}}"
+  },
+  {
+    "slug": "juridico_rejeitado",
+    "nome": "Documento recusado pelo jurídico",
+    "categoria": "juridico",
+    "assunto": "⚠️ Documento recusado pelo jurídico: {{titulo}}"
+  },
+  {
+    "slug": "juridico_alerta_risco",
+    "nome": "Alerta de risco jurídico",
+    "categoria": "juridico",
+    "assunto": "🚨 ALERTA JURÍDICO: Risco identificado"
+  },
+  {
+    "slug": "financeiro_receita",
+    "nome": "Receita registrada",
+    "categoria": "financeiro",
+    "assunto": "💰 Nova receita registrada no PCT"
+  },
+  {
+    "slug": "financeiro_despesa",
+    "nome": "Despesa registrada",
+    "categoria": "financeiro",
+    "assunto": "💳 Nova despesa registrada no PCT"
+  },
+  {
+    "slug": "financeiro_aprovacao",
+    "nome": "Aprovação financeira",
+    "categoria": "financeiro",
+    "assunto": "✅ Solicitação financeira aprovada – PCT"
+  },
+  {
+    "slug": "financeiro_rejeicao",
+    "nome": "Rejeição financeira",
+    "categoria": "financeiro",
+    "assunto": "❌ Solicitação financeira rejeitada – PCT"
+  },
+  {
+    "slug": "financeiro_relatorio",
+    "nome": "Relatório financeiro mensal",
+    "categoria": "financeiro",
+    "assunto": "💰 Relatório financeiro de {{mes}}/{{ano}} disponível"
+  },
+  {
+    "slug": "financeiro_divergencia",
+    "nome": "Divergência financeira detectada",
+    "categoria": "financeiro",
+    "assunto": "🚨 Divergência financeira detectada – Ação necessária"
+  },
+  {
+    "slug": "candidato_pre_cadastro",
+    "nome": "Pré-candidatura recebida",
+    "categoria": "candidato",
+    "assunto": "📋 Sua pré-candidatura ao PCT foi recebida, {{nome}}"
+  },
+  {
+    "slug": "candidato_aprovado",
+    "nome": "Pré-candidatura aprovada",
+    "categoria": "candidato",
+    "assunto": "🎉 Sua pré-candidatura ao PCT foi aprovada, {{nome}}!"
+  },
+  {
+    "slug": "candidato_rejeitado",
+    "nome": "Pré-candidatura rejeitada",
+    "categoria": "candidato",
+    "assunto": "Atualização sobre sua pré-candidatura – PCT"
+  },
+  {
+    "slug": "candidato_documento_pendente",
+    "nome": "Documentos do candidato pendentes",
+    "categoria": "candidato",
+    "assunto": "📎 Documentos pendentes para sua candidatura – PCT"
+  },
+  {
+    "slug": "candidato_avaliacao",
+    "nome": "Avaliação do candidato disponível",
+    "categoria": "candidato",
+    "assunto": "📊 Sua avaliação está disponível – PCT"
+  },
+  {
+    "slug": "candidato_convocacao",
+    "nome": "Convocação interna do candidato",
+    "categoria": "candidato",
+    "assunto": "📌 Convocação: {{titulo}} – PCT"
+  },
+  {
+    "slug": "campanha_disparo",
+    "nome": "Campanha enviada",
+    "categoria": "comunicacao",
+    "assunto": "📨 {{titulo}} – PCT"
+  },
+  {
+    "slug": "campanha_agendada",
+    "nome": "Campanha agendada",
+    "categoria": "comunicacao",
+    "assunto": "📅 Campanha agendada: {{titulo}}"
+  },
+  {
+    "slug": "campanha_resultado",
+    "nome": "Resultado da campanha",
+    "categoria": "comunicacao",
+    "assunto": "📊 Resultado da campanha: {{titulo}}"
+  },
+  {
+    "slug": "comunicado_oficial",
+    "nome": "Comunicado oficial",
+    "categoria": "comunicacao",
+    "assunto": "📢 Comunicado Oficial PCT: {{titulo}}"
+  },
+  {
+    "slug": "engajamento_pontos",
+    "nome": "Pontos ganhos",
+    "categoria": "engajamento",
+    "assunto": "🌟 Você ganhou {{pontos}} pontos no PCT!"
+  },
+  {
+    "slug": "engajamento_nivel",
+    "nome": "Subida de nível",
+    "categoria": "engajamento",
+    "assunto": "🏆 Parabéns! Você subiu para o nível {{nivel}} no PCT!"
+  },
+  {
+    "slug": "engajamento_ranking",
+    "nome": "Ranking atualizado",
+    "categoria": "engajamento",
+    "assunto": "📊 Ranking PCT atualizado – sua posição: #{{posicao}}"
+  },
+  {
+    "slug": "engajamento_inatividade",
+    "nome": "Alerta de inatividade",
+    "categoria": "engajamento",
+    "assunto": "👋 Está tudo bem, {{nome}}? Sentimos sua falta no PCT!"
+  },
+  {
+    "slug": "engajamento_bloqueio",
+    "nome": "Bloqueio por inatividade",
+    "categoria": "engajamento",
+    "assunto": "⚠️ Sua conta PCT foi suspensa por inatividade"
+  },
+  {
+    "slug": "engajamento_reativacao",
+    "nome": "Conta reativada",
+    "categoria": "engajamento",
+    "assunto": "✅ Sua conta PCT foi reativada! Seja bem-vindo(a) de volta!"
+  },
+  {
+    "slug": "suporte_ticket_aberto",
+    "nome": "Ticket aberto",
+    "categoria": "suporte",
+    "assunto": "🎫 Ticket #{{protocolo}} aberto – PCT Suporte"
+  },
+  {
+    "slug": "suporte_ticket_resposta",
+    "nome": "Resposta ao ticket",
+    "categoria": "suporte",
+    "assunto": "💬 Resposta ao seu ticket #{{protocolo}} – PCT"
+  },
+  {
+    "slug": "suporte_ticket_fechado",
+    "nome": "Ticket fechado",
+    "categoria": "suporte",
+    "assunto": "✅ Ticket #{{protocolo}} fechado – PCT"
+  },
+  {
+    "slug": "admin_usuario_criado",
+    "nome": "Usuário criado pelo administrador",
+    "categoria": "suporte",
+    "assunto": "👤 Sua conta PCT foi criada pelo administrador"
+  },
+  {
+    "slug": "admin_usuario_alterado",
+    "nome": "Alteração de usuário",
+    "categoria": "suporte",
+    "assunto": "⚙️ Alteração realizada na sua conta PCT"
+  },
+  {
+    "slug": "admin_acao_critica",
+    "nome": "Ação crítica registrada",
+    "categoria": "suporte",
+    "assunto": "🚨 Ação crítica registrada no sistema PCT"
+  },
+  {
+    "slug": "dev_servidor_offline",
+    "nome": "Servidor fora do ar",
+    "categoria": "infraestrutura",
+    "assunto": "🚨 [CRÍTICO] Servidor PCT offline!"
+  },
+  {
+    "slug": "dev_cpu_alta",
+    "nome": "Uso alto de CPU",
+    "categoria": "infraestrutura",
+    "assunto": "⚠️ Uso crítico de CPU – Servidor PCT"
+  },
+  {
+    "slug": "dev_memoria_alta",
+    "nome": "Uso alto de memória",
+    "categoria": "infraestrutura",
+    "assunto": "⚠️ Uso crítico de memória – Servidor PCT"
+  },
+  {
+    "slug": "dev_disco_critico",
+    "nome": "Disco quase cheio",
+    "categoria": "infraestrutura",
+    "assunto": "🚨 Disco quase cheio – Servidor PCT"
+  },
+  {
+    "slug": "dev_banco_indisponivel",
+    "nome": "Banco de dados indisponível",
+    "categoria": "infraestrutura",
+    "assunto": "🚨 [CRÍTICO] Banco de dados PCT indisponível!"
+  },
+  {
+    "slug": "dev_ssl_expirando",
+    "nome": "SSL prestes a expirar",
+    "categoria": "infraestrutura",
+    "assunto": "⚠️ Certificado SSL expira em {{dias}} dias – PCT"
+  },
+  {
+    "slug": "dev_backup_falhou",
+    "nome": "Backup falhou",
+    "categoria": "infraestrutura",
+    "assunto": "🚨 [CRÍTICO] Backup do PCT falhou!"
+  },
+  {
+    "slug": "dev_backup_sucesso",
+    "nome": "Backup concluído",
+    "categoria": "infraestrutura",
+    "assunto": "✅ Backup PCT concluído com sucesso"
+  },
+  {
+    "slug": "dev_seguranca_alerta",
+    "nome": "Tentativa de invasão",
+    "categoria": "infraestrutura",
+    "assunto": "🚨 [SEGURANÇA] Tentativa de invasão – PCT"
+  }
+]

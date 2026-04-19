@@ -176,8 +176,9 @@ class AdminDashboardController extends Controller
         // Limpeza solicitada
         \App\Models\Directory::where('name', 'like', '%Porto Alegre%')->delete();
         
-        $committees = \App\Models\Directory::withCount('memberships')->paginate(15);
-        return view('pages.admin.directories', compact('committees'));
+        $committees = \App\Models\Directory::withCount('memberships')->latest()->paginate(15);
+        $users = \App\Models\User::orderBy('name')->get();
+        return view('pages.admin.directories', compact('committees', 'users'));
     }
 
     public function storeDirectory(Request $request)
@@ -187,17 +188,30 @@ class AdminDashboardController extends Controller
             'city' => 'required|string|max:255',
             'state' => 'required|string|max:2',
             'directory_type' => 'required|string',
+            'president_id' => 'nullable|exists:users,id',
+            'secretary_id' => 'nullable|exists:users,id',
+            'treasurer_id' => 'nullable|exists:users,id',
+            'address_base' => 'nullable|string',
         ]);
 
-        \App\Models\Directory::create([
+        $directory = \App\Models\Directory::create([
             'name' => $request->name,
             'city' => $request->city,
             'state' => $request->state,
             'directory_type' => $request->directory_type,
-            'status' => 'pending', // Novos diretórios começam como pendentes
+            'president_id' => $request->president_id,
+            'secretary_id' => $request->secretary_id,
+            'treasurer_id' => $request->treasurer_id,
+            'address_base' => $request->address_base,
+            'operational_status' => 'pending', 
+            'affiliation_status' => 'applicant',
+            'legal_status' => 'not_formalized',
+            'submitted_at' => now(),
         ]);
 
-        return redirect()->back()->with('success', 'Novo diretório registrado com sucesso!');
+        $directory->seedChecklist();
+
+        return redirect()->back()->with('success', 'Solicitação de Implantação registrada! Protocolo gerado automaticamente.');
     }
 
     public function updateDirectory(Request $request, \App\Models\Directory $directory)
@@ -213,6 +227,114 @@ class AdminDashboardController extends Controller
         $directory->update($request->all());
 
         return redirect()->back()->with('success', 'Diretório atualizado com sucesso!');
+    }
+
+    public function approveDirectory(Request $request, \App\Models\Directory $directory)
+    {
+        $errors = $directory->getValidationErrors();
+        if (count($errors) > 0) {
+            return redirect()->back()->withErrors($errors)->with('error', 'Aprovação institucional travada por pendências.');
+        }
+
+        $directory->update([
+            'operational_status' => 'approved',
+            'affiliation_status' => 'provisional',
+            'approved_at' => now(),
+        ]);
+
+        \App\Models\DirectoryAction::create([
+            'directory_id' => $directory->id,
+            'user_id' => auth()->id(),
+            'action' => 'approved',
+            'level' => 'nacional',
+            'reason' => 'Requisitos de implantação validados.'
+        ]);
+
+        // Notificar Presidente
+        if ($directory->president && $directory->president->email) {
+            $directory->president->notify(new \App\Notifications\DiretorioAtivado([
+                'name' => $directory->president->name,
+                'directory_name' => $directory->name,
+                'protocol' => $directory->protocol_number,
+                'status' => 'Aprovado (Provisório)'
+            ]));
+        }
+
+        return redirect()->back()->with('success', 'Diretório aprovado institucionalmente! Agora está em estágio Provisório.');
+    }
+
+    public function releaseDirectory(\App\Models\Directory $directory)
+    {
+        if ($directory->operational_status !== 'approved') {
+            return redirect()->back()->with('error', 'O diretório precisa estar APROVADO antes de ser OFICIALIZADO.');
+        }
+
+        $directory->update([
+            'operational_status' => 'active',
+            'affiliation_status' => 'official',
+            'activated_at' => now(),
+        ]);
+
+        \App\Models\DirectoryAction::create([
+            'directory_id' => $directory->id,
+            'user_id' => auth()->id(),
+            'action' => 'released',
+            'level' => 'nacional',
+            'reason' => 'Vínculo oficializado nacionalmente.'
+        ]);
+
+        // Notificar Presidente
+        if ($directory->president && $directory->president->email) {
+            $directory->president->notify(new \App\Notifications\DiretorioAtivado([
+                'name' => $directory->president->name,
+                'directory_name' => $directory->name,
+                'protocol' => $directory->protocol_number,
+                'status' => 'Ativo (Oficial)'
+            ]));
+        }
+
+        return redirect()->back()->with('success', 'Diretório OFICIALIZADO e liberado para operação plena!');
+    }
+
+    public function blockDirectory(Request $request, \App\Models\Directory $directory)
+    {
+        $request->validate(['reason' => 'required|string']);
+
+        $directory->update([
+            'operational_status' => 'blocked',
+            'affiliation_status' => 'suspended',
+            'blocked_at' => now(),
+        ]);
+
+        \App\Models\DirectoryAction::create([
+            'directory_id' => $directory->id,
+            'user_id' => auth()->id(),
+            'action' => 'blocked',
+            'level' => 'nacional',
+            'reason' => $request->reason
+        ]);
+
+        return redirect()->back()->with('warning', 'Diretório bloqueado por intervenção administrativa.');
+    }
+
+    public function rejectDirectory(Request $request, \App\Models\Directory $directory)
+    {
+        $request->validate(['reason' => 'required|string']);
+
+        $directory->update([
+            'operational_status' => 'rejected',
+            'rejected_at' => now(),
+        ]);
+
+        \App\Models\DirectoryAction::create([
+            'directory_id' => $directory->id,
+            'user_id' => auth()->id(),
+            'action' => 'rejected',
+            'level' => 'nacional',
+            'reason' => $request->reason
+        ]);
+
+        return redirect()->back()->with('error', 'Solicitação de implantação rejeitada.');
     }
 
     public function exportDirectory(\App\Models\Directory $directory)
@@ -325,5 +447,41 @@ class AdminDashboardController extends Controller
     public function configuracoes()
     {
         return view('pages.admin.configuracoes');
+    }
+
+    public function showDirectory(\App\Models\Directory $directory)
+    {
+        $directory->load(['president', 'secretary', 'treasurer', 'actions.user', 'members.user']);
+        return view('pages.admin.directories.show', compact('directory'));
+    }
+
+    public function assignMember(Request $request, \App\Models\Directory $directory)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'cpf' => 'required|string',
+            'member_type' => 'required|in:founder,board_member',
+        ]);
+
+        // Regra Partidária: Unicidade de CPF em Fundadores de diferentes diretórios
+        if ($request->member_type === 'founder') {
+            $exists = \App\Models\DirectoryMember::where('cpf', $request->cpf)
+                ->where('member_type', 'founder')
+                ->where('directory_id', '!=', $directory->id)
+                ->exists();
+            if ($exists) {
+                return back()->with('error', 'Este CPF já consta como fundador em outro diretório.');
+            }
+        }
+
+        $directory->members()->create($request->all());
+
+        return back()->with('success', 'Membro cadastrado com sucesso.');
+    }
+
+    public function removeMember(\App\Models\Directory $directory, \App\Models\DirectoryMember $member)
+    {
+        $member->delete();
+        return back()->with('success', 'Membro removido com sucesso.');
     }
 }

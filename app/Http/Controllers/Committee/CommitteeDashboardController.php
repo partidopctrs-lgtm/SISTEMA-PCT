@@ -27,6 +27,25 @@ class CommitteeDashboardController extends Controller
         $directoryId = $this->getDirectoryId();
         $directory = Directory::find($directoryId);
 
+        $entrances = \App\Models\FinancialRecord::where('directory_id', $directoryId)
+            ->where('type', 'revenue')
+            ->where('status', 'approved')
+            ->sum('amount');
+
+        $exits = Expense::where('directory_id', $directoryId)
+            ->whereIn('status', ['aprovado', 'pago'])
+            ->sum('value');
+
+        $frExits = \App\Models\FinancialRecord::where('directory_id', $directoryId)
+            ->where('type', 'expense')
+            ->where('status', 'approved')
+            ->sum('amount');
+
+        $totalBalance = $entrances - $exits - $frExits;
+        $fundoReserva = $totalBalance * 0.10; // 10% do saldo total
+        $investimentoEscola = $totalBalance * 0.05; // 5% do saldo total
+        $caixaLivre = $totalBalance - $fundoReserva - $investimentoEscola;
+
         $stats = [
             'total_members' => Membership::where('directory_id', $directoryId)->count(),
             'active_members' => Membership::where('directory_id', $directoryId)->where('membership_status', 'active')->count(),
@@ -35,7 +54,9 @@ class CommitteeDashboardController extends Controller
             'pending_documents' => DirectoryDocument::where('directory_id', $directoryId)->where('status', 'enviado')->count(),
             'hino_plays' => \App\Models\AudioInteraction::where('type', 'play')->count(),
             'hino_downloads' => \App\Models\AudioInteraction::where('type', 'download')->count(),
-            'balance' => 0, // Implementar lógica de saldo real quando houver tabela de transações
+            'balance' => $caixaLivre,
+            'fundo_reserva' => $fundoReserva,
+            'investimento_escola' => $investimentoEscola,
         ];
 
         $recentActivities = collect();

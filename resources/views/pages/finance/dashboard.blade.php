@@ -17,17 +17,17 @@
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div class="glass p-6 rounded-3xl shadow-sm">
             <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Saldo Atual</p>
-            <h3 class="text-3xl font-black text-pct-blue">R$ 45.230,00</h3>
-            <p class="text-xs text-pct-green font-bold mt-2">↑ 5.4% este mês</p>
+            <h3 class="text-3xl font-black text-pct-blue">R$ {{ number_format($balance ?? 0, 2, ',', '.') }}</h3>
+            <p class="text-xs text-pct-green font-bold mt-2">Valores calculados em tempo real</p>
         </div>
         <div class="glass p-6 rounded-3xl shadow-sm">
             <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Entradas (Mês)</p>
-            <h3 class="text-3xl font-black text-pct-green">R$ 12.800,00</h3>
-            <p class="text-xs text-gray-500 mt-2">145 doações individuais</p>
+            <h3 class="text-3xl font-black text-pct-green">R$ {{ number_format($monthEntrances ?? 0, 2, ',', '.') }}</h3>
+            <p class="text-xs text-gray-500 mt-2">Baseado em registros aprovados</p>
         </div>
         <div class="glass p-6 rounded-3xl shadow-sm">
             <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Saídas (Mês)</p>
-            <h3 class="text-3xl font-black text-red-500">R$ 4.120,50</h3>
+            <h3 class="text-3xl font-black text-red-500">R$ {{ number_format($monthExits ?? 0, 2, ',', '.') }}</h3>
             <p class="text-xs text-gray-500 mt-2">Despesas operacionais e eventos</p>
         </div>
     </div>
@@ -53,42 +53,44 @@
                     </tr>
                 </thead>
                 <tbody class="text-sm">
+                    @forelse($transactions ?? [] as $transaction)
                     <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 border-b border-gray-50 font-medium">12/04/2026</td>
-                        <td class="px-6 py-4 border-b border-gray-50">Doação Voluntária #9982</td>
-                        <td class="px-6 py-4 border-b border-gray-50"><span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-md text-[10px] font-bold uppercase">Entrada</span></td>
-                        <td class="px-6 py-4 border-b border-gray-50 text-right font-bold text-pct-green">+ R$ 250,00</td>
+                        <td class="px-6 py-4 border-b border-gray-50 font-medium">{{ $transaction->created_at->format('d/m/Y') }}</td>
+                        <td class="px-6 py-4 border-b border-gray-50">{{ $transaction->description }}</td>
+                        <td class="px-6 py-4 border-b border-gray-50">
+                            @if($transaction->type == 'revenue')
+                                <span class="px-2 py-1 bg-blue-100 text-blue-700 rounded-md text-[10px] font-bold uppercase">Entrada</span>
+                            @else
+                                <span class="px-2 py-1 bg-red-100 text-red-700 rounded-md text-[10px] font-bold uppercase">Saída</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4 border-b border-gray-50 text-right font-bold {{ $transaction->type == 'revenue' ? 'text-pct-green' : 'text-red-500' }}">
+                            {{ $transaction->type == 'revenue' ? '+' : '-' }} R$ {{ number_format($transaction->amount, 2, ',', '.') }}
+                        </td>
                         <td class="px-6 py-4 border-b border-gray-50 text-center">
+                            @if($transaction->status == 'approved')
                              <div class="flex items-center justify-center space-x-1 decoration-pct-green">
                                 <span class="h-1.5 w-1.5 rounded-full bg-pct-green"></span>
                                 <span class="text-[10px] font-bold text-pct-green uppercase">Confirmado</span>
                              </div>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 border-b border-gray-50 font-medium">10/04/2026</td>
-                        <td class="px-6 py-4 border-b border-gray-50">Aluguel Sede Municipal - Taquara/RS</td>
-                        <td class="px-6 py-4 border-b border-gray-50"><span class="px-2 py-1 bg-red-100 text-red-700 rounded-md text-[10px] font-bold uppercase">Saída</span></td>
-                        <td class="px-6 py-4 border-b border-gray-50 text-right font-bold text-red-500">- R$ 1.200,00</td>
-                        <td class="px-6 py-4 border-b border-gray-50 text-center">
-                             <div class="flex items-center justify-center space-x-1">
-                                <span class="h-1.5 w-1.5 rounded-full bg-pct-green"></span>
-                                <span class="text-[10px] font-bold text-pct-green uppercase">Pago</span>
-                             </div>
-                        </td>
-                    </tr>
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="px-6 py-4 border-b border-gray-50 font-medium">08/04/2026</td>
-                        <td class="px-6 py-4 border-b border-gray-50">Material Gráfico - Panfletos</td>
-                        <td class="px-6 py-4 border-b border-gray-50"><span class="px-2 py-1 bg-red-100 text-red-700 rounded-md text-[10px] font-bold uppercase">Saída</span></td>
-                        <td class="px-6 py-4 border-b border-gray-50 text-right font-bold text-red-500">- R$ 450,00</td>
-                        <td class="px-6 py-4 border-b border-gray-50 text-center">
+                            @elseif($transaction->status == 'pending')
                              <div class="flex items-center justify-center space-x-1">
                                 <span class="h-1.5 w-1.5 rounded-full bg-yellow-500"></span>
                                 <span class="text-[10px] font-bold text-yellow-600 uppercase">Processando</span>
                              </div>
+                            @else
+                             <div class="flex items-center justify-center space-x-1">
+                                <span class="h-1.5 w-1.5 rounded-full bg-red-500"></span>
+                                <span class="text-[10px] font-bold text-red-600 uppercase">Rejeitado</span>
+                             </div>
+                            @endif
                         </td>
                     </tr>
+                    @empty
+                    <tr>
+                        <td colspan="5" class="px-6 py-4 text-center text-gray-500">Nenhuma movimentação encontrada.</td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

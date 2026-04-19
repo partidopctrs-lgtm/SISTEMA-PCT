@@ -4,12 +4,31 @@ namespace App\Http\Controllers\Finance;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\FinancialRecord;
 
 class FinanceController extends Controller
 {
     public function index()
     {
-        return view('pages.finance.dashboard');
+        $entrances = FinancialRecord::where('type', 'revenue')->where('status', 'approved')->sum('amount');
+        $exits = FinancialRecord::where('type', 'expense')->where('status', 'approved')->sum('amount');
+        $balance = $entrances - $exits;
+
+        $monthEntrances = FinancialRecord::where('type', 'revenue')
+            ->where('status', 'approved')
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->sum('amount');
+
+        $monthExits = FinancialRecord::where('type', 'expense')
+            ->where('status', 'approved')
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->sum('amount');
+
+        $transactions = FinancialRecord::orderBy('created_at', 'desc')->take(10)->get();
+
+        return view('pages.finance.dashboard', compact('balance', 'monthEntrances', 'monthExits', 'transactions'));
     }
 
     public function transparency()

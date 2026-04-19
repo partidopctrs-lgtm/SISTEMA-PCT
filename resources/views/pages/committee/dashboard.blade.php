@@ -86,15 +86,15 @@
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="p-6 bg-slate-900 rounded-[2rem] text-white">
                             <p class="text-[9px] font-black text-slate-400 uppercase mb-1">Saldo em Caixa</p>
-                            <p class="text-2xl font-black">R$ 1.250,00</p>
+                            <p class="text-2xl font-black">R$ {{ number_format($stats['balance'], 2, ',', '.') }}</p>
                         </div>
                         <div class="p-6 bg-blue-600 rounded-[2rem] text-white">
                             <p class="text-[9px] font-black text-blue-200 uppercase mb-1">Fundo de Reserva</p>
-                            <p class="text-2xl font-black">R$ 450,00</p>
+                            <p class="text-2xl font-black">R$ {{ number_format($stats['fundo_reserva'], 2, ',', '.') }}</p>
                         </div>
                         <div class="p-6 bg-emerald-600 rounded-[2rem] text-white">
                             <p class="text-[9px] font-black text-emerald-200 uppercase mb-1">Investimento Escola</p>
-                            <p class="text-2xl font-black">R$ 200,00</p>
+                            <p class="text-2xl font-black">R$ {{ number_format($stats['investimento_escola'], 2, ',', '.') }}</p>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>PCT – Índice de Templates de E-mail</title>
+<style>
+body{font-family:Arial,sans-serif;background:#f0f4fa;margin:0;padding:20px;}
+.container{max-width:1200px;margin:0 auto;}
+.header{background:#0d2d6b;color:#fff;padding:30px;border-radius:10px;margin-bottom:24px;text-align:center;}
+.header h1{margin:0 0 8px;font-size:24px;}
+.header p{margin:0;color:#f0c040;font-size:14px;}
+.cat-title{background:#1a3a6b;color:#fff;padding:12px 18px;border-radius:8px 8px 0 0;font-size:16px;font-weight:bold;margin-top:20px;}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;background:#fff;padding:16px;border-radius:0 0 8px 8px;border:1px solid #e0e8f4;}
+.card{background:#f4f7fb;border:1px solid #e0e8f4;border-radius:6px;padding:14px;transition:box-shadow .2s;}
+.card:hover{box-shadow:0 3px 12px rgba(13,45,107,.15);}
+.card .slug{font-size:11px;color:#1a3a6b;font-weight:bold;font-family:monospace;background:#e8f0fe;padding:3px 8px;border-radius:4px;display:inline-block;margin-bottom:8px;}
+.card .nome{font-size:14px;color:#333;font-weight:bold;margin-bottom:6px;}
+.card .assunto{font-size:12px;color:#666;line-height:1.5;}
+.badge{display:inline-block;background:#0d2d6b;color:#fff;font-size:11px;padding:2px 10px;border-radius:20px;margin-top:8px;}
+.total{background:#2a8a40;color:#fff;padding:16px 24px;border-radius:8px;text-align:center;font-size:18px;font-weight:bold;margin-bottom:20px;}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header">
+<h1>PCT – Biblioteca de Templates de E-mail</h1>
+<p>UNIR • DEFENDER • TRANSFORMAR | Sistema Oficial de Comunicação</p>
+</div>
+<div class="total">Total: 103 templates em 16 categorias</div>
+<div class="cat-title">🔐 Autenticação <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(10 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">auth_welcome</span>
+<div class="nome">Boas-vindas ao sistema</div>
+<div class="assunto">Bem-vindo(a) ao PCT, {{nome}}!</div>
+<span class="badge">autenticacao</span>
+</div>
+<div class="card">
+<span class="slug">auth_email_verification</span>
+<div class="nome">Confirmação de e-mail</div>
+<div class="assunto">Confirme seu e-mail – PCT</div>
+<span class="badge">autenticacao</span>
+</div>
+<div class="card">
+<span class="slug">auth_account_activated</span>
+<div class="nome">Conta ativada</div>
+<div class="assunto">Sua conta PCT está ativa, {{nome}}!</div>
+<span class="badge">autenticacao</span>
+</div>
+<div class="card">
+<span class="slug">auth_password_reset_request</span>
+<div class="nome">Redefinição de senha solicitada</div>
+<div class="assunto">Redefinição de senha solicitada – PCT</div>
+<span class="badge">autenticacao</span>
+</div>
+<div class="card">
+<span class="slug">auth_password_reset_success</span>
+<div class="nome">Senha redefinida com sucesso</div>
+<div class="assunto">Sua senha PCT foi redefinida com sucesso</div>
+<span class="badge">autenticacao</span>
+</div>
+<div class="card">
+<span class="slug">auth_password_changed</span>
+<div class="nome">Alteração de senha confirmada</div>
+<div class="assunto">Senha da sua conta PCT foi alterada</div>
+<span class="badge">autenticacao</span>
+</div>
+<div class="card">
+<span class="slug">auth_login_alert</span>
+<div class="nome">Novo login detectado</div>
+<div class="assunto">Novo acesso detectado na sua conta PCT</div>
+<span class="badge">autenticacao</span>
+</div>
+<div class="card">
+<span class="slug">auth_login_suspicious</span>
+<div class="nome">Login suspeito detectado</div>
+<div class="assunto">🚨 Atividade suspeita detectada – PCT</div>
+<span class="badge">autenticacao</span>
+</div>
+<div class="card">
+<span class="slug">auth_account_locked</span>
+<div class="nome">Conta bloqueada</div>
+<div class="assunto">Sua conta PCT foi bloqueada temporariamente</div>
+<span class="badge">autenticacao</span>
+</div>
+<div class="card">
+<span class="slug">auth_account_unlocked</span>
+<div class="nome">Conta desbloqueada</div>
+<div class="assunto">Sua conta PCT foi desbloqueada</div>
+<span class="badge">autenticacao</span>
+</div>
+</div>
+<div class="cat-title">📋 Filiação <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(6 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">filiacao_recebida</span>
+<div class="nome">Filiação recebida</div>
+<div class="assunto">Recebemos sua solicitação de filiação ao PCT, {{nome}}</div>
+<span class="badge">filiacao</span>
+</div>
+<div class="card">
+<span class="slug">filiacao_aprovada</span>
+<div class="nome">Filiação aprovada</div>
+<div class="assunto">🎉 Sua filiação ao PCT foi aprovada, {{nome}}!</div>
+<span class="badge">filiacao</span>
+</div>
+<div class="card">
+<span class="slug">filiacao_rejeitada</span>
+<div class="nome">Filiação rejeitada</div>
+<div class="assunto">Atualização sobre sua solicitação de filiação – PCT</div>
+<span class="badge">filiacao</span>
+</div>
+<div class="card">
+<span class="slug">filiacao_pendente</span>
+<div class="nome">Filiação pendente</div>
+<div class="assunto">Sua filiação PCT precisa de atenção, {{nome}}</div>
+<span class="badge">filiacao</span>
+</div>
+<div class="card">
+<span class="slug">filiacao_termo_aceito</span>
+<div class="nome">Termo de filiação aceito</div>
+<div class="assunto">Termo de filiação aceito – PCT</div>
+<span class="badge">filiacao</span>
+</div>
+<div class="card">
+<span class="slug">filiacao_documento_pendente</span>
+<div class="nome">Documento pendente na filiação</div>
+<div class="assunto">Documento necessário para sua filiação PCT</div>
+<span class="badge">filiacao</span>
+</div>
+</div>
+<div class="cat-title">🤝 Apoio ao Partido <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(9 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">apoio_registrado</span>
+<div class="nome">Apoio registrado</div>
+<div class="assunto">✅ Seu apoio ao PCT foi registrado, {{nome}}!</div>
+<span class="badge">apoio_partido</span>
+</div>
+<div class="card">
+<span class="slug">apoio_ficha_envio</span>
+<div class="nome">Envio da ficha de apoio</div>
+<div class="assunto">📋 Sua ficha de apoio ao PCT está pronta!</div>
+<span class="badge">apoio_partido</span>
+</div>
+<div class="card">
+<span class="slug">apoio_lembrete_assinatura</span>
+<div class="nome">Lembrete para assinar ficha</div>
+<div class="assunto">⏰ Lembrete: sua ficha de apoio ainda não foi assinada</div>
+<span class="badge">apoio_partido</span>
+</div>
+<div class="card">
+<span class="slug">apoio_ficha_reenviar</span>
+<div class="nome">Reenvio da ficha de apoio</div>
+<div class="assunto">📋 Reenviando sua ficha de apoio ao PCT</div>
+<span class="badge">apoio_partido</span>
+</div>
+<div class="card">
+<span class="slug">apoio_confirmado</span>
+<div class="nome">Apoio validado</div>
+<div class="assunto">✅ Seu apoio ao PCT foi validado oficialmente!</div>
+<span class="badge">apoio_partido</span>
+</div>
+<div class="card">
+<span class="slug">apoio_rejeitado</span>
+<div class="nome">Apoio inválido</div>
+<div class="assunto">⚠️ Problema identificado no seu apoio ao PCT</div>
+<span class="badge">apoio_partido</span>
+</div>
+<div class="card">
+<span class="slug">apoio_dados_inconsistentes</span>
+<div class="nome">Problema nos dados do apoio</div>
+<div class="assunto">⚠️ Dados inconsistentes no seu apoio – PCT</div>
+<span class="badge">apoio_partido</span>
+</div>
+<div class="card">
+<span class="slug">apoio_meta_cidade_alerta</span>
+<div class="nome">Cidade abaixo da meta</div>
+<div class="assunto">⚠️ {{cidade}} está abaixo da meta de apoios ao PCT</div>
+<span class="badge">apoio_partido</span>
+</div>
+<div class="card">
+<span class="slug">apoio_meta_cidade_batida</span>
+<div class="nome">Meta da cidade atingida</div>
+<div class="assunto">🎯 {{cidade}} atingiu a meta de apoios ao PCT!</div>
+<span class="badge">apoio_partido</span>
+</div>
+</div>
+<div class="cat-title">🗳️ Votações <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(8 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">votacao_aberta</span>
+<div class="nome">Nova votação aberta</div>
+<div class="assunto">🗳️ Nova votação disponível no PCT: {{titulo}}</div>
+<span class="badge">votacao</span>
+</div>
+<div class="card">
+<span class="slug">votacao_lembrete</span>
+<div class="nome">Lembrete de votação</div>
+<div class="assunto">⏰ Lembrete: você ainda não votou em "{{titulo}}"</div>
+<span class="badge">votacao</span>
+</div>
+<div class="card">
+<span class="slug">votacao_encerrada</span>
+<div class="nome">Votação encerrada</div>
+<div class="assunto">Votação encerrada: {{titulo}}</div>
+<span class="badge">votacao</span>
+</div>
+<div class="card">
+<span class="slug">votacao_resultado</span>
+<div class="nome">Resultado da votação</div>
+<div class="assunto">📊 Resultado oficial da votação: {{titulo}}</div>
+<span class="badge">votacao</span>
+</div>
+<div class="card">
+<span class="slug">votacao_quorum_insuficiente</span>
+<div class="nome">Quorum insuficiente</div>
+<div class="assunto">⚠️ Quorum insuficiente na votação: {{titulo}}</div>
+<span class="badge">votacao</span>
+</div>
+<div class="card">
+<span class="slug">eleicao_aberta</span>
+<div class="nome">Eleição aberta</div>
+<div class="assunto">🗳️ Eleição interna aberta no PCT: {{titulo}}</div>
+<span class="badge">votacao</span>
+</div>
+<div class="card">
+<span class="slug">eleicao_resultado</span>
+<div class="nome">Resultado da eleição</div>
+<div class="assunto">📊 Resultado oficial da eleição: {{titulo}}</div>
+<span class="badge">votacao</span>
+</div>
+<div class="card">
+<span class="slug">eleicao_posse</span>
+<div class="nome">Posse confirmada</div>
+<div class="assunto">📌 Sua posse no cargo foi confirmada – PCT</div>
+<span class="badge">votacao</span>
+</div>
+</div>
+<div class="cat-title">🏛️ Cargos e Governança <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(5 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">cargo_promocao_sugerida</span>
+<div class="nome">Promoção sugerida</div>
+<div class="assunto">💡 Promoção de cargo sugerida para você – PCT</div>
+<span class="badge">governanca</span>
+</div>
+<div class="card">
+<span class="slug">cargo_promocao_aprovada</span>
+<div class="nome">Promoção aprovada</div>
+<div class="assunto">🏅 Parabéns! Você foi promovido(a) no PCT</div>
+<span class="badge">governanca</span>
+</div>
+<div class="card">
+<span class="slug">cargo_promocao_rejeitada</span>
+<div class="nome">Promoção rejeitada</div>
+<div class="assunto">Atualização sobre proposta de promoção – PCT</div>
+<span class="badge">governanca</span>
+</div>
+<div class="card">
+<span class="slug">cargo_nomeacao</span>
+<div class="nome">Nomeação para cargo</div>
+<div class="assunto">📌 Você foi nomeado(a) para um cargo no PCT</div>
+<span class="badge">governanca</span>
+</div>
+<div class="card">
+<span class="slug">cargo_remocao</span>
+<div class="nome">Remoção de cargo</div>
+<div class="assunto">Atualização de cargo no sistema PCT</div>
+<span class="badge">governanca</span>
+</div>
+</div>
+<div class="cat-title">🏙️ Diretórios <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(7 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">diretorio_novo_membro</span>
+<div class="nome">Novo membro na cidade</div>
+<div class="assunto">👤 Novo membro registrado em {{cidade}}</div>
+<span class="badge">diretorio</span>
+</div>
+<div class="card">
+<span class="slug">diretorio_novo_apoio</span>
+<div class="nome">Novo apoio registrado no diretório</div>
+<div class="assunto">✅ Novo apoio registrado em {{cidade}}</div>
+<span class="badge">diretorio</span>
+</div>
+<div class="card">
+<span class="slug">diretorio_meta_atualizada</span>
+<div class="nome">Meta do diretório atualizada</div>
+<div class="assunto">🎯 Meta do diretório atualizada – {{cidade}}</div>
+<span class="badge">diretorio</span>
+</div>
+<div class="card">
+<span class="slug">diretorio_meta_baixa</span>
+<div class="nome">Meta em risco</div>
+<div class="assunto">⚠️ Meta em risco no diretório de {{cidade}}</div>
+<span class="badge">diretorio</span>
+</div>
+<div class="card">
+<span class="slug">diretorio_meta_atingida</span>
+<div class="nome">Meta do diretório atingida</div>
+<div class="assunto">🎯 O diretório de {{cidade}} atingiu sua meta!</div>
+<span class="badge">diretorio</span>
+</div>
+<div class="card">
+<span class="slug">diretorio_sem_atividade</span>
+<div class="nome">Diretório inativo</div>
+<div class="assunto">⚠️ O diretório de {{cidade}} está sem atividade</div>
+<span class="badge">diretorio</span>
+</div>
+<div class="card">
+<span class="slug">diretorio_relatorio_disponivel</span>
+<div class="nome">Relatório do diretório disponível</div>
+<div class="assunto">📊 Relatório do diretório disponível – {{cidade}}</div>
+<span class="badge">diretorio</span>
+</div>
+</div>
+<div class="cat-title">📝 Tarefas <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(5 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">tarefa_nova</span>
+<div class="nome">Nova tarefa atribuída</div>
+<div class="assunto">📝 Nova tarefa atribuída a você: {{titulo}}</div>
+<span class="badge">tarefas</span>
+</div>
+<div class="card">
+<span class="slug">tarefa_prazo_proximo</span>
+<div class="nome">Prazo de tarefa próximo</div>
+<div class="assunto">⏰ Prazo se aproximando: {{titulo}}</div>
+<span class="badge">tarefas</span>
+</div>
+<div class="card">
+<span class="slug">tarefa_atrasada</span>
+<div class="nome">Tarefa atrasada</div>
+<div class="assunto">🚨 Tarefa em atraso: {{titulo}}</div>
+<span class="badge">tarefas</span>
+</div>
+<div class="card">
+<span class="slug">tarefa_concluida</span>
+<div class="nome">Tarefa concluída</div>
+<div class="assunto">✅ Tarefa concluída: {{titulo}}</div>
+<span class="badge">tarefas</span>
+</div>
+<div class="card">
+<span class="slug">tarefa_cancelada</span>
+<div class="nome">Tarefa cancelada</div>
+<div class="assunto">❌ Tarefa cancelada: {{titulo}}</div>
+<span class="badge">tarefas</span>
+</div>
+</div>
+<div class="cat-title">📣 Demandas <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(4 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">demanda_nova</span>
+<div class="nome">Nova demanda registrada</div>
+<div class="assunto">📣 Nova demanda registrada em {{cidade}}</div>
+<span class="badge">demandas</span>
+</div>
+<div class="card">
+<span class="slug">demanda_urgente</span>
+<div class="nome">Demanda urgente</div>
+<div class="assunto">🚨 URGENTE: Nova demanda crítica em {{cidade}}</div>
+<span class="badge">demandas</span>
+</div>
+<div class="card">
+<span class="slug">demanda_encaminhada</span>
+<div class="nome">Demanda encaminhada</div>
+<div class="assunto">📤 Demanda encaminhada: {{titulo}}</div>
+<span class="badge">demandas</span>
+</div>
+<div class="card">
+<span class="slug">demanda_resposta</span>
+<div class="nome">Resposta à demanda</div>
+<div class="assunto">💬 Resposta recebida para sua demanda: {{titulo}}</div>
+<span class="badge">demandas</span>
+</div>
+</div>
+<div class="cat-title">📄 Documentos <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(6 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">doc_criado</span>
+<div class="nome">Documento criado</div>
+<div class="assunto">📄 Novo documento criado: {{titulo}}</div>
+<span class="badge">documentos</span>
+</div>
+<div class="card">
+<span class="slug">doc_em_revisao</span>
+<div class="nome">Documento em revisão</div>
+<div class="assunto">🔍 Documento em revisão: {{titulo}}</div>
+<span class="badge">documentos</span>
+</div>
+<div class="card">
+<span class="slug">doc_aprovado</span>
+<div class="nome">Documento aprovado</div>
+<div class="assunto">✅ Documento aprovado: {{titulo}}</div>
+<span class="badge">documentos</span>
+</div>
+<div class="card">
+<span class="slug">doc_rejeitado</span>
+<div class="nome">Documento rejeitado</div>
+<div class="assunto">⚠️ Documento devolvido: {{titulo}}</div>
+<span class="badge">documentos</span>
+</div>
+<div class="card">
+<span class="slug">doc_juridico_pendente</span>
+<div class="nome">Jurídico pendente</div>
+<div class="assunto">⚖️ Documento aguardando análise jurídica: {{titulo}}</div>
+<span class="badge">documentos</span>
+</div>
+<div class="card">
+<span class="slug">doc_assinatura_pendente</span>
+<div class="nome">Assinatura pendente</div>
+<div class="assunto">✍️ Documento aguardando sua assinatura: {{titulo}}</div>
+<span class="badge">documentos</span>
+</div>
+</div>
+<div class="cat-title">⚖️ Jurídico <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(6 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">juridico_novo_documento</span>
+<div class="nome">Novo documento para análise</div>
+<div class="assunto">⚖️ Novo documento para análise jurídica: {{titulo}}</div>
+<span class="badge">juridico</span>
+</div>
+<div class="card">
+<span class="slug">juridico_parecer_emitido</span>
+<div class="nome">Parecer jurídico emitido</div>
+<div class="assunto">⚖️ Parecer jurídico emitido: {{titulo}}</div>
+<span class="badge">juridico</span>
+</div>
+<div class="card">
+<span class="slug">juridico_pendencia</span>
+<div class="nome">Pendência jurídica</div>
+<div class="assunto">⚖️ Pendência jurídica: {{titulo}}</div>
+<span class="badge">juridico</span>
+</div>
+<div class="card">
+<span class="slug">juridico_aprovado</span>
+<div class="nome">Documento validado pelo jurídico</div>
+<div class="assunto">✅ Documento validado pelo jurídico: {{titulo}}</div>
+<span class="badge">juridico</span>
+</div>
+<div class="card">
+<span class="slug">juridico_rejeitado</span>
+<div class="nome">Documento recusado pelo jurídico</div>
+<div class="assunto">⚠️ Documento recusado pelo jurídico: {{titulo}}</div>
+<span class="badge">juridico</span>
+</div>
+<div class="card">
+<span class="slug">juridico_alerta_risco</span>
+<div class="nome">Alerta de risco jurídico</div>
+<div class="assunto">🚨 ALERTA JURÍDICO: Risco identificado</div>
+<span class="badge">juridico</span>
+</div>
+</div>
+<div class="cat-title">💰 Financeiro <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(6 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">financeiro_receita</span>
+<div class="nome">Receita registrada</div>
+<div class="assunto">💰 Nova receita registrada no PCT</div>
+<span class="badge">financeiro</span>
+</div>
+<div class="card">
+<span class="slug">financeiro_despesa</span>
+<div class="nome">Despesa registrada</div>
+<div class="assunto">💳 Nova despesa registrada no PCT</div>
+<span class="badge">financeiro</span>
+</div>
+<div class="card">
+<span class="slug">financeiro_aprovacao</span>
+<div class="nome">Aprovação financeira</div>
+<div class="assunto">✅ Solicitação financeira aprovada – PCT</div>
+<span class="badge">financeiro</span>
+</div>
+<div class="card">
+<span class="slug">financeiro_rejeicao</span>
+<div class="nome">Rejeição financeira</div>
+<div class="assunto">❌ Solicitação financeira rejeitada – PCT</div>
+<span class="badge">financeiro</span>
+</div>
+<div class="card">
+<span class="slug">financeiro_relatorio</span>
+<div class="nome">Relatório financeiro mensal</div>
+<div class="assunto">💰 Relatório financeiro de {{mes}}/{{ano}} disponível</div>
+<span class="badge">financeiro</span>
+</div>
+<div class="card">
+<span class="slug">financeiro_divergencia</span>
+<div class="nome">Divergência financeira detectada</div>
+<div class="assunto">🚨 Divergência financeira detectada – Ação necessária</div>
+<span class="badge">financeiro</span>
+</div>
+</div>
+<div class="cat-title">🏆 Candidatos <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(6 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">candidato_pre_cadastro</span>
+<div class="nome">Pré-candidatura recebida</div>
+<div class="assunto">📋 Sua pré-candidatura ao PCT foi recebida, {{nome}}</div>
+<span class="badge">candidato</span>
+</div>
+<div class="card">
+<span class="slug">candidato_aprovado</span>
+<div class="nome">Pré-candidatura aprovada</div>
+<div class="assunto">🎉 Sua pré-candidatura ao PCT foi aprovada, {{nome}}!</div>
+<span class="badge">candidato</span>
+</div>
+<div class="card">
+<span class="slug">candidato_rejeitado</span>
+<div class="nome">Pré-candidatura rejeitada</div>
+<div class="assunto">Atualização sobre sua pré-candidatura – PCT</div>
+<span class="badge">candidato</span>
+</div>
+<div class="card">
+<span class="slug">candidato_documento_pendente</span>
+<div class="nome">Documentos do candidato pendentes</div>
+<div class="assunto">📎 Documentos pendentes para sua candidatura – PCT</div>
+<span class="badge">candidato</span>
+</div>
+<div class="card">
+<span class="slug">candidato_avaliacao</span>
+<div class="nome">Avaliação do candidato disponível</div>
+<div class="assunto">📊 Sua avaliação está disponível – PCT</div>
+<span class="badge">candidato</span>
+</div>
+<div class="card">
+<span class="slug">candidato_convocacao</span>
+<div class="nome">Convocação interna do candidato</div>
+<div class="assunto">📌 Convocação: {{titulo}} – PCT</div>
+<span class="badge">candidato</span>
+</div>
+</div>
+<div class="cat-title">📢 Comunicação <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(4 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">campanha_disparo</span>
+<div class="nome">Campanha enviada</div>
+<div class="assunto">📨 {{titulo}} – PCT</div>
+<span class="badge">comunicacao</span>
+</div>
+<div class="card">
+<span class="slug">campanha_agendada</span>
+<div class="nome">Campanha agendada</div>
+<div class="assunto">📅 Campanha agendada: {{titulo}}</div>
+<span class="badge">comunicacao</span>
+</div>
+<div class="card">
+<span class="slug">campanha_resultado</span>
+<div class="nome">Resultado da campanha</div>
+<div class="assunto">📊 Resultado da campanha: {{titulo}}</div>
+<span class="badge">comunicacao</span>
+</div>
+<div class="card">
+<span class="slug">comunicado_oficial</span>
+<div class="nome">Comunicado oficial</div>
+<div class="assunto">📢 Comunicado Oficial PCT: {{titulo}}</div>
+<span class="badge">comunicacao</span>
+</div>
+</div>
+<div class="cat-title">🌟 Engajamento <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(6 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">engajamento_pontos</span>
+<div class="nome">Pontos ganhos</div>
+<div class="assunto">🌟 Você ganhou {{pontos}} pontos no PCT!</div>
+<span class="badge">engajamento</span>
+</div>
+<div class="card">
+<span class="slug">engajamento_nivel</span>
+<div class="nome">Subida de nível</div>
+<div class="assunto">🏆 Parabéns! Você subiu para o nível {{nivel}} no PCT!</div>
+<span class="badge">engajamento</span>
+</div>
+<div class="card">
+<span class="slug">engajamento_ranking</span>
+<div class="nome">Ranking atualizado</div>
+<div class="assunto">📊 Ranking PCT atualizado – sua posição: #{{posicao}}</div>
+<span class="badge">engajamento</span>
+</div>
+<div class="card">
+<span class="slug">engajamento_inatividade</span>
+<div class="nome">Alerta de inatividade</div>
+<div class="assunto">👋 Está tudo bem, {{nome}}? Sentimos sua falta no PCT!</div>
+<span class="badge">engajamento</span>
+</div>
+<div class="card">
+<span class="slug">engajamento_bloqueio</span>
+<div class="nome">Bloqueio por inatividade</div>
+<div class="assunto">⚠️ Sua conta PCT foi suspensa por inatividade</div>
+<span class="badge">engajamento</span>
+</div>
+<div class="card">
+<span class="slug">engajamento_reativacao</span>
+<div class="nome">Conta reativada</div>
+<div class="assunto">✅ Sua conta PCT foi reativada! Seja bem-vindo(a) de volta!</div>
+<span class="badge">engajamento</span>
+</div>
+</div>
+<div class="cat-title">🎫 Suporte <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(6 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">suporte_ticket_aberto</span>
+<div class="nome">Ticket aberto</div>
+<div class="assunto">🎫 Ticket #{{protocolo}} aberto – PCT Suporte</div>
+<span class="badge">suporte</span>
+</div>
+<div class="card">
+<span class="slug">suporte_ticket_resposta</span>
+<div class="nome">Resposta ao ticket</div>
+<div class="assunto">💬 Resposta ao seu ticket #{{protocolo}} – PCT</div>
+<span class="badge">suporte</span>
+</div>
+<div class="card">
+<span class="slug">suporte_ticket_fechado</span>
+<div class="nome">Ticket fechado</div>
+<div class="assunto">✅ Ticket #{{protocolo}} fechado – PCT</div>
+<span class="badge">suporte</span>
+</div>
+<div class="card">
+<span class="slug">admin_usuario_criado</span>
+<div class="nome">Usuário criado pelo administrador</div>
+<div class="assunto">👤 Sua conta PCT foi criada pelo administrador</div>
+<span class="badge">suporte</span>
+</div>
+<div class="card">
+<span class="slug">admin_usuario_alterado</span>
+<div class="nome">Alteração de usuário</div>
+<div class="assunto">⚙️ Alteração realizada na sua conta PCT</div>
+<span class="badge">suporte</span>
+</div>
+<div class="card">
+<span class="slug">admin_acao_critica</span>
+<div class="nome">Ação crítica registrada</div>
+<div class="assunto">🚨 Ação crítica registrada no sistema PCT</div>
+<span class="badge">suporte</span>
+</div>
+</div>
+<div class="cat-title">🖥️ Infraestrutura <span style="font-size:13px;font-weight:normal;color:#a0b8e0;">(9 templates)</span></div>
+<div class="cards">
+<div class="card">
+<span class="slug">dev_servidor_offline</span>
+<div class="nome">Servidor fora do ar</div>
+<div class="assunto">🚨 [CRÍTICO] Servidor PCT offline!</div>
+<span class="badge">infraestrutura</span>
+</div>
+<div class="card">
+<span class="slug">dev_cpu_alta</span>
+<div class="nome">Uso alto de CPU</div>
+<div class="assunto">⚠️ Uso crítico de CPU – Servidor PCT</div>
+<span class="badge">infraestrutura</span>
+</div>
+<div class="card">
+<span class="slug">dev_memoria_alta</span>
+<div class="nome">Uso alto de memória</div>
+<div class="assunto">⚠️ Uso crítico de memória – Servidor PCT</div>
+<span class="badge">infraestrutura</span>
+</div>
+<div class="card">
+<span class="slug">dev_disco_critico</span>
+<div class="nome">Disco quase cheio</div>
+<div class="assunto">🚨 Disco quase cheio – Servidor PCT</div>
+<span class="badge">infraestrutura</span>
+</div>
+<div class="card">
+<span class="slug">dev_banco_indisponivel</span>
+<div class="nome">Banco de dados indisponível</div>
+<div class="assunto">🚨 [CRÍTICO] Banco de dados PCT indisponível!</div>
+<span class="badge">infraestrutura</span>
+</div>
+<div class="card">
+<span class="slug">dev_ssl_expirando</span>
+<div class="nome">SSL prestes a expirar</div>
+<div class="assunto">⚠️ Certificado SSL expira em {{dias}} dias – PCT</div>
+<span class="badge">infraestrutura</span>
+</div>
+<div class="card">
+<span class="slug">dev_backup_falhou</span>
+<div class="nome">Backup falhou</div>
+<div class="assunto">🚨 [CRÍTICO] Backup do PCT falhou!</div>
+<span class="badge">infraestrutura</span>
+</div>
+<div class="card">
+<span class="slug">dev_backup_sucesso</span>
+<div class="nome">Backup concluído</div>
+<div class="assunto">✅ Backup PCT concluído com sucesso</div>
+<span class="badge">infraestrutura</span>
+</div>
+<div class="card">
+<span class="slug">dev_seguranca_alerta</span>
+<div class="nome">Tentativa de invasão</div>
+<div class="assunto">🚨 [SEGURANÇA] Tentativa de invasão – PCT</div>
+<span class="badge">infraestrutura</span>
+</div>
+</div>
+</div></body></html>

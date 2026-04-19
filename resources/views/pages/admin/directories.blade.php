@@ -62,8 +62,8 @@
                     @forelse($committees as $dir)
                     <tr class="hover:bg-slate-50/50 transition-colors">
                         <td class="px-8 py-6">
-                            <p class="text-sm font-black text-pct-blue uppercase">{{ $dir->name }}</p>
-                            <p class="text-[10px] text-gray-400 font-bold mt-0.5">ID: #DIR-{{ str_pad($dir->id, 4, '0', STR_PAD_LEFT) }}</p>
+                            <a href="{{ route('admin.directories.show', $dir->id) }}" class="text-sm font-black text-pct-blue uppercase hover:underline decoration-2 underline-offset-4">{{ $dir->name }}</a>
+                            <p class="text-[10px] text-gray-400 font-bold mt-0.5">Protocolo: {{ $dir->protocol_number ?? 'DIR-'.$dir->id }}</p>
                         </td>
                         <td class="px-8 py-6">
                             <p class="text-xs font-bold text-gray-600">{{ $dir->city }}</p>
@@ -83,17 +83,47 @@
                             </div>
                         </td>
                         <td class="px-8 py-6">
-                            <span class="px-3 py-1 {{ $dir->status === 'active' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : 'bg-amber-50 text-amber-600 border-amber-100' }} text-[9px] font-black rounded-full uppercase border">
-                                {{ $dir->status === 'active' ? 'Ativo' : 'Pendente' }}
-                            </span>
+                            <div class="flex flex-col gap-1">
+                                <span class="px-2 py-0.5 {{ in_array($dir->operational_status, ['active', 'approved']) ? 'bg-emerald-50 text-emerald-600 border-emerald-100' : ($dir->operational_status === 'blocked' ? 'bg-red-50 text-red-600 border-red-100' : 'bg-amber-50 text-amber-600 border-amber-100') }} text-[8px] font-black rounded-md uppercase border w-fit">
+                                    OPE: {{ $dir->operational_status }}
+                                </span>
+                                <span class="px-2 py-0.5 bg-blue-50 text-pct-blue border-blue-100 text-[8px] font-black rounded-md uppercase border w-fit">
+                                    VÍN: {{ $dir->affiliation_status }}
+                                </span>
+                                <span class="px-2 py-0.5 bg-slate-50 text-slate-500 border-slate-100 text-[8px] font-black rounded-md uppercase border w-fit">
+                                    JUR: {{ $dir->legal_status }}
+                                </span>
+                            </div>
                         </td>
                         <td class="px-8 py-6">
                             <div class="flex gap-2">
-                                <button @click="openView({{ json_encode($dir) }})" class="p-2 bg-white border border-slate-200 rounded-xl text-gray-400 hover:text-pct-blue hover:border-pct-blue transition-all">
+                                @if($dir->operational_status === 'pending' || $dir->operational_status === 'submitted')
+                                <form action="{{ route('admin.directories.approve', $dir->id) }}" method="POST" class="inline">
+                                    @csrf
+                                    <button type="submit" class="p-2 bg-white border border-slate-200 rounded-xl text-emerald-500 hover:text-emerald-700 hover:border-emerald-500 hover:bg-emerald-50 transition-all" title="Aprovar Implantação">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                    </button>
+                                </form>
+                                @endif
+
+                                @if($dir->operational_status === 'approved')
+                                <form action="{{ route('admin.directories.release', $dir->id) }}" method="POST" class="inline">
+                                    @csrf
+                                </form>
+                                @endif
+
+                                @if($dir->status === 'active')
+                                <form action="{{ route('admin.directories.block', $dir->id) }}" method="POST" class="inline" onsubmit="return confirm('Deseja realmente BLOQUEAR este diretório?')">
+                                    @csrf
+                                    <input type="hidden" name="reason" value="Bloqueio administrativo temporário.">
+                                    <button type="submit" class="p-2 bg-white border border-slate-200 rounded-xl text-amber-600 hover:text-amber-800 hover:border-amber-600 hover:bg-amber-50 transition-all" title="Bloquear Operações">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                                    </button>
+                                </form>
+                                @endif
+
+                                <button @click="openView({{ json_encode($dir) }})" class="p-2 bg-white border border-slate-200 rounded-xl text-gray-400 hover:text-pct-blue hover:border-pct-blue transition-all" title="Visualizar Detalhes">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
-                                </button>
-                                <button @click="openEdit({{ json_encode($dir) }})" class="p-2 bg-white border border-slate-200 rounded-xl text-gray-400 hover:text-pct-blue hover:border-pct-blue transition-all">
-                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
                                 </button>
                                 <a href="{{ route('admin.directories.export', $dir->id) }}" target="_blank" class="p-2 bg-white border border-slate-200 rounded-xl text-gray-400 hover:text-pct-green hover:border-pct-green transition-all" title="Baixar Ficha (PDF)">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
@@ -279,6 +309,42 @@
                                     <option value="Estadual">Estadual</option>
                                     <option value="Nacional">Nacional</option>
                                 </select>
+                            </div>
+                            <div class="space-y-4 pt-4 border-t border-slate-100">
+                                <p class="text-[10px] font-black text-pct-blue uppercase tracking-widest">Responsáveis Institucionais</p>
+                                <div>
+                                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Presidente</label>
+                                    <select name="president_id" class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold outline-none">
+                                        <option value="">Selecione o Presidente</option>
+                                        @foreach($users ?? [] as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Secretário</label>
+                                        <select name="secretary_id" class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold outline-none">
+                                            <option value="">Selecione...</option>
+                                            @foreach($users ?? [] as $user)
+                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Tesoureiro</label>
+                                        <select name="treasurer_id" class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold outline-none">
+                                            <option value="">Selecione...</option>
+                                            @foreach($users ?? [] as $user)
+                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Endereço Base</label>
+                                <input type="text" name="address_base" class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold outline-none">
                             </div>
                             <div class="flex gap-2">
                                 <button type="button" @click="mode = 'choice'" class="w-1/3 py-4 bg-slate-100 text-gray-400 text-xs font-black uppercase rounded-2xl hover:bg-slate-200">Voltar</button>
