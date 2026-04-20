@@ -32,5 +32,18 @@
 
 - [ ] **Fase 6: Deploy e Validação Final**
   - `[x]` Atualização do script deploy/deploy.sh
+  - `[x]` Configuração de DNS (A para 187.127.17.241, CNAME para www)
+  - `[/]` Migração do Frontend para Vercel
+  - `[/]` Ajuste de CORS e Sanctum para domínio externo
   - `[ ]` Teste de Fluxo de Login em todos os subdomínios (Simulação de Cookies)
-  - `[ ]` Emissão de Certificados SSL (Certbot Multi-Domain)
+  - `[ ]` Emissão de Certificados SSL (Certbot Multi-Domain / Wildcard)
+
+- [ ] **Fase 7: Multi-Site por Subdomínio Dinâmico**
+  - `[x]` Migration: Adição de `subdomain` e `slug` em `directories`
+  - `[x]` Middleware: Identificação automática de Diretório via Host
+  - `[x]` Roteamento Wildcard: `{city}.pct.social.br`
+  - `[x]` Roteamento Fixo: `administrativo`, `afiliado`, `juridico`, etc.
+  - `[x]` View: Site customizável do Diretório (`directory.show`)
+  - `[ ]` Módulo Admin: Gestão de subdomínios de Diretórios
+  - `[ ]` Configuração Nginx Wildcard no VPS
+

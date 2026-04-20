@@ -52,9 +52,9 @@
             <div class="px-4 space-y-4">
                 @php 
                     $user = auth()->user();
-                    $role = $user->role ?? 'affiliate';
-                    $isAdmin = $user->hasRole('admin');
-                    $committee = $user->committee;
+                    $role = $user?->role ?? 'affiliate';
+                    $isAdmin = $user?->hasRole('admin') ?? false;
+                    $committee = $user?->committee;
                     $isApplicant = $committee && $committee->affiliation_status === 'applicant';
 
                     $currentRoute = request()->route() ? request()->route()->getName() : '';
@@ -186,15 +186,15 @@
                         <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
                         <span class="ml-3 font-bold text-sm whitespace-nowrap" x-show="sidebarOpen">Gabinete Digital</span>
                     </a>
-                    <a href="#" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
+                    <a href="{{ route('candidate.votes') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
                         <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L16 4m0 13V4m0 0L9 7"></path></svg>
                         <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Mapa de Votos</span>
                     </a>
-                    <a href="#" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
+                    <a href="{{ route('candidate.team') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
                         <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                         <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Minha Equipe</span>
                     </a>
-                    <a href="#" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
+                    <a href="{{ route('candidate.materials') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
                         <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 002-2H4a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                         <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Materiais</span>
                     </a>
@@ -209,15 +209,15 @@
                         <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         <span class="ml-3 font-bold text-sm whitespace-nowrap" x-show="sidebarOpen">Tesouraria</span>
                     </a>
-                    <a href="#" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
+                    <a href="{{ route('finance.transparency') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
                         <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                         <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Transparência</span>
                     </a>
-                    <a href="#" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
+                    <a href="{{ route('finance.donors') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('finance.donors') ? 'bg-white/10' : '' }}">
                         <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
                         <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Doadores</span>
                     </a>
-                    <a href="#" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
+                    <a href="{{ route('finance.reconciliation') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('finance.reconciliation') ? 'bg-white/10' : '' }}">
                         <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
                         <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Conciliação</span>
                     </a>
@@ -255,15 +255,15 @@
                         <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z"></path></svg>
                         <span class="ml-3 font-bold text-sm whitespace-nowrap" x-show="sidebarOpen">Comunicação</span>
                     </a>
-                    <a href="#" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
+                    <a href="{{ route('communication.broadcast') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
                         <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
                         <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Broadcast</span>
                     </a>
-                    <a href="#" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
+                    <a href="{{ route('communication.social') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
                         <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Social Hub</span>
                     </a>
-                    <a href="#" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
+                    <a href="{{ route('communication.press') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
                         <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2z"></path></svg>
                         <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Press Kit</span>
                     </a>
@@ -316,14 +316,45 @@
                 @endif
 
                 @if($isAdmin)
-                    <div class="pt-4 border-t border-white/10 mt-6">
-                        <p class="px-4 py-2 text-[9px] font-black text-blue-400 uppercase tracking-widest" x-show="sidebarOpen">Alternar Visão Admin</p>
-                        <a href="{{ route('admin.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showAdminMenu ? 'bg-white/5 text-white' : '' }}">
-                            <span class="w-2 h-2 rounded-full bg-blue-500 mr-3"></span> Presidência
-                        </a>
-                        <a href="{{ route('affiliate.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showAffiliateMenu ? 'bg-white/5 text-white' : '' }}">
-                            <span class="w-2 h-2 rounded-full bg-pct-green mr-3"></span> Afiliado
-                        </a>
+                    <div class="pt-4 border-t border-white/10 mt-6" x-data="{ viewMenuOpen: true }">
+                        <div class="flex items-center justify-between px-4 py-2 mb-2">
+                            <p class="text-[9px] font-black text-blue-400 uppercase tracking-widest" x-show="sidebarOpen">Alternar Visão</p>
+                            <button @click="viewMenuOpen = !viewMenuOpen" class="text-blue-400 hover:text-white transition-colors" x-show="sidebarOpen">
+                                <svg class="w-3 h-3 transition-transform" :class="viewMenuOpen ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                            </button>
+                        </div>
+                        <div x-show="viewMenuOpen" x-transition class="space-y-0.5">
+                            <a href="{{ route('admin.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showAdminMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-blue-500 mr-3"></span> Admin
+                            </a>
+                            <a href="{{ route('candidate.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showCandidateMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-3"></span> Candidato
+                            </a>
+                            <a href="{{ route('committee.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showCommitteeMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 mr-3"></span> Comitê
+                            </a>
+                            <a href="{{ route('finance.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showFinanceMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-3"></span> Financeiro
+                            </a>
+                            <a href="{{ route('legal.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showLegalMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-red-500 mr-3"></span> Jurídico
+                            </a>
+                            <a href="{{ route('communication.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showCommunicationMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-sky-500 mr-3"></span> Comunicação
+                            </a>
+                            <a href="{{ route('advogado.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showLawyerMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-purple-500 mr-3"></span> Advogado
+                            </a>
+                            <a href="{{ route('dev.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showDevMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-rose-500 mr-3"></span> Dev
+                            </a>
+                            <a href="{{ route('affiliate.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showAffiliateMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
+                                <span class="w-1.5 h-1.5 rounded-full bg-pct-green mr-3"></span> Afiliado
+                            </a>
+                            <a href="{{ route('admin.configuracoes') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all">
+                                <span class="w-1.5 h-1.5 rounded-full bg-slate-400 mr-3"></span> Configurações
+                            </a>
+                        </div>
                     </div>
                 @endif
             </div>

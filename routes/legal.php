@@ -9,7 +9,7 @@ use App\Http\Controllers\Legal\LegalDashboardController;
 // PAINEL JURÍDICO INSTITUCIONAL (Supervisão)
 // Acesso: admin, legal
 // =============================================
-Route::middleware(['auth'])->prefix('legal')->name('legal.')->group(function () {
+Route::domain('juridico.pct.social.br')->middleware(['auth'])->name('legal.')->group(function () {
     Route::get('/dashboard', [LegalDashboardController::class, 'index'])->name('dashboard');
     Route::get('/solicitacoes', [LegalDashboardController::class, 'requests'])->name('requests');
     Route::get('/solicitacoes/{id}', [LegalDashboardController::class, 'showRequest'])->name('requests.show');

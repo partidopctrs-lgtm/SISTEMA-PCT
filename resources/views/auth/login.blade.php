@@ -34,7 +34,7 @@
                         <label for="remember-me" class="ml-2 block text-sm text-gray-700">Lembrar-me</label>
                     </div>
                     <div class="text-sm">
-                        <a href="#" onclick="alert('Funcionalidade em desenvolvimento.'); return false;" class="font-medium text-pct-blue hover:text-blue-500">Esqueceu a senha?</a>
+                        <a href="{{ route('password.request') }}" class="font-medium text-pct-blue hover:text-blue-500">Esqueceu a senha?</a>
                     </div>
                 </div>
 

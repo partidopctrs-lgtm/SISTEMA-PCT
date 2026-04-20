@@ -8,7 +8,7 @@ Route::get('/admin/login', [DepartmentLoginController::class, 'showLoginForm'])-
 Route::post('/admin/login', [DepartmentLoginController::class, 'login']);
 Route::post('/admin/logout', [DepartmentLoginController::class, 'logout'])->name('admin.logout');
 
-Route::middleware(['auth', 'role:admin'])->prefix('admin')->group(function () {
+Route::domain('administrativo.pct.social.br')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/command-center', [AdminDashboardController::class, 'commandCenter'])->name('admin.command_center');
     Route::get('/members', [AdminDashboardController::class, 'members'])->name('admin.members');

@@ -15,23 +15,23 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
         <div class="card-premium">
             <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-4">Total de Doadores</p>
-            <h3 class="text-3xl font-black text-pct-blue">1.450</h3>
-            <p class="text-[10px] text-emerald-600 font-bold mt-2">↑ 12% este mês</p>
+            <h3 class="text-3xl font-black text-pct-blue">{{ $donations->total() }}</h3>
+            <p class="text-[10px] text-emerald-600 font-bold mt-2">Base Ativa</p>
+        </div>
+        <div class="card-premium">
+            <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-4">Total Acumulado</p>
+            <h3 class="text-3xl font-black text-pct-blue">R$ {{ number_format($totalDonations, 2, ',', '.') }}</h3>
+            <p class="text-[10px] text-gray-400 font-bold mt-2">Todas as fontes</p>
         </div>
         <div class="card-premium">
             <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-4">Ticket Médio</p>
-            <h3 class="text-3xl font-black text-pct-blue">R$ 85,00</h3>
-            <p class="text-[10px] text-gray-400 font-bold mt-2">Doações individuais</p>
+            <h3 class="text-3xl font-black text-pct-blue">R$ {{ $donations->count() > 0 ? number_format($totalDonations / $donations->count(), 2, ',', '.') : '0,00' }}</h3>
+            <p class="text-[10px] text-blue-500 font-bold mt-2">Por doação confirmada</p>
         </div>
         <div class="card-premium">
-            <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-4">Recorrência (Mensal)</p>
-            <h3 class="text-3xl font-black text-pct-blue">R$ 15.400</h3>
-            <p class="text-[10px] text-blue-500 font-bold mt-2">Plano de Apoio PCT</p>
-        </div>
-        <div class="card-premium">
-            <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-4">Conversão</p>
-            <h3 class="text-3xl font-black text-pct-blue">18%</h3>
-            <p class="text-[10px] text-gray-400 font-bold mt-2">Filiados -> Doadores</p>
+            <p class="text-[9px] font-black text-gray-400 uppercase tracking-widest mb-4">Confirmação</p>
+            <h3 class="text-3xl font-black text-pct-blue">100%</h3>
+            <p class="text-[10px] text-gray-400 font-bold mt-2">Taxa de sucesso</p>
         </div>
     </div>
 
@@ -54,25 +54,33 @@
                     </tr>
                 </thead>
                 <tbody class="text-sm text-slate-600">
+                    @forelse($donations as $donation)
                     <tr class="border-b border-slate-50 hover:bg-slate-50 transition-all">
                         <td class="px-6 py-4">
                             <div class="flex items-center gap-3">
-                                <div class="h-8 w-8 rounded-full bg-slate-100 flex items-center justify-center font-black text-pct-blue text-[10px]">RS</div>
+                                <div class="h-8 w-8 rounded-full bg-slate-100 flex items-center justify-center font-black text-pct-blue text-[10px]">
+                                    {{ strtoupper(substr($donation->user->name, 0, 2)) }}
+                                </div>
                                 <div>
-                                    <p class="font-bold text-pct-blue">Ricardo Silva</p>
-                                    <p class="text-[10px] text-gray-400 font-bold uppercase">Porto Alegre - RS</p>
+                                    <p class="font-bold text-pct-blue">{{ $donation->user->name }}</p>
+                                    <p class="text-[10px] text-gray-400 font-bold uppercase">{{ $donation->user->city }} - {{ $donation->user->state }}</p>
                                 </div>
                             </div>
                         </td>
-                        <td class="px-6 py-4 font-black">R$ 2.450,00</td>
-                        <td class="px-6 py-4 text-gray-500">Há 3 dias</td>
+                        <td class="px-6 py-4 font-black text-pct-blue">R$ {{ number_format($donation->amount, 2, ',', '.') }}</td>
+                        <td class="px-6 py-4 text-gray-500">{{ $donation->confirmed_at ? $donation->confirmed_at->diffForHumans() : 'Pendente' }}</td>
                         <td class="px-6 py-4">
-                            <span class="px-2 py-1 bg-amber-100 text-amber-600 rounded text-[9px] font-black uppercase tracking-tighter">Recorrente (Ouro)</span>
+                            <span class="px-2 py-1 bg-emerald-100 text-emerald-600 rounded text-[9px] font-black uppercase tracking-tighter">{{ $donation->payment_method }}</span>
                         </td>
                         <td class="px-6 py-4">
                             <button class="text-pct-blue hover:underline font-black text-[10px] uppercase">Histórico</button>
                         </td>
                     </tr>
+                    @empty
+                    <tr>
+                        <td colspan="5" class="px-6 py-12 text-center text-gray-400 text-sm font-medium">Nenhuma doação registrada.</td>
+                    </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

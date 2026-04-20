@@ -17,6 +17,21 @@ Route::get('/modelos-oficios', [HomeController::class, 'modelosOficios'])->name(
 Route::get('/cadastro', [RegistrationController::class, 'index'])->name('register.index');
 Route::post('/cadastro', [RegistrationController::class, 'store'])->name('register.store');
 
+// ============================================================
+// DIRETERÓRIOS DINÂMICOS (city.pct.social.br)
+// ============================================================
+Route::domain('{subdomain}.pct.social.br')->group(function () {
+    Route::get('/', [\App\Http\Controllers\Public\DirectoryController::class, 'show'])->name('directory.home');
+    Route::get('/cadastro', [\App\Http\Controllers\Public\RegistrationController::class, 'index'])->name('directory.register');
+    Route::post('/cadastro', [\App\Http\Controllers\Public\RegistrationController::class, 'store'])->name('directory.register.store');
+    Route::get('/login', [\App\Http\Controllers\Auth\DepartmentLoginController::class, 'showLoginForm'])->name('directory.login');
+    Route::post('/login', [\App\Http\Controllers\Auth\DepartmentLoginController::class, 'login']);
+    
+    // Login específico para a diretoria local
+    Route::get('/login-diretorio', [\App\Http\Controllers\Auth\DepartmentLoginController::class, 'showLoginForm'])->name('directory.board.login');
+    Route::post('/login-diretorio', [\App\Http\Controllers\Auth\DepartmentLoginController::class, 'login']);
+});
+
 // Main Authenticated Portals Entries
 use App\Http\Controllers\Auth\DepartmentLoginController;
 

@@ -35,6 +35,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'role' => \App\Http\Middleware\RoleMiddleware::class,
             'affiliation' => \App\Http\Middleware\CheckDirectoryAffiliation::class,
         ]);
+
+        $middleware->web(append: [
+            \App\Http\Middleware\DirectorySubdomainMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

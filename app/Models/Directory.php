@@ -60,6 +60,8 @@ class Directory extends Model
         'created_by',
         'updated_by',
         'directory_type',
+        'slug',
+        'subdomain',
     ];
 
     public function memberships()
@@ -135,6 +137,20 @@ class Directory extends Model
             if (empty($model->operational_status)) $model->operational_status = 'draft';
             if (empty($model->legal_status)) $model->legal_status = 'not_formalized';
             if (empty($model->affiliation_status)) $model->affiliation_status = 'applicant';
+
+            if (empty($model->slug) && !empty($model->city)) {
+                $baseSlug = \Illuminate\Support\Str::slug($model->city);
+                $slug = $baseSlug;
+                $count = 1;
+                while (static::where('slug', $slug)->exists()) {
+                    $slug = $baseSlug . '-' . $count++;
+                }
+                $model->slug = $slug;
+            }
+
+            if (empty($model->subdomain) && !empty($model->slug)) {
+                $model->subdomain = $model->slug;
+            }
         });
     }
 

@@ -21,22 +21,6 @@
             <p class="text-gray-500 font-medium italic">Bem-vindo à sua área de liderança e mobilização nacional.</p>
         </div>
 
-        @if(auth()->user()->role === 'admin' || auth()->user()->hasRole('admin'))
-        <div class="bg-slate-50 p-4 rounded-[2rem] border border-slate-100 w-full lg:w-auto">
-            <p class="text-[9px] font-black text-pct-blue uppercase tracking-widest mb-3 px-2 opacity-50">Acesso Multicanais (Admin)</p>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2">
-                <a href="{{ route('admin.dashboard') }}" class="px-3 py-2 bg-pct-blue text-white rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-blue-900 transition-all text-center">Admin</a>
-                <a href="{{ route('candidate.dashboard') }}" class="px-3 py-2 bg-white text-gray-500 rounded-xl text-[9px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all text-center">Candidato</a>
-                <a href="{{ route('committee.dashboard') }}" class="px-3 py-2 bg-white text-gray-500 rounded-xl text-[9px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all text-center">Comitê</a>
-                <a href="{{ route('finance.dashboard') }}" class="px-3 py-2 bg-white text-gray-500 rounded-xl text-[9px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all text-center">Financeiro</a>
-                <a href="{{ route('legal.dashboard') }}" class="px-3 py-2 bg-white text-gray-500 rounded-xl text-[9px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all text-center">Jurídico</a>
-                <a href="{{ route('communication.dashboard') }}" class="px-3 py-2 bg-white text-gray-500 rounded-xl text-[9px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all text-center">Comunicação</a>
-                <a href="{{ route('advogado.dashboard') }}" class="px-3 py-2 bg-white text-gray-500 rounded-xl text-[9px] font-black uppercase tracking-widest border border-slate-100 hover:bg-slate-50 transition-all text-center">Advogado</a>
-                <a href="{{ route('dev.dashboard') }}" class="px-3 py-2 bg-red-500 text-white rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-red-700 transition-all text-center">Dev</a>
-                <a href="/" class="px-3 py-2 bg-slate-200 text-gray-700 rounded-xl text-[9px] font-black uppercase tracking-widest hover:bg-slate-300 transition-all text-center">Portal</a>
-            </div>
-        </div>
-        @endif
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">

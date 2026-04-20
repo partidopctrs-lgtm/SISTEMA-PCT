@@ -34,6 +34,7 @@ class LegalRequestObserver
         // 3. Gerar Notificação para o departamento
         \App\Models\Notification::create([
             'user_id' => $legalRequest->requester_id, // Notificar o solicitante que foi aberta
+            'title' => 'Nova Solicitação Jurídica',
             'message' => 'Sua solicitação jurídica ' . $legalRequest->request_code . ' foi aberta e uma tarefa foi gerada.',
             'type' => 'operational',
             'related_module' => 'legal',

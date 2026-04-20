@@ -47,9 +47,18 @@ class RegistrationController extends Controller
                 'is_primary' => true,
             ]);
 
-            // 2. Vincular a um diretório (ex: Taquara)
-            $directory = \App\Models\Directory::where('city', 'Taquara')->first();
+            // 2. Vincular ao diretório (detectado via subdomínio ou padrão)
+            $directory = $request->get('currentDirectory');
+            
+            if (!$directory) {
+                // Tenta buscar por cidade se não houver subdomínio (ex: cadastro direto no domínio raiz)
+                $directory = \App\Models\Directory::where('city', 'Taquara')->first();
+            }
+
             if ($directory) {
+                // Atualiza o usuário com o comitê oficial
+                $user->update(['committee_id' => $directory->id]);
+
                 \App\Models\Membership::create([
                     'user_id' => $user->id,
                     'directory_id' => $directory->id,

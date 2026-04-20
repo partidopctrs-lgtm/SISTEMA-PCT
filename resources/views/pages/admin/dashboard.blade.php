@@ -91,10 +91,10 @@
                         @foreach($recentUsers as $user)
                         <div class="flex items-center gap-4">
                             <div class="h-8 w-8 bg-slate-100 rounded-lg flex items-center justify-center text-[10px] font-black text-gray-400 uppercase">
-                                {{ substr($user->full_name, 0, 1) }}
+                            {{ substr($user->name, 0, 1) }}
                             </div>
                             <div>
-                                <p class="text-[11px] font-black text-pct-blue">{{ $user->full_name }}</p>
+                                <p class="text-[11px] font-black text-pct-blue">{{ $user->name }}</p>
                                 <p class="text-[9px] text-gray-400 font-bold">{{ $user->created_at->diffForHumans() }}</p>
                             </div>
                         </div>
@@ -103,15 +103,6 @@
                     <a href="{{ route('admin.members') }}" class="block text-center text-[10px] font-black text-blue-600 uppercase tracking-widest mt-8 hover:underline">Ver Todos os Membros</a>
                 </div>
 
-                <!-- Fast Access to Modules -->
-                <div class="card-premium bg-slate-50 border-none shadow-none">
-                    <h3 class="text-sm font-black text-pct-blue mb-6 uppercase tracking-[0.2em]">Seletor de Visão</h3>
-                    <div class="space-y-2">
-                        <a href="{{ route('legal.dashboard') }}" class="block w-full text-center bg-white border border-slate-100 text-gray-600 font-black py-4 rounded-2xl text-[10px] uppercase tracking-widest hover:bg-pct-blue hover:text-white transition-all">Visão Jurídica</a>
-                        <a href="{{ route('committee.dashboard') }}" class="block w-full text-center bg-white border border-slate-100 text-gray-600 font-black py-4 rounded-2xl text-[10px] uppercase tracking-widest hover:bg-pct-blue hover:text-white transition-all">Visão Comitês</a>
-                        <a href="{{ route('affiliate.dashboard') }}" class="block w-full text-center bg-white border border-slate-100 text-gray-600 font-black py-4 rounded-2xl text-[10px] uppercase tracking-widest hover:bg-pct-blue hover:text-white transition-all">Visão Afiliado</a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

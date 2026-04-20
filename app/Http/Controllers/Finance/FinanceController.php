@@ -33,17 +33,21 @@ class FinanceController extends Controller
 
     public function transparency()
     {
-        return view('pages.finance.transparency');
+        $records = FinancialRecord::orderBy('created_at', 'desc')->paginate(20);
+        return view('pages.finance.transparency', compact('records'));
     }
 
     public function donors()
     {
-        return view('pages.finance.donors');
+        $donations = \App\Models\Donation::with('user')->latest()->paginate(20);
+        $totalDonations = \App\Models\Donation::where('status', 'confirmed')->sum('amount');
+        return view('pages.finance.donors', compact('donations', 'totalDonations'));
     }
 
     public function reconciliation()
     {
-        return view('pages.finance.reconciliation');
+        $pendingRecords = FinancialRecord::where('status', 'pending')->get();
+        return view('pages.finance.reconciliation', compact('pendingRecords'));
     }
 
     public function modelosOficios()

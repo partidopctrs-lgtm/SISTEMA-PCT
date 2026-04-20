@@ -12,9 +12,21 @@ class CommunicationController extends Controller
         return view('pages.communication.dashboard');
     }
 
-    public function broadcast() { return $this->index(); }
-    public function social() { return $this->index(); }
-    public function press() { return $this->index(); }
+    public function broadcast() 
+    { 
+        $broadcasts = \App\Models\CommunicationBroadcast::with('sender')->latest()->paginate(15);
+        return view('pages.communication.broadcast', compact('broadcasts')); 
+    }
+
+    public function social() 
+    { 
+        return view('pages.communication.social'); 
+    }
+
+    public function press() 
+    { 
+        return view('pages.communication.press'); 
+    }
 
     public function modelosOficios()
     {

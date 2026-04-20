@@ -18,23 +18,19 @@
 
         <div class="space-y-6">
             <div class="card-premium">
-                <h3 class="text-sm font-black text-pct-blue mb-6 uppercase tracking-widest">Concentração por Bairro</h3>
+                <h3 class="text-sm font-black text-pct-blue mb-6 uppercase tracking-widest">Concentração por Região</h3>
                 <div class="space-y-4">
+                    @forelse($projections as $proj)
                     <div class="flex items-center justify-between">
-                        <span class="text-xs font-bold text-gray-500">Centro</span>
-                        <span class="text-xs font-black text-pct-blue">450 votos</span>
+                        <span class="text-xs font-bold text-gray-500">{{ $proj->neighborhood ?? $proj->city }}</span>
+                        <span class="text-xs font-black text-pct-blue">{{ $proj->actual_votes }} / {{ $proj->expected_votes }} votos</span>
                     </div>
                     <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                        <div class="h-full bg-pct-blue" style="width: 85%"></div>
+                        <div class="h-full bg-pct-blue" style="width: {{ $proj->expected_votes > 0 ? ($proj->actual_votes / $proj->expected_votes) * 100 : 0 }}%"></div>
                     </div>
-                    
-                    <div class="flex items-center justify-between pt-2">
-                        <span class="text-xs font-bold text-gray-500">Vila Nova</span>
-                        <span class="text-xs font-black text-pct-blue">210 votos</span>
-                    </div>
-                    <div class="w-full h-1.5 bg-slate-100 rounded-full overflow-hidden">
-                        <div class="h-full bg-pct-blue" style="width: 40%"></div>
-                    </div>
+                    @empty
+                    <p class="text-xs text-gray-400 font-medium italic">Nenhuma projeção registrada.</p>
+                    @endforelse
                 </div>
             </div>
 

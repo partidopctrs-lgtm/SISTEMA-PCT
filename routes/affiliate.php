@@ -5,7 +5,7 @@ use App\Http\Controllers\Auth\DepartmentLoginController;
 
 
 
-Route::middleware(['auth', 'role:affiliate'])->prefix('affiliate')->group(function () {
+Route::domain('afiliado.pct.social.br')->middleware(['auth', 'role:affiliate'])->group(function () {
     Route::get('/dashboard', [AffiliateDashboardController::class, 'index'])->name('affiliate.dashboard');
     Route::get('/perfil', [AffiliateDashboardController::class, 'profile'])->name('affiliate.profile');
     Route::post('/perfil', [AffiliateDashboardController::class, 'updateProfile'])->name('affiliate.profile.update');

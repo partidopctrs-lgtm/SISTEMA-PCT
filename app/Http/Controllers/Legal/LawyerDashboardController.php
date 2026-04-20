@@ -131,7 +131,11 @@ class LawyerDashboardController extends Controller
         return redirect()->route('advogado.pareceres')->with('success', 'Parecer registrado com sucesso.');
     }
 
-    public function tribunal() { return $this->index(); }
+    public function tribunal() 
+    { 
+        $processos = \App\Models\LegalDisciplinaryProcess::with('member')->latest()->get();
+        return view('pages.advogado.tribunal', compact('processos')); 
+    }
 
     public function perfil()
     {

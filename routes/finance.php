@@ -6,7 +6,7 @@ use App\Http\Controllers\Auth\DepartmentLoginController;
 Route::get('/finance/login', [DepartmentLoginController::class, 'showLoginForm'])->name('finance.login');
 Route::post('/finance/login', [DepartmentLoginController::class, 'login']);
 
-Route::middleware(['auth', 'role:finance'])->prefix('finance')->group(function () {
+Route::domain('tesouraria.pct.social.br')->middleware(['auth', 'role:finance'])->group(function () {
     Route::get('/dashboard', [FinanceController::class, 'index'])->name('finance.dashboard');
     Route::get('/transparencia', [FinanceController::class, 'transparency'])->name('finance.transparency');
     Route::get('/doadores', [FinanceController::class, 'donors'])->name('finance.donors');
