@@ -20,7 +20,7 @@ Route::post('/cadastro', [RegistrationController::class, 'store'])->name('regist
 // ============================================================
 // DIRETERÓRIOS DINÂMICOS (city.pct.social.br)
 // ============================================================
-Route::domain('{subdomain}.pct.social.br')->where('subdomain', '.*')->group(function () {
+Route::domain('{subdomain}.pct.social.br')->where(['subdomain' => '.*'])->group(function () {
     Route::get('/', [\App\Http\Controllers\Public\DirectoryController::class, 'show'])->name('directory.home');
     Route::get('/cadastro', [\App\Http\Controllers\Public\RegistrationController::class, 'index'])->name('directory.register');
     Route::post('/cadastro', [\App\Http\Controllers\Public\RegistrationController::class, 'store'])->name('directory.register.store');

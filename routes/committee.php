@@ -9,7 +9,7 @@ Route::post('/committee/login', [DepartmentLoginController::class, 'login']);
 // Permitir que qualquer subdomínio de diretório acesse estas rotas (Taquara, etc)
 // Adicionamos o 'where' para permitir subdomínios com pontos (ex: diretorio.taquara)
 Route::domain('{subdomain}.pct.social.br')
-    ->where('subdomain', '.*')
+    ->where(['subdomain' => '.*'])
     ->middleware(['auth', 'role:committee'])
     ->group(function () {
     Route::get('/dashboard', [CommitteeDashboardController::class, 'index'])->name('committee.dashboard');
