@@ -92,11 +92,9 @@ class AffiliateDashboardController extends Controller
         $image = str_replace(' ', '+', $image);
         $imageName = 'avatars/' . Str::random(10) . '_' . time() . '.png';
 
-        if (!file_exists(public_path('storage/avatars'))) {
-            mkdir(public_path('storage/avatars'), 0755, true);
-        }
-
-        file_put_contents(public_path('storage/' . $imageName), base64_decode($image));
+        $imageData = base64_decode($image);
+        Storage::disk('public')->makeDirectory('avatars');
+        Storage::disk('public')->put($imageName, $imageData);
 
         $user->update([
             'photo' => $imageName
