@@ -150,7 +150,7 @@
 
                 @elseif($showCommitteeMenu)
                     <!-- MENU COMITÊ -->
-                    <a href="{{ route('committee.dashboard') }}" class="flex items-center px-4 py-3 rounded-2xl hover:bg-white/10 transition-all group {{ request()->routeIs('committee.dashboard') ? 'bg-white/10 shadow-lg' : '' }}">
+                    <a href="{{ route('committee.dashboard', ['subdomain' => $user->committee->subdomain ?? 'diretorio']) }}" class="flex items-center px-4 py-3 rounded-2xl hover:bg-white/10 transition-all group {{ request()->routeIs('committee.dashboard') ? 'bg-white/10 shadow-lg' : '' }}">
                         <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
                         <span class="ml-3 font-bold text-sm whitespace-nowrap" x-show="sidebarOpen">Gestão Local</span>
                     </a>
