@@ -59,7 +59,19 @@ class DepartmentLoginController extends Controller
                 
                 // Redirecionamento simplificado: O Laravel já sabe em qual domínio estamos.
                 // Redirecionamos para a raiz do painel (/dashboard) que existe em todos os subdomínios.
-                return redirect()->intended('/dashboard');
+                // Se estivermos no domínio principal, redireciona para o subdomínio correto
+        $host = $request->getHost();
+        $mainDomain = 'pct.social.br';
+        
+        if ($host === $mainDomain || $host === 'www.' . $mainDomain) {
+            if ($user->hasRole('admin')) {
+                return redirect()->away('https://administrativo.' . $mainDomain . '/dashboard');
+            } elseif ($user->hasRole('affiliate')) {
+                return redirect()->away('https://afiliado.' . $mainDomain . '/dashboard');
+            }
+        }
+
+        return redirect()->intended('/dashboard');
             }
 
             Auth::logout();
