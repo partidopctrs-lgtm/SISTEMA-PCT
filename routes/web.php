@@ -26,6 +26,8 @@ foreach ($mainDomains as $domain) {
         Route::get('/login', [DepartmentLoginController::class, 'showLoginForm'])->name('login');
         Route::post('/login', [DepartmentLoginController::class, 'login']);
         Route::get('/cadastro/sucesso', [RegistrationController::class, 'success'])->name('register.success');
+        Route::get('/politica-de-privacidade', [HomeController::class, 'privacy'])->name('privacy');
+        Route::get('/termos-de-uso', [HomeController::class, 'terms'])->name('terms');
     });
 }
 

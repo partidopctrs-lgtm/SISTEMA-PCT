@@ -97,11 +97,42 @@
                         </ul>
                     </div>
                 </div>
-                <div class="mt-12 pt-8 border-t border-blue-800 text-center text-blue-200 text-sm">
-                    &copy; {{ date('Y') }} PCT - Movimento Político. Todos os direitos reservados.
+                <div class="mt-12 pt-8 border-t border-blue-800 flex flex-col md:flex-row justify-between items-center text-blue-200 text-sm gap-4">
+                    <p>&copy; {{ date('Y') }} PCT - Movimento Político. Todos os direitos reservados.</p>
+                    <div class="flex space-x-6">
+                        <a href="{{ route('terms') }}" class="hover:text-white transition-colors">Termos de Uso</a>
+                        <a href="{{ route('privacy') }}" class="hover:text-white transition-colors">Privacidade (LGPD)</a>
+                    </div>
                 </div>
             </div>
         </footer>
+
+        <!-- Aviso de Cookies -->
+        <div x-data="{ open: !localStorage.getItem('cookies_accepted') }" x-show="open" x-cloak 
+             class="fixed bottom-0 left-0 right-0 z-[100] p-4 animate-in slide-in-from-bottom duration-700">
+            <div class="max-w-7xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl border border-slate-100 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="flex items-center gap-6">
+                        <div class="w-16 h-16 bg-pct-blue/5 rounded-2xl flex items-center justify-center text-pct-blue shrink-0">
+                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-black text-pct-blue mb-1 uppercase tracking-tight">Privacidade e Cookies</h4>
+                            <p class="text-sm text-slate-500 font-medium leading-relaxed">
+                                Utilizamos cookies para melhorar sua experiência e garantir a segurança do portal, em conformidade com a LGPD. 
+                                Ao continuar navegando, você concorda com nossa <a href="{{ route('privacy') }}" class="text-pct-blue font-bold hover:underline">Política de Privacidade</a>.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4 shrink-0">
+                        <button @click="localStorage.setItem('cookies_accepted', 'true'); open = false" 
+                                class="px-8 py-4 bg-pct-blue text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-blue-900 transition-all shadow-xl shadow-blue-900/20">
+                            Aceitar e Continuar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

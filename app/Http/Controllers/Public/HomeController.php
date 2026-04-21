@@ -59,4 +59,14 @@ class HomeController extends Controller
     {
         return view('pages.public.modelos-oficios');
     }
+
+    public function privacy()
+    {
+        return view('pages.public.privacy');
+    }
+
+    public function terms()
+    {
+        return view('pages.public.terms');
+    }
 }
