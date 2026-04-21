@@ -64,6 +64,17 @@ class Directory extends Model
         'subdomain',
     ];
 
+    protected $casts = [
+        'founding_date' => 'date',
+        'cnpj_registration_date' => 'date',
+        'statute_approval_date' => 'date',
+        'submitted_at' => 'datetime',
+        'approved_at' => 'datetime',
+        'activated_at' => 'datetime',
+        'blocked_at' => 'datetime',
+        'rejected_at' => 'datetime',
+    ];
+
     public function memberships()
     {
         return $this->hasMany(Membership::class);

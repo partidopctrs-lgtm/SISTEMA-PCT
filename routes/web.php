@@ -134,3 +134,6 @@ Route::get('/indicar/{code}', function($code) {
     session(['referred_by' => $code]);
     return redirect()->route('register.index');
 });
+
+// Rota de atalho para testes locais (sem necessidade de configurar subdomínios no hosts)
+Route::get('/diretorio/{subdomain}', [\App\Http\Controllers\Public\DirectoryController::class, 'show'])->name('directory.fallback');

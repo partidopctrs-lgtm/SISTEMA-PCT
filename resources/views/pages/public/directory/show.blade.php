@@ -33,7 +33,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="p-8 bg-slate-50 rounded-[2rem] text-center">
-                    <div class="text-4xl font-black text-pct-blue mb-2">{{ number_format($directory->members_count ?? 0, 0, ',', '.') }}</div>
+                    <div class="text-4xl font-black text-pct-blue mb-2">{{ number_format($directory->memberships_count ?? 0, 0, ',', '.') }}</div>
                     <p class="text-slate-500 font-bold uppercase tracking-widest text-xs">Membros Filiados</p>
                 </div>
                 <div class="p-8 bg-slate-50 rounded-[2rem] text-center border-l-4 border-pct-green">
