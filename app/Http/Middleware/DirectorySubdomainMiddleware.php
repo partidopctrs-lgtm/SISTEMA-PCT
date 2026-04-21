@@ -22,7 +22,7 @@ class DirectorySubdomainMiddleware
         $parsedDomain = parse_url($domain, PHP_URL_HOST);
         
         // Se estivermos no domínio raiz ou se for um painel fixo, ignorar
-        $fixedSubdomains = ['administrativo', 'afiliado', 'juridico', 'tesouraria', 'candidato', 'dev', 'www'];
+        $fixedSubdomains = ['administrativo', 'afiliado', 'juridico', 'tesouraria', 'candidato', 'dev', 'www', 'comite', 'tesouraria'];
         
         $subdomain = explode('.', $host)[0];
 

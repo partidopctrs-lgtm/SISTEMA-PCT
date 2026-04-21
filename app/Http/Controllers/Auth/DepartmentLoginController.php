@@ -57,27 +57,9 @@ class DepartmentLoginController extends Controller
             if ($user->hasRole('admin') || $user->role === $role || $user->role === 'committee') {
                 $request->session()->regenerate();
                 
-                $host = $request->getHost();
-                $domain = config('app.url');
-                $parsedDomain = parse_url($domain, PHP_URL_HOST);
-
-                // Se logou via subdomínio de diretório
-                if ($host !== $parsedDomain && !in_array(explode('.', $host)[0], ['administrativo', 'afiliado', 'juridico', 'tesouraria', 'candidato', 'dev'])) {
-                    if ($path === 'login-diretorio') {
-                        return redirect()->intended('/committee/dashboard');
-                    }
-                    return redirect()->intended('/affiliate/dashboard');
-                }
-
-                // Fluxo padrão via domínios principais
-                $targetPath = match ($role) {
-                    'admin' => 'admin',
-                    'affiliate' => 'affiliate',
-                    'committee' => 'committee',
-                    default => $path
-                };
-                
-                return redirect("/{$targetPath}/dashboard");
+                // Redirecionamento simplificado: O Laravel já sabe em qual domínio estamos.
+                // Redirecionamos para a raiz do painel (/dashboard) que existe em todos os subdomínios.
+                return redirect()->intended('/dashboard');
             }
 
             Auth::logout();
