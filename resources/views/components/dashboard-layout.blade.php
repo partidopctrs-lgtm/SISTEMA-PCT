@@ -161,11 +161,11 @@
                             <p class="text-[8px] text-amber-100/60 uppercase mt-1 font-medium">Aguardando aprovação institucional para liberar recursos.</p>
                         </div>
                     @else
-                        <a href="{{ route('committee.members') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('committee.members') ? 'bg-white/10' : '' }}">
+                        <a href="{{ route('committee.members', ['subdomain' => $user->committee->subdomain ?? 'diretorio']) }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('committee.members') ? 'bg-white/10' : '' }}">
                             <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
                             <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Membros Locais</span>
                         </a>
-                        <a href="{{ route('committee.signatures') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('committee.signatures') ? 'bg-white/10' : '' }}">
+                        <a href="{{ route('committee.signatures', ['subdomain' => $user->committee->subdomain ?? 'diretorio']) }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('committee.signatures') ? 'bg-white/10' : '' }}">
                             <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                             <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Assinaturas</span>
                         </a>
