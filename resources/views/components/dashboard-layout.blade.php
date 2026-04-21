@@ -149,71 +149,70 @@
                             <a href="{{ route('affiliate.signatures.create') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.signatures.*') ? 'text-white' : 'text-blue-200' }} hover:text-white">Apoio ao Partido</a>
                             <a href="{{ route('shared.documents', ['portal' => 'institucional']) }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Documentos</a>
                         </div>
-                    </div>
-
-                    <!-- 📈 Desempenho -->
-                    <div x-data="{ open: false }">
-                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white">
+                      <!-- 📈 Desempenho -->
+                    <div x-data="{ open: {{ request()->routeIs('affiliate.desempenho.*') ? 'true' : 'false' }} }">
+                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white {{ request()->routeIs('affiliate.desempenho.*') ? 'bg-white/10 text-white' : '' }}">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                             <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Desempenho</span>
                             <svg class="w-4 h-4 ml-auto transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div x-show="open" x-transition class="mt-2 ml-10 space-y-1">
                             <a href="{{ route('affiliate.dashboard') }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Meus Resultados</a>
-                            <a href="#" class="block px-4 py-2 text-xs font-bold text-blue-200/50 cursor-not-allowed">Estatísticas</a>
-                            <a href="#" class="block px-4 py-2 text-xs font-bold text-blue-200/50 cursor-not-allowed">Relatórios</a>
+                            <a href="{{ route('affiliate.desempenho.estatisticas') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.desempenho.estatisticas') ? 'text-white' : 'text-blue-200' }} hover:text-white">Estatísticas</a>
                         </div>
                     </div>
 
                     <!-- 🔗 Divulgação -->
-                    <div x-data="{ open: false }">
-                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white">
+                    <div x-data="{ open: {{ request()->routeIs('affiliate.divulgacao.*') ? 'true' : 'false' }} }">
+                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white {{ request()->routeIs('affiliate.divulgacao.*') ? 'bg-white/10 text-white' : '' }}">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
                             <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Divulgação</span>
                             <svg class="w-4 h-4 ml-auto transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div x-show="open" x-transition class="mt-2 ml-10 space-y-1">
-                            <a href="{{ route('affiliate.dashboard') }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Link de Divulgação</a>
-                            <a href="#" class="block px-4 py-2 text-xs font-bold text-blue-200/50 cursor-not-allowed">Gerador de Links</a>
-                            <a href="#" class="block px-4 py-2 text-xs font-bold text-blue-200/50 cursor-not-allowed">QR Code</a>
+                            <a href="{{ route('affiliate.divulgacao.gerador') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.divulgacao.gerador') ? 'text-white' : 'text-blue-200' }} hover:text-white">Meu Link de Divulgação</a>
+                            <a href="{{ route('affiliate.divulgacao.qrcode') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.divulgacao.qrcode') ? 'text-white' : 'text-blue-200' }} hover:text-white">Gerador de QR Code</a>
                         </div>
                     </div>
 
                     <!-- 🧾 Relatos -->
-                    <div x-data="{ open: false }">
-                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white">
+                    <div x-data="{ open: {{ request()->routeIs('affiliate.relatos.*') ? 'true' : 'false' }} }">
+                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white {{ request()->routeIs('affiliate.relatos.*') ? 'bg-white/10 text-white' : '' }}">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                             <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Relatos</span>
                             <svg class="w-4 h-4 ml-auto transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div x-show="open" x-transition class="mt-2 ml-10 space-y-1">
-                            <a href="{{ route('affiliate.dashboard') }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Lista de Relatos</a>
-                            <a href="{{ route('affiliate.dashboard') }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Relatos por Cidade</a>
+                            <a href="{{ route('affiliate.relatos.lista') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.relatos.lista') ? 'text-white' : 'text-blue-200' }} hover:text-white">Lista de Relatos</a>
+                            <a href="{{ route('affiliate.relatos.cidades') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.relatos.cidades') ? 'text-white' : 'text-blue-200' }} hover:text-white">Relatos por Cidade</a>
                         </div>
                     </div>
 
                     <!-- 📢 Materiais -->
-                    <div x-data="{ open: false }">
-                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white">
+                    <div x-data="{ open: {{ request()->routeIs('affiliate.materiais.*') ? 'true' : 'false' }} }">
+                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white {{ request()->routeIs('affiliate.materiais.*') ? 'bg-white/10 text-white' : '' }}">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 002-2H4a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                             <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Materiais</span>
                             <svg class="w-4 h-4 ml-auto transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div x-show="open" x-transition class="mt-2 ml-10 space-y-1">
-                            <a href="{{ route('affiliate.dashboard') }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Artes & Textos</a>
+                            <a href="{{ route('affiliate.materiais.artes') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.materiais.artes') ? 'text-white' : 'text-blue-200' }} hover:text-white">Artes para Divulgação</a>
+                            <a href="{{ route('affiliate.materiais.textos') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.materiais.textos') ? 'text-white' : 'text-blue-200' }} hover:text-white">Textos Prontos</a>
                         </div>
                     </div>
 
                     <!-- 🏆 Engajamento -->
-                    <div x-data="{ open: false }">
-                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white">
+                    <div x-data="{ open: {{ request()->routeIs('affiliate.engajamento.*') ? 'true' : 'false' }} }">
+                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white {{ request()->routeIs('affiliate.engajamento.*') ? 'bg-white/10 text-white' : '' }}">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
                             <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Engajamento</span>
                             <svg class="w-4 h-4 ml-auto transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div x-show="open" x-transition class="mt-2 ml-10 space-y-1">
-                            <a href="{{ route('affiliate.dashboard') }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Ranking Nacional</a>
+                            <a href="{{ route('affiliate.engajamento.ranking') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.engajamento.ranking') ? 'text-white' : 'text-blue-200' }} hover:text-white">Ranking de Afiliados</a>
                         </div>
+                    </div>
+               </div>
                     </div>
 
                     <!-- 🔔 Comunicação -->
