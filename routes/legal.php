@@ -40,6 +40,7 @@ Route::middleware(['auth'])->prefix('advogado')->name('advogado.')->group(functi
     Route::get('/denuncias', [LawyerDashboardController::class, 'denuncias'])->name('denuncias');
     Route::get('/processos', [LawyerDashboardController::class, 'processos'])->name('processos');
     Route::get('/pareceres', [LawyerDashboardController::class, 'pareceres'])->name('pareceres');
+    Route::post('/pareceres', [LawyerDashboardController::class, 'storeParecer'])->name('pareceres.store');
     Route::get('/tribunal-digital', [LawyerDashboardController::class, 'tribunal'])->name('tribunal');
     Route::get('/perfil', [LawyerDashboardController::class, 'perfil'])->name('perfil');
 });
