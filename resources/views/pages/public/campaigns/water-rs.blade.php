@@ -16,8 +16,7 @@
                 Movimento pela <br><span class="text-pct-green underline">Água no RS</span>
             </h1>
             <p class="text-xl md:text-2xl text-blue-100 max-w-2xl mx-auto font-medium leading-relaxed mb-10">
-                “Se falta água na sua cidade, isso precisa ser registrado. <br>
-                E quando o povo se organiza, a solução aparece.”
+                O problema da água no RS vai além da falta. Qualidade, tratamento e abastecimento estão em risco. Sua cidade precisa ser ouvida.
             </p>
             <div class="flex flex-col md:flex-row items-center justify-center gap-4">
                 <a href="#relatar" class="px-10 py-5 bg-white text-pct-blue rounded-2xl font-black uppercase tracking-widest hover:bg-pct-green hover:text-white transition-all shadow-2xl shadow-black/20">

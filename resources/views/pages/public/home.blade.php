@@ -103,7 +103,7 @@
                         <span class="text-pct-green">E o povo precisa ser ouvido.</span>
                     </h2>
                     <p class="text-xl md:text-2xl text-blue-100 font-medium leading-relaxed mb-8">
-                        Participe do movimento e registre o problema na sua cidade. Nossa união gera a pressão necessária para a solução.
+                        O problema da água no RS vai além da falta. Qualidade, tratamento e abastecimento estão em risco. Sua cidade precisa ser ouvida.
                     </p>
                 </div>
                 <div class="md:w-1/3 flex justify-center">
