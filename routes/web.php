@@ -28,6 +28,12 @@ foreach ($mainDomains as $domain) {
         Route::get('/cadastro/sucesso', [RegistrationController::class, 'success'])->name('register.success');
         Route::get('/politica-de-privacidade', [HomeController::class, 'privacy'])->name('privacy');
         Route::get('/termos-de-uso', [HomeController::class, 'terms'])->name('terms');
+
+        // Recuperação de Senha
+        Route::get('/esqueci-minha-senha', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+        Route::post('/esqueci-minha-senha', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+        Route::get('/redefinir-senha/{token}', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+        Route::post('/redefinir-senha', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'reset'])->name('password.update');
     });
 }
 

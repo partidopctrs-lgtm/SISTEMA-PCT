@@ -67,6 +67,13 @@ class RegistrationController extends Controller
                     'source' => 'web_registration',
                 ]);
             }
+
+            // Enviar e-mail de Boas-Vindas
+            try {
+                \Illuminate\Support\Facades\Mail::to($user->email)->send(new \App\Mail\WelcomeMail($user));
+            } catch (\Exception $e) {
+                \Illuminate\Support\Facades\Log::error('Erro ao enviar e-mail de boas-vindas: ' . $e->getMessage());
+            }
         });
 
         return redirect()->route('register.success')->with('user_name', $validated['name']);

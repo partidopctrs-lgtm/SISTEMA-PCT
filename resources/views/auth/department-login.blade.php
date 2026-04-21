@@ -85,7 +85,7 @@
                             <label for="remember" class="ml-3 block text-xs text-pct-blue font-bold uppercase tracking-tighter cursor-pointer">Manter Conectado</label>
                         </div>
                         <div class="text-xs">
-                            <a href="https://wa.me/5551933806899" target="_blank" class="font-bold text-pct-green hover:underline">Esqueci meus dados</a>
+                            <a href="{{ route('password.request') }}" class="font-bold text-pct-green hover:underline uppercase tracking-tighter">Esqueci meus dados</a>
                         </div>
                     </div>
 
