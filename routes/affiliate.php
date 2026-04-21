@@ -49,4 +49,50 @@ Route::domain('afiliado.pct.social.br')->middleware(['auth', 'role:affiliate'])-
     // Módulo Demandas da População
     Route::get('/demandas', [\App\Http\Controllers\Affiliate\PublicDemandController::class, 'create'])->name('affiliate.demands.create');
     Route::post('/demandas', [\App\Http\Controllers\Affiliate\PublicDemandController::class, 'store'])->name('affiliate.demands.store');
+
+    // 📈 Módulo de Desempenho
+    Route::prefix('desempenho')->name('affiliate.desempenho.')->group(function () {
+        Route::get('/estatisticas', [AffiliateDashboardController::class, 'index'])->name('estatisticas');
+        Route::get('/relatorios', [AffiliateDashboardController::class, 'index'])->name('relatorios');
+        Route::get('/conversoes', [AffiliateDashboardController::class, 'index'])->name('conversoes');
+    });
+
+    // 🔗 Módulo de Divulgação
+    Route::prefix('divulgacao')->name('affiliate.divulgacao.')->group(function () {
+        Route::get('/gerador', [\App\Http\Controllers\Affiliate\CampaignManagementController::class, 'generator'])->name('gerador');
+        Route::get('/qrcode', [\App\Http\Controllers\Affiliate\CampaignManagementController::class, 'generator'])->name('qrcode');
+        Route::get('/compartilhar', [\App\Http\Controllers\Affiliate\CampaignManagementController::class, 'generator'])->name('compartilhar');
+    });
+
+    // 🧾 Módulo de Relatos / Atendimento PCT
+    Route::prefix('atendimento')->name('affiliate.atendimento.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Affiliate\AtendimentoController::class, 'index'])->name('index');
+        Route::get('/novo', [\App\Http\Controllers\Affiliate\AtendimentoController::class, 'create'])->name('create');
+        Route::post('/enviar', [\App\Http\Controllers\Affiliate\AtendimentoController::class, 'store'])->name('store');
+        Route::get('/acompanhar/{id}', [\App\Http\Controllers\Affiliate\AtendimentoController::class, 'show'])->name('show');
+        Route::get('/direitos', [\App\Http\Controllers\Affiliate\AtendimentoController::class, 'rights'])->name('rights');
+    });
+
+    // 🧑🤝🧑 Módulo de Comunidade PCT (Fórum)
+    Route::prefix('forum')->name('affiliate.forum.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Affiliate\ForumController::class, 'index'])->name('index');
+        Route::get('/topico/novo', [\App\Http\Controllers\Affiliate\ForumController::class, 'create'])->name('create');
+        Route::post('/topico/enviar', [\App\Http\Controllers\Affiliate\ForumController::class, 'storeTopic'])->name('store');
+        Route::get('/topico/{id}', [\App\Http\Controllers\Affiliate\ForumController::class, 'show'])->name('show');
+        Route::post('/topico/{id}/comentar', [\App\Http\Controllers\Affiliate\ForumController::class, 'storeComment'])->name('comment');
+        Route::post('/topico/{id}/like', [\App\Http\Controllers\Affiliate\ForumController::class, 'toggleLike'])->name('like');
+    });
+
+    // 📢 Módulo de Materiais
+    Route::prefix('materiais')->name('affiliate.materiais.')->group(function () {
+        Route::get('/artes', [\App\Http\Controllers\Affiliate\CampaignManagementController::class, 'materials'])->name('artes');
+        Route::get('/textos', [\App\Http\Controllers\Affiliate\CampaignManagementController::class, 'materials'])->name('textos');
+        Route::get('/downloads', [\App\Http\Controllers\Affiliate\CampaignManagementController::class, 'materials'])->name('downloads');
+    });
+
+    // 🏆 Módulo de Engajamento
+    Route::prefix('engajamento')->name('affiliate.engajamento.')->group(function () {
+        Route::get('/ranking', [\App\Http\Controllers\Affiliate\CampaignManagementController::class, 'ranking'])->name('ranking');
+        Route::get('/metas', [\App\Http\Controllers\Affiliate\CampaignManagementController::class, 'ranking'])->name('metas');
+    });
 });
