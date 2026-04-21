@@ -6,7 +6,8 @@ use App\Http\Controllers\Auth\DepartmentLoginController;
 Route::get('/committee/login', [DepartmentLoginController::class, 'showLoginForm'])->name('committee.login');
 Route::post('/committee/login', [DepartmentLoginController::class, 'login']);
 
-Route::domain('comite.pct.social.br')->middleware(['auth', 'role:committee'])->group(function () {
+// Permitir que qualquer subdomínio de diretório acesse estas rotas (Taquara, etc)
+Route::domain('{subdomain}.pct.social.br')->middleware(['auth', 'role:committee'])->group(function () {
     Route::get('/dashboard', [CommitteeDashboardController::class, 'index'])->name('committee.dashboard');
     Route::get('/members', [CommitteeDashboardController::class, 'members'])->name('committee.members');
     Route::post('/members/store', [CommitteeDashboardController::class, 'storeMember'])->name('committee.members.store');
