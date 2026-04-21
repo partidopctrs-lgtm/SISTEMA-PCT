@@ -95,6 +95,19 @@
                             ACESSAR PORTAL
                         </button>
                     </div>
+
+                    <!-- Aviso de Suporte Emergencial -->
+                    <div class="pt-4 mt-8 border-t border-slate-100">
+                        <div class="bg-blue-50/50 rounded-2xl p-6 text-center">
+                            <p class="text-[11px] font-black text-pct-blue uppercase tracking-widest mb-2">Problemas para acessar?</p>
+                            <p class="text-xs text-slate-500 font-medium mb-4 leading-relaxed">
+                                Se você encontrou erro ao fazer login em <span class="font-bold text-pct-blue">www.pct.social.br</span>, não desista!
+                            </p>
+                            <a href="https://wa.me/5551933806899" target="_blank" class="inline-flex items-center text-[10px] font-black text-pct-green uppercase tracking-widest hover:underline">
+                                👉 Entre em contato conosco e faça parte do movimento!
+                            </a>
+                        </div>
+                    </div>
                 </form>
             </div>
 

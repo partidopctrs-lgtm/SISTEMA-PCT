@@ -53,6 +53,11 @@ class FaqSeeder extends Seeder
                 'answer' => 'O foco em organização real, uso de tecnologia, escuta da população e construção prática de soluções — não apenas discurso.',
                 'order' => 8
             ],
+            [
+                'question' => 'Problemas para acessar o site ou fazer login?',
+                'answer' => "Se você encontrou erro ao fazer login em www.pct.social.br, não desista!\n\nEntre em contato conosco e faça parte do movimento: 👉 Sua participação é essencial para a mudança!",
+                'order' => 9
+            ],
         ];
 
         foreach ($faqs as $faq) {
