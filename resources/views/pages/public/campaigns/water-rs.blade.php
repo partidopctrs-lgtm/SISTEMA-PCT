@@ -55,6 +55,75 @@
         </div>
     </section>
 
+    <!-- 📊 Dossiê Real 2026 -->
+    <section class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-16 items-start">
+                <div class="lg:w-1/2">
+                    <span class="text-pct-blue font-black tracking-[0.3em] uppercase mb-4 block">Realidade 2026</span>
+                    <h2 class="text-4xl font-black text-pct-blue mb-8 leading-tight uppercase">
+                        “Não é uma cidade. Não é um caso isolado. <br>
+                        <span class="text-pct-green">O problema da água já atinge dezenas de municípios no RS.”</span>
+                    </h2>
+                    <div class="space-y-6 text-slate-600 font-medium text-lg leading-relaxed">
+                        <p>O problema da água em 2026 não está limitado a poucas cidades. É um problema estrutural que afeta múltiplos polos do estado.</p>
+                        <ul class="space-y-3">
+                            <li class="flex items-center gap-3">
+                                <span class="w-2 h-2 bg-pct-green rounded-full"></span>
+                                Falta de água recorrente
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-2 h-2 bg-pct-green rounded-full"></span>
+                                Baixa pressão nas torneiras
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-2 h-2 bg-pct-green rounded-full"></span>
+                                Água suja / Qualidade ruim
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <span class="w-2 h-2 bg-pct-green rounded-full"></span>
+                                Falhas graves no tratamento
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 bg-slate-50 p-10 rounded-[3rem] border border-slate-100">
+                    <h3 class="text-xl font-black text-pct-blue mb-8 uppercase tracking-widest">Exemplos Reais Confirmados (2026)</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
+                            <p class="text-xs font-black text-pct-blue uppercase">Cachoeirinha</p>
+                            <p class="text-[10px] text-slate-500 font-bold">30 mil afetados / Bairros sem água</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
+                            <p class="text-xs font-black text-pct-blue uppercase">Flores da Cunha</p>
+                            <p class="text-[10px] text-slate-500 font-bold">Falta em 9 bairros da Serra</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
+                            <p class="text-xs font-black text-pct-blue uppercase">Taquara</p>
+                            <p class="text-[10px] text-slate-500 font-bold">Centenas de reclamações de qualidade</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
+                            <p class="text-xs font-black text-pct-blue uppercase">Gramado / Canela</p>
+                            <p class="text-[10px] text-slate-500 font-bold">Interrupções que afetam turismo</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
+                            <p class="text-xs font-black text-pct-blue uppercase">Lajeado</p>
+                            <p class="text-[10px] text-slate-500 font-bold">Protestos por falta de abastecimento</p>
+                        </div>
+                        <div class="p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
+                            <p class="text-xs font-black text-pct-blue uppercase">Torres</p>
+                            <p class="text-[10px] text-slate-500 font-bold">Ação judicial por problemas de esgoto</p>
+                        </div>
+                    </div>
+                    <p class="mt-8 text-[10px] text-slate-400 font-bold italic uppercase leading-tight text-center">
+                        Outras cidades com registros recorrentes: <br>
+                        Santa Cruz do Sul, Canoas, Sapiranga e região metropolitana.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 📋 3. Formulário -->
     <section id="relatar" class="py-24 bg-slate-50">
         <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
