@@ -141,4 +141,59 @@
             </div>
         </div>
     </div>
+
+    <!-- 📊 Campanha Água no RS -->
+    <div class="mb-12">
+        <div class="card-premium bg-gradient-to-br from-blue-600 to-blue-800 text-white border-none overflow-hidden relative">
+            <div class="relative z-10">
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+                    <div>
+                        <span class="inline-block px-3 py-1 bg-white/20 text-[9px] font-black uppercase tracking-[0.2em] rounded-full mb-3">Campanha Ativa: Água no RS</span>
+                        <h3 class="text-2xl font-black tracking-tighter">Mobilização pela Água</h3>
+                        <p class="text-blue-100 text-xs font-medium">Ajude sua cidade a cobrar soluções registrando problemas de abastecimento.</p>
+                    </div>
+                    <div class="flex gap-4">
+                        <div class="bg-white/10 px-6 py-3 rounded-2xl text-center backdrop-blur-md border border-white/10">
+                            <p class="text-[9px] font-black uppercase tracking-widest opacity-60">Meus Relatos Gerados</p>
+                            <p class="text-2xl font-black">{{ $waterStats['total'] }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
+                    <div class="space-y-4">
+                        <p class="text-[10px] font-black uppercase tracking-widest opacity-60">Seu Link de Mobilização da Campanha</p>
+                        <div class="flex items-center gap-3">
+                            <input type="text" readonly value="{{ route('campaign.water.index', ['ref' => auth()->id()]) }}" class="bg-white/10 border border-white/20 rounded-2xl px-6 py-4 text-xs w-full font-bold text-white outline-none">
+                            <button class="bg-pct-green text-white p-4 rounded-2xl hover:scale-105 transition-all shadow-lg" onclick="navigator.clipboard.writeText('{{ route('campaign.water.index', ['ref' => auth()->id()]) }}'); alert('Link da campanha copiado!')">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-[2rem] p-6 text-slate-800">
+                        <h4 class="text-xs font-black text-pct-blue uppercase tracking-widest mb-4">Últimos Relatos da sua Rede</h4>
+                        <div class="space-y-3">
+                            @forelse($waterStats['recent'] as $report)
+                                <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                                    <div>
+                                        <p class="text-[10px] font-black text-pct-blue uppercase">{{ $report->city }} / {{ $report->neighborhood }}</p>
+                                        <p class="text-[9px] text-slate-500 font-bold">{{ $report->problem_type }}</p>
+                                    </div>
+                                    <span class="text-[9px] font-black text-pct-green">{{ $report->created_at->diffForHumans() }}</span>
+                                </div>
+                            @empty
+                                <div class="py-4 text-center">
+                                    <p class="text-[10px] text-slate-400 font-bold uppercase italic">Nenhum relato gerado ainda.</p>
+                                </div>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Efeito visual de água -->
+            <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-blue-400/20 rounded-full blur-3xl"></div>
+        </div>
+    </div>
 </x-dashboard-layout>

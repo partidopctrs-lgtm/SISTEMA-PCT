@@ -30,7 +30,13 @@ class AffiliateDashboardController extends Controller
 
         $myReferrals = $user->referrals()->latest()->limit(5)->get();
 
-        return view('pages.affiliate.dashboard', compact('user', 'isFounder', 'stats', 'myReferrals'));
+        // Dados da Campanha Água no RS
+        $waterStats = [
+            'total' => \App\Models\WaterReport::where('affiliate_id', $user->id)->count(),
+            'recent' => \App\Models\WaterReport::where('affiliate_id', $user->id)->latest()->limit(5)->get(),
+        ];
+
+        return view('pages.affiliate.dashboard', compact('user', 'isFounder', 'stats', 'myReferrals', 'waterStats'));
     }
 
     public function profile()
