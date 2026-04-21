@@ -330,7 +330,7 @@
                             <a href="{{ route('candidate.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showCandidateMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
                                 <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-3"></span> Candidato
                             </a>
-                            <a href="{{ route('committee.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showCommitteeMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
+                            <a href="{{ route('committee.dashboard', ['subdomain' => $user->committee->subdomain ?? 'diretorio']) }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showCommitteeMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
                                 <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 mr-3"></span> Comitê
                             </a>
                             <a href="{{ route('finance.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showFinanceMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
