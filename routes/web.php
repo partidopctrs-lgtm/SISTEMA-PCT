@@ -29,8 +29,8 @@ foreach ($mainDomains as $index => $domain) {
         Route::post('/login', [DepartmentLoginController::class, 'login']);
         Route::get('/cadastro/sucesso', [RegistrationController::class, 'success'])->name($index === 0 ? 'register.success' : 'register.success.www');
         Route::get('/cadastro/verificar/{token}', [\App\Http\Controllers\Public\VerifyEmailController::class, 'verify'])->name($index === 0 ? 'register.verify' : 'register.verify.www');
-        Route::get('/politica-de-privacidade', [HomeController::class, 'privacy'])->name('privacy');
-        Route::get('/termos-de-uso', [HomeController::class, 'terms'])->name('terms');
+        Route::get('/politica-de-privacidade', [HomeController::class, 'privacy'])->name($index === 0 ? 'privacy' : 'privacy.www');
+        Route::get('/termos-de-uso', [HomeController::class, 'terms'])->name($index === 0 ? 'terms' : 'terms.www');
 
         // Recuperação de Senha
         Route::get('/esqueci-minha-senha', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name($index === 0 ? 'password.request' : 'password.request.www');
