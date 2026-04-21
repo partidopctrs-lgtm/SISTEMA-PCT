@@ -7,7 +7,11 @@ Route::get('/committee/login', [DepartmentLoginController::class, 'showLoginForm
 Route::post('/committee/login', [DepartmentLoginController::class, 'login']);
 
 // Permitir que qualquer subdomínio de diretório acesse estas rotas (Taquara, etc)
-Route::domain('{subdomain}.pct.social.br')->middleware(['auth', 'role:committee'])->group(function () {
+// Adicionamos o 'where' para permitir subdomínios com pontos (ex: diretorio.taquara)
+Route::domain('{subdomain}.pct.social.br')
+    ->where('subdomain', '.*')
+    ->middleware(['auth', 'role:committee'])
+    ->group(function () {
     Route::get('/dashboard', [CommitteeDashboardController::class, 'index'])->name('committee.dashboard');
     Route::get('/members', [CommitteeDashboardController::class, 'members'])->name('committee.members');
     Route::post('/members/store', [CommitteeDashboardController::class, 'storeMember'])->name('committee.members.store');
