@@ -63,6 +63,7 @@ class User extends Authenticatable
         'referred_by',
         'registration_document',
         'position_id',
+        'verification_token',
     ];
 
     public function position()

@@ -54,6 +54,13 @@ class DepartmentLoginController extends Controller
         if (Auth::attempt($request->only('email', 'password'), $request->filled('remember'))) {
             $user = Auth::user();
 
+            if ($user->status !== 'active') {
+                Auth::logout();
+                throw ValidationException::withMessages([
+                    'email' => "Sua conta ainda não foi ativada. Por favor, verifique seu e-mail e clique no link de confirmação.",
+                ]);
+            }
+
             if ($user->hasRole('admin') || $user->role === $role || $user->role === 'committee') {
                 $request->session()->regenerate();
                 

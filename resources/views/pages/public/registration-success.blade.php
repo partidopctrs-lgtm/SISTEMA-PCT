@@ -46,13 +46,23 @@
                     Parabéns, {{ session('user_name') }}!
                 </h1>
                 <p class="text-lg text-gray-600 font-medium mb-8 leading-relaxed">
-                    Seu cadastro no <span class="text-pct-blue font-bold">Movimento PCT</span> foi realizado com sucesso. Estamos entusiasmados em ter você conosco na construção de um país melhor!
+                    Seu pré-cadastro no <span class="text-pct-blue font-bold">Movimento PCT</span> foi concluído! <br>
+                    <span class="text-pct-green font-bold uppercase text-sm tracking-widest bg-pct-green/5 px-3 py-1 rounded-full inline-block mt-4">📧 Verifique seu e-mail</span>
+                </p>
+
+                <p class="text-sm text-gray-500 mb-8">
+                    Enviamos um link de ativação para o seu e-mail. <br>
+                    <strong>Clique no link para liberar seu acesso e entrar automaticamente.</strong>
                 </p>
 
                 <div class="space-y-4">
+                    <div class="bg-gray-100 p-4 rounded-2xl mb-4 border border-gray-200">
+                        <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Dica de Acesso</p>
+                        <p class="text-[11px] text-gray-500 font-medium leading-tight">Não encontrou o e-mail? Verifique sua pasta de <strong>Spam</strong> ou <strong>Promoções</strong>.</p>
+                    </div>
                     <a href="{{ route('login') }}" 
-                        class="block w-full py-5 px-6 bg-pct-blue text-white rounded-2xl text-lg font-black shadow-xl hover:bg-blue-900 transition-all transform hover:scale-[1.02] active:scale-95">
-                        ACESSAR MEU PORTAL
+                        class="block w-full py-5 px-6 bg-gray-200 text-gray-500 rounded-2xl text-lg font-black transition-all cursor-not-allowed">
+                        PORTAL BLOQUEADO (AGUARDANDO E-MAIL)
                     </a>
                     <a href="/" class="block text-sm font-bold text-gray-400 hover:text-pct-blue transition-colors">
                         Voltar para a página inicial

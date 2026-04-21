@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Redefinição de senha solicitada</title>
+<title>Confirmação de e-mail</title>
 </head>
 <body style="margin:0;padding:0;background:#f0f4fa;font-family:Arial,Helvetica,sans-serif;">
 <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f0f4fa;">
@@ -28,24 +28,22 @@
 
 <!-- CORPO -->
 <tr><td style="padding:36px 40px 28px;">
-<h1 style='margin:0 0 18px;font-size:22px;font-weight:bold;color:#0d2d6b;line-height:1.3;'>Solicitação de redefinição de senha</h1>
-<p style='margin:0 0 14px;font-size:15px;color:#333;line-height:1.7;'>Olá, <strong>{{ $user->name }}</strong>. Recebemos uma solicitação para redefinir a senha da sua conta.</p>
-<div style='background:#fff8e1;border-left:4px solid #f0c040;border-radius:6px;padding:14px 18px;margin:18px 0;font-size:14px;color:#7a4f00;line-height:1.6;'>⚠️ <strong>Se foi você</strong>, clique no botão abaixo. Se não foi você, ignore — sua conta está segura.</div>
+<h1 style='margin:0 0 18px;font-size:22px;font-weight:bold;color:#0d2d6b;line-height:1.3;'>Confirme seu endereço de e-mail</h1>
+<p style='margin:0 0 14px;font-size:15px;color:#333;line-height:1.7;'>Olá, <strong>{{ $user->name }}</strong>! Para ativar sua conta no <strong>Movimento PCT</strong>, precisamos confirmar que este e-mail é seu.</p>
+<div style='background:#e8f0fe;border-left:4px solid #0d2d6b;border-radius:6px;padding:14px 18px;margin:18px 0;font-size:14px;color:#0d2d6b;line-height:1.6;'><strong>Clique no botão abaixo</strong> para confirmar seu e-mail e ativar seu acesso completo ao portal.</div>
 <div style='text-align:center;margin:24px 0;'>
-    <a href='{{ $url }}' style='display:inline-block;background:#0d2d6b;color:#fff;font-size:15px;font-weight:bold;text-decoration:none;padding:14px 36px;border-radius:6px;'>Redefinir minha senha</a>
+    <a href='{{ $url }}' style='display:inline-block;background:#2a8a40;color:#fff;font-size:15px;font-weight:bold;text-decoration:none;padding:14px 36px;border-radius:6px;'>Confirmar meu e-mail</a>
 </div>
-<div style='background:#e8f0fe;border-left:4px solid #0d2d6b;border-radius:6px;padding:14px 18px;margin:18px 0;font-size:14px;color:#0d2d6b;line-height:1.6;'>🔒 Este link é único e válido por apenas <strong>60 minutos</strong>.</div>
+<div style='background:#fff8e1;border-left:4px solid #f0c040;border-radius:6px;padding:14px 18px;margin:18px 0;font-size:14px;color:#7a4f00;line-height:1.6;'>⚠️ Este link é válido por <strong>24 horas</strong>.</div>
 <hr style='border:none;border-top:1px solid #e0e8f4;margin:22px 0;'>
-<p style='margin:0 0 14px;font-size:15px;color:#333;line-height:1.7;'>Data/hora da solicitação: <strong>{{ now()->format('d/m/Y H:i') }}</strong></p>
-<p style='margin:10px 0 0;font-size:11.5px;color:#999;line-height:1.6;'>Se você não solicitou, verifique a segurança do seu e-mail.</p>
+<p style='margin:10px 0 0;font-size:11.5px;color:#999;line-height:1.6;'>Se você não criou uma conta no PCT, ignore este e-mail com segurança.</p>
 </td></tr>
 
 <!-- RODAPÉ -->
 <tr><td style="background:#f0f4fa;border-top:2px solid #e0e8f4;padding:22px 40px 18px;text-align:center;">
 <p style="margin:0 0 5px;font-size:12px;color:#1a3a6b;font-weight:bold;">PCT – Partido Cidadania e Trabalho</p>
 <p style="margin:0 0 4px;font-size:11px;color:#666;">UNIR &bull; DEFENDER &bull; TRANSFORMAR</p>
-<p style="margin:0 0 6px;font-size:10px;color:#999;">pct.social.br &nbsp;|&nbsp; movimento@pct.social.br &nbsp;|&nbsp; (51) 93380-6899</p>
-<p style="margin:0;font-size:10px;color:#bbb;">Este é um e-mail automático. Por favor, não responda diretamente.</p>
+<p style="margin:0 0 6px;font-size:10px;color:#999;">pct.social.br &nbsp;|&nbsp; movimento@pct.social.br</p>
 </td></tr>
 
 <!-- FAIXA RODAPÉ -->

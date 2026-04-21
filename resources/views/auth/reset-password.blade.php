@@ -2,36 +2,50 @@
     <x-slot name="title">Redefinir Senha - PCT</x-slot>
 
     <div class="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
-        <div class="max-w-md w-full glass p-8 rounded-3xl shadow-xl">
-            <div class="text-center mb-8">
-                <img class="mx-auto h-16 w-auto mb-4" src="{{ asset('logo.png') }}" alt="PCT Logo">
-                <h2 class="text-3xl font-extrabold text-pct-blue tracking-tight">Nova Senha</h2>
-                <p class="mt-2 text-sm text-gray-500">
-                    Crie uma nova senha segura para sua conta.
-                </p>
+        <div class="max-w-md w-full glass p-10 rounded-[2.5rem] shadow-2xl">
+            <div class="text-center mb-10">
+                <img class="mx-auto h-20 w-auto mb-6" src="{{ asset('logo.png') }}" alt="PCT Logo">
+                <h2 class="text-3xl font-black text-pct-blue tracking-tighter uppercase">Nova Senha</h2>
+                <p class="mt-2 text-sm font-medium text-gray-500">Crie uma senha forte e segura para sua conta.</p>
             </div>
+
+            @if($errors->any())
+                <div class="bg-red-50 border border-red-100 text-red-600 px-6 py-4 rounded-2xl mb-8 text-sm font-bold">
+                    @foreach ($errors->all() as $error)
+                        <p>{{ $error }}</p>
+                    @endforeach
+                </div>
+            @endif
 
             <form class="space-y-6" action="{{ route('password.update') }}" method="POST">
                 @csrf
                 <input type="hidden" name="token" value="{{ $token }}">
-                <input type="hidden" name="email" value="{{ $email }}">
+                
+                <div class="space-y-4">
+                    <div>
+                        <label for="email" class="block text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4 mb-2">E-mail de Confirmação</label>
+                        <input id="email" name="email" type="email" required value="{{ old('email', $email ?? '') }}" readonly
+                            class="appearance-none block w-full px-6 py-4 bg-gray-100 border border-gray-100 rounded-2xl text-sm font-bold text-gray-500 cursor-not-allowed outline-none">
+                    </div>
 
-                <div>
-                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Nova Senha</label>
-                    <input id="password" name="password" type="password" required class="appearance-none block w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-pct-blue focus:border-pct-blue sm:text-sm" placeholder="Mínimo 8 caracteres">
-                    @error('password')
-                        <p class="mt-2 text-xs text-red-600 font-bold">{{ $message }}</p>
-                    @enderror
+                    <div>
+                        <label for="password" class="block text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4 mb-2">Nova Senha</label>
+                        <input id="password" name="password" type="password" required autofocus
+                            class="appearance-none block w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pct-blue focus:bg-white transition-all text-sm font-bold text-pct-blue" 
+                            placeholder="Mínimo 8 caracteres...">
+                    </div>
+
+                    <div>
+                        <label for="password_confirmation" class="block text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4 mb-2">Confirmar Nova Senha</label>
+                        <input id="password_confirmation" name="password_confirmation" type="password" required 
+                            class="appearance-none block w-full px-6 py-4 bg-gray-50 border border-gray-100 rounded-2xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-pct-blue focus:bg-white transition-all text-sm font-bold text-pct-blue" 
+                            placeholder="Repita a nova senha...">
+                    </div>
                 </div>
 
                 <div>
-                    <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Nova Senha</label>
-                    <input id="password_confirmation" name="password_confirmation" type="password" required class="appearance-none block w-full px-4 py-3 border border-gray-300 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-pct-blue focus:border-pct-blue sm:text-sm" placeholder="Digite a mesma senha">
-                </div>
-
-                <div>
-                    <button type="submit" class="w-full flex justify-center py-4 px-4 border border-transparent rounded-xl shadow-lg text-lg font-bold text-white bg-pct-blue hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pct-blue transition-all">
-                        Atualizar Senha
+                    <button type="submit" class="w-full flex justify-center py-5 px-4 border border-transparent rounded-2xl shadow-xl text-xs font-black uppercase tracking-[0.2em] text-white bg-pct-blue hover:bg-blue-900 transition-all transform hover:-translate-y-1 active:scale-95 shadow-blue-900/20">
+                        Salvar Nova Senha
                     </button>
                 </div>
             </form>

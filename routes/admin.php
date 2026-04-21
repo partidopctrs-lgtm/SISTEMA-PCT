@@ -24,6 +24,18 @@ Route::domain('administrativo.pct.social.br')->middleware(['auth', 'role:admin']
     
     // 2. Demandas da População
     Route::get('/demandas', [AdminDashboardController::class, 'publicDemands'])->name('admin.demands');
+
+    // 🏛️ Central de Atendimento (Command Center)
+    Route::prefix('atendimento-central')->name('admin.atendimento.')->group(function () {
+        Route::get('/', [\App\Http\Controllers\Admin\AtendimentoCentralController::class, 'dashboard'])->name('dashboard');
+        Route::get('/ocorrencias', [\App\Http\Controllers\Admin\AtendimentoCentralController::class, 'index'])->name('index');
+        Route::get('/triagem', [\App\Http\Controllers\Admin\AtendimentoCentralController::class, 'triage'])->name('triage');
+        Route::get('/mobilizacao', [\App\Http\Controllers\Admin\AtendimentoCentralController::class, 'mobilization'])->name('mobilization');
+        Route::get('/caso/{id}', [\App\Http\Controllers\Admin\AtendimentoCentralController::class, 'show'])->name('show');
+        Route::post('/caso/{id}/status', [\App\Http\Controllers\Admin\AtendimentoCentralController::class, 'updateStatus'])->name('status');
+        Route::post('/caso/{id}/nota', [\App\Http\Controllers\Admin\AtendimentoCentralController::class, 'addNote'])->name('note');
+        Route::post('/caso/{id}/encaminhar', [\App\Http\Controllers\Admin\AtendimentoCentralController::class, 'forward'])->name('forward');
+    });
     
     Route::get('/diretorios', [AdminDashboardController::class, 'directories'])->name('admin.directories');
     Route::post('/directories', [AdminDashboardController::class, 'storeDirectory'])->name('admin.directories.store');

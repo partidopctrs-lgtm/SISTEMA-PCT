@@ -104,6 +104,21 @@
                         <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Inteligência</span>
                     </a>
+
+                    <!-- 🏛️ Central de Atendimento -->
+                    <div x-data="{ open: {{ request()->routeIs('admin.atendimento.*') ? 'true' : 'false' }} }">
+                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white {{ request()->routeIs('admin.atendimento.*') ? 'bg-white/10 text-white' : '' }}">
+                            <img src="{{ asset('icons/agua.svg') }}" class="w-5 h-5 brightness-0 invert opacity-70 group-hover:opacity-100" alt="Água">
+                            <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Atendimento Central</span>
+                            <svg class="w-4 h-4 ml-auto transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" x-transition class="mt-2 ml-10 space-y-1">
+                            <a href="{{ route('admin.atendimento.dashboard') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('admin.atendimento.dashboard') ? 'text-white' : 'text-blue-200' }} hover:text-white">Dashboard</a>
+                            <a href="{{ route('admin.atendimento.triage') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('admin.atendimento.triage') ? 'text-white' : 'text-blue-200' }} hover:text-white text-amber-400">Fila de Triagem</a>
+                            <a href="{{ route('admin.atendimento.index') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('admin.atendimento.index') ? 'text-white' : 'text-blue-200' }} hover:text-white">Ocorrências</a>
+                            <a href="{{ route('admin.atendimento.mobilization') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('admin.atendimento.mobilization') ? 'text-white' : 'text-blue-200' }} hover:text-white">Mobilização</a>
+                        </div>
+                    </div>
                     <a href="{{ route('admin.configuracoes') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('admin.configuracoes') ? 'bg-white/10' : '' }}">
                         <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                         <span class="ml-3 text-sm font-medium whitespace-nowrap truncate" x-show="sidebarOpen">Configurações</span>
@@ -149,7 +164,9 @@
                             <a href="{{ route('affiliate.signatures.create') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.signatures.*') ? 'text-white' : 'text-blue-200' }} hover:text-white">Apoio ao Partido</a>
                             <a href="{{ route('shared.documents', ['portal' => 'institucional']) }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Documentos</a>
                         </div>
-                      <!-- 📈 Desempenho -->
+                    </div>
+
+                    <!-- 📈 Desempenho -->
                     <div x-data="{ open: {{ request()->routeIs('affiliate.desempenho.*') ? 'true' : 'false' }} }">
                         <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white {{ request()->routeIs('affiliate.desempenho.*') ? 'bg-white/10 text-white' : '' }}">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
@@ -175,18 +192,25 @@
                         </div>
                     </div>
 
-                    <!-- 🧾 Relatos -->
-                    <div x-data="{ open: {{ request()->routeIs('affiliate.relatos.*') ? 'true' : 'false' }} }">
-                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white {{ request()->routeIs('affiliate.relatos.*') ? 'bg-white/10 text-white' : '' }}">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                            <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Relatos</span>
+                    <!-- 🧩 Atendimento PCT -->
+                    <div x-data="{ open: {{ request()->routeIs('affiliate.atendimento.*') ? 'true' : 'false' }} }">
+                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white {{ request()->routeIs('affiliate.atendimento.*') ? 'bg-white/10 text-white' : '' }}">
+                            <img src="{{ asset('icons/agua.svg') }}" class="w-5 h-5 brightness-0 invert opacity-70 group-hover:opacity-100" alt="Água">
+                            <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Atendimento PCT</span>
                             <svg class="w-4 h-4 ml-auto transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                         </button>
                         <div x-show="open" x-transition class="mt-2 ml-10 space-y-1">
-                            <a href="{{ route('affiliate.relatos.lista') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.relatos.lista') ? 'text-white' : 'text-blue-200' }} hover:text-white">Lista de Relatos</a>
-                            <a href="{{ route('affiliate.relatos.cidades') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.relatos.cidades') ? 'text-white' : 'text-blue-200' }} hover:text-white">Relatos por Cidade</a>
+                            <a href="{{ route('affiliate.atendimento.create') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.atendimento.create') ? 'text-white' : 'text-blue-200' }} hover:text-white">Enviar Relato</a>
+                            <a href="{{ route('affiliate.atendimento.index') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.atendimento.index') ? 'text-white' : 'text-blue-200' }} hover:text-white">Acompanhar Caso</a>
+                            <a href="{{ route('affiliate.atendimento.rights') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.atendimento.rights') ? 'text-white' : 'text-blue-200' }} hover:text-white">Direitos do Cidadão</a>
                         </div>
                     </div>
+
+                    <!-- 🧑🤝🧑 Comunidade PCT -->
+                    <a href="{{ route('affiliate.forum.index') }}" class="flex items-center px-4 py-3 rounded-2xl hover:bg-white/10 transition-all group {{ request()->routeIs('affiliate.forum.*') ? 'bg-white/10 shadow-lg' : '' }}">
+                        <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <span class="ml-3 font-bold text-sm whitespace-nowrap" x-show="sidebarOpen">Comunidade PCT</span>
+                    </a>
 
                     <!-- 📢 Materiais -->
                     <div x-data="{ open: {{ request()->routeIs('affiliate.materiais.*') ? 'true' : 'false' }} }">
@@ -212,8 +236,7 @@
                             <a href="{{ route('affiliate.engajamento.ranking') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.engajamento.ranking') ? 'text-white' : 'text-blue-200' }} hover:text-white">Ranking de Afiliados</a>
                         </div>
                     </div>
-               </div>
-                    </div>
+
 
                     <!-- 🔔 Comunicação -->
                     <div x-data="{ open: false }">

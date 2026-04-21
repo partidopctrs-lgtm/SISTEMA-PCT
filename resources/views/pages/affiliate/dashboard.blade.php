@@ -145,7 +145,10 @@
     <!-- 🚀 CENTRAL DE COMANDO: CAMPANHA ÁGUA NO RS -->
     <div class="mb-12">
         <div class="flex items-center justify-between mb-8">
-            <h2 class="text-2xl font-black text-pct-blue uppercase tracking-tighter">Campanha: Água no RS 🌊</h2>
+            <div class="flex items-center gap-3">
+                <img src="{{ asset('icons/agua.svg') }}" class="w-8 h-8" alt="Água">
+                <h2 class="text-2xl font-black text-pct-blue uppercase tracking-tighter">Campanha: Água no RS</h2>
+            </div>
             <div class="flex gap-2">
                 <span class="px-3 py-1 bg-pct-blue text-white text-[9px] font-black uppercase rounded-lg">Mobilização Ativa</span>
                 <span class="px-3 py-1 bg-pct-green text-white text-[9px] font-black uppercase rounded-lg">Impacto 2026</span>

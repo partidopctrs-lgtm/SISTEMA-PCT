@@ -26,6 +26,7 @@ foreach ($mainDomains as $domain) {
         Route::get('/login', [DepartmentLoginController::class, 'showLoginForm'])->name('login');
         Route::post('/login', [DepartmentLoginController::class, 'login']);
         Route::get('/cadastro/sucesso', [RegistrationController::class, 'success'])->name('register.success');
+        Route::get('/cadastro/verificar/{token}', [\App\Http\Controllers\Public\VerifyEmailController::class, 'verify'])->name('register.verify');
         Route::get('/politica-de-privacidade', [HomeController::class, 'privacy'])->name('privacy');
         Route::get('/termos-de-uso', [HomeController::class, 'terms'])->name('terms');
 
@@ -63,11 +64,23 @@ Route::domain('afiliado.pct.social.br')->name('affiliate.')->middleware(['web', 
         Route::get('/compartilhar', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'generator'])->name('compartilhar');
     });
 
-    // 🧾 Módulo de Relatos
-    Route::prefix('relatos')->name('relatos.')->group(function () {
-        Route::get('/lista', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'reportsList'])->name('lista');
-        Route::get('/cidades', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'reportsList'])->name('cidades');
-        Route::get('/status', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'reportsList'])->name('status');
+    // 🧾 Módulo de Relatos / Atendimento PCT
+    Route::prefix('atendimento')->name('atendimento.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Affiliate\AtendimentoController::class, 'index'])->name('index');
+        Route::get('/novo', [App\Http\Controllers\Affiliate\AtendimentoController::class, 'create'])->name('create');
+        Route::post('/enviar', [App\Http\Controllers\Affiliate\AtendimentoController::class, 'store'])->name('store');
+        Route::get('/acompanhar/{id}', [App\Http\Controllers\Affiliate\AtendimentoController::class, 'show'])->name('show');
+        Route::get('/direitos', [App\Http\Controllers\Affiliate\AtendimentoController::class, 'rights'])->name('rights');
+    });
+
+    // 🧑🤝🧑 Módulo de Comunidade PCT (Fórum)
+    Route::prefix('comunidade')->name('forum.')->group(function () {
+        Route::get('/', [App\Http\Controllers\Affiliate\ForumController::class, 'index'])->name('index');
+        Route::get('/topico/novo', [App\Http\Controllers\Affiliate\ForumController::class, 'create'])->name('create');
+        Route::post('/topico/enviar', [App\Http\Controllers\Affiliate\ForumController::class, 'storeTopic'])->name('store');
+        Route::get('/topico/{id}', [App\Http\Controllers\Affiliate\ForumController::class, 'show'])->name('show');
+        Route::post('/topico/{id}/comentar', [App\Http\Controllers\Affiliate\ForumController::class, 'storeComment'])->name('comment');
+        Route::post('/topico/{id}/like', [App\Http\Controllers\Affiliate\ForumController::class, 'toggleLike'])->name('like');
     });
 
     // 📢 Módulo de Materiais

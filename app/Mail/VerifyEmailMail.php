@@ -8,28 +8,30 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class WelcomeMail extends Mailable
+class VerifyEmailMail extends Mailable
 {
     use Queueable, SerializesModels;
 
     public $user;
+    public $url;
 
-    public function __construct($user)
+    public function __construct($user, $url)
     {
         $this->user = $user;
+        $this->url = $url;
     }
 
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Bem-vindo ao Movimento PCT! 🚩',
+            subject: 'Confirme seu e-mail - Movimento PCT 🚩',
         );
     }
 
     public function content(): Content
     {
         return new Content(
-            view: 'emails.welcome',
+            view: 'emails.verify-email',
         );
     }
 }

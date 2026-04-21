@@ -35,9 +35,9 @@ class RegistrationController extends Controller
                 'cpf' => $validated['cpf'],
                 'phone' => $validated['phone'],
                 'password' => Hash::make($validated['password']),
-                'role' => 'affiliate',
                 'registration_number' => $regNumber,
-                'status' => 'active',
+                'status' => 'pending',
+                'verification_token' => \Illuminate\Support\Str::random(64),
             ]);
 
             // 1. Criar Perfil de Afiliado
@@ -68,11 +68,12 @@ class RegistrationController extends Controller
                 ]);
             }
 
-            // Enviar e-mail de Boas-Vindas
+            // Enviar e-mail de Verificação
             try {
-                \Illuminate\Support\Facades\Mail::to($user->email)->send(new \App\Mail\WelcomeMail($user));
+                $url = route('register.verify', ['token' => $user->verification_token]);
+                \Illuminate\Support\Facades\Mail::to($user->email)->send(new \App\Mail\VerifyEmailMail($user, $url));
             } catch (\Exception $e) {
-                \Illuminate\Support\Facades\Log::error('Erro ao enviar e-mail de boas-vindas: ' . $e->getMessage());
+                \Illuminate\Support\Facades\Log::error('Erro ao enviar e-mail de verificação: ' . $e->getMessage());
             }
         });
 
