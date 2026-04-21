@@ -28,15 +28,43 @@ class AffiliateDashboardController extends Controller
             'rank_national' => $rankNational,
         ];
 
-        $myReferrals = $user->referrals()->latest()->limit(5)->get();
-
-        // Dados da Campanha Água no RS
+        // Dados Avançados da Campanha Água no RS
+        $totalClicks = \App\Models\CampaignClick::where('affiliate_id', $user->id)->where('campaign_name', 'agua-rs')->count();
+        $totalReports = \App\Models\WaterReport::where('affiliate_id', $user->id)->count();
+        
         $waterStats = [
-            'total' => \App\Models\WaterReport::where('affiliate_id', $user->id)->count(),
+            'total_clicks' => $totalClicks,
+            'total_reports' => $totalReports,
+            'conversion_rate' => $totalClicks > 0 ? round(($totalReports / $totalClicks) * 100, 1) : 0,
+            'cities_impacted' => \App\Models\WaterReport::where('affiliate_id', $user->id)->distinct('city')->count(),
+            'by_city' => \App\Models\WaterReport::where('affiliate_id', $user->id)
+                ->selectRaw('city, count(*) as count')
+                ->groupBy('city')
+                ->orderByDesc('count')
+                ->get(),
             'recent' => \App\Models\WaterReport::where('affiliate_id', $user->id)->latest()->limit(5)->get(),
         ];
 
-        return view('pages.affiliate.dashboard', compact('user', 'isFounder', 'stats', 'myReferrals', 'waterStats'));
+        // Ranking da Campanha (Top 10 Afiliados que mais geraram relatos)
+        $campaignRanking = \App\Models\WaterReport::selectRaw('affiliate_id, count(*) as total')
+            ->whereNotNull('affiliate_id')
+            ->groupBy('affiliate_id')
+            ->orderByDesc('total')
+            ->with('affiliate:id,name,photo')
+            ->limit(10)
+            ->get();
+
+        // Posição do usuário no ranking da campanha
+        $myCampaignPos = \App\Models\WaterReport::selectRaw('affiliate_id, count(*) as total')
+            ->whereNotNull('affiliate_id')
+            ->groupBy('affiliate_id')
+            ->orderByDesc('total')
+            ->pluck('affiliate_id')
+            ->search($user->id);
+            
+        $waterStats['my_rank'] = $myCampaignPos !== false ? $myCampaignPos + 1 : '-';
+
+        return view('pages.affiliate.dashboard', compact('user', 'isFounder', 'stats', 'myReferrals', 'waterStats', 'campaignRanking'));
     }
 
     public function profile()

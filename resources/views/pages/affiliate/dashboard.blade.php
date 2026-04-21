@@ -142,58 +142,131 @@
         </div>
     </div>
 
-    <!-- 📊 Campanha Água no RS -->
+    <!-- 🚀 CENTRAL DE COMANDO: CAMPANHA ÁGUA NO RS -->
     <div class="mb-12">
-        <div class="card-premium bg-gradient-to-br from-blue-600 to-blue-800 text-white border-none overflow-hidden relative">
-            <div class="relative z-10">
-                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
-                    <div>
-                        <span class="inline-block px-3 py-1 bg-white/20 text-[9px] font-black uppercase tracking-[0.2em] rounded-full mb-3">Campanha Ativa: Água no RS</span>
-                        <h3 class="text-2xl font-black tracking-tighter">Mobilização pela Água</h3>
-                        <p class="text-blue-100 text-xs font-medium">Ajude sua cidade a cobrar soluções registrando problemas de abastecimento.</p>
-                    </div>
-                    <div class="flex gap-4">
-                        <div class="bg-white/10 px-6 py-3 rounded-2xl text-center backdrop-blur-md border border-white/10">
-                            <p class="text-[9px] font-black uppercase tracking-widest opacity-60">Meus Relatos Gerados</p>
-                            <p class="text-2xl font-black">{{ $waterStats['total'] }}</p>
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-2xl font-black text-pct-blue uppercase tracking-tighter">Campanha: Água no RS 🌊</h2>
+            <div class="flex gap-2">
+                <span class="px-3 py-1 bg-pct-blue text-white text-[9px] font-black uppercase rounded-lg">Mobilização Ativa</span>
+                <span class="px-3 py-1 bg-pct-green text-white text-[9px] font-black uppercase rounded-lg">Impacto 2026</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <!-- 📈 1. Resumo Geral -->
+            <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm text-center group hover:border-pct-blue transition-all">
+                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">Relatos Gerados</p>
+                    <p class="text-3xl font-black text-pct-blue">{{ $waterStats['total_reports'] }}</p>
+                </div>
+                <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm text-center group hover:border-pct-blue transition-all">
+                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">Pessoas Alcançadas</p>
+                    <p class="text-3xl font-black text-indigo-600">{{ $waterStats['total_clicks'] }}</p>
+                </div>
+                <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm text-center group hover:border-pct-blue transition-all">
+                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">Taxa de Conversão</p>
+                    <p class="text-3xl font-black text-pct-green">{{ $waterStats['conversion_rate'] }}%</p>
+                </div>
+                <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm text-center group hover:border-pct-blue transition-all">
+                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2">Sua Posição</p>
+                    <p class="text-3xl font-black text-amber-500">#{{ $waterStats['my_rank'] }}</p>
+                </div>
+
+                <!-- 🔗 2. Link de Divulgação -->
+                <div class="md:col-span-4 bg-pct-blue p-8 rounded-[3rem] text-white relative overflow-hidden">
+                    <div class="relative z-10">
+                        <h4 class="text-xs font-black uppercase tracking-[0.3em] mb-4 opacity-60">Seu Link Exclusivo de Líder</h4>
+                        <div class="flex flex-col md:flex-row gap-4">
+                            <input type="text" readonly value="{{ route('campaign.water.index', ['ref' => auth()->id()]) }}" id="refLink" class="flex-grow bg-white/10 border border-white/20 rounded-2xl px-6 py-4 text-xs font-bold outline-none focus:border-white/40">
+                            <div class="flex gap-2">
+                                <button onclick="copyLink()" class="px-6 py-4 bg-white text-pct-blue rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-pct-green hover:text-white transition-all shadow-xl">Copiar Link</button>
+                                <a href="https://wa.me/?text=O%20problema%20da%20%C3%A1gua%20no%20RS%20vai%20al%C3%A9m%20da%20falta.%20Sua%20cidade%20precisa%20ser%20ouvida.%20Relate%20aqui%3A%20{{ urlencode(route('campaign.water.index', ['ref' => auth()->id()])) }}" target="_blank" class="px-6 py-4 bg-emerald-500 text-white rounded-2xl font-black uppercase text-[10px] tracking-widest hover:bg-emerald-600 transition-all shadow-xl flex items-center gap-2">
+                                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-2.277 0-4.131 1.851-4.131 4.128 0 2.276 1.854 4.128 4.131 4.128 2.277 0 4.131-1.852 4.131-4.128 0-2.277-1.854-4.128-4.131-4.128zm0 6.757c-1.448 0-2.628-1.181-2.628-2.629 0-1.449 1.18-2.63 2.628-2.63 1.448 0 2.628 1.181 2.628 2.63 0 1.448-1.18 2.629-2.628-2.629zM12 1C5.925 1 1 5.925 1 12s4.925 11 11 11 11-4.925 11-11S18.075 1 12 1zm0 20c-4.963 0-9-4.037-9-9s4.037-9 9-9 9 4.037 9 9-4.037 9-9 9z"/></svg>
+                                    WhatsApp
+                                </a>
+                            </div>
                         </div>
+                    </div>
+                    <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+                </div>
+
+                <!-- 🗺️ 3. Relatos por Cidade -->
+                <div class="md:col-span-2 bg-white p-8 rounded-[3rem] border border-slate-100 shadow-sm">
+                    <h3 class="text-xs font-black text-pct-blue uppercase tracking-widest mb-6">Impacto por Cidade</h3>
+                    <div class="space-y-4 max-h-[300px] overflow-y-auto pr-4 custom-scrollbar">
+                        @forelse($waterStats['by_city'] as $city)
+                        <div class="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                            <span class="text-xs font-black text-pct-blue uppercase">{{ $city->city }}</span>
+                            <span class="px-3 py-1 bg-white text-pct-blue rounded-lg text-[10px] font-black border border-slate-200">{{ $city->count }} relatos</span>
+                        </div>
+                        @empty
+                        <div class="py-12 text-center text-slate-300 font-bold uppercase text-[10px] italic">Aguardando relatos...</div>
+                        @endforelse
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
+                <!-- 📢 7. Materiais & Gerador de Posts -->
+                <div class="md:col-span-2 bg-slate-50 p-8 rounded-[3rem] border border-slate-100">
+                    <h3 class="text-xs font-black text-pct-blue uppercase tracking-widest mb-6">Ferramentas de Divulgação</h3>
                     <div class="space-y-4">
-                        <p class="text-[10px] font-black uppercase tracking-widest opacity-60">Seu Link de Mobilização da Campanha</p>
-                        <div class="flex items-center gap-3">
-                            <input type="text" readonly value="{{ route('campaign.water.index', ['ref' => auth()->id()]) }}" class="bg-white/10 border border-white/20 rounded-2xl px-6 py-4 text-xs w-full font-bold text-white outline-none">
-                            <button class="bg-pct-green text-white p-4 rounded-2xl hover:scale-105 transition-all shadow-lg" onclick="navigator.clipboard.writeText('{{ route('campaign.water.index', ['ref' => auth()->id()]) }}'); alert('Link da campanha copiado!')">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="bg-white rounded-[2rem] p-6 text-slate-800">
-                        <h4 class="text-xs font-black text-pct-blue uppercase tracking-widest mb-4">Últimos Relatos da sua Rede</h4>
-                        <div class="space-y-3">
-                            @forelse($waterStats['recent'] as $report)
-                                <div class="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
-                                    <div>
-                                        <p class="text-[10px] font-black text-pct-blue uppercase">{{ $report->city }} / {{ $report->neighborhood }}</p>
-                                        <p class="text-[9px] text-slate-500 font-bold">{{ $report->problem_type }}</p>
-                                    </div>
-                                    <span class="text-[9px] font-black text-pct-green">{{ $report->created_at->diffForHumans() }}</span>
-                                </div>
-                            @empty
-                                <div class="py-4 text-center">
-                                    <p class="text-[10px] text-slate-400 font-bold uppercase italic">Nenhum relato gerado ainda.</p>
-                                </div>
-                            @endforelse
+                        <button onclick="copyPostText()" class="w-full p-6 bg-white rounded-2xl border-2 border-dashed border-slate-200 text-left group hover:border-pct-blue transition-all">
+                            <p class="text-[9px] font-black text-pct-blue uppercase mb-2">Copiar Sugestão de Post</p>
+                            <p class="text-[10px] text-slate-500 italic leading-relaxed">"O problema da água no RS já atinge dezenas de municípios. Na minha rede já temos {{ $waterStats['total_reports'] }} relatos. Participe também: [link]"</p>
+                        </button>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="p-4 bg-white rounded-2xl border border-slate-200 text-center opacity-50 cursor-not-allowed">
+                                <p class="text-[9px] font-black uppercase">Baixar Panfletos</p>
+                                <p class="text-[8px] font-bold text-slate-400 mt-1">(Em breve)</p>
+                            </div>
+                            <div class="p-4 bg-white rounded-2xl border border-slate-200 text-center opacity-50 cursor-not-allowed">
+                                <p class="text-[9px] font-black uppercase">Gerar QR Code</p>
+                                <p class="text-[8px] font-bold text-slate-400 mt-1">(Em breve)</p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Efeito visual de água -->
-            <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-blue-400/20 rounded-full blur-3xl"></div>
+
+            <!-- 🏆 5. Ranking de Afiliados -->
+            <div class="lg:col-span-1 bg-white p-8 rounded-[3rem] border border-slate-100 shadow-sm border-t-4 border-t-amber-400">
+                <h3 class="text-xs font-black text-pct-blue uppercase tracking-widest mb-8 flex items-center gap-2">
+                    <svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
+                    TOP 10 Mobilizadores
+                </h3>
+                <div class="space-y-4">
+                    @foreach($campaignRanking as $rank)
+                    <div class="flex items-center justify-between p-3 {{ $rank->affiliate_id == auth()->id() ? 'bg-amber-50 border-amber-200' : 'bg-slate-50 border-slate-100' }} rounded-2xl border">
+                        <div class="flex items-center gap-3">
+                            <span class="text-[10px] font-black text-slate-400 w-4">{{ $loop->iteration }}º</span>
+                            <div class="w-8 h-8 rounded-lg bg-white border border-slate-200 overflow-hidden">
+                                @if($rank->affiliate->photo)
+                                    <img src="{{ asset('storage/'.$rank->affiliate->photo) }}" class="w-full h-full object-cover">
+                                @else
+                                    <div class="w-full h-full flex items-center justify-center text-[10px] font-black text-pct-blue">{{ substr($rank->affiliate->name, 0, 1) }}</div>
+                                @endif
+                            </div>
+                            <span class="text-[10px] font-black text-pct-blue uppercase truncate w-20">{{ $rank->affiliate->name }}</span>
+                        </div>
+                        <span class="text-[10px] font-black text-pct-green">{{ $rank->total }}</span>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
         </div>
     </div>
+
+    <script>
+        function copyLink() {
+            var copyText = document.getElementById("refLink");
+            copyText.select();
+            copyText.setSelectionRange(0, 99999);
+            navigator.clipboard.writeText(copyText.value);
+            alert("Link de mobilização copiado!");
+        }
+        function copyPostText() {
+            const text = "O problema da água no RS já atinge dezenas de municípios. Na minha rede já temos {{ $waterStats['total_reports'] }} relatos. Participe também: {{ route('campaign.water.index', ['ref' => auth()->id()]) }}";
+            navigator.clipboard.writeText(text);
+            alert("Texto para postagem copiado!");
+        }
+    </script>
 </x-dashboard-layout>

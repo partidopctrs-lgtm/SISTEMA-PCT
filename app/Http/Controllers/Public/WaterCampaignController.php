@@ -12,9 +12,16 @@ class WaterCampaignController extends Controller
 {
     public function index(Request $request)
     {
-        // Guardar o ID do afiliado na sessão se vier via ref
+        // Guardar o ID do afiliado na sessão se vier via ref e registrar clique
         if ($request->has('ref')) {
             session(['water_ref' => $request->ref]);
+            
+            \App\Models\CampaignClick::create([
+                'affiliate_id' => $request->ref,
+                'campaign_name' => 'agua-rs',
+                'ip_address' => $request->ip(),
+                'user_agent' => $request->userAgent()
+            ]);
         }
 
         // Estatísticas para o painel de impacto
