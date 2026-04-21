@@ -311,6 +311,73 @@
         </div>
     </section>
 
+    <!-- Perguntas Frequentes (FAQ) -->
+    <section id="faq" class="py-32 bg-white relative overflow-hidden">
+        <div class="absolute top-40 right-0 w-96 h-96 bg-pct-blue/5 rounded-full blur-[100px]"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-20">
+                <span class="text-pct-green font-black tracking-[0.3em] uppercase mb-4 block">Dúvidas Comuns</span>
+                <h2 class="text-5xl font-black text-pct-blue tracking-tighter">Perguntas Frequentes</h2>
+                <div class="h-1.5 w-20 bg-pct-green mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="space-y-4">
+                @foreach($faqs as $faq)
+                <div class="group border border-slate-100 rounded-[2.5rem] bg-slate-50 hover:bg-white hover:shadow-2xl hover:shadow-pct-blue/5 transition-all duration-500 overflow-hidden">
+                    <button onclick="toggleFaq({{ $faq->id }})" class="w-full px-10 py-8 flex items-center justify-between text-left focus:outline-none">
+                        <span class="text-xl font-black text-pct-blue group-hover:text-pct-green transition-colors leading-tight pr-8">
+                            {{ $faq->question }}
+                        </span>
+                        <div id="icon-{{ $faq->id }}" class="w-10 h-10 rounded-full bg-white shadow-sm flex items-center justify-center text-pct-blue transition-transform duration-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                        </div>
+                    </button>
+                    <div id="answer-{{ $faq->id }}" class="max-h-0 opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                        <div class="px-10 pb-10 text-lg text-slate-600 font-medium leading-relaxed whitespace-pre-line">
+                            {{ $faq->answer }}
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+
+            <div class="mt-20 text-center">
+                <p class="text-slate-500 font-medium mb-6">Ainda tem alguma dúvida sobre o movimento?</p>
+                <a href="{{ route('register.index') }}" class="text-pct-green font-black uppercase tracking-widest text-sm hover:underline">Entre em contato conosco</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleFaq(id) {
+            const answer = document.getElementById(`answer-${id}`);
+            const icon = document.getElementById(`icon-${id}`);
+            
+            // Fecha outros FAQs (opcional, remova se quiser abrir múltiplos)
+            document.querySelectorAll('[id^="answer-"]').forEach(el => {
+                if(el.id !== `answer-${id}`) {
+                    el.style.maxHeight = null;
+                    el.style.opacity = 0;
+                }
+            });
+            document.querySelectorAll('[id^="icon-"]').forEach(el => {
+                if(el.id !== `icon-${id}`) {
+                    el.style.transform = 'rotate(0deg)';
+                }
+            });
+
+            if (answer.style.maxHeight) {
+                answer.style.maxHeight = null;
+                answer.style.opacity = 0;
+                icon.style.transform = 'rotate(0deg)';
+            } else {
+                answer.style.maxHeight = answer.scrollHeight + "px";
+                answer.style.opacity = 1;
+                icon.style.transform = 'rotate(180deg)';
+            }
+        }
+    </script>
+
     <!-- Junte-se -->
     <section class="py-32 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

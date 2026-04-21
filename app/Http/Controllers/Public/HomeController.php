@@ -25,7 +25,9 @@ class HomeController extends Controller
         
         $stats['progress'] = ($stats['total_signatures'] / $stats['goal']) * 100;
 
-        return view('pages.public.home', compact('stats'));
+        $faqs = \App\Models\Faq::where('is_active', true)->orderBy('order')->get();
+        
+        return view('pages.public.home', compact('stats', 'faqs'));
     }
 
     public function manifesto()
