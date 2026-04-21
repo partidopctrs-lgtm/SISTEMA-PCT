@@ -35,47 +35,60 @@ foreach ($mainDomains as $domain) {
         Route::get('/redefinir-senha/{token}', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
         Route::post('/redefinir-senha', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'reset'])->name('password.update');
 
-        // Campanha Água no RS
-        Route::get('/carteirinha', [App\Http\Controllers\Affiliate\AffiliateDashboardController::class, 'carteirinha'])->name('carteirinha');
-
-        // 📈 Módulo de Desempenho
-        Route::prefix('desempenho')->name('desempenho.')->group(function () {
-            Route::get('/estatisticas', [App\Http\Controllers\Affiliate\AffiliateDashboardController::class, 'index'])->name('estatisticas');
-            Route::get('/relatorios', [App\Http\Controllers\Affiliate\AffiliateDashboardController::class, 'index'])->name('relatorios');
-            Route::get('/conversoes', [App\Http\Controllers\Affiliate\AffiliateDashboardController::class, 'index'])->name('conversoes');
-        });
-
-        // 🔗 Módulo de Divulgação
-        Route::prefix('divulgacao')->name('divulgacao.')->group(function () {
-            Route::get('/gerador', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'generator'])->name('gerador');
-            Route::get('/qrcode', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'generator'])->name('qrcode');
-            Route::get('/compartilhar', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'generator'])->name('compartilhar');
-        });
-
-        // 🧾 Módulo de Relatos
-        Route::prefix('relatos')->name('relatos.')->group(function () {
-            Route::get('/lista', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'reportsList'])->name('lista');
-            Route::get('/cidades', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'reportsList'])->name('cidades');
-            Route::get('/status', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'reportsList'])->name('status');
-        });
-
-        // 📢 Módulo de Materiais
-        Route::prefix('materiais')->name('materiais.')->group(function () {
-            Route::get('/artes', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'materials'])->name('artes');
-            Route::get('/textos', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'materials'])->name('textos');
-            Route::get('/downloads', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'materials'])->name('downloads');
-        });
-
-        // 🏆 Módulo de Engajamento
-        Route::prefix('engajamento')->name('engajamento.')->group(function () {
-            Route::get('/ranking', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'ranking'])->name('ranking');
-            Route::get('/metas', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'ranking'])->name('metas');
-        });
-
         Route::get('/agua-rs', [\App\Http\Controllers\Public\WaterCampaignController::class, 'index'])->name('campaign.water.index');
         Route::post('/agua-rs', [\App\Http\Controllers\Public\WaterCampaignController::class, 'store'])->name('campaign.water.store');
     });
 }
+
+// ============================================================
+// 2. PAINEL DO AFILIADO (afiliado.pct.social.br)
+// ============================================================
+Route::domain('afiliado.pct.social.br')->name('affiliate.')->middleware(['web', 'auth', 'role:affiliate'])->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\Affiliate\AffiliateDashboardController::class, 'index'])->name('dashboard');
+    Route::get('/perfil', [App\Http\Controllers\Affiliate\AffiliateDashboardController::class, 'profile'])->name('profile');
+    Route::post('/perfil', [App\Http\Controllers\Affiliate\AffiliateDashboardController::class, 'updateProfile'])->name('profile.update');
+    Route::get('/carteirinha', [App\Http\Controllers\Affiliate\AffiliateDashboardController::class, 'index'])->name('carteirinha');
+
+    // 📈 Módulo de Desempenho
+    Route::prefix('desempenho')->name('desempenho.')->group(function () {
+        Route::get('/estatisticas', [App\Http\Controllers\Affiliate\AffiliateDashboardController::class, 'index'])->name('estatisticas');
+        Route::get('/relatorios', [App\Http\Controllers\Affiliate\AffiliateDashboardController::class, 'index'])->name('relatorios');
+        Route::get('/conversoes', [App\Http\Controllers\Affiliate\AffiliateDashboardController::class, 'index'])->name('conversoes');
+    });
+
+    // 🔗 Módulo de Divulgação
+    Route::prefix('divulgacao')->name('divulgacao.')->group(function () {
+        Route::get('/gerador', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'generator'])->name('gerador');
+        Route::get('/qrcode', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'generator'])->name('qrcode');
+        Route::get('/compartilhar', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'generator'])->name('compartilhar');
+    });
+
+    // 🧾 Módulo de Relatos
+    Route::prefix('relatos')->name('relatos.')->group(function () {
+        Route::get('/lista', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'reportsList'])->name('lista');
+        Route::get('/cidades', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'reportsList'])->name('cidades');
+        Route::get('/status', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'reportsList'])->name('status');
+    });
+
+    // 📢 Módulo de Materiais
+    Route::prefix('materiais')->name('materiais.')->group(function () {
+        Route::get('/artes', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'materials'])->name('artes');
+        Route::get('/textos', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'materials'])->name('textos');
+        Route::get('/downloads', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'materials'])->name('downloads');
+    });
+
+    // 🏆 Módulo de Engajamento
+    Route::prefix('engajamento')->name('engajamento.')->group(function () {
+        Route::get('/ranking', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'ranking'])->name('ranking');
+        Route::get('/metas', [App\Http\Controllers\Affiliate\CampaignManagementController::class, 'ranking'])->name('metas');
+    });
+
+    // Apoio ao Partido
+    Route::prefix('apoio')->name('signatures.')->group(function () {
+        Route::get('/registrar', [App\Http\Controllers\Affiliate\PartySignatureController::class, 'create'])->name('create');
+        Route::post('/registrar', [App\Http\Controllers\Affiliate\PartySignatureController::class, 'store'])->name('store');
+    });
+});
 
 // ============================================================
 // 2. DIRETÓRIOS DINÂMICOS (city.pct.social.br)
