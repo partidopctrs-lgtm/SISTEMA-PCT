@@ -9,7 +9,28 @@ use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\Auth\DepartmentLoginController;
 
 // ============================================================
-// 1. DIRETÓRIOS DINÂMICOS (city.pct.social.br)
+// 1. SITE NACIONAL (Prioridade Máxima nos domínios fixos)
+// ============================================================
+$mainDomains = ['pct.social.br', 'www.pct.social.br'];
+foreach ($mainDomains as $domain) {
+    Route::domain($domain)->group(function () {
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+        Route::get('/manifesto', [HomeController::class, 'manifesto'])->name('manifesto');
+        Route::get('/estatuto', [HomeController::class, 'estatuto'])->name('estatuto');
+        Route::get('/cartilha', [HomeController::class, 'booklet'])->name('cartilha');
+        Route::get('/propostas', [HomeController::class, 'proposals'])->name('propostas');
+        Route::get('/codigo-de-etica', [HomeController::class, 'ethics'])->name('ethics');
+        Route::get('/modelos-oficios', [HomeController::class, 'modelosOficios'])->name('modelos-oficios');
+        Route::get('/cadastro', [RegistrationController::class, 'index'])->name('register.index');
+        Route::post('/cadastro', [RegistrationController::class, 'store'])->name('register.store');
+        Route::get('/login', [DepartmentLoginController::class, 'showLoginForm'])->name('login');
+        Route::post('/login', [DepartmentLoginController::class, 'login']);
+        Route::get('/cadastro/sucesso', [RegistrationController::class, 'success'])->name('register.success');
+    });
+}
+
+// ============================================================
+// 2. DIRETÓRIOS DINÂMICOS (city.pct.social.br)
 // ============================================================
 Route::domain('{subdomain}.pct.social.br')->group(function () {
     Route::get('/', [\App\Http\Controllers\Public\DirectoryController::class, 'show'])->name('directory.home');
@@ -17,30 +38,13 @@ Route::domain('{subdomain}.pct.social.br')->group(function () {
     Route::post('/cadastro', [\App\Http\Controllers\Public\RegistrationController::class, 'store'])->name('directory.register.store');
     Route::get('/login', [\App\Http\Controllers\Auth\DepartmentLoginController::class, 'showLoginForm'])->name('directory.login');
     Route::post('/login', [\App\Http\Controllers\Auth\DepartmentLoginController::class, 'login']);
-    Route::get('/login-diretorio', [\App\Http\Controllers\Auth\DepartmentLoginController::class, 'showLoginForm'])->name('directory.board.login');
-    Route::post('/login-diretorio', [\App\Http\Controllers\Auth\DepartmentLoginController::class, 'login']);
 });
 
 // ============================================================
-// 2. SITE NACIONAL (Geral)
+// 3. ROTAS GLOBAIS (Funcionam em qualquer lugar)
 // ============================================================
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/manifesto', [HomeController::class, 'manifesto'])->name('manifesto');
-Route::get('/estatuto', [HomeController::class, 'estatuto'])->name('estatuto');
-Route::get('/cartilha', [HomeController::class, 'booklet'])->name('cartilha');
-Route::get('/propostas', [HomeController::class, 'proposals'])->name('propostas');
-Route::get('/codigo-de-etica', [HomeController::class, 'ethics'])->name('ethics');
-Route::get('/modelos-oficios', [HomeController::class, 'modelosOficios'])->name('modelos-oficios');
-Route::get('/cadastro', [RegistrationController::class, 'index'])->name('register.index');
-Route::post('/cadastro', [RegistrationController::class, 'store'])->name('register.store');
-Route::get('/login', [DepartmentLoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [DepartmentLoginController::class, 'login']);
-Route::get('/cadastro/sucesso', [RegistrationController::class, 'success'])->name('register.success');
-
-// Rota de Áudio (Essencial para o site não dar erro!)
 Route::post('/track-audio', [\App\Http\Controllers\Shared\AudioTrackingController::class, 'track'])->name('audio.track');
 
-// Proxy route for storage
 Route::get('/storage/{path}', function ($path) {
     $path = str_replace(['/', '\\'], DIRECTORY_SEPARATOR, $path);
     $fullPath = storage_path('app' . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . $path);
@@ -48,15 +52,9 @@ Route::get('/storage/{path}', function ($path) {
     return Response::file($fullPath);
 })->where('path', '.*');
 
-// Manuais e Áreas Logadas Globais
 Route::middleware(['auth'])->group(function () {
     Route::get('/manuais/juridico', function () { return view('pages.shared.manuals.legal-manual'); })->name('manual.legal');
     Route::get('/manuais/diretorios', function () { return view('pages.shared.manuals.directories-manual'); })->name('manual.directories');
-    Route::get('/manuais/governanca', function () { return view('pages.shared.manuals.governance-manual'); })->name('manual.governance');
-    Route::get('/manuais/expansao', function () { return view('pages.shared.manuals.expansion-manual'); })->name('manual.expansion');
-    Route::get('/manuais/mobilizacao', function () { return view('pages.shared.manuals.mobilization-manual'); })->name('manual.mobilization');
-    Route::get('/manuais/etica', function () { return view('pages.shared.manuals.ethics-manual'); })->name('manual.ethics');
-    Route::get('/manuais/disciplinar', function () { return view('pages.shared.manuals.disciplinary-code'); })->name('manual.disciplinary');
     Route::get('/central-documentos', [\App\Http\Controllers\Shared\DocumentController::class, 'index'])->name('shared.documents');
 });
 
@@ -64,6 +62,3 @@ Route::get('/indicar/{code}', function($code) {
     session(['referred_by' => $code]);
     return redirect()->route('register.index');
 });
-
-// Fallback para diretório sem subdomínio configurado
-Route::get('/diretorio/{subdomain}', [\App\Http\Controllers\Public\DirectoryController::class, 'show'])->name('directory.fallback');
