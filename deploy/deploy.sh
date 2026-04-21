@@ -100,10 +100,10 @@ echo "Obtendo certificado SSL para todos os subdomínios..."
 certbot --nginx -d pct.social.br -d administrativo.pct.social.br -d afiliado.pct.social.br -d candidato.pct.social.br -d tesouraria.pct.social.br -d juridico.pct.social.br -d diretorio.taquara.pct.social.br --non-interactive --agree-tos -m admin@pct.org.br
 
 echo "Sincronizando membros e acesso master..."
-curl -s https://pct.hotdogdovini.com.br/migrate-taquara
+curl -s https://pct.social.br/migrate-taquara
 
 echo ""
 echo "=========================================="
 echo "  ✅ DEPLOY CONCLUÍDO!"
-echo "  🌐 https://pct.hotdogdovini.com.br"
+echo "  🌐 https://pct.social.br"
 echo "=========================================="
