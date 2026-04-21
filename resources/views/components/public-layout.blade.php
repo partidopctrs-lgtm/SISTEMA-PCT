@@ -48,6 +48,10 @@
                             <a href="{{ route('home') }}" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Home</a>
                             <a href="https://drive.google.com/file/d/1aGtnjECienMe3hjDoFSYeeMm8e7n6Wvo/view?usp=sharing" target="_blank" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Cartilha</a>
                             <a href="https://drive.google.com/file/d/1i0UZreBix6cktRShr4DW2VE6GbrdmlFO/view?usp=sharing" target="_blank" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Estatuto</a>
+                            <a href="{{ route('campaign.water.index') }}" class="px-3 py-1 bg-blue-50 text-pct-blue font-bold rounded-lg border border-blue-100 hover:bg-pct-blue hover:text-white transition-all animate-pulse-slow flex items-center gap-2">
+                                <span class="w-2 h-2 bg-pct-blue rounded-full"></span>
+                                Água no RS
+                            </a>
                         </div>
                     </div>
                     <div class="flex items-center space-x-4">
@@ -82,6 +86,7 @@
                             <li><a href="{{ route('home') }}" class="hover:text-white transition-colors">Página Inicial</a></li>
                             <li><a href="https://drive.google.com/file/d/1aGtnjECienMe3hjDoFSYeeMm8e7n6Wvo/view?usp=sharing" target="_blank" class="hover:text-white transition-colors">Cartilha Oficial</a></li>
                             <li><a href="https://drive.google.com/file/d/1i0UZreBix6cktRShr4DW2VE6GbrdmlFO/view?usp=sharing" target="_blank" class="hover:text-white transition-colors">Estatuto Social</a></li>
+                            <li><a href="{{ route('campaign.water.index') }}" class="text-pct-green font-bold hover:text-white transition-colors uppercase text-xs tracking-widest">🚨 Água no RS</a></li>
                             <li><a href="{{ route('ethics') }}" class="hover:text-white transition-colors">Código de Ética</a></li>
                             <li><a href="{{ route('register.index') }}" class="hover:text-white transition-colors">Filie-se ao PCT</a></li>
                         </ul>
