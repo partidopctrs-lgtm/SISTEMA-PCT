@@ -28,6 +28,8 @@ class AffiliateDashboardController extends Controller
             'rank_national' => $rankNational,
         ];
 
+        $myReferrals = $user->referrals()->latest()->limit(5)->get();
+
         // Dados Avançados da Campanha Água no RS
         $totalClicks = \App\Models\CampaignClick::where('affiliate_id', $user->id)->where('campaign_name', 'agua-rs')->count();
         $totalReports = \App\Models\WaterReport::where('affiliate_id', $user->id)->count();
