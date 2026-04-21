@@ -25,7 +25,7 @@ class RegistrationController extends Controller
             'password' => ['required', Password::defaults()],
         ]);
 
-        \Illuminate\Support\Facades\DB::transaction(function () use ($validated) {
+        \Illuminate\Support\Facades\DB::transaction(function () use ($validated, $request) {
             $nextId = User::count() + 1;
             $regNumber = 'PCT-' . str_pad($nextId, 4, '0', STR_PAD_LEFT);
 
