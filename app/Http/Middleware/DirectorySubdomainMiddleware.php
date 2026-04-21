@@ -24,11 +24,17 @@ class DirectorySubdomainMiddleware
         // Se estivermos no domínio raiz ou se for um painel fixo, ignorar
         $fixedSubdomains = ['administrativo', 'afiliado', 'juridico', 'tesouraria', 'candidato', 'dev', 'www', 'comite', 'tesouraria'];
         
-        $subdomain = explode('.', $host)[0];
+        // Extrair tudo que vem antes de pct.social.br
+        $subdomain = str_replace('.' . $parsedDomain, '', $host);
+        
+        // Se o subdomínio for algo como 'diretorio.taquara', vamos tentar pegar a última parte ou procurar o todo
+        $parts = explode('.', $subdomain);
+        $cleanSubdomain = end($parts); // Pega 'taquara' de 'diretorio.taquara'
 
         if ($host !== $parsedDomain && !in_array($subdomain, $fixedSubdomains)) {
-            $directory = Directory::where('subdomain', $subdomain)
-                ->orWhere('slug', $subdomain)
+            $directory = Directory::where('subdomain', $cleanSubdomain)
+                ->orWhere('slug', $cleanSubdomain)
+                ->orWhere('subdomain', $subdomain) // Tenta o completo também por segurança
                 ->first();
 
             if ($directory) {
