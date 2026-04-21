@@ -126,26 +126,112 @@
                     </div>
 
                 @elseif($showAffiliateMenu)
-                    <!-- MENU AFILIADO -->
+                    <!-- MENU AFILIADO: ERP DE MOBILIZAÇÃO -->
+                    
+                    <!-- 🏠 Dashboard -->
                     <a href="{{ route('affiliate.dashboard') }}" class="flex items-center px-4 py-3 rounded-2xl hover:bg-white/10 transition-all group {{ request()->routeIs('affiliate.dashboard') ? 'bg-white/10 shadow-lg' : '' }}">
-                        <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                        <span class="ml-3 font-bold text-sm whitespace-nowrap" x-show="sidebarOpen">Minha Área</span>
+                        <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        <span class="ml-3 font-bold text-sm whitespace-nowrap" x-show="sidebarOpen">Dashboard</span>
                     </a>
-                    <a href="{{ route('affiliate.profile') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('affiliate.profile') ? 'bg-white/10' : '' }}">
-                        <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                        <span class="ml-3 text-sm font-medium whitespace-nowrap truncate" x-show="sidebarOpen">Meu Perfil</span>
-                    </a>
-                    <a href="{{ route('affiliate.carteirinha') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('affiliate.carteirinha') ? 'bg-white/10' : '' }}">
-                        <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path></svg>
-                        <span class="ml-3 text-sm font-medium whitespace-nowrap truncate" x-show="sidebarOpen">Carteirinha Digital</span>
-                    </a>
-                    <a href="{{ route('affiliate.signatures.create') }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('affiliate.signatures.*') ? 'bg-white/10' : '' }}">
-                        <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                        <span class="ml-3 text-sm font-medium whitespace-nowrap truncate" x-show="sidebarOpen">Apoio ao Partido</span>
-                    </a>
-                    <a href="{{ route('shared.documents', ['portal' => 'institucional']) }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group">
-                        <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        <span class="ml-3 text-sm font-medium whitespace-nowrap truncate" x-show="sidebarOpen">Documentos</span>
+
+                    <!-- 👤 Minha Área (Destaque Visual) -->
+                    <div x-data="{ open: {{ request()->routeIs('affiliate.profile', 'affiliate.carteirinha', 'affiliate.signatures.*') ? 'true' : 'false' }} }" class="pt-2">
+                        <button @click="open = !open" class="flex items-center w-full px-4 py-3 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group">
+                            <div class="h-6 w-6 rounded-lg bg-pct-green/20 flex items-center justify-center">
+                                <svg class="w-4 h-4 text-pct-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                            </div>
+                            <span class="ml-3 font-black text-sm text-pct-green whitespace-nowrap" x-show="sidebarOpen">Minha Área</span>
+                            <svg class="w-4 h-4 ml-auto text-pct-green transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" x-transition class="mt-2 ml-10 space-y-1">
+                            <a href="{{ route('affiliate.profile') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.profile') ? 'text-white' : 'text-blue-200' }} hover:text-white">Meu Perfil</a>
+                            <a href="{{ route('affiliate.carteirinha') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.carteirinha') ? 'text-white' : 'text-blue-200' }} hover:text-white">Carteirinha Digital</a>
+                            <a href="{{ route('affiliate.signatures.create') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.signatures.*') ? 'text-white' : 'text-blue-200' }} hover:text-white">Apoio ao Partido</a>
+                            <a href="{{ route('shared.documents', ['portal' => 'institucional']) }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Documentos</a>
+                        </div>
+                    </div>
+
+                    <!-- 📈 Desempenho -->
+                    <div x-data="{ open: false }">
+                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                            <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Desempenho</span>
+                            <svg class="w-4 h-4 ml-auto transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" x-transition class="mt-2 ml-10 space-y-1">
+                            <a href="{{ route('affiliate.dashboard') }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Meus Resultados</a>
+                            <a href="#" class="block px-4 py-2 text-xs font-bold text-blue-200/50 cursor-not-allowed">Estatísticas</a>
+                            <a href="#" class="block px-4 py-2 text-xs font-bold text-blue-200/50 cursor-not-allowed">Relatórios</a>
+                        </div>
+                    </div>
+
+                    <!-- 🔗 Divulgação -->
+                    <div x-data="{ open: false }">
+                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"></path></svg>
+                            <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Divulgação</span>
+                            <svg class="w-4 h-4 ml-auto transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" x-transition class="mt-2 ml-10 space-y-1">
+                            <a href="{{ route('affiliate.dashboard') }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Link de Divulgação</a>
+                            <a href="#" class="block px-4 py-2 text-xs font-bold text-blue-200/50 cursor-not-allowed">Gerador de Links</a>
+                            <a href="#" class="block px-4 py-2 text-xs font-bold text-blue-200/50 cursor-not-allowed">QR Code</a>
+                        </div>
+                    </div>
+
+                    <!-- 🧾 Relatos -->
+                    <div x-data="{ open: false }">
+                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Relatos</span>
+                            <svg class="w-4 h-4 ml-auto transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" x-transition class="mt-2 ml-10 space-y-1">
+                            <a href="{{ route('affiliate.dashboard') }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Lista de Relatos</a>
+                            <a href="{{ route('affiliate.dashboard') }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Relatos por Cidade</a>
+                        </div>
+                    </div>
+
+                    <!-- 📢 Materiais -->
+                    <div x-data="{ open: false }">
+                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 002-2H4a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                            <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Materiais</span>
+                            <svg class="w-4 h-4 ml-auto transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" x-transition class="mt-2 ml-10 space-y-1">
+                            <a href="{{ route('affiliate.dashboard') }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Artes & Textos</a>
+                        </div>
+                    </div>
+
+                    <!-- 🏆 Engajamento -->
+                    <div x-data="{ open: false }">
+                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                            <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Engajamento</span>
+                            <svg class="w-4 h-4 ml-auto transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" x-transition class="mt-2 ml-10 space-y-1">
+                            <a href="{{ route('affiliate.dashboard') }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Ranking Nacional</a>
+                        </div>
+                    </div>
+
+                    <!-- 🔔 Comunicação -->
+                    <div x-data="{ open: false }">
+                        <button @click="open = !open" class="flex items-center w-full px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group text-blue-200 hover:text-white">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                            <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Comunicação</span>
+                            <svg class="w-4 h-4 ml-auto transition-transform" :class="open ? 'rotate-180' : ''" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="open" x-transition class="mt-2 ml-10 space-y-1">
+                            <a href="#" class="block px-4 py-2 text-xs font-bold text-blue-200/50 cursor-not-allowed">Notificações</a>
+                        </div>
+                    </div>
+
+                    <!-- ❓ Suporte -->
+                    <a href="#" class="flex items-center px-4 py-3 rounded-2xl hover:bg-white/10 transition-all group text-blue-200 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        <span class="ml-3 font-bold text-sm whitespace-nowrap" x-show="sidebarOpen">Suporte</span>
                     </a>
 
                 @elseif($showCommitteeMenu)
