@@ -87,6 +87,34 @@
         </div>
     </section>
 
+    <!-- Campanha Água é um Direito -->
+    <section class="py-24 bg-gradient-to-br from-blue-600 to-blue-800 text-white overflow-hidden relative">
+        <div class="absolute inset-0 opacity-10">
+            <svg class="h-full w-full" preserveAspectRatio="none" viewBox="0 0 100 100" fill="none">
+                <path d="M0 50 Q 25 25, 50 50 T 100 50" stroke="white" stroke-width="2" fill="none"/>
+            </svg>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12">
+                <div class="md:w-2/3 text-center md:text-left">
+                    <span class="inline-block px-4 py-1 bg-white/20 text-[10px] font-black uppercase tracking-[0.3em] rounded-full mb-6">Mobilização RS</span>
+                    <h2 class="text-4xl md:text-6xl font-black mb-6 tracking-tighter leading-tight uppercase">
+                        A água é um direito. <br>
+                        <span class="text-pct-green">E o povo precisa ser ouvido.</span>
+                    </h2>
+                    <p class="text-xl md:text-2xl text-blue-100 font-medium leading-relaxed mb-8">
+                        Participe do movimento e registre o problema na sua cidade. Nossa união gera a pressão necessária para a solução.
+                    </p>
+                </div>
+                <div class="md:w-1/3 flex justify-center">
+                    <a href="{{ route('campaign.water.index') }}" class="px-12 py-6 bg-pct-green text-white rounded-[2rem] font-black uppercase tracking-widest hover:bg-white hover:text-pct-blue transition-all shadow-2xl shadow-black/20 text-center transform hover:scale-105 active:scale-95">
+                        Quero participar
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Nossos Princípios -->
     <section class="py-32 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
