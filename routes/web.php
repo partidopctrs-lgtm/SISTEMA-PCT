@@ -9,10 +9,9 @@ use Illuminate\Support\Facades\Response;
 use App\Http\Controllers\Auth\DepartmentLoginController;
 
 // ============================================================
-// 1. DIRETÓRIOS DINÂMICOS (city.pct.social.br)
-// Usando regex para ignorar subdomínios fixos
+// 1. DIRETÓRIOS DINÂMICOS (Qualquer subdomínio que não seja o principal)
 // ============================================================
-Route::domain('{subdomain}.pct.social.br')->where(['subdomain' => '^(?!www|administrativo|afiliado|juridico|tesouraria|candidato|dev).*$'])->group(function () {
+Route::domain('{subdomain}.pct.social.br')->group(function () {
     Route::get('/', [\App\Http\Controllers\Public\DirectoryController::class, 'show'])->name('directory.home');
     Route::get('/cadastro', [\App\Http\Controllers\Public\RegistrationController::class, 'index'])->name('directory.register');
     Route::post('/cadastro', [\App\Http\Controllers\Public\RegistrationController::class, 'store'])->name('directory.register.store');
@@ -21,7 +20,7 @@ Route::domain('{subdomain}.pct.social.br')->where(['subdomain' => '^(?!www|admin
 });
 
 // ============================================================
-// 2. SITE NACIONAL (Sem trava de domínio para garantir que abra)
+// 2. SITE NACIONAL (Geral)
 // ============================================================
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/manifesto', [HomeController::class, 'manifesto'])->name('manifesto');
@@ -43,18 +42,6 @@ Route::get('/storage/{path}', function ($path) {
     if (!File::exists($fullPath)) abort(404);
     return Response::file($fullPath);
 })->where('path', '.*');
-
-// Manuais e Áreas Logadas Globais
-Route::middleware(['auth'])->group(function () {
-    Route::get('/manuais/juridico', function () { return view('pages.shared.manuals.legal-manual'); })->name('manual.legal');
-    Route::get('/manuais/diretorios', function () { return view('pages.shared.manuals.directories-manual'); })->name('manual.directories');
-    Route::get('/manuais/governanca', function () { return view('pages.shared.manuals.governance-manual'); })->name('manual.governance');
-    Route::get('/manuais/expansao', function () { return view('pages.shared.manuals.expansion-manual'); })->name('manual.expansion');
-    Route::get('/manuais/mobilizacao', function () { return view('pages.shared.manuals.mobilization-manual'); })->name('manual.mobilization');
-    Route::get('/manuais/etica', function () { return view('pages.shared.manuals.ethics-manual'); })->name('manual.ethics');
-    Route::get('/manuais/disciplinar', function () { return view('pages.shared.manuals.disciplinary-code'); })->name('manual.disciplinary');
-    Route::get('/central-documentos', [\App\Http\Controllers\Shared\DocumentController::class, 'index'])->name('shared.documents');
-});
 
 Route::get('/indicar/{code}', function($code) {
     session(['referred_by' => $code]);
