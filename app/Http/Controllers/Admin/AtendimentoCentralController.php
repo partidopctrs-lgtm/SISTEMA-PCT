@@ -65,7 +65,13 @@ class AtendimentoCentralController extends Controller
     public function show($id)
     {
         $report = WaterReport::with(['evidences', 'notes.user', 'forwardings.sender', 'affiliate'])->findOrFail($id);
-        return view('pages.admin.atendimento.show', compact('report'));
+        
+        $municipalityInfo = \App\Models\MunicipalityReference::where('name', $report->city)->first();
+        $infringementNotices = \App\Models\InfringementNotice::where('municipality_name', $report->city)
+            ->orderByDesc('year')
+            ->get();
+
+        return view('pages.admin.atendimento.show', compact('report', 'municipalityInfo', 'infringementNotices'));
     }
 
     /**
