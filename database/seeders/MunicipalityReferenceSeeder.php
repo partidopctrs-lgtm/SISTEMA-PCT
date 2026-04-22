@@ -15,9 +15,16 @@ class MunicipalityReferenceSeeder extends Seeder
         $pmsb_updated = ["São Francisco de Paula"];
         $pmsb_critical = ["Ajuricaba", "Alecrim", "Alegrete", "Alpestre", "Alto Alegre", "Alvorada", "Ametista do Sul", "Aratiba", "Arroio do Meio", "Arroio do Sal", "Arroio do Tigre", "Arroio dos Ratos", "Arvorezinha", "Áurea", "Balneário Pinhal", "Barão", "Barão do Triunfo", "Barra do Quaraí", "Barros Cassal", "Bento Gonçalves", "Boa Vista do Buricá", "Bom Jesus", "Bom Progresso", "Bom Retiro do Sul", "Bossoroca", "Butiá", "Cachoeirinha", "Caibaté", "Caiçara", "Cambará do Sul", "Campina das Missões", "Campo Novo", "Candelária", "Canguçu", "Canoas", "Capão do Leão", "Carazinho", "Carlos Barbosa", "Casca", "Caseiros", "Catuípe", "Cerrito", "Cerro Largo", "Chapada", "Charqueadas", "Chuí", "Cidreira", "Ciríaco", "Condor", "Constantina", "Cruzeiro do Sul", "David Canabarro", "Derrubadas", "Dois Irmãos", "Dom Pedrito", "Encruzilhada do Sul", "Entre Rios do Sul", "Erebango", "Erval Grande", "Erval Seco", "Estação", "Esteio", "Farroupilha", "Faxinal do Soturno", "Feliz", "Gaurama", "General Câmara", "Getúlio Vargas", "Giruá", "Glorinha", "Gramado", "Gravataí", "Guarani das Missões", "Herval", "Horizontina", "Humaitá", "Ibiraiaras", "Ijuí", "Ilópolis", "Imbé", "Independência", "Ipê", "Itapuca", "Itaqui", "Ivorá", "Jaguari", "Lagoa Bonita do Sul", "Lagoão", "Lajeado", "Liberato Salzano", "Marau", "Marcelino Ramos", "Mata", "Montenegro", "Morro Reuter", "Mostardas", "Nonoai", "Nova Esperança do Sul", "Nova Petrópolis", "Palmares do Sul", "Palmeira das Missões", "Panambi", "Pantano Grande", "Passa Sete", "Passo Fundo", "Pedras Altas", "Pedro Osório", "Pinheiro Machado", "Putinga", "Quaraí", "Redentora", "Restinga Sêca", "Rio dos Índios", "Rio Grande", "Rio Pardo", "Ronda Alta", "Salto do Jacuí", "Salvador do Sul", "Santa Maria", "Santa Maria do Herval", "Santa Rosa", "Santiago", "Santo Ângelo", "Santo Antônio da Patrulha", "Santo Antônio das Missões", "Santo Augusto", "Santo Cristo", "São Borja", "São Jerônimo", "São José dos Ausentes", "São Lourenço do Sul", "São Miguel das Missões", "São Nicolau", "São Pedro da Serra", "São Pedro do Sul", "São Sebastião do Caí", "São Sepé", "São Valentim", "Sarandi", "Selbach", "Serafina Corrêa", "Sertão", "Sobradinho", "Tavares", "Tenente Portela", "Terra de Areia", "Tiradentes do Sul", "Torres", "Três Cachoeiras", "Três de Maio", "Três Passos", "Trindade do Sul", "Triunfo", "Tupanciretã", "Tuparendi", "Vacaria", "Venâncio Aires", "Viamão", "Vicente Dutra"];
 
-        $all_cities = array_unique(array_merge($metas, $prae, $pmsb_updated, $pmsb_critical));
+        $all_cities = array_unique(array_map(function($city) {
+            return trim($city);
+        }, array_merge($metas, $prae, $pmsb_updated, $pmsb_critical)));
 
         foreach ($all_cities as $city) {
+            // Evitar duplicatas (comparação case-insensitive do DB)
+            if (DB::table('municipality_references')->where('name', $city)->exists()) {
+                continue;
+            }
+
             $status = 'none';
             if (in_array($city, $pmsb_updated)) $status = 'updated';
             if (in_array($city, $pmsb_critical)) $status = 'not_updated';
