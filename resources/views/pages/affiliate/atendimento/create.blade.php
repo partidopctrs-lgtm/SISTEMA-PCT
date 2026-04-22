@@ -27,12 +27,35 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="space-y-2">
-                            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Cidade</label>
-                            <input type="text" name="city" id="city_input" required class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-xs font-bold text-pct-blue focus:ring-2 focus:ring-pct-blue outline-none transition-all" placeholder="Ex: Taquara">
-                            <button type="button" onclick="detectLocation()" class="text-[9px] font-black text-pct-blue uppercase tracking-widest ml-4 hover:underline flex items-center gap-1">
-                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                Detectar minha localização
-                            </button>
+                            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Município (Seleção Oficial)</label>
+                            <div class="relative">
+                                <select name="city" id="city_select" required class="w-full bg-slate-50 border border-slate-100 rounded-2xl px-6 py-4 text-xs font-bold text-pct-blue focus:ring-2 focus:ring-pct-blue outline-none transition-all appearance-none">
+                                    <option value="">Selecione sua cidade...</option>
+                                    @foreach($municipalities as $m)
+                                        <option value="{{ $m->name }}" 
+                                                data-pmsb="{{ $m->pmsb_status }}" 
+                                                data-meta="{{ $m->has_universalization_meta ? '1' : '0' }}"
+                                                data-prae="{{ $m->adhered_to_prae ? '1' : '0' }}">
+                                            {{ $m->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                                <div class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none text-pct-blue">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                                </div>
+                            </div>
+                            <!-- Alerta AGERGS -->
+                            <div id="agergs_warning" class="hidden p-4 bg-amber-50 border border-amber-100 rounded-2xl animate-in fade-in slide-in-from-top-2">
+                                <div class="flex gap-3">
+                                    <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center shrink-0">
+                                        <svg class="w-4 h-4 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                                    </div>
+                                    <div>
+                                        <p class="text-[9px] font-black text-amber-800 uppercase tracking-widest">Informação Técnica AGERGS</p>
+                                        <p id="warning_text" class="text-[10px] text-amber-700 font-bold leading-tight mt-1"></p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="space-y-2">
                             <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-4">Bairro / Região</label>
@@ -143,6 +166,42 @@
     </div>
 
     <script>
+        document.getElementById('city_select').addEventListener('change', function() {
+            const selected = this.options[this.selectedIndex];
+            const warningDiv = document.getElementById('agergs_warning');
+            const warningText = document.getElementById('warning_text');
+            
+            if (!selected.value) {
+                warningDiv.classList.add('hidden');
+                return;
+            }
+
+            const pmsb = selected.dataset.pmsb;
+            const meta = selected.dataset.meta === '1';
+            const prae = selected.dataset.prae === '1';
+            
+            let messages = [];
+            
+            if (pmsb === 'not_updated') {
+                messages.push("Este município NÃO atualizou o Plano de Saneamento (PMSB) ou está em fase de atualização, o que indica falhas no planejamento estrutural.");
+            }
+            
+            if (meta) {
+                messages.push("Cidade com metas progressivas de universalização pendentes conforme contrato/aditivo vigente.");
+            }
+
+            if (prae) {
+                messages.push("Município aderente ao Plano Regional (PRAE) elaborado pela CORSAN, indicando dependência do sistema estadual em adaptação.");
+            }
+
+            if (messages.length > 0) {
+                warningText.innerHTML = messages.join('<br><br>');
+                warningDiv.classList.remove('hidden');
+            } else {
+                warningDiv.classList.add('hidden');
+            }
+        });
+
         function handleFiles(files) {
             const preview = document.getElementById('file-preview');
             preview.innerHTML = '';

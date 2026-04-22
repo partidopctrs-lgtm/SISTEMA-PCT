@@ -18,7 +18,8 @@ class AtendimentoController extends Controller
 
     public function create()
     {
-        return view('pages.affiliate.atendimento.create');
+        $municipalities = \App\Models\MunicipalityReference::orderBy('name')->get();
+        return view('pages.affiliate.atendimento.create', compact('municipalities'));
     }
 
     public function store(Request $request)
