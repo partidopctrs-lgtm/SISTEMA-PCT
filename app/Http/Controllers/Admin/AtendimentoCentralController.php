@@ -22,6 +22,12 @@ class AtendimentoCentralController extends Controller
             'triage' => WaterReport::where('status', 'recebido')->count(),
             'in_analysis' => WaterReport::where('status', 'em análise')->count(),
             'resolved' => WaterReport::where('status', 'finalizado')->count(),
+            
+            // Novos Indicadores de Inteligência
+            'total_cities_regulated' => \App\Models\MunicipalityReference::count(),
+            'critical_planning_cities' => \App\Models\MunicipalityReference::where('pmsb_status', 'not_updated')->count(),
+            'cities_with_infringements' => \App\Models\InfringementNotice::distinct('municipality_name')->count(),
+            'affected_cities_count' => WaterReport::distinct('city')->count(),
         ];
 
         $reportsByCity = WaterReport::select('city', DB::raw('count(*) as total'))
@@ -30,9 +36,16 @@ class AtendimentoCentralController extends Controller
             ->limit(10)
             ->get();
 
+        $criticalCitiesWithReports = WaterReport::whereIn('city', function($query) {
+                $query->select('name')->from('municipality_references')->where('pmsb_status', 'not_updated');
+            })
+            ->select('city', DB::raw('count(*) as total'))
+            ->groupBy('city')
+            ->get();
+
         $recentReports = WaterReport::with('affiliate')->latest()->limit(5)->get();
 
-        return view('pages.admin.atendimento.dashboard', compact('stats', 'reportsByCity', 'recentReports'));
+        return view('pages.admin.atendimento.dashboard', compact('stats', 'reportsByCity', 'recentReports', 'criticalCitiesWithReports'));
     }
 
     /**
