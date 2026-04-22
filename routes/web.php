@@ -40,6 +40,11 @@ foreach ($mainDomains as $index => $domain) {
 
         Route::get('/agua-rs', [\App\Http\Controllers\Public\WaterCampaignController::class, 'index'])->name($index === 0 ? 'campaign.water.index' : 'campaign.water.index.www');
         Route::post('/agua-rs', [\App\Http\Controllers\Public\WaterCampaignController::class, 'store'])->name($index === 0 ? 'campaign.water.store' : 'campaign.water.store.www');
+
+        // Projeto de Lei SNDAH 2026
+        Route::get('/PL_SNDAH_PCT_2026', function () {
+            return view('propostas.sndah');
+        })->name($index === 0 ? 'proposta.sndah' : 'proposta.sndah.www');
     });
 }
 
