@@ -20,5 +20,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         \App\Models\LegalRequest::observe(\App\Observers\LegalRequestObserver::class);
+
+        // Define padrões para parâmetros de rota em domínios dinâmicos
+        // Isso evita o erro "Missing required parameter for [Route: login]"
+        \Illuminate\Support\Facades\URL::defaults([
+            'domain' => 'pct.social.br',
+            'affiliate_domain' => 'afiliado.pct.social.br',
+            'subdomain' => 'taquara' // Padrão para comitês locais
+        ]);
     }
 }
