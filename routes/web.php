@@ -11,42 +11,40 @@ use App\Http\Controllers\Auth\DepartmentLoginController;
 // ============================================================
 // 1. SITE NACIONAL (Prioridade Máxima nos domínios fixos)
 // ============================================================
-$mainDomains = ['pct.social.br', 'www.pct.social.br', 'localhost'];
-foreach ($mainDomains as $index => $domain) {
-    Route::domain($domain)->group(function () use ($index) {
-        $namePrefix = ($index === 0) ? '' : 'www.';
-        
-        Route::get('/', [HomeController::class, 'index'])->name($index === 0 ? 'home' : 'home.www');
-        Route::get('/manifesto', [HomeController::class, 'manifesto'])->name($index === 0 ? 'manifesto' : 'manifesto.www');
-        Route::get('/estatuto', [HomeController::class, 'estatuto'])->name($index === 0 ? 'estatuto' : 'estatuto.www');
-        Route::get('/cartilha', [HomeController::class, 'booklet'])->name($index === 0 ? 'cartilha' : 'cartilha.www');
-        Route::get('/propostas', [HomeController::class, 'proposals'])->name($index === 0 ? 'propostas' : 'propostas.www');
-        Route::get('/codigo-de-etica', [HomeController::class, 'ethics'])->name($index === 0 ? 'ethics' : 'ethics.www');
-        Route::get('/modelos-oficios', [HomeController::class, 'modelosOficios'])->name($index === 0 ? 'modelos-oficios' : 'modelos-oficios.www');
-        Route::get('/cadastro', [RegistrationController::class, 'index'])->name($index === 0 ? 'register.index' : 'register.index.www');
-        Route::post('/cadastro', [RegistrationController::class, 'store'])->name($index === 0 ? 'register.store' : 'register.store.www');
-        Route::get('/login', [DepartmentLoginController::class, 'showLoginForm'])->name($index === 0 ? 'login' : 'login.www');
-        Route::post('/login', [DepartmentLoginController::class, 'login']);
-        Route::get('/cadastro/sucesso', [RegistrationController::class, 'success'])->name($index === 0 ? 'register.success' : 'register.success.www');
-        Route::get('/cadastro/verificar/{token}', [\App\Http\Controllers\Public\VerifyEmailController::class, 'verify'])->name($index === 0 ? 'register.verify' : 'register.verify.www');
-        Route::get('/politica-de-privacidade', [HomeController::class, 'privacy'])->name($index === 0 ? 'privacy' : 'privacy.www');
-        Route::get('/termos-de-uso', [HomeController::class, 'terms'])->name($index === 0 ? 'terms' : 'terms.www');
+// ============================================================
+// 1. SITE NACIONAL (Prioridade Máxima nos domínios fixos)
+// ============================================================
+Route::domain('{domain}')->where('domain', 'pct.social.br|www.pct.social.br|localhost|127.0.0.1')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/manifesto', [HomeController::class, 'manifesto'])->name('manifesto');
+    Route::get('/estatuto', [HomeController::class, 'estatuto'])->name('estatuto');
+    Route::get('/cartilha', [HomeController::class, 'booklet'])->name('cartilha');
+    Route::get('/propostas', [HomeController::class, 'proposals'])->name('propostas');
+    Route::get('/codigo-de-etica', [HomeController::class, 'ethics'])->name('ethics');
+    Route::get('/modelos-oficios', [HomeController::class, 'modelosOficios'])->name('modelos-oficios');
+    Route::get('/cadastro', [RegistrationController::class, 'index'])->name('register.index');
+    Route::post('/cadastro', [RegistrationController::class, 'store'])->name('register.store');
+    Route::get('/login', [DepartmentLoginController::class, 'showLoginForm'])->name('login');
+    Route::post('/login', [DepartmentLoginController::class, 'login']);
+    Route::get('/cadastro/sucesso', [RegistrationController::class, 'success'])->name('register.success');
+    Route::get('/cadastro/verificar/{token}', [\App\Http\Controllers\Public\VerifyEmailController::class, 'verify'])->name('register.verify');
+    Route::get('/politica-de-privacidade', [HomeController::class, 'privacy'])->name('privacy');
+    Route::get('/termos-de-uso', [HomeController::class, 'terms'])->name('terms');
 
-        // Recuperação de Senha
-        Route::get('/esqueci-minha-senha', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name($index === 0 ? 'password.request' : 'password.request.www');
-        Route::post('/esqueci-minha-senha', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name($index === 0 ? 'password.email' : 'password.email.www');
-        Route::get('/redefinir-senha/{token}', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showResetForm'])->name($index === 0 ? 'password.reset' : 'password.reset.www');
-        Route::post('/redefinir-senha', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'reset'])->name($index === 0 ? 'password.update' : 'password.update.www');
+    // Recuperação de Senha
+    Route::get('/esqueci-minha-senha', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+    Route::post('/esqueci-minha-senha', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+    Route::get('/redefinir-senha/{token}', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showResetForm'])->name('password.reset');
+    Route::post('/redefinir-senha', [\App\Http\Controllers\Auth\ForgotPasswordController::class, 'reset'])->name('password.update');
 
-        Route::get('/agua-rs', [\App\Http\Controllers\Public\WaterCampaignController::class, 'index'])->name($index === 0 ? 'campaign.water.index' : 'campaign.water.index.www');
-        Route::post('/agua-rs', [\App\Http\Controllers\Public\WaterCampaignController::class, 'store'])->name($index === 0 ? 'campaign.water.store' : 'campaign.water.store.www');
+    Route::get('/agua-rs', [\App\Http\Controllers\Public\WaterCampaignController::class, 'index'])->name('campaign.water.index');
+    Route::post('/agua-rs', [\App\Http\Controllers\Public\WaterCampaignController::class, 'store'])->name('campaign.water.store');
 
-        // Projeto de Lei SNDAH 2026
-        Route::get('/PL_SNDAH_PCT_2026', function () {
-            return view('propostas.sndah');
-        })->name($index === 0 ? 'proposta.sndah' : 'proposta.sndah.www');
-    });
-}
+    // Projeto de Lei SNDAH 2026
+    Route::get('/PL_SNDAH_PCT_2026', function () {
+        return view('propostas.sndah');
+    })->name('proposta.sndah');
+});
 
 // ============================================================
 // 2. PAINEL DO AFILIADO (afiliado.pct.social.br)

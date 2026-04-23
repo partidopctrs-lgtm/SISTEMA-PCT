@@ -5,9 +5,10 @@ use App\Http\Controllers\Auth\DepartmentLoginController;
 
 
 
-$affiliateDomains = ['afiliado.pct.social.br', 'afiliado.localhost'];
-foreach ($affiliateDomains as $domain) {
-    Route::domain($domain)->middleware(['auth', 'role:affiliate'])->group(function () {
+// ============================================================
+// 2. PAINEL DO AFILIADO (afiliado.pct.social.br / afiliado.localhost)
+// ============================================================
+Route::domain('{affiliate_domain}')->where('affiliate_domain', 'afiliado.pct.social.br|afiliado.localhost|afiliado.127.0.0.1')->middleware(['auth', 'role:affiliate'])->group(function () {
     Route::get('/dashboard', [AffiliateDashboardController::class, 'index'])->name('affiliate.dashboard');
     Route::get('/perfil', [AffiliateDashboardController::class, 'profile'])->name('affiliate.profile');
     Route::post('/perfil', [AffiliateDashboardController::class, 'updateProfile'])->name('affiliate.profile.update');
@@ -98,5 +99,4 @@ foreach ($affiliateDomains as $domain) {
         Route::get('/ranking', [\App\Http\Controllers\Affiliate\CampaignManagementController::class, 'ranking'])->name('ranking');
         Route::get('/metas', [\App\Http\Controllers\Affiliate\CampaignManagementController::class, 'ranking'])->name('metas');
     });
-    });
-}
+});
