@@ -6,6 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use App\Models\Directory;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\URL;
 use Symfony\Component\HttpFoundation\Response;
 
 class DirectorySubdomainMiddleware
@@ -20,6 +21,13 @@ class DirectorySubdomainMiddleware
         $host = $request->getHost();
         $domain = config('app.url');
         $parsedDomain = parse_url($domain, PHP_URL_HOST);
+
+        // Definir parâmetros padrão para geração de URLs (evita erro de parâmetro ausente)
+        URL::defaults([
+            'domain' => $host,
+            'affiliate_domain' => $host,
+            'subdomain' => str_replace('.' . $parsedDomain, '', $host)
+        ]);
         
         // Se estivermos no domínio raiz ou se for um painel fixo, ignorar
         $fixedSubdomains = ['administrativo', 'afiliado', 'juridico', 'tesouraria', 'candidato', 'dev', 'www', 'comite', 'tesouraria'];
