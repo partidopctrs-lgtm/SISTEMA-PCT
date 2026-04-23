@@ -19,6 +19,7 @@ Route::domain('administrativo.pct.social.br')->middleware(['auth', 'role:admin']
     Route::get('/command-center', [AdminDashboardController::class, 'commandCenter'])->name('admin.command_center');
     Route::get('/members', [AdminDashboardController::class, 'members'])->name('admin.members');
     Route::post('/member/store', [AdminDashboardController::class, 'storeMember'])->name('admin.member.store');
+    Route::delete('/member/{user}', [AdminDashboardController::class, 'destroyMember'])->name('admin.member.destroy');
     Route::get('/member/{user}/pdf', [SignaturePdfController::class, 'exportMemberPdf'])->name('admin.member.pdf');
     
     // 1. Partido em Formação (Assinaturas)

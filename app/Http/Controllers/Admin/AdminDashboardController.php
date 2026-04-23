@@ -67,11 +67,30 @@ class AdminDashboardController extends Controller
             'cpf' => $request->cpf,
             'phone' => $request->phone,
             'birth_date' => $request->birth_date,
-            'password' => \Illuminate\Support\Facades\Hash::make('PCT@123456'), // Senha padrão
+            'password' => \Illuminate\Support\Facades\Hash::make('PCT@Forte2026!'), // Senha padrão atualizada
             'registration_number' => 'PCT-' . str_pad(\App\Models\User::count() + 1, 5, '0', STR_PAD_LEFT),
         ]);
 
-        return redirect()->route('admin.members')->with('success', 'Membro cadastrado com sucesso! A senha padrão é PCT@123456');
+        return redirect()->route('admin.members')->with('success', 'Membro cadastrado com sucesso! A senha padrão é PCT@Forte2026!');
+    }
+
+    public function destroyMember(\App\Models\User $user)
+    {
+        // Impede que o admin se exclua
+        if ($user->id === auth()->id()) {
+            return redirect()->back()->withErrors(['Não é possível excluir sua própria conta administrativa.']);
+        }
+
+        \Illuminate\Support\Facades\DB::transaction(function () use ($user) {
+            // Remove dados vinculados para evitar erros de FK
+            \App\Models\Point::where('user_id', $user->id)->delete();
+            \App\Models\Membership::where('user_id', $user->id)->delete();
+            \App\Models\FinancialRecord::where('approved_by', $user->id)->update(['approved_by' => null]);
+            
+            $user->delete();
+        });
+
+        return redirect()->route('admin.members')->with('success', 'Membro removido da base nacional com sucesso.');
     }
 
     // Management Modules
