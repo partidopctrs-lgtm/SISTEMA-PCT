@@ -85,8 +85,8 @@
                             <p class="text-gray-500 font-medium mb-8 leading-relaxed">
                                 Sistema Nacional Descentralizado de Abastecimento Hídrico. Água de qualidade e gestão municipal forte.
                             </p>
-                            <a href="{{ route('campaign.water.index') }}" class="inline-flex items-center gap-2 text-pct-green font-black uppercase tracking-widest text-xs hover:gap-4 transition-all">
-                                Saiba mais sobre o projeto
+                            <a href="{{ route('proposta.sndah') }}" class="inline-flex items-center gap-2 text-pct-green font-black uppercase tracking-widest text-xs hover:gap-4 transition-all">
+                                Ver Projeto de Lei e Estudo Técnico
                                 <i data-lucide="arrow-right" class="w-4 h-4"></i>
                             </a>
                         </div>

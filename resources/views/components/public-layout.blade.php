@@ -58,10 +58,11 @@
                             <a href="{{ route('home') }}" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Home</a>
                             <a href="https://drive.google.com/file/d/1aGtnjECienMe3hjDoFSYeeMm8e7n6Wvo/view?usp=sharing" target="_blank" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Cartilha</a>
                             <a href="https://drive.google.com/file/d/1i0UZreBix6cktRShr4DW2VE6GbrdmlFO/view?usp=sharing" target="_blank" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Estatuto</a>
-                            <a href="{{ route('campaign.water.index') }}" class="px-3 py-1 bg-blue-50 text-pct-blue font-bold rounded-lg border border-blue-100 hover:bg-pct-blue hover:text-white transition-all animate-pulse-slow flex items-center gap-2">
-                                <span class="w-2 h-2 bg-pct-blue rounded-full"></span>
-                                Água no RS
+                            <a href="{{ route('proposta.sndah') }}" class="px-3 py-1 bg-emerald-50 text-pct-green font-bold rounded-lg border border-emerald-100 hover:bg-pct-green hover:text-white transition-all flex items-center gap-2">
+                                <span class="w-2 h-2 bg-pct-green rounded-full"></span>
+                                SNDAH 2026
                             </a>
+                            <a href="{{ route('campaign.water.index') }}" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Relatar Problema</a>
                         </div>
                     </div>
                     <div class="hidden md:flex items-center space-x-4">
@@ -90,10 +91,11 @@
                     <a href="{{ route('home') }}" class="block px-4 py-3 text-lg font-bold text-gray-700 hover:bg-slate-50 rounded-xl transition-all">Home</a>
                     <a href="https://drive.google.com/file/d/1aGtnjECienMe3hjDoFSYeeMm8e7n6Wvo/view?usp=sharing" target="_blank" class="block px-4 py-3 text-lg font-bold text-gray-700 hover:bg-slate-50 rounded-xl transition-all">Cartilha</a>
                     <a href="https://drive.google.com/file/d/1i0UZreBix6cktRShr4DW2VE6GbrdmlFO/view?usp=sharing" target="_blank" class="block px-4 py-3 text-lg font-bold text-gray-700 hover:bg-slate-50 rounded-xl transition-all">Estatuto</a>
-                    <a href="{{ route('campaign.water.index') }}" class="block px-4 py-3 text-lg font-black text-blue-600 bg-blue-50 rounded-xl transition-all flex items-center gap-2">
-                        <span class="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
-                        Água no RS
+                    <a href="{{ route('proposta.sndah') }}" class="block px-4 py-3 text-lg font-black text-emerald-600 bg-emerald-50 rounded-xl transition-all flex items-center gap-2">
+                        <span class="w-2 h-2 bg-emerald-600 rounded-full animate-pulse"></span>
+                        SNDAH 2026 (Projeto de Lei)
                     </a>
+                    <a href="{{ route('campaign.water.index') }}" class="block px-4 py-3 text-lg font-bold text-gray-700 hover:bg-slate-50 rounded-xl transition-all">Relatar Problema Hídrico</a>
                     <div class="pt-4 border-t border-slate-100 grid grid-cols-2 gap-4">
                         <a href="{{ route('login') }}" class="flex items-center justify-center py-4 text-pct-blue font-black uppercase tracking-widest text-xs border border-pct-blue/20 rounded-xl">Entrar</a>
                         <a href="{{ route('register.index') }}" class="flex items-center justify-center py-4 bg-pct-blue text-white font-black uppercase tracking-widest text-xs rounded-xl shadow-lg shadow-blue-900/20">Afiliar-se</a>
@@ -126,8 +128,8 @@
                             <li><a href="{{ route('home') }}" class="hover:text-white transition-colors">Página Inicial</a></li>
                             <li><a href="https://drive.google.com/file/d/1aGtnjECienMe3hjDoFSYeeMm8e7n6Wvo/view?usp=sharing" target="_blank" class="hover:text-white transition-colors">Cartilha Oficial</a></li>
                             <li><a href="https://drive.google.com/file/d/1i0UZreBix6cktRShr4DW2VE6GbrdmlFO/view?usp=sharing" target="_blank" class="hover:text-white transition-colors">Estatuto Social</a></li>
-                            <li><a href="{{ route('campaign.water.index') }}" class="text-pct-green font-bold hover:text-white transition-colors uppercase text-xs tracking-widest">🚨 Água no RS</a></li>
-                            <li><a href="{{ route('ethics') }}" class="hover:text-white transition-colors">Código de Ética</a></li>
+                            <li><a href="{{ route('proposta.sndah') }}" class="text-pct-green font-bold hover:text-white transition-colors uppercase text-xs tracking-widest">📋 SNDAH 2026 (Projeto de Lei)</a></li>
+                            <li><a href="{{ route('campaign.water.index') }}" class="hover:text-white transition-colors">🚨 Relatar Problema Hídrico</a></li>
                             <li><a href="{{ route('register.index') }}" class="hover:text-white transition-colors">Filie-se ao PCT</a></li>
                         </ul>
                     </div>
