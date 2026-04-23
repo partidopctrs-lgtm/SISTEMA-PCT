@@ -8,6 +8,12 @@ Route::get('/admin/login', [DepartmentLoginController::class, 'showLoginForm'])-
 Route::post('/admin/login', [DepartmentLoginController::class, 'login']);
 Route::post('/admin/logout', [DepartmentLoginController::class, 'logout'])->name('admin.logout');
 
+// Login específico para o subdomínio administrativo
+Route::domain('administrativo.pct.social.br')->group(function () {
+    Route::get('/login', [DepartmentLoginController::class, 'showLoginForm'])->name('admin.subdomain.login');
+    Route::post('/login', [DepartmentLoginController::class, 'login']);
+});
+
 Route::domain('administrativo.pct.social.br')->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/command-center', [AdminDashboardController::class, 'commandCenter'])->name('admin.command_center');

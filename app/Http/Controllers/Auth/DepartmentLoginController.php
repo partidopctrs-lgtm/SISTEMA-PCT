@@ -12,6 +12,8 @@ class DepartmentLoginController extends Controller
     public function showLoginForm(Request $request)
     {
         $path = $request->segment(1);
+        $host = $request->getHost();
+        
         $titles = [
             'admin' => 'Portal da Presidência (Admin)',
             'login' => 'Portal do Afiliado',
@@ -26,17 +28,29 @@ class DepartmentLoginController extends Controller
 
         $title = $titles[$path] ?? 'Portal PCT';
         
+        // Se estiver no subdomínio administrativo, força o título correto
+        if (str_contains($host, 'administrativo')) {
+            $title = 'Portal da Presidência (Admin)';
+        }
+        
         return view('auth.department-login', compact('title', 'path'));
     }
 
     public function login(Request $request)
     {
         $path = $request->segment(1);
+        $host = $request->getHost();
+        
         $role = match($path) {
             'login-diretorio' => 'admin',
             'login' => 'affiliate',
             default => $path
         };
+
+        // Se estiver no subdomínio administrativo, o papel esperado é admin
+        if (str_contains($host, 'administrativo')) {
+            $role = 'admin';
+        }
         
         $email = $request->email;
         // Map legacy admin e‑mail to the current one
