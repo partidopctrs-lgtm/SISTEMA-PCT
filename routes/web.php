@@ -14,7 +14,7 @@ use App\Http\Controllers\Auth\DepartmentLoginController;
 // ============================================================
 // 1. SITE NACIONAL (Prioridade Máxima nos domínios fixos)
 // ============================================================
-Route::domain('{domain}')->where('domain', 'pct.social.br|www.pct.social.br|localhost|127.0.0.1')->group(function () {
+Route::domain('{domain}')->where(['domain' => 'pct.social.br|www.pct.social.br|localhost|127.0.0.1'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/manifesto', [HomeController::class, 'manifesto'])->name('manifesto');
     Route::get('/estatuto', [HomeController::class, 'estatuto'])->name('estatuto');
