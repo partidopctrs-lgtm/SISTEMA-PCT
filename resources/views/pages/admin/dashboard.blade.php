@@ -14,14 +14,14 @@
                 <p class="text-[10px] font-black opacity-60 uppercase tracking-[0.2em] mb-2">Total de Membros</p>
                 <p class="text-4xl font-black">{{ number_format($stats['total_members'], 0, ',', '.') }}</p>
                 <div class="mt-4 flex items-center gap-2">
-                    <span class="text-[10px] bg-pct-green/20 text-pct-green px-2 py-0.5 rounded font-black">+12%</span>
+                    <span class="text-[10px] {{ $stats['growth'] >= 0 ? 'bg-pct-green/20 text-pct-green' : 'bg-red-500/20 text-red-400' }} px-2 py-0.5 rounded font-black">{{ $stats['growth'] >= 0 ? '+' : '' }}{{ number_format($stats['growth'], 1) }}%</span>
                     <span class="text-[9px] opacity-40 uppercase font-black tracking-widest text-white">Crescimento Mensal</span>
                 </div>
             </div>
             <div class="card-premium">
                 <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">Diretórios Ativos</p>
                 <p class="text-4xl font-black text-pct-blue">{{ $stats['total_directories'] }}</p>
-                <p class="text-[9px] text-gray-400 font-bold uppercase mt-4">Em {{ \App\Models\User::distinct('state')->count() }} estados</p>
+                <p class="text-[9px] text-gray-400 font-bold uppercase mt-4">Em {{ $stats['active_states'] }} estados</p>
             </div>
             <div class="card-premium">
                 <p class="text-[10px] font-black text-gray-400 uppercase tracking-[0.2em] mb-2">Receita Global</p>
@@ -71,15 +71,15 @@
                     <div class="space-y-4">
                         <div class="flex items-center justify-between text-xs py-3 border-b border-slate-50">
                             <span class="text-gray-500 font-bold">Uptime Servidor</span>
-                            <span class="text-pct-green font-black uppercase">99.9%</span>
+                            <span class="text-pct-green font-black uppercase tracking-tighter">Operacional</span>
                         </div>
                         <div class="flex items-center justify-between text-xs py-3 border-b border-slate-50">
                             <span class="text-gray-500 font-bold">Versão do Core</span>
-                            <span class="text-gray-400 font-black uppercase">v2.0.4-PRO</span>
+                            <span class="text-gray-400 font-black uppercase">v3.0.0-BETA</span>
                         </div>
                         <div class="flex items-center justify-between text-xs py-3">
-                            <span class="text-gray-500 font-bold">Banco de Dados</span>
-                            <span class="text-pct-green font-black uppercase">Sincronizado</span>
+                            <span class="text-gray-500 font-bold">Base de Dados</span>
+                            <span class="text-pct-green font-black uppercase">Conectado</span>
                         </div>
                     </div>
                 </div>

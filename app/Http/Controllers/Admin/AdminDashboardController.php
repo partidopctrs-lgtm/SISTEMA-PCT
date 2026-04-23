@@ -10,6 +10,18 @@ class AdminDashboardController extends Controller
 {
     public function index()
     {
+        // Cálculos de Crescimento Real
+        $now = now();
+        $thisMonth = \App\Models\User::whereMonth('created_at', $now->month)->whereYear('created_at', $now->year)->count();
+        $lastMonth = \App\Models\User::whereMonth('created_at', $now->subMonth()->month)->whereYear('created_at', $now->year)->count();
+        
+        $growth = 0;
+        if ($lastMonth > 0) {
+            $growth = (($thisMonth - $lastMonth) / $lastMonth) * 100;
+        } elseif ($thisMonth > 0) {
+            $growth = 100; // 100% se for o primeiro mês com dados
+        }
+
         $stats = [
             'total_members' => \App\Models\User::count(),
             'total_directories' => \App\Models\Directory::count(),
@@ -18,6 +30,8 @@ class AdminDashboardController extends Controller
             'legal_requests_new' => \App\Models\LegalRequest::where('status', 'new')->count(),
             'hino_plays' => \App\Models\AudioInteraction::where('type', 'play')->count(),
             'hino_downloads' => \App\Models\AudioInteraction::where('type', 'download')->count(),
+            'growth' => $growth,
+            'active_states' => \App\Models\User::whereNotNull('state')->distinct('state')->count(),
         ];
 
         $topDirectories = \App\Models\Directory::withCount('memberships')
