@@ -116,6 +116,13 @@ class SystemDataSeeder extends Seeder
         $this->command->info('Creating Users...');
         $roles = ['affiliate', 'committee', 'finance', 'legal', 'communication'];
         
+        $realNames = [
+            'Carlos Alberto Silveira', 'Mariana Souza Santos', 'Ricardo Pereira Lima', 
+            'Ana Paula Oliveira', 'Fernando Henrique Costa', 'Juliana Mendes Rocha',
+            'Roberto Carlos da Silva', 'Beatriz Antunes Garcia', 'Marcelo Vieira Gomes',
+            'Luciana Ferreira Martins'
+        ];
+
         foreach (range(1, 100) as $i) {
             $role = $roles[array_rand($roles)];
             $state = $states[array_rand($states)];
@@ -123,20 +130,17 @@ class SystemDataSeeder extends Seeder
             
             $referredBy = null;
             if ($i > 1) {
-                // Refer to a previously created user or candidate
                 if (rand(1, 10) < 3) {
                     $referredBy = $candidateUser->id;
-                } else if ($i > 5) {
-                    // Refer to one of the first 5 users
-                    $firstUser = User::where('email', 'like', 'user%@pct.social.br')->orderBy('id')->first();
-                    if ($firstUser) $referredBy = $firstUser->id;
                 }
             }
 
+            $name = ($i <= 10) ? $realNames[$i-1] : "Usuário $i " . Str::random(3);
+
             $user = User::updateOrCreate(
-                ['email' => "user$i@pct.social.br"],
+                ['email' => ($i <= 10) ? "membro$i@exemplo.com" : "user$i@pct.social.br"],
                 [
-                    'name' => "Usuário $i " . Str::random(3),
+                    'name' => $name,
                     'password' => $password,
                     'role' => $role,
                     'status' => 'active',
