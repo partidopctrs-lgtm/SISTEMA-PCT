@@ -37,14 +37,30 @@
     </style>
     @stack('styles')
 </head>
-<body class="antialiased bg-gray-50 flex h-screen overflow-hidden" x-data="{ sidebarOpen: true }">
+<body class="antialiased bg-gray-50 flex h-screen overflow-hidden" 
+      x-data="{ sidebarOpen: window.innerWidth > 1024, isMobile: window.innerWidth < 1024 }"
+      @resize.window="isMobile = window.innerWidth < 1024; if (!isMobile) sidebarOpen = true">
     
+    <!-- Backdrop for mobile -->
+    <div x-show="sidebarOpen && isMobile" 
+         x-transition:opacity
+         @click="sidebarOpen = false"
+         class="fixed inset-0 bg-pct-blue/60 backdrop-blur-sm z-40 lg:hidden"
+         x-cloak>
+    </div>
+
     <!-- Sidebar -->
-    <aside class="bg-pct-blue text-white transition-all duration-300 flex-shrink-0 flex flex-col shadow-2xl z-50" :class="sidebarOpen ? 'w-72' : 'w-20'">
+    <aside class="bg-pct-blue text-white transition-all duration-300 flex-shrink-0 flex flex-col shadow-2xl z-50 fixed inset-y-0 left-0 lg:static lg:translate-x-0" 
+           :class="{
+               'w-72': sidebarOpen,
+               'w-20': !sidebarOpen && !isMobile,
+               '-translate-x-full': !sidebarOpen && isMobile,
+               'w-72 translate-x-0': sidebarOpen && isMobile
+           }">
         <div class="h-20 flex items-center px-6 border-b border-white/10 shrink-0">
             <a href="/" class="flex items-center space-x-3 overflow-hidden">
                 <img src="{{ asset('logo.png') }}" alt="Logo" class="h-10 w-auto brightness-0 invert flex-shrink-0">
-                <span class="text-xl font-black tracking-tighter whitespace-nowrap" x-show="sidebarOpen">MOVIMENTO <span class="text-pct-green">PCT</span></span>
+                <span class="text-xl font-black tracking-tighter whitespace-nowrap" x-show="sidebarOpen || isMobile">MOVIMENTO <span class="text-pct-green">PCT</span></span>
             </a>
         </div>
         
@@ -521,34 +537,34 @@
                 @csrf
                 <button type="submit" class="flex items-center w-full px-4 py-3 rounded-2xl hover:bg-red-500/20 text-blue-200 hover:text-red-400 transition-all group">
                     <svg class="w-6 h-6 group-hover:text-red-400 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
-                    <span class="ml-3 font-bold text-sm whitespace-nowrap" x-show="sidebarOpen">Sair do Portal</span>
+                    <span class="ml-3 font-bold text-sm whitespace-nowrap" x-show="sidebarOpen || isMobile">Sair</span>
                 </button>
             </form>
         </div>
     </aside>
 
     <!-- Main Content Area -->
-    <div class="flex-grow flex flex-col min-w-0">
+    <div class="flex-grow flex flex-col min-w-0 h-full">
         <!-- Topbar -->
-        <header class="h-20 bg-white border-b border-gray-200 flex items-center justify-between px-8 shrink-0">
-            <button @click="sidebarOpen = !sidebarOpen" class="text-gray-500 hover:text-pct-blue focus:outline-none">
+        <header class="h-20 bg-white border-b border-gray-200 flex items-center justify-between px-4 md:px-8 shrink-0 relative z-30">
+            <button @click="sidebarOpen = !sidebarOpen" class="text-gray-500 hover:text-pct-blue focus:outline-none p-2 lg:hidden">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
             
-            <div class="flex items-center space-x-6">
+            <div class="flex items-center space-x-3 md:space-x-6">
                 <!-- Notifications -->
-                <button class="text-gray-400 hover:text-pct-blue relative">
+                <button class="text-gray-400 hover:text-pct-blue relative p-2">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                    <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-pct-green ring-2 ring-white"></span>
+                    <span class="absolute top-2 right-2 block h-2 w-2 rounded-full bg-pct-green ring-2 ring-white"></span>
                 </button>
                 
-                <div class="flex items-center space-x-3">
-                    <div class="text-right">
-                        <p class="text-sm font-bold text-gray-900">{{ auth()->user()->name ?? 'Usuário Teste' }}</p>
-                        <p class="text-xs text-gray-500 uppercase font-semibold">{{ auth()->user()->role ?? 'Afiliado' }}</p>
+                <div class="flex items-center space-x-2 md:space-x-3 max-w-[150px] md:max-w-none">
+                    <div class="text-right hidden sm:block">
+                        <p class="text-xs md:sm font-bold text-gray-900 truncate">{{ auth()->user()->name ?? 'Usuário' }}</p>
+                        <p class="text-[10px] text-gray-500 uppercase font-semibold">{{ auth()->user()->role ?? 'Afiliado' }}</p>
                     </div>
-                    <div class="h-10 w-10 rounded-full bg-pct-blue flex items-center justify-center text-white font-bold overflow-hidden">
-                        @if(auth()->user()->photo)
+                    <div class="h-10 w-10 rounded-full bg-pct-blue flex items-center justify-center text-white font-bold overflow-hidden ring-2 ring-slate-100 shrink-0">
+                        @if(auth()->user() && auth()->user()->photo)
                             <img src="{{ asset('storage/' . auth()->user()->photo) }}" alt="Avatar" class="w-full h-full object-cover">
                         @else
                             {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
@@ -559,7 +575,7 @@
         </header>
 
         <!-- Page Content -->
-        <main class="flex-grow overflow-y-auto p-8">
+        <main class="flex-grow overflow-y-auto p-4 md:p-8">
             {{ $slot }}
         </main>
     </div>

@@ -5,7 +5,9 @@ use App\Http\Controllers\Auth\DepartmentLoginController;
 
 
 
-Route::domain('afiliado.pct.social.br')->middleware(['auth', 'role:affiliate'])->group(function () {
+$affiliateDomains = ['afiliado.pct.social.br', 'afiliado.localhost'];
+foreach ($affiliateDomains as $domain) {
+    Route::domain($domain)->middleware(['auth', 'role:affiliate'])->group(function () {
     Route::get('/dashboard', [AffiliateDashboardController::class, 'index'])->name('affiliate.dashboard');
     Route::get('/perfil', [AffiliateDashboardController::class, 'profile'])->name('affiliate.profile');
     Route::post('/perfil', [AffiliateDashboardController::class, 'updateProfile'])->name('affiliate.profile.update');
@@ -25,6 +27,7 @@ Route::domain('afiliado.pct.social.br')->middleware(['auth', 'role:affiliate'])-
     Route::get('/comunidade/topico/{id}', [\App\Http\Controllers\Affiliate\CommunityController::class, 'show'])->name('affiliate.community.show');
     Route::post('/comunidade/topico/{id}/post', [\App\Http\Controllers\Affiliate\CommunityController::class, 'storePost'])->name('affiliate.community.post.store');
     Route::get('/documentos', [AffiliateDashboardController::class, 'documentos'])->name('affiliate.documentos');
+    Route::post('/documentos/poll', [AffiliateDashboardController::class, 'documentPoll'])->name('affiliate.document.poll');
     Route::get('/modelos-oficios', [AffiliateDashboardController::class, 'modelosOficios'])->name('affiliate.modelos_oficios');
     Route::get('/ficha-de-apoio', [AffiliateDashboardController::class, 'membershipForm'])->name('affiliate.membership_form');
     Route::get('/eventos', [AffiliateDashboardController::class, 'eventos'])->name('affiliate.eventos');
@@ -95,4 +98,5 @@ Route::domain('afiliado.pct.social.br')->middleware(['auth', 'role:affiliate'])-
         Route::get('/ranking', [\App\Http\Controllers\Affiliate\CampaignManagementController::class, 'ranking'])->name('ranking');
         Route::get('/metas', [\App\Http\Controllers\Affiliate\CampaignManagementController::class, 'ranking'])->name('metas');
     });
-});
+    });
+}

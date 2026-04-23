@@ -58,8 +58,8 @@
     </div>
   </header>
 
-  <!-- ===== BREADCRUMB (opcional, injetar via @section) ===== -->
-  @hasSection('breadcrumb')
+  <!-- ===== BREADCRUMB (opcional, injetar via section) ===== -->
+  @if(trim($__env->yieldContent('breadcrumb')))
   <div style="background:var(--bg-white); border-bottom:1px solid var(--border);">
     <div class="pct-container">
       <nav class="pct-breadcrumb">

@@ -1,242 +1,326 @@
-@extends('layouts.app')
+<x-public-layout>
+    <x-slot name="title">SNDAH – Sistema Nacional de Abastecimento Hídrico | PCT</x-slot>
 
-@section('title', 'SNDAH – Sistema Nacional de Abastecimento Hídrico | PCT')
-@section('description', 'Conheça o SNDAH – proposta do PCT para garantir água de qualidade a todos os brasileiros.')
-
-@section('breadcrumb')
-  <a href="{{ url('/') }}">Início</a>
-  <span class="pct-breadcrumb__sep">›</span>
-  <a href="{{ url('/propostas') }}">Propostas</a>
-  <span class="pct-breadcrumb__sep">›</span>
-  <span class="pct-breadcrumb__item pct-breadcrumb__item--active">SNDAH</span>
-@endsection
-
-@section('content')
-
-  <!-- Hero da proposta -->
-  <section style="background:var(--bg-dark); padding:64px 0 56px; position:relative; overflow:hidden; border-bottom:3px solid var(--pct-laranja);">
-    <div style="position:absolute; inset:0; background:radial-gradient(ellipse 50% 100% at 80% 50%, rgba(27,79,138,.4) 0%, transparent 70%); pointer-events:none;"></div>
-    <div class="pct-container" style="position:relative; z-index:1;">
-      <div style="max-width:700px;">
-        <div class="d-flex gap-2 mb-3 flex-wrap">
-          <span class="pct-badge pct-badge--orange">Proposta Legislativa</span>
-          <span class="pct-badge pct-badge--dark">Congresso Nacional – 2026</span>
-        </div>
-        <h1 style="font-family:var(--font-display); font-size:clamp(36px,6vw,68px); font-weight:900; color:var(--text-white); line-height:.95; margin-bottom:20px; letter-spacing:-1px;">
-          SNDAH<br><span style="color:var(--pct-laranja);">Água para Todos</span>
-        </h1>
-        <p style="font-size:18px; color:rgba(255,255,255,.70); line-height:1.75; margin-bottom:32px; max-width:560px;">
-          Sistema Nacional Descentralizado de Abastecimento Hídrico — proposta do PCT ao
-          Congresso Nacional para reorganizar a gestão da água no Brasil, com autonomia
-          municipal, qualidade obrigatória e transparência total.
-        </p>
-        <div class="d-flex gap-2 flex-wrap">
-          <a href="{{ asset('docs/PL_SNDAH_2026.pdf') }}" class="pct-btn pct-btn--primary" target="_blank">
-            📄 Baixar Projeto de Lei (PDF)
-          </a>
-          <a href="{{ asset('docs/Estudo_Tecnico_Hidrico_RS.pdf') }}" class="pct-btn pct-btn--ghost" target="_blank">
-            📊 Estudo Técnico RS
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- O Problema -->
-  <section class="pct-section">
-    <div class="pct-container">
-      <div class="pct-layout">
-
-        <!-- Sidebar de navegação -->
-        <aside class="pct-sidebar">
-          <div class="pct-sidebar__title">Nesta página</div>
-          <a href="#problema"     class="pct-sidebar__link"><span class="icon">⚠️</span> O Problema</a>
-          <a href="#solucao"      class="pct-sidebar__link"><span class="icon">💡</span> A Solução</a>
-          <a href="#principios"   class="pct-sidebar__link"><span class="icon">📋</span> Princípios</a>
-          <a href="#financiamento" class="pct-sidebar__link"><span class="icon">💰</span> Financiamento</a>
-          <a href="#penalidades"  class="pct-sidebar__link"><span class="icon">⚖️</span> Penalidades</a>
-          <a href="#transparencia" class="pct-sidebar__link"><span class="icon">🔍</span> Transparência</a>
-          <a href="#rs"           class="pct-sidebar__link"><span class="icon">🌊</span> Crise no RS</a>
-        </aside>
-
-        <!-- Conteúdo principal -->
-        <div>
-
-          <div id="problema">
-            <span class="pct-eyebrow">O Problema</span>
-            <h2 class="pct-section-title pct-section-header--left">Por que o modelo atual falha?</h2>
-            <p class="pct-text-lead mb-3">
-              Milhões de brasileiros ainda não dispõem de acesso a água tratada com regularidade,
-              especialmente em municípios de pequeno porte, comunidades rurais e populações
-              quilombolas e indígenas.
-            </p>
-
-            <div class="pct-alert pct-alert--warning mb-3">
-              <span class="pct-alert__icon">🚰</span>
-              <div>
-                <div class="pct-alert__title">Rio Grande do Sul – Crise de 2026</div>
-                <div class="pct-alert__text">
-                  Em abril de 2026, moradores de Taquara, Rolante, Estância Velha, Campo Bom e Sapiranga
-                  relataram água com cor, cheiro e gosto inadequados. A Agesan-RS multou a Corsan em
-                  <strong>R$ 70 mil em Taquara</strong> e <strong>R$ 180 mil em Rolante</strong>.
-                  O município de Rolante entrou com ação civil pública exigindo melhoria da qualidade.
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-56 overflow-hidden bg-pct-blue text-white">
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,rgba(16,185,129,0.15),transparent_50%)]"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-pct-blue/50 to-pct-blue"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="w-full lg:w-3/5 space-y-12">
+                    <div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <span class="px-4 py-1.5 bg-pct-green/20 text-pct-green rounded-full text-xs font-black uppercase tracking-widest border border-pct-green/30">
+                                Proposta Legislativa
+                            </span>
+                            <span class="px-4 py-1.5 bg-white/10 text-white/70 rounded-full text-xs font-bold uppercase tracking-widest border border-white/10">
+                                Congresso Nacional 2026
+                            </span>
+                        </div>
+                        
+                        <h1 class="text-5xl md:text-7xl lg:text-8xl font-black leading-[0.9] tracking-tighter">
+                            SNDAH<br>
+                            <span class="text-pct-green">Água para Todos</span>
+                        </h1>
+                    </div>
+                    
+                    <p class="text-xl text-blue-100/80 leading-relaxed max-w-2xl font-medium">
+                        Sistema Nacional Descentralizado de Abastecimento Hídrico — a proposta do PCT para garantir água de qualidade, autonomia municipal e transparência absoluta na gestão hídrica do Brasil.
+                    </p>
+                    
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="{{ asset('docs/PL_SNDAH_2026.pdf') }}" target="_blank" class="px-8 py-4 bg-pct-green text-white rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-emerald-600 transition-all shadow-xl shadow-pct-green/20 flex items-center gap-2">
+                            <i data-lucide="file-text" class="w-5 h-5 text-white"></i>
+                            Baixar PL Completo
+                        </a>
+                        <a href="{{ asset('docs/Estudo_Tecnico_Hidrico_RS.pdf') }}" target="_blank" class="px-8 py-4 bg-white/10 text-white border border-white/20 rounded-2xl font-black uppercase tracking-widest text-xs hover:bg-white/20 transition-all flex items-center gap-2">
+                            <i data-lucide="bar-chart-3" class="w-5 h-5 text-white"></i>
+                            Estudo Técnico RS
+                        </a>
+                    </div>
                 </div>
-              </div>
+                
+                <div class="w-full lg:w-2/5 flex flex-col items-center justify-center text-center">
+                    <div class="mb-8 p-6 bg-white/10 rounded-full backdrop-blur-sm border border-white/10">
+                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2200" class="w-48 h-48 mx-auto">
+                            <g id="Objects">
+                                <path fill="#0068FF" d="M1177.322,1668.558c-25.583,10.881-56.18,11.996-77.303,11.996 c-24.428,0-51.72-1.115-77.303-11.996c-7.867-3.339-16.786-9.284-15.89-17.778c1.042-9.9,14.282-9.738,26.261-12.646 c19.425-4.706,49.742-13.234,54.998-44.089c0.465-2.736,0.864-5.552,1.205-8.427c2.809-23.691-4.562-47.29-19.458-65.925 c-6.493-8.122-10.444-18.88-10.444-30.679c0-25.314,18.193-45.832,40.632-45.832c22.44,0,40.632,20.518,40.632,45.832 c0,11.8-3.952,22.557-10.444,30.679c-14.896,18.635-22.267,42.234-19.458,65.925c0.341,2.875,0.74,5.692,1.205,8.427 c5.255,30.855,35.573,39.383,54.998,44.089c11.979,2.908,25.219,2.745,26.261,12.646 C1194.108,1659.274,1185.188,1659.274,1177.322,1668.558z"/>
+                                <path fill="#0068FF" d="M1217.851,1655.851c19.539,1.266,80.655,5.867,85.294,28.185 c4.31,27.009-71.483,38.358-91.048,41.551c-49.313,7.255-99.281,8.817-149.033,6.915c-43.643-2.202-87.665-6.112-129.693-18.892 c-6.074-1.949-12.13-4.144-18.091-7.059c-6.587-3.513-12.824-6.554-16.99-13.863c-7.771-17.14,15.74-25.169,27.894-28.557 c18.083-4.958,36.693-7.045,55.323-8.183c-11.993,2.798-23.977,5.696-35.727,9.292c-5.826,1.851-11.629,3.707-17.207,5.96 c-7.473,3.189-16.076,6.62-20.59,12.941c-1.922,2.99,2.282,5.465,5.032,7.305c12.668,6.912,27.246,9.573,41.78,12.406 c23.769,4.163,48.074,6.457,72.389,7.99c36.532,2.235,73.211,2.697,109.798,1.617c36.375-1.143,73.205-3.496,108.923-9.738 c14.487-2.875,29.087-5.511,41.594-12.591c2.175-1.312,3.951-2.954,4.605-4.078c0.775-1.302,0.536-1.792-0.283-3.25 c-4.869-6.234-13.407-9.639-20.988-12.821C1253.735,1664.36,1235.728,1660.008,1217.851,1655.851L1217.851,1655.851z"/>
+                                <path fill="#0068FF" d="M1330.842,1655.851c42.768,2.93,116.972,10.22,151.783,34.147 c10.897,7.469,18.546,20.695,11.734,34.094c-14.122,27.553-75.128,42.006-103.817,48.969 c-118.856,25.714-241.378,29.737-362.557,25.826c-60.668-2.551-121.316-7.77-181.197-18.296 c-36.441-6.818-72.753-14.385-106.937-29.595c-12.355-5.986-25.594-12.683-33.201-25.162c-8.897-15.441,0.42-29.676,13.782-37.851 c36.602-22.141,104.502-28.921,147.428-31.951c-23.493,5.08-46.963,10.4-70.019,17.037c-23.314,7.198-48.329,14.318-67.999,28.443 c-2.554,1.941-5.853,4.923-7.243,7.424c-1.627,3.182-1.617,4.148,0.256,7.024c5.465,6.854,16.472,11.829,25.389,15.217 c21.564,8.048,44.828,12.837,67.668,16.922c93.671,15.454,189.773,19.134,284.774,19.425 c94.985-0.353,191.111-4.045,284.736-19.672c27.968-5.386,57.243-10.544,82.272-24.113c3.838-2.198,7.669-5.151,9.849-8.372 c1.699-2.864,1.226-4.078-0.615-7.129C1456.029,1681.96,1365.668,1663.654,1330.842,1655.851L1330.842,1655.851z"/>
+                                <path fill="#0068FF" d="M1430.956,1655.851c57.116,5.291,224.666,24.794,237.339,90.789 c8.875,57.958-101.856,89.978-144.697,102.121c-103.381,27.565-209.92,38.658-316.388,44.202 c-106.188,4.808-212.658,2.801-318.484-7.578c-86.844-8.711-292.599-36.072-347.079-103.681 c-21.177-27.768-7.795-55.516,19.099-72.865c54.314-34.395,142.799-46.398,206.423-52.681 c-17.11,4.122-34.185,8.211-51.079,12.902c-36.918,10.073-152.403,42.555-159.038,81.458 c-0.431,14.774,21.174,26.725,33.688,33.144c45.748,21.578,97.133,31.542,146.962,40.266 c154.332,24.655,311.587,28.748,467.615,23.783c103.771-4.078,207.97-12.134,309.61-33.903 c35.702-8.298,71.799-17.319,103.823-35.267c10.458-6.459,25.374-16.306,24.024-29.052 C1631.579,1703.245,1475.903,1666.576,1430.956,1655.851L1430.956,1655.851z"/>
+                                <path fill="#0068FF" d="M1411.064,1003.497c0,171.788-139.257,311.045-311.045,311.045s-311.045-139.256-311.045-311.045 c0-182.102,216.714-450.491,294.387-686.864c5.291-16.101,28.024-16.101,33.315,0 C1194.349,553.005,1411.064,821.395,1411.064,1003.497z"/>
+                                <path fill="#FFFFFF" d="M988.053,1236.507c-18.506-10.185-35.814-22.51-51.39-36.776 c-51.386-47.064-83.357-114.739-87.072-184.343c-2.983-56.155,11.681-111.952,32.471-164.196 c18.361-46.135,41.491-90.233,62.513-135.243c2.501-5.358,8.966-7.573,14.164-4.787c0.071,0.018,0.125,0.054,0.179,0.089 c4.572,2.429,6.68,7.841,4.894,12.699c-18.147,49.671-34.936,100.003-41.92,152.318c-8.198,61.513-7.287,125.009,20.469,180.503 c17.75,35.483,41.037,63.259,76.506,83.328L988.053,1236.507z"/>
+                                <path fill="#FFFFFF" d="M1127.953,1215.498L1127.953,1215.498c0,31.924-29.12,56.056-60.444,49.894 c-13.686-2.692-27.168-6.434-40.292-11.168l24.309-99.128c11.293,4.166,23.573,7.795,36.957,10.886 C1111.563,1171.313,1127.953,1191.811,1127.953,1215.498z"/>
+                            </g>
+                        </svg>
+                    </div>
+                    <h3 class="text-4xl font-black mb-3 uppercase tracking-tighter">Gestão Direta</h3>
+                    <p class="text-lg text-blue-100 opacity-80">Menos burocracia, mais água na torneira.</p>
+                </div>
             </div>
-
-            <div class="pct-grid pct-grid--2 mb-4">
-              @foreach([
-                ['🔴', 'Captação única', 'Dependência de um único ponto de captação cria vulnerabilidade sistêmica. Qualquer evento no manancial afeta toda a cidade.'],
-                ['🔴', 'Sem alternativas locais', 'Municípios não têm fontes alternativas. Quando o sistema central falha, não há redundância disponível.'],
-                ['🔴', 'Tarifas sem qualidade', 'Reajustes anuais ocorrem independentemente da qualidade prestada. Em 2026, reajuste de 4,68% com piora do serviço.'],
-                ['🔴', 'Falta de transparência', 'Dados de qualidade não são públicos. Moradores só descobrem problemas ao sentir o gosto e cheiro na água.'],
-              ] as $prob)
-              <div class="pct-card" style="border-left:4px solid #C81E1E;">
-                <div style="font-size:22px; margin-bottom:10px;">{{ $prob[0] }}</div>
-                <h4 style="font-family:var(--font-display); font-weight:700; color:#7F1D1D; margin-bottom:8px;">{{ $prob[1] }}</h4>
-                <p style="font-size:14px; color:var(--text-secondary); line-height:1.6;">{{ $prob[2] }}</p>
-              </div>
-              @endforeach
-            </div>
-          </div>
-
-          <hr class="pct-divider">
-
-          <div id="solucao">
-            <span class="pct-eyebrow">A Solução</span>
-            <h2 class="pct-section-title pct-section-header--left">O que é o SNDAH?</h2>
-            <p class="pct-text-lead mb-3">
-              O SNDAH reorganiza o modelo de abastecimento de água potável no Brasil, promovendo
-              descentralização da gestão, autonomia municipal, integração regional dos sistemas
-              existentes, universalização do acesso e garantia de qualidade.
-            </p>
-
-            <div class="pct-grid pct-grid--2 mb-4">
-              @foreach([
-                ['💧', 'Qualidade Obrigatória', 'Art. 10: proibido fornecer água sem tratamento. Art. 11: monitoramento contínuo e publicação mensal dos resultados. Inclui parâmetros sensoriais (cor, odor, sabor).', 'pct-azul'],
-                ['🏛️', 'Autonomia Municipal', 'Art. 7º: municípios escolhem o prestador, instituem tarifa social, criam conselho de controle e usam soluções alternativas sem imposição externa.', 'pct-verde'],
-                ['📊', 'SINQUA', 'Sistema Nacional de Informações sobre Qualidade da Água — dados em tempo real, histórico completo e cadastro nacional de poços. Acesso público e gratuito.', 'pct-azul'],
-                ['💰', 'FNSAH', 'Fundo Nacional de Suporte ao Abastecimento Hídrico Descentralizado — transferências de até 80% não reembolsáveis para municípios com menos de 50 mil habitantes.', 'pct-laranja'],
-              ] as $sol)
-              <div class="pct-card pct-card--featured">
-                <div class="pct-card__icon" style="font-size:28px; width:60px; height:60px;">{{ $sol[0] }}</div>
-                <h3 class="pct-card__title">{{ $sol[1] }}</h3>
-                <p class="pct-card__text">{{ $sol[2] }}</p>
-              </div>
-              @endforeach
-            </div>
-          </div>
-
-          <hr class="pct-divider">
-
-          <div id="principios">
-            <span class="pct-eyebrow">Art. 3º do PL</span>
-            <h2 class="pct-section-title pct-section-header--left">Princípios do SNDAH</h2>
-            <div style="columns:2; column-gap:24px; margin-top:16px;">
-              @foreach([
-                'Universalidade do acesso à água potável como direito fundamental',
-                'Descentralização com fortalecimento da autonomia municipal',
-                'Integração regional, preservando sistemas intermunicipais',
-                'Qualidade obrigatória com monitoramento contínuo',
-                'Eficiência operacional e sustentabilidade econômica',
-                'Transparência, controle social e participação popular',
-                'Responsabilidade ambiental e uso racional da água',
-                'Solidariedade federativa com suporte aos menores municípios',
-                'Equidade — atenção a comunidades rurais, quilombolas e indígenas',
-              ] as $p)
-              <div style="display:flex; align-items:flex-start; gap:10px; margin-bottom:12px; break-inside:avoid;">
-                <span style="color:var(--pct-laranja); font-weight:900; flex-shrink:0; margin-top:1px;">›</span>
-                <span style="font-size:14px; color:var(--text-secondary); line-height:1.5;">{{ $p }}</span>
-              </div>
-              @endforeach
-            </div>
-          </div>
-
-          <hr class="pct-divider">
-
-          <div id="financiamento">
-            <span class="pct-eyebrow">Capítulo VI</span>
-            <h2 class="pct-section-title pct-section-header--left">Financiamento – FNSAH</h2>
-
-            <div class="pct-table-wrap mt-3">
-              <table class="pct-table">
-                <thead>
-                  <tr>
-                    <th>Porte do Município</th>
-                    <th>Tipo de Recurso</th>
-                    <th>Condição</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>Até 50 mil hab.</strong></td>
-                    <td>Transferência não reembolsável</td>
-                    <td>Até <strong>80%</strong> do valor do projeto</td>
-                  </tr>
-                  <tr>
-                    <td>Todos os portes</td>
-                    <td>Financiamento especial</td>
-                    <td>Juros máx. <strong>2% a.a.</strong>, prazo de até <strong>30 anos</strong></td>
-                  </tr>
-                  <tr>
-                    <td>Emergência hídrica</td>
-                    <td>Acesso simplificado</td>
-                    <td>Prioridade máxima, requisitos reduzidos</td>
-                  </tr>
-                  <tr>
-                    <td>Rural, quilombola, indígena</td>
-                    <td>Soluções alternativas</td>
-                    <td>Cisternas, captação de chuva, dessalinização</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <hr class="pct-divider">
-
-          <div id="penalidades">
-            <span class="pct-eyebrow">Capítulo IX</span>
-            <h2 class="pct-section-title pct-section-header--left">Penalidades</h2>
-
-            <div class="pct-grid pct-grid--3 mt-3">
-              <div class="pct-card" style="border-top:4px solid var(--pct-amarelo);">
-                <div style="font-family:var(--font-display); font-weight:800; font-size:13px; letter-spacing:1px; text-transform:uppercase; color:#7B4F00; margin-bottom:12px;">⚡ Infração Leve</div>
-                <div style="font-family:var(--font-display); font-size:28px; font-weight:900; color:var(--text-primary);">R$ 100 mil</div>
-                <p style="font-size:13px; color:var(--text-secondary); margin-top:8px; line-height:1.5;">Advertência e multa de até R$ 100.000. Ex: atraso na publicação de relatórios.</p>
-              </div>
-              <div class="pct-card" style="border-top:4px solid var(--pct-laranja);">
-                <div style="font-family:var(--font-display); font-weight:800; font-size:13px; letter-spacing:1px; text-transform:uppercase; color:var(--pct-laranja-dark); margin-bottom:12px;">🚨 Infração Grave</div>
-                <div style="font-family:var(--font-display); font-size:28px; font-weight:900; color:var(--text-primary);">R$ 1 milhão</div>
-                <p style="font-size:13px; color:var(--text-secondary); margin-top:8px; line-height:1.5;">Multa + suspensão. Ex: água sem tratamento, adulteração de dados, descontinuidade.</p>
-              </div>
-              <div class="pct-card" style="border-top:4px solid #C81E1E;">
-                <div style="font-family:var(--font-display); font-weight:800; font-size:13px; letter-spacing:1px; text-transform:uppercase; color:#7F1D1D; margin-bottom:12px;">🔴 Infração Gravíssima</div>
-                <div style="font-family:var(--font-display); font-size:28px; font-weight:900; color:var(--text-primary);">R$ 10 milhões</div>
-                <p style="font-size:13px; color:var(--text-secondary); margin-top:8px; line-height:1.5;">Multa + cassação + encampação. Ex: risco à saúde pública, laudos adulterados.</p>
-              </div>
-            </div>
-          </div>
-
         </div>
-      </div>
+    </section>
+    
+    <!-- Navigation Tab -->
+    <div class="sticky top-20 z-40 bg-white/80 backdrop-blur-xl border-b border-slate-100 overflow-x-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center space-x-8 py-4 whitespace-nowrap">
+                <a href="#problema" class="text-xs font-black uppercase tracking-widest text-slate-400 hover:text-pct-blue transition-colors flex items-center gap-2">
+                    <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-500"></i> O Problema
+                </a>
+                <a href="#solucao" class="text-xs font-black uppercase tracking-widest text-slate-400 hover:text-pct-blue transition-colors flex items-center gap-2">
+                    <i data-lucide="lightbulb" class="w-4 h-4 text-pct-green"></i> A Solução
+                </a>
+                <a href="#principios" class="text-xs font-black uppercase tracking-widest text-slate-400 hover:text-pct-blue transition-colors flex items-center gap-2">
+                    <i data-lucide="list-checks" class="w-4 h-4 text-pct-blue"></i> Princípios
+                </a>
+                <a href="#penalidades" class="text-xs font-black uppercase tracking-widest text-slate-400 hover:text-pct-blue transition-colors flex items-center gap-2">
+                    <i data-lucide="gavel" class="w-4 h-4 text-red-500"></i> Penalidades
+                </a>
+                <a href="#rs" class="text-xs font-black uppercase tracking-widest text-pct-green flex items-center gap-2 transition-all hover:scale-105">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2200" class="w-4 h-4 fill-current">
+                        <g id="Objects">
+                            <path d="M1177.322,1668.558c-25.583,10.881-56.18,11.996-77.303,11.996 c-24.428,0-51.72-1.115-77.303-11.996c-7.867-3.339-16.786-9.284-15.89-17.778c1.042-9.9,14.282-9.738,26.261-12.646 c19.425-4.706,49.742-13.234,54.998-44.089c0.465-2.736,0.864-5.552,1.205-8.427c2.809-23.691-4.562-47.29-19.458-65.925 c-6.493-8.122-10.444-18.88-10.444-30.679c0-25.314,18.193-45.832,40.632-45.832c22.44,0,40.632,20.518,40.632,45.832 c0,11.8-3.952,22.557-10.444,30.679c-14.896,18.635-22.267,42.234-19.458,65.925c0.341,2.875,0.74,5.692,1.205,8.427 c5.255,30.855,35.573,39.383,54.998,44.089c11.979,2.908,25.219,2.745,26.261,12.646 C1194.108,1659.274,1185.188,1665.219,1177.322,1668.558z"/>
+                            <path d="M1217.851,1655.851c19.539,1.266,80.655,5.867,85.294,28.185 c4.31,27.009-71.483,38.358-91.048,41.551c-49.313,7.255-99.281,8.817-149.033,6.915c-43.643-2.202-87.665-6.112-129.693-18.892 c-6.074-1.949-12.13-4.144-18.091-7.059c-6.587-3.513-12.824-6.554-16.99-13.863c-7.771-17.14,15.74-25.169,27.894-28.557 c18.083-4.958,36.693-7.045,55.323-8.183c-11.993,2.798-23.977,5.696-35.727,9.292c-5.826,1.851-11.629,3.707-17.207,5.96 c-7.473,3.189-16.076,6.62-20.59,12.941c-1.922,2.99,2.282,5.465,5.032,7.305c12.668,6.912,27.246,9.573,41.78,12.406 c23.769,4.163,48.074,6.457,72.389,7.99c36.532,2.235,73.211,2.697,109.798,1.617c36.375-1.143,73.205-3.496,108.923-9.738 c14.487-2.875,29.087-5.511,41.594-12.591c2.175-1.312,3.951-2.954,4.605-4.078c0.775-1.302,0.536-1.792-0.283-3.25 c-4.869-6.234-13.407-9.639-20.988-12.821C1253.735,1664.36,1235.728,1660.008,1217.851,1655.851L1217.851,1655.851z"/>
+                            <path d="M1411.064,1003.497c0,171.788-139.257,311.045-311.045,311.045s-311.045-139.256-311.045-311.045 c0-182.102,216.714-450.491,294.387-686.864c5.291-16.101,28.024-16.101,33.315,0 C1194.349,553.005,1411.064,821.395,1411.064,1003.497z"/>
+                        </g>
+                    </svg>
+                    Crise no RS
+                </a>
+            </div>
+        </div>
     </div>
-  </section>
 
-  <!-- CTA -->
-  <section style="background:var(--pct-azul); padding:64px 0;">
-    <div class="pct-container text-center">
-      <h2 style="font-family:var(--font-display); font-size:clamp(28px,4vw,44px); font-weight:900; color:var(--text-white); margin-bottom:12px; line-height:1.1;">
-        Apoie esta proposta
-      </h2>
-      <p style="font-size:17px; color:rgba(255,255,255,.75); margin-bottom:32px; max-width:500px; margin-left:auto; margin-right:auto;">
-        Compartilhe o SNDAH, filiar-se ao PCT e ajude a levar esta proposta ao Congresso Nacional.
-      </p>
-      <div class="d-flex gap-2 justify-center flex-wrap">
-        <a href="{{ url('/cadastro') }}" class="pct-btn pct-btn--primary pct-btn--lg">Filiar-se ao PCT</a>
-        <a href="{{ asset('docs/PL_SNDAH_2026.pdf') }}" class="pct-btn pct-btn--ghost pct-btn--lg" target="_blank">Baixar o PL</a>
-      </div>
+    <!-- Main Content Sections -->
+    <div class="py-20 space-y-32">
+        
+        <!-- O Problema -->
+        <section id="problema" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-16 items-start">
+                <div class="w-full lg:w-1/3">
+                    <span class="text-pct-green font-black uppercase tracking-widest text-xs">Diagnóstico</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-pct-blue mt-4 mb-6 leading-tight tracking-tighter">
+                        Por que o modelo atual falha?
+                    </h2>
+                    <p class="text-slate-500 leading-relaxed font-medium">
+                        O sistema centralizado ignora as particularidades de cada município, gerando ineficiência e falta de redundância.
+                    </p>
+                </div>
+                
+                <div class="w-full lg:w-2/3">
+                    <div class="bg-amber-50 border border-amber-100 rounded-3xl p-8 mb-12 flex gap-6 items-start">
+                        <div class="w-12 h-12 bg-amber-200 rounded-2xl flex items-center justify-center text-amber-700 shrink-0">
+                            <i data-lucide="alert-octagon" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-black text-amber-900 uppercase text-xs tracking-widest mb-2">Rio Grande do Sul – Crise 2026</h4>
+                            <p class="text-sm text-amber-800 leading-relaxed">
+                                Em Taquara e Rolante, moradores sofreram com água de má qualidade enquanto as tarifas continuavam subindo. 
+                                Multas de <strong>R$ 70 mil</strong> e <strong>R$ 180 mil</strong> foram aplicadas, mas não resolveram o problema estrutural.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        @php
+                            $problemas = [
+                                ['Captação Única', 'A dependência de um só ponto cria vulnerabilidade sistêmica extrema.', 'droplets'],
+                                ['Sem Alternativas', 'Municípios são proibidos ou desincentivados de usar fontes locais.', 'shield-off'],
+                                ['Tarifas Injustas', 'Aumentos automáticos sem qualquer contrapartida em qualidade.', 'trending-up'],
+                                ['Dados Ocultos', 'Falta de transparência real sobre o que sai da torneira.', 'eye-off']
+                            ];
+                        @endphp
+                        @foreach($problemas as $item)
+                        <div class="p-8 bg-white rounded-3xl border border-slate-100 shadow-sm">
+                            <div class="w-10 h-10 bg-red-50 text-red-600 rounded-xl flex items-center justify-center mb-4 font-black">
+                                <i data-lucide="{{ $item[2] }}" class="w-5 h-5"></i>
+                            </div>
+                            <h4 class="font-black text-pct-blue uppercase text-xs tracking-widest mb-2">{{ $item[0] }}</h4>
+                            <p class="text-sm text-slate-500 leading-relaxed">{{ $item[1] }}</p>
+                        </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- A Solução -->
+        <section id="solucao" class="bg-slate-50 py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-pct-green font-black uppercase tracking-widest text-xs">Nossa Proposta</span>
+                    <h2 class="text-4xl md:text-5xl font-black text-pct-blue mt-4 mb-6 leading-tight tracking-tighter">O que é o SNDAH?</h2>
+                    <p class="text-slate-500 leading-relaxed font-medium">
+                        O Sistema Nacional Descentralizado reorganiza a gestão hídrica priorizando quem mais importa: o cidadão no seu município.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="card-premium">
+                        <div class="w-12 h-12 bg-pct-blue/5 text-pct-blue rounded-2xl flex items-center justify-center mb-6">
+                            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2200" class="w-8 h-8">
+                                <g id="Objects">
+                                    <path fill="#1B4FA8" d="M1177.322,1668.558c-25.583,10.881-56.18,11.996-77.303,11.996 c-24.428,0-51.72-1.115-77.303-11.996c-7.867-3.339-16.786-9.284-15.89-17.778c1.042-9.9,14.282-9.738,26.261-12.646 c19.425-4.706,49.742-13.234,54.998-44.089c0.465-2.736,0.864-5.552,1.205-8.427c2.809-23.691-4.562-47.29-19.458-65.925 c-6.493-8.122-10.444-18.88-10.444-30.679c0-25.314,18.193-45.832,40.632-45.832c22.44,0,40.632,20.518,40.632,45.832 c0,11.8-3.952,22.557-10.444,30.679c-14.896,18.635-22.267,42.234-19.458,65.925c0.341,2.875,0.74,5.692,1.205,8.427 c5.255,30.855,35.573,39.383,54.998,44.089c11.979,2.908,25.219,2.745,26.261,12.646 C1194.108,1659.274,1185.188,1659.274,1177.322,1668.558z"/>
+                                    <path fill="#1B4FA8" d="M1217.851,1655.851c19.539,1.266,80.655,5.867,85.294,28.185 c4.31,27.009-71.483,38.358-91.048,41.551c-49.313,7.255-99.281,8.817-149.033,6.915c-43.643-2.202-87.665-6.112-129.693-18.892 c-6.074-1.949-12.13-4.144-18.091-7.059c-6.587-3.513-12.824-6.554-16.99-13.863c-7.771-17.14,15.74-25.169,27.894-28.557 c18.083-4.958,36.693-7.045,55.323-8.183c-11.993,2.798-23.977,5.696-35.727,9.292c-5.826,1.851-11.629,3.707-17.207,5.96 c-7.473,3.189-16.076,6.62-20.59,12.941c-1.922,2.99,2.282,5.465,5.032,7.305c12.668,6.912,27.246,9.573,41.78,12.406 c23.769,4.163,48.074,6.457,72.389,7.99c36.532,2.235,73.211,2.697,109.798,1.617c36.375-1.143,73.205-3.496,108.923-9.738 c14.487-2.875,29.087-5.511,41.594-12.591c2.175-1.312,3.951-2.954,4.605-4.078c0.775-1.302,0.536-1.792-0.283-3.25 c-4.869-6.234-13.407-9.639-20.988-12.821C1253.735,1664.36,1235.728,1660.008,1217.851,1655.851L1217.851,1655.851z"/>
+                                    <path fill="#1B4FA8" d="M1411.064,1003.497c0,171.788-139.257,311.045-311.045,311.045s-311.045-139.256-311.045-311.045 c0-182.102,216.714-450.491,294.387-686.864c5.291-16.101,28.024-16.101,33.315,0 C1194.349,553.005,1411.064,821.395,1411.064,1003.497z"/>
+                                    <path fill="#E8A800" d="M988.053,1236.507c-18.506-10.185-35.814-22.51-51.39-36.776 c-51.386-47.064-83.357-114.739-87.072-184.343c-2.983-56.155,11.681-111.952,32.471-164.196 c18.361-46.135,41.491-90.233,62.513-135.243c2.501-5.358,8.966-7.573,14.164-4.787c0.071,0.018,0.125,0.054,0.179,0.089 c4.572,2.429,6.68,7.841,4.894,12.699c-18.147,49.671-34.936,100.003-41.92,152.318c-8.198,61.513-7.287,125.009,20.469,180.503 c17.75,35.483,41.037,63.259,76.506,83.328L988.053,1236.507z"/>
+                                    <path fill="#E8A800" d="M1127.953,1215.498L1127.953,1215.498c0,31.924-29.12,56.056-60.444,49.894 c-13.686-2.692-27.168-6.434-40.292-11.168l24.309-99.128c11.293,4.166,23.573,7.795,36.957,10.886 C1111.563,1171.313,1127.953,1191.811,1127.953,1215.498z"/>
+                                </g>
+                            </svg>
+                        </div>
+                        <h4 class="font-black text-pct-blue uppercase text-xs tracking-widest mb-4">Qualidade</h4>
+                        <p class="text-sm text-slate-500 leading-relaxed">Proibição de fornecimento sem tratamento e monitoramento em tempo real.</p>
+                    </div>
+                    <div class="card-premium">
+                        <div class="w-12 h-12 bg-pct-green/5 text-pct-green rounded-2xl flex items-center justify-center mb-6">
+                            <i data-lucide="landmark" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-black text-pct-blue uppercase text-xs tracking-widest mb-4">Autonomia</h4>
+                        <p class="text-sm text-slate-500 leading-relaxed">Municípios decidem quem presta o serviço e como gerir seus recursos.</p>
+                    </div>
+                    <div class="card-premium">
+                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mb-6">
+                            <i data-lucide="bar-chart-big" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-black text-pct-blue uppercase text-xs tracking-widest mb-4">SINQUA</h4>
+                        <p class="text-sm text-slate-500 leading-relaxed">Sistema Nacional de Informações sobre Qualidade com acesso público.</p>
+                    </div>
+                    <div class="card-premium">
+                        <div class="w-12 h-12 bg-orange-50 text-orange-600 rounded-2xl flex items-center justify-center mb-6">
+                            <i data-lucide="coins" class="w-6 h-6"></i>
+                        </div>
+                        <h4 class="font-black text-pct-blue uppercase text-xs tracking-widest mb-4">Financiamento</h4>
+                        <p class="text-sm text-slate-500 leading-relaxed">Fundo Nacional para municípios de pequeno porte (até 80% não reembolsável).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Penalidades -->
+        <section id="penalidades" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row gap-16 items-center">
+                <div class="w-full lg:w-1/2">
+                    <div class="p-12 bg-pct-blue rounded-[3rem] text-white relative overflow-hidden">
+                        <div class="absolute -right-20 -top-20 w-64 h-64 bg-pct-green/20 rounded-full blur-3xl"></div>
+                        <h3 class="text-4xl font-black mb-8 leading-tight tracking-tighter relative z-10">
+                            Tolerância Zero com o Descaso
+                        </h3>
+                        <div class="space-y-6 relative z-10">
+                            <div class="flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/10">
+                                <i data-lucide="alert-circle" class="w-8 h-8 text-amber-400"></i>
+                                <div>
+                                    <p class="text-[10px] font-black uppercase opacity-60">Leve</p>
+                                    <p class="font-bold">R$ 100 mil + Advertência</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 p-4 bg-white/5 rounded-2xl border border-white/10">
+                                <i data-lucide="alert-octagon" class="w-8 h-8 text-orange-400"></i>
+                                <div>
+                                    <p class="text-[10px] font-black uppercase opacity-60">Grave</p>
+                                    <p class="font-bold">R$ 1 milhão + Suspensão</p>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 p-6 bg-pct-green text-pct-blue rounded-3xl shadow-xl shadow-pct-green/20">
+                                <i data-lucide="shield-alert" class="w-10 h-10"></i>
+                                <div>
+                                    <p class="text-[10px] font-black uppercase opacity-80">Gravíssima</p>
+                                    <p class="text-xl font-black">R$ 10 milhões + Encampação</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full lg:w-1/2">
+                    <span class="text-pct-green font-black uppercase tracking-widest text-xs">Rigididez Jurídica</span>
+                    <h2 class="text-4xl font-black text-pct-blue mt-4 mb-6 leading-tight tracking-tighter">Responsabilidade Civil e Criminal</h2>
+                    <p class="text-slate-500 leading-relaxed mb-6 font-medium">
+                        O PL prevê que a diretoria das concessionárias responda pessoalmente em casos de contaminação deliberada ou negligência grave.
+                    </p>
+                    <ul class="space-y-4 text-sm text-slate-600 font-bold">
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-pct-green"></i>
+                            Cassação imediata da concessão em casos gravíssimos.
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="w-5 h-5 text-pct-green"></i>
+                            Proibição de reajustes tarifários por 2 anos após infrações graves.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dossiê Técnico RS -->
+        <section id="rs" class="bg-pct-blue py-24 text-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row gap-16 items-start">
+                    <div class="w-full lg:w-2/5">
+                        <span class="text-pct-green font-black uppercase tracking-widest text-xs">Dossiê Técnico</span>
+                        <h2 class="text-5xl font-black mt-4 mb-8 leading-tight tracking-tighter">Colapso no RS 2026</h2>
+                        <p class="text-blue-100 opacity-80 leading-relaxed mb-8 font-medium">
+                            O estudo técnico detalha as falhas sistêmicas que levaram ao descaso no Vale do Paranhana e Serra Gaúcha.
+                        </p>
+                        <div class="p-8 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-xl">
+                            <h4 class="font-black uppercase text-xs tracking-widest mb-6">Cidades em Foco</h4>
+                            <div class="grid grid-cols-2 gap-4">
+                                @foreach(['Taquara', 'Rolante', 'Cachoeirinha', 'Gramado', 'Canela', 'Lajeado'] as $city)
+                                <div class="flex items-center gap-2 text-sm font-bold">
+                                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2200 2200" class="w-3 h-3 fill-pct-green">
+                                        <path d="M1411.064,1003.497c0,171.788-139.257,311.045-311.045,311.045s-311.045-139.256-311.045-311.045 c0-182.102,216.714-450.491,294.387-686.864c5.291-16.101,28.024-16.101,33.315,0 C1194.349,553.005,1411.064,821.395,1411.064,1003.497z"/>
+                                    </svg>
+                                    {{ $city }}
+                                </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="w-full lg:w-3/5 grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div class="p-8 bg-white/5 rounded-3xl border border-white/10">
+                            <h4 class="font-black text-pct-green uppercase text-xs tracking-widest mb-4">Vulnerabilidade</h4>
+                            <p class="text-sm opacity-80 leading-relaxed">A dependência de mananciais únicos sem redundância local paralisou regiões turísticas por semanas.</p>
+                        </div>
+                        <div class="p-8 bg-white/5 rounded-3xl border border-white/10">
+                            <h4 class="font-black text-pct-green uppercase text-xs tracking-widest mb-4">Sucateamento</h4>
+                            <p class="text-sm opacity-80 leading-relaxed">Perdas de até 40% da água tratada devido a tubulações que não recebem manutenção há décadas.</p>
+                        </div>
+                        <div class="p-8 bg-white/5 rounded-3xl border border-white/10">
+                            <h4 class="font-black text-pct-green uppercase text-xs tracking-widest mb-4">Solução Local</h4>
+                            <p class="text-sm opacity-80 leading-relaxed">A descentralização permitiria poços artesianos de alta profundidade para garantir abastecimento imediato.</p>
+                        </div>
+                        <div class="p-8 bg-white/5 rounded-3xl border border-white/10">
+                            <h4 class="font-black text-pct-green uppercase text-xs tracking-widest mb-4">Gestão Próxima</h4>
+                            <p class="text-sm opacity-80 leading-relaxed">O município tendo poder de fiscalização direta impede que o descaso se arraste por meses.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </div>
-  </section>
 
-@endsection
+    <!-- Final CTA -->
+    <section class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h2 class="text-5xl md:text-6xl font-black text-pct-blue mb-8 leading-tight tracking-tighter">
+                Faça parte desta mudança
+            </h2>
+            <p class="text-xl text-slate-500 mb-12 font-medium max-w-2xl mx-auto">
+                O SNDAH é mais que um projeto de lei, é um compromisso com a saúde e a dignidade de cada brasileiro. Apoie nossa iniciativa.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="{{ route('register.index') }}" class="px-10 py-5 bg-pct-blue text-white rounded-2xl font-black uppercase tracking-widest text-sm hover:bg-blue-900 transition-all shadow-2xl shadow-blue-900/30">
+                    Filiar-se ao PCT
+                </a>
+                <a href="{{ asset('docs/PL_SNDAH_2026.pdf') }}" target="_blank" class="px-10 py-5 bg-slate-100 text-pct-blue rounded-2xl font-black uppercase tracking-widest text-sm hover:bg-slate-200 transition-all border border-slate-200">
+                    Baixar o Projeto
+                </a>
+            </div>
+        </div>
+        <div class="absolute -left-24 -bottom-24 w-96 h-96 bg-pct-blue/5 rounded-full blur-3xl"></div>
+        <div class="absolute -right-24 -top-24 w-96 h-96 bg-pct-green/5 rounded-full blur-3xl"></div>
+    </section>
+
+</x-public-layout>

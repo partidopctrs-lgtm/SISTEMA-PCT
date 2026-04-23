@@ -11,7 +11,7 @@ use App\Http\Controllers\Auth\DepartmentLoginController;
 // ============================================================
 // 1. SITE NACIONAL (Prioridade Máxima nos domínios fixos)
 // ============================================================
-$mainDomains = ['pct.social.br', 'www.pct.social.br'];
+$mainDomains = ['pct.social.br', 'www.pct.social.br', 'localhost'];
 foreach ($mainDomains as $index => $domain) {
     Route::domain($domain)->group(function () use ($index) {
         $namePrefix = ($index === 0) ? '' : 'www.';

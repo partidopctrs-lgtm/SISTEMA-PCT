@@ -32,17 +32,27 @@
     <style>
         [x-cloak] { display: none !important; }
     </style>
+
+    <!-- Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        });
+    </script>
 </head>
 <body class="antialiased">
-    <div class="min-h-screen flex flex-col">
+    <div class="min-h-screen flex flex-col" x-data="{ mobileMenuOpen: false }">
         <!-- Navbar -->
         <nav class="glass sticky top-0 z-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-20">
                     <div class="flex items-center">
                         <a href="{{ route('home') }}" class="flex items-center space-x-3">
-                            <img src="{{ asset('logo.png') }}" alt="PCT Logo" class="h-12 w-auto">
-                            <span class="text-2xl font-bold text-pct-blue tracking-tight">PCT</span>
+                            <img src="{{ asset('logo.png') }}" alt="PCT Logo" class="h-10 md:h-12 w-auto">
+                            <span class="text-xl md:text-2xl font-bold text-pct-blue tracking-tight">PCT</span>
                         </a>
                         <div class="hidden md:ml-10 md:flex md:space-x-8">
                             <a href="{{ route('home') }}" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Home</a>
@@ -54,9 +64,39 @@
                             </a>
                         </div>
                     </div>
-                    <div class="flex items-center space-x-4">
+                    <div class="hidden md:flex items-center space-x-4">
                         <a href="{{ route('login') }}" class="text-pct-blue font-semibold hover:underline">Entrar</a>
                         <a href="{{ route('register.index') }}" class="btn-primary">Quero Me Afiliar</a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <div class="flex md:hidden items-center">
+                        <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-pct-blue p-2">
+                            <svg x-show="!mobileMenuOpen" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                            <svg x-show="mobileMenuOpen" x-cloak class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Drawer -->
+            <div x-show="mobileMenuOpen" 
+                 x-transition:enter="transition ease-out duration-200"
+                 x-transition:enter-start="opacity-0 -translate-y-4"
+                 x-transition:enter-end="opacity-100 translate-y-0"
+                 x-cloak
+                 class="md:hidden bg-white border-b border-slate-100 shadow-xl">
+                <div class="px-4 pt-2 pb-6 space-y-4">
+                    <a href="{{ route('home') }}" class="block px-4 py-3 text-lg font-bold text-gray-700 hover:bg-slate-50 rounded-xl transition-all">Home</a>
+                    <a href="https://drive.google.com/file/d/1aGtnjECienMe3hjDoFSYeeMm8e7n6Wvo/view?usp=sharing" target="_blank" class="block px-4 py-3 text-lg font-bold text-gray-700 hover:bg-slate-50 rounded-xl transition-all">Cartilha</a>
+                    <a href="https://drive.google.com/file/d/1i0UZreBix6cktRShr4DW2VE6GbrdmlFO/view?usp=sharing" target="_blank" class="block px-4 py-3 text-lg font-bold text-gray-700 hover:bg-slate-50 rounded-xl transition-all">Estatuto</a>
+                    <a href="{{ route('campaign.water.index') }}" class="block px-4 py-3 text-lg font-black text-blue-600 bg-blue-50 rounded-xl transition-all flex items-center gap-2">
+                        <span class="w-2 h-2 bg-blue-600 rounded-full animate-pulse"></span>
+                        Água no RS
+                    </a>
+                    <div class="pt-4 border-t border-slate-100 grid grid-cols-2 gap-4">
+                        <a href="{{ route('login') }}" class="flex items-center justify-center py-4 text-pct-blue font-black uppercase tracking-widest text-xs border border-pct-blue/20 rounded-xl">Entrar</a>
+                        <a href="{{ route('register.index') }}" class="flex items-center justify-center py-4 bg-pct-blue text-white font-black uppercase tracking-widest text-xs rounded-xl shadow-lg shadow-blue-900/20">Afiliar-se</a>
                     </div>
                 </div>
             </div>

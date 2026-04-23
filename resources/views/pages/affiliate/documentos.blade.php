@@ -80,6 +80,52 @@
                 <p class="text-sm text-gray-500 mb-8 flex-grow">Materiais padronizados para comunicação oficial, solicitações e propostas em nível municipal e estadual.</p>
                 <a href="https://docs.google.com/document/d/1L2887QLvuxrF3Ga9TYFCE4-f3tUAcqSz/edit?usp=sharing&ouid=111700861456647359974&rtpof=true&sd=true" target="_blank" class="w-full py-4 bg-indigo-600 text-white rounded-2xl font-bold text-center hover:bg-indigo-700 transition-all shadow-lg shadow-indigo-600/20">Abrir Documentos</a>
             </div>
+
+            <!-- NOVO: SNDAH -->
+            <div class="card-premium flex flex-col h-full bg-gradient-to-br from-white to-blue-50/50 border-l-4 border-pct-azul">
+                <div class="w-16 h-16 bg-blue-100 rounded-3xl flex items-center justify-center text-pct-azul mb-8">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 4v4h4"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h8M8 16h8"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold text-pct-blue mb-4">PL SNDAH 2026</h3>
+                <p class="text-sm text-gray-500 mb-6 flex-grow">Projeto de Lei do Sistema Nacional de Abastecimento Hídrico. Nossa proposta para resolver o problema da água no Brasil.</p>
+                
+                <div class="mb-6 p-4 bg-blue-50/50 rounded-2xl border border-blue-100">
+                    <p class="text-[10px] font-black text-pct-blue uppercase mb-3 text-center">Enquete: O que você acha?</p>
+                    <form action="{{ route('affiliate.document.poll') }}" method="POST" class="flex items-center justify-center gap-2">
+                        @csrf
+                        <input type="hidden" name="document" value="sndah_pl">
+                        <button type="submit" name="vote" value="5" class="w-8 h-8 rounded-full bg-white border border-blue-200 text-xs hover:bg-pct-green hover:text-white transition-all shadow-sm">🚀</button>
+                        <button type="submit" name="vote" value="4" class="w-8 h-8 rounded-full bg-white border border-blue-200 text-xs hover:bg-pct-green hover:text-white transition-all shadow-sm">👍</button>
+                        <button type="submit" name="vote" value="3" class="w-8 h-8 rounded-full bg-white border border-blue-200 text-xs hover:bg-pct-azul hover:text-white transition-all shadow-sm">😐</button>
+                        <button type="submit" name="vote" value="1" class="w-8 h-8 rounded-full bg-white border border-blue-200 text-xs hover:bg-red-500 hover:text-white transition-all shadow-sm">👎</button>
+                    </form>
+                </div>
+
+                <a href="{{ asset('docs/PL_SNDAH_2026.pdf') }}" target="_blank" class="w-full py-4 bg-pct-azul text-white rounded-2xl font-bold text-center hover:bg-blue-900 transition-all shadow-lg shadow-pct-azul/20">Baixar Projeto</a>
+            </div>
+
+            <!-- NOVO: Estudo Técnico -->
+            <div class="card-premium flex flex-col h-full bg-gradient-to-br from-white to-orange-50/50 border-l-4 border-pct-laranja">
+                <div class="w-16 h-16 bg-orange-100 rounded-3xl flex items-center justify-center text-pct-laranja mb-8">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                </div>
+                <h3 class="text-xl font-bold text-pct-blue mb-4">Estudo Técnico RS</h3>
+                <p class="text-sm text-gray-500 mb-6 flex-grow">Análise detalhada da crise hídrica no Rio Grande do Sul e as soluções propostas pelo PCT.</p>
+
+                <div class="mb-6 p-4 bg-orange-50/50 rounded-2xl border border-orange-100">
+                    <p class="text-[10px] font-black text-pct-laranja uppercase mb-3 text-center">Enquete: Conteúdo aprovado?</p>
+                    <form action="{{ route('affiliate.document.poll') }}" method="POST" class="flex items-center justify-center gap-2">
+                        @csrf
+                        <input type="hidden" name="document" value="rs_study">
+                        <button type="submit" name="vote" value="5" class="w-8 h-8 rounded-full bg-white border border-orange-200 text-xs hover:bg-pct-green hover:text-white transition-all shadow-sm">💯</button>
+                        <button type="submit" name="vote" value="4" class="w-8 h-8 rounded-full bg-white border border-orange-200 text-xs hover:bg-pct-green hover:text-white transition-all shadow-sm">⭐</button>
+                        <button type="submit" name="vote" value="3" class="w-8 h-8 rounded-full bg-white border border-orange-200 text-xs hover:bg-pct-laranja hover:text-white transition-all shadow-sm">📝</button>
+                        <button type="submit" name="vote" value="1" class="w-8 h-8 rounded-full bg-white border border-orange-200 text-xs hover:bg-red-500 hover:text-white transition-all shadow-sm">❌</button>
+                    </form>
+                </div>
+
+                <a href="{{ asset('docs/Estudo_Tecnico_Hidrico_RS.pdf') }}" target="_blank" class="w-full py-4 bg-pct-laranja text-white rounded-2xl font-bold text-center hover:bg-pct-laranja-dark transition-all shadow-lg shadow-pct-laranja/20">Baixar Estudo</a>
+            </div>
         </div>
     </div>
 </x-dashboard-layout>
