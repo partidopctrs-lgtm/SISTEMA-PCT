@@ -22,7 +22,7 @@ class SystemDataSeeder extends Seeder
 {
     public function run()
     {
-        $password = Hash::make('PCT@123456');
+        $password = 'PCT@123456';
 
         // 1. Ensure Admin exists
         $this->command->info('Creating Admin...');
@@ -30,7 +30,7 @@ class SystemDataSeeder extends Seeder
             ['email' => 'viniamaral2026@gmail.com'],
             [
                 'name' => 'Presidente Fundador - Vini Amaral',
-                'password' => Hash::make('PCT@Forte2026!'),
+                'password' => 'PCT@Forte2026!',
                 'role' => 'admin',
                 'status' => 'active',
                 'registration_number' => 'PCT-ADM-001',
