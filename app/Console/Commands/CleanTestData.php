@@ -25,32 +25,37 @@ class CleanTestData extends Command
 
         $this->info('Limpando base de dados...');
 
-        // Mantém apenas o Admin principal e o Candidato (opcional)
+        // Desabilita checagem de chaves estrangeiras para permitir o truncate
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        // Mantém apenas o Admin principal
         $adminEmail = 'viniamaral2026@gmail.com';
         
-        // 1. Deletar Membros (exceto o admin principal)
+        // 1. Limpar Tabelas Dependentes Primeiro
+        DB::table('points')->truncate();
+        DB::table('memberships')->truncate();
+        DB::table('audio_interactions')->truncate();
+        DB::table('financial_records')->truncate();
+        DB::table('public_demands')->truncate();
+        DB::table('petition_signatures')->truncate();
+        DB::table('party_signatures')->truncate();
+        DB::table('directory_actions')->truncate();
+        DB::table('directory_members')->truncate();
+        DB::table('legal_requests')->truncate();
+        DB::table('legal_complaints')->truncate();
+        DB::table('legal_disciplinary_processes')->truncate();
+
+        // 2. Limpar Diretórios
+        Directory::truncate();
+        $this->info("✓ Diretórios/comitês removidos.");
+
+        // 3. Deletar Membros (exceto o admin principal)
         $deletedUsers = User::where('email', '!=', $adminEmail)->count();
         User::where('email', '!=', $adminEmail)->delete();
         $this->info("✓ $deletedUsers membros de teste removidos.");
 
-        // 2. Limpar Diretórios (exceto os oficiais se houver, mas por segurança vamos limpar e deixar o admin recriar)
-        $deletedDirs = Directory::count();
-        Directory::truncate();
-        $this->info("✓ $deletedDirs diretórios/comitês removidos.");
-
-        // 3. Limpar Registros Financeiros
-        FinancialRecord::truncate();
-        $this->info("✓ Registros financeiros limpos.");
-
-        // 4. Limpar Demandas e Assinaturas
-        PublicDemand::truncate();
-        PartySignature::truncate();
-        $this->info("✓ Demandas e Assinaturas limpas.");
-
-        // 5. Limpar Outras tabelas de apoio
-        DB::table('memberships')->truncate();
-        DB::table('points')->truncate();
-        DB::table('audio_interactions')->truncate();
+        // Reabilita checagem
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         
         $this->info('====================================');
         $this->info('SISTEMA LIMPO E PRONTO PARA USO REAL!');
