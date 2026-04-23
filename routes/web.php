@@ -44,6 +44,10 @@ Route::domain('{domain}')->where(['domain' => 'pct.social.br|www.pct.social.br|l
     Route::get('/PL_SNDAH_PCT_2026', function () {
         return view('propostas.sndah');
     })->name('proposta.sndah');
+
+    // Abaixo-Assinado SNDAH
+    Route::get('/abaixo-assinado', [\App\Http\Controllers\Public\PetitionController::class, 'show'])->name('petition.show');
+    Route::post('/abaixo-assinado', [\App\Http\Controllers\Public\PetitionController::class, 'store'])->name('petition.store');
 });
 
 // ============================================================

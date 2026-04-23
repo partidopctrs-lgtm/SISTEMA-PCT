@@ -29,8 +29,8 @@ class SystemDataSeeder extends Seeder
         $admin = User::updateOrCreate(
             ['email' => 'viniamaral2026@gmail.com'],
             [
-                'name' => 'Administrador Nacional',
-                'password' => $password,
+                'name' => 'Presidente Fundador - Vini Amaral',
+                'password' => Hash::make('PCT@Forte2026!'),
                 'role' => 'admin',
                 'status' => 'active',
                 'registration_number' => 'PCT-ADM-001',

@@ -546,29 +546,75 @@
     <!-- Main Content Area -->
     <div class="flex-grow flex flex-col min-w-0 h-full">
         <!-- Topbar -->
-        <header class="h-20 bg-white border-b border-gray-200 flex items-center justify-between px-4 md:px-8 shrink-0 relative z-30">
+        <header class="h-20 bg-white border-b border-gray-200 flex items-center px-4 md:px-8 shrink-0 relative z-30">
             <button @click="sidebarOpen = !sidebarOpen" class="text-gray-500 hover:text-pct-blue focus:outline-none p-2 lg:hidden">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
             
-            <div class="flex items-center space-x-3 md:space-x-6">
+            <div class="flex items-center space-x-3 md:space-x-6 ml-auto">
                 <!-- Notifications -->
                 <button class="text-gray-400 hover:text-pct-blue relative p-2">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
                     <span class="absolute top-2 right-2 block h-2 w-2 rounded-full bg-pct-green ring-2 ring-white"></span>
                 </button>
                 
-                <div class="flex items-center space-x-2 md:space-x-3 max-w-[150px] md:max-w-none">
-                    <div class="text-right hidden sm:block">
-                        <p class="text-xs md:sm font-bold text-gray-900 truncate">{{ auth()->user()->name ?? 'Usuário' }}</p>
-                        <p class="text-[10px] text-gray-500 uppercase font-semibold">{{ auth()->user()->role ?? 'Afiliado' }}</p>
-                    </div>
-                    <div class="h-10 w-10 rounded-full bg-pct-blue flex items-center justify-center text-white font-bold overflow-hidden ring-2 ring-slate-100 shrink-0">
-                        @if(auth()->user() && auth()->user()->photo)
-                            <img src="{{ asset('storage/' . auth()->user()->photo) }}" alt="Avatar" class="w-full h-full object-cover">
-                        @else
-                            {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
-                        @endif
+                <!-- Profile Dropdown -->
+                <div class="relative" x-data="{ open: false }" @click.away="open = false">
+                    <button @click="open = !open" class="flex items-center space-x-2 md:space-x-3 focus:outline-none group">
+                        <div class="text-right hidden sm:block">
+                            <p class="text-xs md:sm font-bold text-gray-900 truncate group-hover:text-pct-blue transition-colors">{{ auth()->user()->name ?? 'Usuário' }}</p>
+                            <p class="text-[10px] text-gray-500 uppercase font-semibold">{{ auth()->user()->role ?? 'Afiliado' }}</p>
+                        </div>
+                        <div class="h-10 w-10 rounded-full bg-pct-blue flex items-center justify-center text-white font-bold overflow-hidden ring-2 ring-slate-100 group-hover:ring-pct-blue transition-all shrink-0">
+                            @if(auth()->user() && auth()->user()->photo)
+                                <img src="{{ asset('storage/' . auth()->user()->photo) }}" alt="Avatar" class="w-full h-full object-cover">
+                            @else
+                                {{ substr(auth()->user()->name ?? 'U', 0, 1) }}
+                            @endif
+                        </div>
+                    </button>
+
+                    <!-- Dropdown Menu -->
+                    <div x-show="open" 
+                         x-transition:enter="transition ease-out duration-100"
+                         x-transition:enter-start="transform opacity-0 scale-95"
+                         x-transition:enter-end="transform opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-75"
+                         x-transition:leave-start="transform opacity-100 scale-100"
+                         x-transition:leave-end="transform opacity-0 scale-95"
+                         class="absolute right-0 mt-3 w-56 bg-white rounded-3xl shadow-2xl border border-slate-100 py-3 z-50 overflow-hidden"
+                         x-cloak>
+                        
+                        <div class="px-6 py-3 border-b border-slate-50 mb-2">
+                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Opções de Conta</p>
+                        </div>
+
+                        <a href="{{ route('affiliate.profile') }}" class="flex items-center gap-3 px-6 py-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-pct-blue transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                            Alterar Dados
+                        </a>
+                        <a href="{{ route('affiliate.profile') }}#password" class="flex items-center gap-3 px-6 py-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-pct-blue transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                            Alterar Senha
+                        </a>
+                        <a href="{{ route('affiliate.profile') }}#contact" class="flex items-center gap-3 px-6 py-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-pct-blue transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.0420 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            Telefone
+                        </a>
+                        <a href="{{ route('affiliate.profile') }}#contact" class="flex items-center gap-3 px-6 py-3 text-sm font-bold text-slate-600 hover:bg-slate-50 hover:text-pct-blue transition-all">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            E-mail
+                        </a>
+
+                        <div class="mt-2 pt-2 border-t border-slate-50">
+                            <form action="{{ route('admin.logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="flex items-center gap-3 w-full px-6 py-3 text-sm font-black text-red-500 hover:bg-red-50 transition-all">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+                                    Sair da Conta
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

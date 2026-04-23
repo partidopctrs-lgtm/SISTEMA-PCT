@@ -9,8 +9,12 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $totalSignatures = \App\Models\PartySignature::count();
+        $totalPetition = \App\Models\PetitionSignature::count();
+        $totalUsers = \App\Models\User::count();
+
         $stats = [
-            'total_signatures' => \App\Models\PartySignature::count(),
+            'total_signatures' => $totalSignatures + $totalPetition + $totalUsers,
             'goal' => 500000,
             'by_state' => \App\Models\PartySignature::select('state', \DB::raw('count(*) as total'))
                 ->groupBy('state')

@@ -38,7 +38,7 @@
                         @endif
 
                         <!-- Seção 1: Dados Pessoais -->
-                        <div class="space-y-6">
+                        <div class="space-y-6" id="personal-data">
                             <h4 class="text-xs font-black text-blue-400 uppercase tracking-[0.2em] mb-4">01. Dados Pessoais</h4>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="md:col-span-2">
@@ -103,7 +103,7 @@
                         </div>
 
                         <!-- Seção 3: Localização e Contato -->
-                        <div class="space-y-6 pt-8 border-t border-slate-50">
+                        <div class="space-y-6 pt-8 border-t border-slate-50" id="contact">
                             <h4 class="text-xs font-black text-blue-400 uppercase tracking-[0.2em] mb-4">03. Endereço e Contato</h4>
                             <div class="grid grid-cols-1 md:grid-cols-6 gap-6">
                                 <div class="md:col-span-4">

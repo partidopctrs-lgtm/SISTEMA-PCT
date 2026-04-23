@@ -62,6 +62,7 @@
                                 <span class="w-2 h-2 bg-pct-green rounded-full"></span>
                                 SNDAH 2026
                             </a>
+                            <a href="{{ route('petition.show') }}" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Abaixo-Assinado</a>
                             <a href="{{ route('campaign.water.index') }}" class="text-gray-700 hover:text-pct-blue font-medium transition-colors">Relatar Problema</a>
                         </div>
                     </div>
@@ -95,6 +96,7 @@
                         <span class="w-2 h-2 bg-emerald-600 rounded-full animate-pulse"></span>
                         SNDAH 2026 (Projeto de Lei)
                     </a>
+                    <a href="{{ route('petition.show') }}" class="block px-4 py-3 text-lg font-bold text-gray-700 hover:bg-slate-50 rounded-xl transition-all">Abaixo-Assinado</a>
                     <a href="{{ route('campaign.water.index') }}" class="block px-4 py-3 text-lg font-bold text-gray-700 hover:bg-slate-50 rounded-xl transition-all">Relatar Problema Hídrico</a>
                     <div class="pt-4 border-t border-slate-100 grid grid-cols-2 gap-4">
                         <a href="{{ route('login') }}" class="flex items-center justify-center py-4 text-pct-blue font-black uppercase tracking-widest text-xs border border-pct-blue/20 rounded-xl">Entrar</a>
@@ -129,6 +131,7 @@
                             <li><a href="https://drive.google.com/file/d/1aGtnjECienMe3hjDoFSYeeMm8e7n6Wvo/view?usp=sharing" target="_blank" class="hover:text-white transition-colors">Cartilha Oficial</a></li>
                             <li><a href="https://drive.google.com/file/d/1i0UZreBix6cktRShr4DW2VE6GbrdmlFO/view?usp=sharing" target="_blank" class="hover:text-white transition-colors">Estatuto Social</a></li>
                             <li><a href="{{ route('proposta.sndah') }}" class="text-pct-green font-bold hover:text-white transition-colors uppercase text-xs tracking-widest">📋 SNDAH 2026 (Projeto de Lei)</a></li>
+                            <li><a href="{{ route('petition.show') }}" class="hover:text-white transition-colors">✍️ Abaixo-Assinado</a></li>
                             <li><a href="{{ route('campaign.water.index') }}" class="hover:text-white transition-colors">🚨 Relatar Problema Hídrico</a></li>
                             <li><a href="{{ route('register.index') }}" class="hover:text-white transition-colors">Filie-se ao PCT</a></li>
                         </ul>

@@ -21,6 +21,27 @@
             <p class="text-gray-500 font-medium italic">Bem-vindo à sua área de liderança e mobilização nacional.</p>
         </div>
 
+        <!-- SNDAH Downloads (Bio/Header Area) -->
+        <div class="flex flex-wrap gap-4">
+            <a href="{{ asset('docs/PL_SNDAH_PCT_2026.pdf') }}" download class="flex items-center gap-3 px-6 py-4 bg-white border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-xl hover:shadow-pct-blue/10 transition-all group">
+                <div class="w-10 h-10 bg-pct-blue text-white rounded-2xl flex items-center justify-center shadow-lg shadow-pct-blue/20 group-hover:scale-110 transition-transform">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                </div>
+                <div>
+                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Projeto de Lei</p>
+                    <p class="text-[11px] font-black text-pct-blue uppercase">SNDAH 2026</p>
+                </div>
+            </a>
+            <a href="{{ asset('docs/Estudo_Tecnico_Hidrico_RS.pdf') }}" download class="flex items-center gap-3 px-6 py-4 bg-white border border-slate-100 rounded-[2rem] shadow-sm hover:shadow-xl hover:shadow-pct-green/10 transition-all group">
+                <div class="w-10 h-10 bg-pct-green text-white rounded-2xl flex items-center justify-center shadow-lg shadow-pct-green/20 group-hover:scale-110 transition-transform">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                </div>
+                <div>
+                    <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Estudo Técnico</p>
+                    <p class="text-[11px] font-black text-pct-green uppercase">Hídrico RS</p>
+                </div>
+            </a>
+        </div>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
