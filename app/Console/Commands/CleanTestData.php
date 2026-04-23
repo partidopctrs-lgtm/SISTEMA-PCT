@@ -28,8 +28,21 @@ class CleanTestData extends Command
         // Desabilita checagem de chaves estrangeiras para permitir o truncate
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-        // Mantém apenas o Admin principal
-        $adminEmail = 'viniamaral2026@gmail.com';
+        // Emails que NÃO devem ser apagados (Administradores e Fundadores Reais)
+        $preservedEmails = [
+            'viniamaral2026@gmail.com',
+            'dmgproductionsoficial@gmail.com',
+            'dreybach@gmail.com',
+            'marciamachado335@gmail.com',
+            'admin@pct.social.br',
+            'maria.fatima@pct.social.br',
+            'ricardo-santos@exemplo.com',
+            'ana-paula-oliveira@exemplo.com',
+            'lucas-ferreira@exemplo.com',
+            'juliana-costa@exemplo.com',
+            'marcelo-almeida@exemplo.com',
+            'fernanda-souza@exemplo.com'
+        ];
         
         // 1. Limpar Tabelas Dependentes Primeiro
         DB::table('points')->truncate();
@@ -49,10 +62,11 @@ class CleanTestData extends Command
         Directory::truncate();
         $this->info("✓ Diretórios/comitês removidos.");
 
-        // 3. Deletar Membros (exceto o admin principal)
-        $deletedUsers = User::where('email', '!=', $adminEmail)->count();
-        User::where('email', '!=', $adminEmail)->delete();
+        // 3. Deletar Membros (exceto os preservados)
+        $deletedUsers = User::whereNotIn('email', $preservedEmails)->count();
+        User::whereNotIn('email', $preservedEmails)->delete();
         $this->info("✓ $deletedUsers membros de teste removidos.");
+        $this->info("ℹ " . count($preservedEmails) . " contas administrativas mantidas.");
 
         // Reabilita checagem
         DB::statement('SET FOREIGN_KEY_CHECKS=1;');

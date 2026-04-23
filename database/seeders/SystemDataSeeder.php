@@ -24,19 +24,40 @@ class SystemDataSeeder extends Seeder
     {
         $password = 'PCT@123456';
 
-        // 1. Ensure Admin exists
-        $this->command->info('Creating Admin...');
-        $admin = User::updateOrCreate(
-            ['email' => 'viniamaral2026@gmail.com'],
-            [
-                'name' => 'Presidente Fundador - Vini Amaral',
-                'password' => 'PCT@Forte2026!',
-                'role' => 'admin',
-                'status' => 'active',
-                'registration_number' => 'PCT-ADM-001',
-                'cpf' => '111.111.111-11'
-            ]
-        );
+        // 1. Ensure Admins exist
+        $this->command->info('Creating Admins...');
+        
+        $adminEmails = [
+            'viniamaral2026@gmail.com' => 'Presidente Fundador - Vini Amaral',
+            'dmgproductionsoficial@gmail.com' => 'Diretoria Executiva - DMG',
+            'dreybach@gmail.com' => 'Diretoria Executiva - Dreybach',
+            'marciamachado335@gmail.com' => 'Diretoria Executiva - Marcia Machado',
+            'admin@pct.social.br' => 'Administrador do Sistema'
+        ];
+
+        foreach ($adminEmails as $email => $name) {
+            $existingUser = User::where('email', $email)->first();
+            
+            if ($existingUser) {
+                // Se já existe, apenas garantimos que ele seja ADMIN e esteja ATIVO
+                // Não sobrescrevemos o Nome, CPF, Data de Nascimento, etc, para não perder dados reais
+                $existingUser->update([
+                    'role' => 'admin',
+                    'status' => 'active'
+                ]);
+            } else {
+                // Se não existe, criamos com os dados padrão
+                User::create([
+                    'name' => $name,
+                    'email' => $email,
+                    'password' => 'PCT@Forte2026!',
+                    'role' => 'admin',
+                    'status' => 'active',
+                    'registration_number' => 'PCT-ADM-' . strtoupper(substr(md5($email), 0, 4)),
+                    'cpf' => '111.111.111-' . rand(10, 99)
+                ]);
+            }
+        }
 
         // 2. Create Candidate
         $this->command->info('Creating Candidate...');
@@ -112,58 +133,49 @@ class SystemDataSeeder extends Seeder
             }
         }
 
-        // 4. Create Users (Affiliates, Committee Members, etc.)
-        $this->command->info('Creating Users...');
-        $roles = ['affiliate', 'committee', 'finance', 'legal', 'communication'];
+        // 4. Create Real Users (Founding Group & Admins)
+        $this->command->info('Creating Real Members...');
         
-        $realNames = [
-            'Carlos Alberto Silveira', 'Mariana Souza Santos', 'Ricardo Pereira Lima', 
-            'Ana Paula Oliveira', 'Fernando Henrique Costa', 'Juliana Mendes Rocha',
-            'Roberto Carlos da Silva', 'Beatriz Antunes Garcia', 'Marcelo Vieira Gomes',
-            'Luciana Ferreira Martins'
+        $realMembers = [
+            ['email' => 'viniamaral2026@gmail.com', 'name' => 'Vini Amaral', 'role' => 'admin', 'registration' => 'PCT-ADM-001', 'cpf' => '111.111.111-11'],
+            ['email' => 'marciamachado335@gmail.com', 'name' => 'Marcia Regina Machado da Silva', 'role' => 'admin', 'registration' => 'PCT-ADM-002'],
+            ['email' => 'dmgproductionsoficial@gmail.com', 'name' => 'Diretoria Executiva - DMG', 'role' => 'admin', 'registration' => 'PCT-ADM-003'],
+            ['email' => 'dreybach@gmail.com', 'name' => 'Diretoria Executiva - Dreybach', 'role' => 'admin', 'registration' => 'PCT-ADM-004'],
+            ['email' => 'admin@pct.social.br', 'name' => 'Administrador do Sistema', 'role' => 'admin', 'registration' => 'PCT-ADM-000'],
+            ['email' => 'maria.fatima@pct.social.br', 'name' => 'Maria de Fatima Dresbach', 'role' => 'committee', 'registration' => 'PCT-COM-001'],
+            ['email' => 'ricardo-santos@exemplo.com', 'name' => 'Ricardo Santos', 'role' => 'affiliate', 'registration' => 'PCT-AFI-010'],
+            ['email' => 'ana-paula-oliveira@exemplo.com', 'name' => 'Ana Paula Oliveira', 'role' => 'affiliate', 'registration' => 'PCT-AFI-011'],
+            ['email' => 'lucas-ferreira@exemplo.com', 'name' => 'Lucas Ferreira', 'role' => 'affiliate', 'registration' => 'PCT-AFI-012'],
+            ['email' => 'juliana-costa@exemplo.com', 'name' => 'Juliana Costa', 'role' => 'affiliate', 'registration' => 'PCT-AFI-013'],
+            ['email' => 'marcelo-almeida@exemplo.com', 'name' => 'Marcelo Almeida', 'role' => 'affiliate', 'registration' => 'PCT-AFI-014'],
+            ['email' => 'fernanda-souza@exemplo.com', 'name' => 'Fernanda Souza', 'role' => 'affiliate', 'registration' => 'PCT-AFI-015'],
         ];
 
-        foreach (range(1, 100) as $i) {
-            $role = $roles[array_rand($roles)];
-            $state = $states[array_rand($states)];
-            $city = $cities[array_rand($cities)];
-            
-            $referredBy = null;
-            if ($i > 1) {
-                if (rand(1, 10) < 3) {
-                    $referredBy = $candidateUser->id;
-                }
-            }
-
-            $name = ($i <= 10) ? $realNames[$i-1] : "Usuário $i " . Str::random(3);
-
+        foreach ($realMembers as $m) {
             $user = User::updateOrCreate(
-                ['email' => ($i <= 10) ? "membro$i@exemplo.com" : "user$i@pct.social.br"],
+                ['email' => $m['email']],
                 [
-                    'name' => $name,
-                    'password' => $password,
-                    'role' => $role,
+                    'name' => $m['name'],
+                    'password' => 'PCT@Forte2026!', // Senha padrão para o grupo fundador
+                    'role' => $m['role'],
                     'status' => 'active',
-                    'registration_number' => 'PCT-MEM-' . str_pad($i, 4, '0', STR_PAD_LEFT),
-                    'city' => $city,
-                    'state' => $state,
-                    'cpf' => rand(100, 999) . '.' . rand(100, 999) . '.' . rand(100, 999) . '-' . rand(10, 99),
-                    'referred_by' => $referredBy
+                    'registration_number' => $m['registration'],
+                    'cpf' => $m['cpf'] ?? null,
+                    'city' => 'Taquara',
+                    'state' => 'RS',
                 ]
             );
 
-            // Assign to a directory if they are committee/finance/legal
-            if (in_array($role, ['committee', 'finance', 'legal'])) {
-                $dir = Directory::inRandomOrder()->first();
-                $user->update(['committee_id' => $dir->id]);
-                
-                Membership::updateOrCreate(
-                    ['user_id' => $user->id, 'directory_id' => $dir->id],
-                    [
-                        'membership_status' => 'active',
-                        'joined_at' => now()->subMonths(rand(1, 6))
-                    ]
-                );
+            // Vincula ao primeiro diretório se for comitê ou admin
+            if (in_array($m['role'], ['admin', 'committee'])) {
+                $dir = Directory::first();
+                if ($dir) {
+                    $user->update(['committee_id' => $dir->id]);
+                    Membership::updateOrCreate(
+                        ['user_id' => $user->id, 'directory_id' => $dir->id],
+                        ['membership_status' => 'active', 'joined_at' => now()]
+                    );
+                }
             }
         }
 
@@ -175,6 +187,7 @@ class SystemDataSeeder extends Seeder
 
         foreach (range(1, 50) as $i) {
             $dirId = Directory::inRandomOrder()->first()?->id ?? $defaultDirId;
+            $approver = User::where('role', 'admin')->first();
             FinancialRecord::create([
                 'directory_id' => $dirId,
                 'type' => rand(0, 1) ? 'revenue' : 'expense',
@@ -182,7 +195,7 @@ class SystemDataSeeder extends Seeder
                 'description' => "Transação de teste $i",
                 'amount' => rand(100, 5000),
                 'status' => 'approved',
-                'approved_by' => $admin->id,
+                'approved_by' => $approver?->id,
                 'created_at' => now()->subDays(rand(1, 60))
             ]);
         }
