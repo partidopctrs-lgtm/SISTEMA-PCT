@@ -69,6 +69,11 @@ class AffiliateDashboardController extends Controller
         return view('pages.affiliate.dashboard', compact('user', 'isFounder', 'stats', 'myReferrals', 'waterStats', 'campaignRanking'));
     }
 
+    public function participacao()
+    {
+        return view('pages.affiliate.participacao');
+    }
+
     public function profile()
     {
         return view('pages.affiliate.profile');

@@ -1,5 +1,5 @@
 <x-public-layout>
-    <x-slot name="title">Cadastrar-se no PCT - Partido Cidadania e Trabalho</x-slot>
+    <x-slot name="title">Cadastre-se no PCT - Movimento Cidadania e Trabalho</x-slot>
 
     <div class="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div class="max-w-md w-full glass p-8 rounded-3xl shadow-xl relative overflow-hidden">
@@ -9,7 +9,7 @@
             <div class="relative">
                 <div class="text-center mb-8">
                     <img class="mx-auto h-16 w-auto mb-4" src="{{ asset('logo.png') }}" alt="PCT Logo">
-                    <h2 class="text-3xl font-extrabold text-pct-blue tracking-tight">Filie-se ao PCT</h2>
+                    <h2 class="text-3xl font-extrabold text-pct-blue tracking-tight">Cadastre-se no PCT</h2>
                     <p class="mt-2 text-sm text-gray-500">
                         Junte-se ao movimento que valoriza o seu trabalho.
                     </p>

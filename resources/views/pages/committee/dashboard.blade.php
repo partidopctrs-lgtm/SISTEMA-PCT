@@ -3,7 +3,7 @@
 
     <div class="max-w-7xl mx-auto py-8 px-4">
         <div class="mb-12">
-            <p class="text-[10px] font-black text-pct-blue uppercase tracking-[0.3em] mb-2 opacity-60">Painel do Comitê Regional</p>
+            <p class="text-[10px] font-black text-pct-blue uppercase tracking-[0.3em] mb-2 opacity-60">Painel do Núcleo Regional</p>
             <h1 class="text-3xl font-black text-pct-blue tracking-tight mb-2">{{ $directory?->name ?? 'Gestão Local' }}</h1>
             <p class="text-gray-500 font-medium italic">Operação política e administrativa territorial.</p>
         </div>
@@ -122,7 +122,7 @@
                     </div>
                 </div>
 
-                <!-- 1.5 Agenda do Diretório -->
+                <!-- 1.5 Agenda do Núcleo -->
                 <div class="card-premium">
                     <h3 class="text-xs font-black text-pct-blue uppercase tracking-widest mb-6">Agenda Administrativa</h3>
                     <div class="space-y-4">

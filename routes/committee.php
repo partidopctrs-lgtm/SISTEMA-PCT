@@ -3,13 +3,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Committee\CommitteeDashboardController;
 use App\Http\Controllers\Auth\DepartmentLoginController;
 
-Route::get('/committee/login', [DepartmentLoginController::class, 'showLoginForm'])->name('committee.login');
-Route::post('/committee/login', [DepartmentLoginController::class, 'login']);
+
 
 // Permitir que qualquer subdomínio de diretório acesse estas rotas (Taquara, etc)
 // Adicionamos o 'where' para permitir subdomínios com pontos (ex: diretorio.taquara)
-Route::domain('{subdomain}.pct.social.br')
-    ->where(['subdomain' => '.*'])
+Route::domain('{subdomain}')
+    ->where(['subdomain' => '(.*\.pct\.social\.br$|localhost|127\.0\.0\.1)'])
     ->middleware(['auth', 'role:committee'])
     ->group(function () {
     Route::get('/dashboard', [CommitteeDashboardController::class, 'index'])->name('committee.dashboard');

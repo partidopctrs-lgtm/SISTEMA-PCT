@@ -95,7 +95,7 @@ php artisan optimize:clear
 7. Rodar sistema
 php artisan serve
 🔐 Acesso
-http://localhost:8000
+http://localhost:8002
 
 ####Use os e-mails da tabela acima.
 

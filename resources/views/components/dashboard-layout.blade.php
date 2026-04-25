@@ -151,7 +151,7 @@
                             <a href="{{ route('shared.documents', ['portal' => 'finance']) }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white hover:bg-white/5 rounded-lg">Financeiro</a>
                             <a href="{{ route('shared.documents', ['portal' => 'legal']) }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white hover:bg-white/5 rounded-lg">Jurídico</a>
                             <a href="{{ route('shared.documents', ['portal' => 'candidate']) }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white hover:bg-white/5 rounded-lg">Candidato</a>
-                            <a href="{{ route('shared.documents', ['portal' => 'committee']) }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white hover:bg-white/5 rounded-lg">Comitê</a>
+                            <a href="{{ route('shared.documents', ['portal' => 'committee']) }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white hover:bg-white/5 rounded-lg">Núcleo</a>
                             <a href="{{ route('shared.documents', ['portal' => 'communication']) }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white hover:bg-white/5 rounded-lg">Comunicação</a>
                         </div>
                     </div>
@@ -177,6 +177,7 @@
                         <div x-show="open" x-transition class="mt-2 ml-10 space-y-1">
                             <a href="{{ route('affiliate.profile') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.profile') ? 'text-white' : 'text-blue-200' }} hover:text-white">Meu Perfil</a>
                             <a href="{{ route('affiliate.carteirinha') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.carteirinha') ? 'text-white' : 'text-blue-200' }} hover:text-white">Carteirinha Digital</a>
+                            <a href="{{ route('affiliate.participacao') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.participacao') ? 'text-white' : 'text-pct-green' }} hover:text-white">Minha Participação</a>
                             <a href="{{ route('affiliate.signatures.create') }}" class="block px-4 py-2 text-xs font-bold {{ request()->routeIs('affiliate.signatures.*') ? 'text-white' : 'text-blue-200' }} hover:text-white">Apoio ao Partido</a>
                             <a href="{{ route('shared.documents', ['portal' => 'institucional']) }}" class="block px-4 py-2 text-xs font-bold text-blue-200 hover:text-white">Documentos</a>
                         </div>
@@ -273,10 +274,10 @@
                     </a>
 
                 @elseif($showCommitteeMenu)
-                    <!-- MENU COMITÊ -->
+                    <!-- MENU NÚCLEO -->
                     <a href="{{ route('committee.dashboard', ['subdomain' => $user->committee->subdomain ?? 'diretorio']) }}" class="flex items-center px-4 py-3 rounded-2xl hover:bg-white/10 transition-all group {{ request()->routeIs('committee.dashboard') ? 'bg-white/10 shadow-lg' : '' }}">
                         <svg class="w-6 h-6 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-                        <span class="ml-3 font-bold text-sm whitespace-nowrap" x-show="sidebarOpen">Gestão Local</span>
+                        <span class="ml-3 font-bold text-sm whitespace-nowrap" x-show="sidebarOpen">Gestão do Núcleo</span>
                     </a>
 
                     @if($isApplicant)
@@ -287,7 +288,7 @@
                     @else
                         <a href="{{ route('committee.members', ['subdomain' => $user->committee->subdomain ?? 'diretorio']) }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('committee.members') ? 'bg-white/10' : '' }}">
                             <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-                            <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Membros Locais</span>
+                            <span class="ml-3 text-sm font-medium whitespace-nowrap" x-show="sidebarOpen">Membros do Núcleo</span>
                         </a>
                         <a href="{{ route('committee.signatures', ['subdomain' => $user->committee->subdomain ?? 'diretorio']) }}" class="flex items-center px-4 py-2.5 rounded-xl hover:bg-white/5 transition-all group {{ request()->routeIs('committee.signatures') ? 'bg-white/10' : '' }}">
                             <svg class="w-5 h-5 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -454,8 +455,7 @@
                             <a href="{{ route('candidate.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showCandidateMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
                                 <span class="w-1.5 h-1.5 rounded-full bg-amber-500 mr-3"></span> Candidato
                             </a>
-                            <a href="{{ route('committee.dashboard', ['subdomain' => $user->committee->subdomain ?? 'diretorio']) }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showCommitteeMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
-                                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 mr-3"></span> Comitê
+                                <span class="w-1.5 h-1.5 rounded-full bg-indigo-500 mr-3"></span> Núcleo
                             </a>
                             <a href="{{ route('finance.dashboard') }}" class="flex items-center px-4 py-2 rounded-xl text-xs font-bold text-blue-200 hover:bg-white/5 transition-all {{ $showFinanceMenu ? 'bg-white/5 text-white ring-1 ring-white/10' : '' }}">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 mr-3"></span> Financeiro
@@ -625,6 +625,7 @@
             {{ $slot }}
         </main>
     </div>
+    @include('components.apoio-partido-modal')
     @stack('scripts')
 </body>
 </html>

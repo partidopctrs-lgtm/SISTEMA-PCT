@@ -17,18 +17,18 @@
     }">
         <div class="mb-12 flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-                <h1 class="text-3xl font-black text-pct-blue tracking-tight">Gestão de Diretórios</h1>
+                <h1 class="text-3xl font-black text-pct-blue tracking-tight">Gestão de Núcleos</h1>
                 <p class="text-gray-500 font-medium mt-1">Organização da estrutura local e monitoramento de desempenho regional.</p>
             </div>
             <button @click="showCreate = true" class="px-6 py-3 bg-pct-blue text-white rounded-xl text-xs font-black uppercase tracking-widest hover:bg-blue-900 transition-all shadow-lg shadow-blue-900/20 flex items-center gap-2">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-                Novo Diretório
+                Novo Núcleo
             </button>
         </div>
         <!-- Filtros e Busca -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
             <div class="md:col-span-2 relative">
-                <input type="text" placeholder="Buscar diretório por nome ou cidade..." class="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-xs font-medium focus:ring-2 focus:ring-pct-blue outline-none shadow-sm">
+                <input type="text" placeholder="Buscar núcleo por nome ou cidade..." class="w-full pl-12 pr-4 py-3 bg-white border border-slate-200 rounded-2xl text-xs font-medium focus:ring-2 focus:ring-pct-blue outline-none shadow-sm">
                 <svg class="w-5 h-5 text-gray-400 absolute left-4 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
             <select class="px-4 py-3 bg-white border border-slate-200 rounded-2xl text-xs font-black text-pct-blue uppercase tracking-widest outline-none shadow-sm">
@@ -45,7 +45,7 @@
             </select>
         </div>
 
-        <!-- Tabela de Diretórios -->
+        <!-- Tabela de Núcleos -->
         <div class="bg-white rounded-[2.5rem] shadow-sm border border-slate-100 overflow-hidden">
             <table class="w-full text-left">
                 <thead>
@@ -53,7 +53,7 @@
                         <th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Identificação</th>
                         <th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Localidade</th>
                         <th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Tipo / Nível</th>
-                        <th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Filiados</th>
+                        <th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Membros</th>
                         <th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Status</th>
                         <th class="px-8 py-6 text-[10px] font-black text-gray-400 uppercase tracking-widest">Ações</th>
                     </tr>
@@ -63,7 +63,7 @@
                     <tr class="hover:bg-slate-50/50 transition-colors">
                         <td class="px-8 py-6">
                             <a href="{{ route('admin.directories.show', $dir->id) }}" class="text-sm font-black text-pct-blue uppercase hover:underline decoration-2 underline-offset-4">{{ $dir->name }}</a>
-                            <p class="text-[10px] text-gray-400 font-bold mt-0.5">Protocolo: {{ $dir->protocol_number ?? 'DIR-'.$dir->id }}</p>
+                            <p class="text-[10px] text-gray-400 font-bold mt-0.5">Protocolo: {{ $dir->protocol_number ?? 'NUC-'.$dir->id }}</p>
                         </td>
                         <td class="px-8 py-6">
                             <p class="text-xs font-bold text-gray-600">{{ $dir->city }}</p>
@@ -113,7 +113,7 @@
                                 @endif
 
                                 @if($dir->status === 'active')
-                                <form action="{{ route('admin.directories.block', $dir->id) }}" method="POST" class="inline" onsubmit="return confirm('Deseja realmente BLOQUEAR este diretório?')">
+                                <form action="{{ route('admin.directories.block', $dir->id) }}" method="POST" class="inline" onsubmit="return confirm('Deseja realmente BLOQUEAR este núcleo?')">
                                     @csrf
                                     <input type="hidden" name="reason" value="Bloqueio administrativo temporário.">
                                     <button type="submit" class="p-2 bg-white border border-slate-200 rounded-xl text-amber-600 hover:text-amber-800 hover:border-amber-600 hover:bg-amber-50 transition-all" title="Bloquear Operações">
@@ -152,7 +152,7 @@
                     <button @click="showView = false" class="absolute top-6 right-6 text-white/50 hover:text-white transition-colors">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
-                    <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-300 mb-2">Detalhes do Diretório</h3>
+                    <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-300 mb-2">Detalhes do Núcleo</h3>
                     <h2 class="text-2xl font-black uppercase tracking-tight" x-text="selectedDir.name"></h2>
                 </div>
                 <div class="p-8">
@@ -172,7 +172,7 @@
                                   x-text="selectedDir.status === 'active' ? 'Ativo' : 'Pendente'"></span>
                         </div>
                         <div>
-                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Filiados Vinculados</p>
+                            <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">Membros Vinculados</p>
                             <p class="text-sm font-black text-pct-blue" x-text="selectedDir.memberships_count"></p>
                         </div>
                     </div>
@@ -204,11 +204,11 @@
                             </button>
                         </div>
                         <h3 class="text-[10px] font-black uppercase tracking-[0.2em] text-green-100 mb-2">Painel de Edição</h3>
-                        <h2 class="text-2xl font-black uppercase tracking-tight">Atualizar Diretório</h2>
+                        <h2 class="text-2xl font-black uppercase tracking-tight">Atualizar Núcleo</h2>
                     </div>
                     <div class="p-8 space-y-4">
                         <div>
-                            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Nome do Diretório</label>
+                            <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Nome do Núcleo</label>
                             <input type="text" name="name" x-model="selectedDir.name" class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold outline-none focus:ring-2 focus:ring-pct-green transition-all">
                         </div>
                         <div class="grid grid-cols-2 gap-4">
@@ -289,7 +289,7 @@
 
                         <div x-show="mode === 'online'" class="p-8 space-y-4">
                             <div>
-                                <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Nome da Unidade (Ex: Diretório Regional RS)</label>
+                                <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Nome da Unidade (Ex: Núcleo Regional RS)</label>
                                 <input type="text" name="name" required class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold outline-none focus:ring-2 focus:ring-pct-blue transition-all">
                             </div>
                             <div class="grid grid-cols-2 gap-4">
@@ -311,11 +311,11 @@
                                 </select>
                             </div>
                             <div class="space-y-4 pt-4 border-t border-slate-100">
-                                <p class="text-[10px] font-black text-pct-blue uppercase tracking-widest">Responsáveis Institucionais</p>
+                                <p class="text-[10px] font-black text-pct-blue uppercase tracking-widest">Gestores do Núcleo</p>
                                 <div>
-                                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Presidente</label>
+                                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2 block">Coordenador</label>
                                     <select name="president_id" class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl text-xs font-bold outline-none">
-                                        <option value="">Selecione o Presidente</option>
+                                        <option value="">Selecione o Coordenador</option>
                                         @foreach($users ?? [] as $user)
                                             <option value="{{ $user->id }}">{{ $user->name }}</option>
                                         @endforeach

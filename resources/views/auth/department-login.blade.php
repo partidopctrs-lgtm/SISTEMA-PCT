@@ -92,7 +92,7 @@
                     <div>
                         <button type="submit" 
                             class="w-full flex justify-center py-5 px-6 border border-transparent rounded-[1.25rem] shadow-xl text-lg font-black text-white bg-pct-blue hover:bg-blue-900 transition-all transform hover:scale-[1.02] active:scale-95 focus:outline-none focus:ring-4 focus:ring-blue-100">
-                            ACESSAR PORTAL
+                            ENTRAR NA ÁREA DO MEMBRO
                         </button>
                     </div>
 

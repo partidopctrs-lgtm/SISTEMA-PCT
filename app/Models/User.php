@@ -64,6 +64,9 @@ class User extends Authenticatable
         'registration_document',
         'position_id',
         'verification_token',
+        'apoio_partido',
+        'data_apoio',
+        'ip_apoio',
     ];
 
     public function position()

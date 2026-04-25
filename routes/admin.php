@@ -4,17 +4,16 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\SignaturePdfController;
 use App\Http\Controllers\Auth\DepartmentLoginController;
 
-Route::get('/admin/login', [DepartmentLoginController::class, 'showLoginForm'])->name('admin.login');
-Route::post('/admin/login', [DepartmentLoginController::class, 'login']);
+
 Route::post('/admin/logout', [DepartmentLoginController::class, 'logout'])->name('admin.logout');
 
 // Login específico para o subdomínio administrativo
-Route::domain('administrativo.pct.social.br')->group(function () {
+Route::domain('{admin_domain}')->where(['admin_domain' => 'administrativo\.pct\.social\.br|administrativo\.localhost|administrativo\.localhost:8002'])->group(function () {
     Route::get('/login', [DepartmentLoginController::class, 'showLoginForm'])->name('admin.subdomain.login');
     Route::post('/login', [DepartmentLoginController::class, 'login']);
 });
 
-Route::domain('administrativo.pct.social.br')->middleware(['auth', 'role:admin'])->group(function () {
+Route::domain('{admin_domain}')->where(['admin_domain' => 'administrativo\.pct\.social\.br|administrativo\.localhost|administrativo\.localhost:8002'])->middleware(['auth', 'role:admin'])->group(function () {
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/command-center', [AdminDashboardController::class, 'commandCenter'])->name('admin.command_center');
     Route::get('/members', [AdminDashboardController::class, 'members'])->name('admin.members');

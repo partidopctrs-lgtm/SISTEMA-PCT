@@ -28,8 +28,7 @@ Route::domain('juridico.pct.social.br')->middleware(['auth'])->name('legal.')->g
 // PAINEL DO ADVOGADO (Operacional Individual)
 // Login isolado, apenas role legal/admin
 // =============================================
-Route::get('/advogado/login', [LawyerAuthController::class, 'showLogin'])->name('advogado.login');
-Route::post('/advogado/login', [LawyerAuthController::class, 'login'])->name('advogado.login.post');
+
 Route::post('/advogado/logout', [LawyerAuthController::class, 'logout'])->name('advogado.logout');
 
 Route::middleware(['auth'])->prefix('advogado')->name('advogado.')->group(function () {

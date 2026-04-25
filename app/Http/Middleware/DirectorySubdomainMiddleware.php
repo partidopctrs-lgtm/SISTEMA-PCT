@@ -21,12 +21,16 @@ class DirectorySubdomainMiddleware
         $host = $request->getHost();
         $domain = config('app.url');
         $parsedDomain = parse_url($domain, PHP_URL_HOST);
+        
+        $isLocal = str_contains($host, 'localhost') || $host === '127.0.0.1';
+        $baseSuffix = $isLocal ? 'localhost' : $parsedDomain;
 
         // Definir parâmetros padrão para geração de URLs (evita erro de parâmetro ausente)
         URL::defaults([
             'domain' => $host,
-            'affiliate_domain' => $host,
-            'subdomain' => str_replace('.' . $parsedDomain, '', $host)
+            'admin_domain' => 'administrativo.' . $baseSuffix,
+            'affiliate_domain' => 'afiliado.' . $baseSuffix,
+            'subdomain' => str_replace('.' . $parsedDomain, '', $host) ?: 'www'
         ]);
         
         // Se estivermos no domínio raiz ou se for um painel fixo, ignorar

@@ -14,7 +14,7 @@ use App\Http\Controllers\Auth\DepartmentLoginController;
 // ============================================================
 // 1. SITE NACIONAL (Prioridade Máxima nos domínios fixos)
 // ============================================================
-Route::domain('{domain}')->where(['domain' => 'pct.social.br|www.pct.social.br|localhost|127.0.0.1'])->group(function () {
+Route::domain('{domain}')->where(['domain' => '(^pct\.social\.br$|^www\.pct\.social\.br$|^localhost$|^127\.0\.0\.1$|.*:8002.*)'])->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/manifesto', [HomeController::class, 'manifesto'])->name('manifesto');
     Route::get('/estatuto', [HomeController::class, 'estatuto'])->name('estatuto');
@@ -26,6 +26,13 @@ Route::domain('{domain}')->where(['domain' => 'pct.social.br|www.pct.social.br|l
     Route::post('/cadastro', [RegistrationController::class, 'store'])->name('register.store');
     Route::get('/login', [DepartmentLoginController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [DepartmentLoginController::class, 'login']);
+
+    // Redirecionamento de rotas antigas para o login unificado
+    Route::get('/admin/login', fn() => redirect('/login'));
+    Route::get('/committee/login', fn() => redirect('/login'));
+    Route::get('/candidate/login', fn() => redirect('/login'));
+    Route::get('/legal/login', fn() => redirect('/login'));
+    Route::get('/finance/login', fn() => redirect('/login'));
     Route::get('/cadastro/sucesso', [RegistrationController::class, 'success'])->name('register.success');
     Route::get('/cadastro/verificar/{token}', [\App\Http\Controllers\Public\VerifyEmailController::class, 'verify'])->name('register.verify');
     Route::get('/politica-de-privacidade', [HomeController::class, 'privacy'])->name('privacy');
@@ -86,6 +93,10 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/manuais/etica', function () { return view('pages.shared.manuals.ethics-manual'); })->name('manual.ethics');
     Route::get('/manuais/disciplinar', function () { return view('pages.shared.manuals.disciplinary-code'); })->name('manual.disciplinary');
     Route::get('/central-documentos', [\App\Http\Controllers\Shared\DocumentController::class, 'index'])->name('shared.documents');
+
+    // ✅ Apoio Partidário — Decisão Opcional e Reversível (Global)
+    Route::post('/apoio-partido/salvar', [\App\Http\Controllers\Affiliate\ApoioPartidoController::class, 'salvar'])->name('affiliate.apoio.salvar');
+    Route::post('/apoio-partido/alterar', [\App\Http\Controllers\Affiliate\ApoioPartidoController::class, 'alterar'])->name('affiliate.apoio.alterar');
 });
 
 Route::get('/indicar/{code}', function($code) {

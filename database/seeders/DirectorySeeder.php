@@ -15,32 +15,32 @@ class DirectorySeeder extends Seeder
         $users = User::all();
         if ($users->isEmpty()) return;
 
-        // 1. Diretório Solicitante (Submitted / Applicant)
+        // 1. Núcleo Solicitante (Submitted / Applicant)
         $d1 = Directory::create([
             'uuid' => (string) Str::uuid(),
-            'name' => 'Diretório Municipal de Taquara',
+            'name' => 'Núcleo Taquara',
             'city' => 'Taquara',
             'state' => 'RS',
             'directory_type' => 'Municipal',
             'operational_status' => 'submitted',
             'affiliation_status' => 'applicant',
             'legal_status' => 'not_formalized',
-            'protocol_number' => 'PRT-DIR-' . date('Ymd') . '-0001',
+            'protocol_number' => 'PRT-NUC-' . date('Ymd') . '-0001',
             'president_id' => $users->first()->id,
         ]);
         $d1->seedChecklist();
 
-        // 2. Diretório Provisório (Approved / Provisional)
+        // 2. Núcleo Regional (Approved / Provisional)
         $d2 = Directory::create([
             'uuid' => (string) Str::uuid(),
-            'name' => 'Diretório Regional de Porto Alegre',
+            'name' => 'Núcleo Regional RS',
             'city' => 'Porto Alegre',
             'state' => 'RS',
             'directory_type' => 'Regional',
             'operational_status' => 'approved',
             'affiliation_status' => 'provisional',
             'legal_status' => 'in_formalization',
-            'protocol_number' => 'PRT-DIR-' . date('Ymd') . '-0002',
+            'protocol_number' => 'PRT-NUC-' . date('Ymd') . '-0002',
             'president_id' => $users->skip(1)->first()?->id ?? $users->first()->id,
             'secretary_id' => $users->skip(2)->first()?->id ?? $users->first()->id,
         ]);
@@ -63,17 +63,17 @@ class DirectorySeeder extends Seeder
             'verification_status' => 'pending'
         ]);
 
-        // 3. Diretório Oficial (Active / Official)
+        // 3. Núcleo Nacional (Active / Official)
         $d3 = Directory::create([
             'uuid' => (string) Str::uuid(),
-            'name' => 'Diretório Nacional PCT',
+            'name' => 'Núcleo Nacional',
             'city' => 'Brasília',
             'state' => 'DF',
             'directory_type' => 'Nacional',
             'operational_status' => 'active',
             'affiliation_status' => 'official',
             'legal_status' => 'regular',
-            'protocol_number' => 'PRT-DIR-' . date('Ymd') . '-0003',
+            'protocol_number' => 'PRT-NUC-' . date('Ymd') . '-0003',
             'president_id' => $users->first()->id,
             'cnpj' => '12.345.678/0001-90',
             'registry_number' => 'REG-12345',

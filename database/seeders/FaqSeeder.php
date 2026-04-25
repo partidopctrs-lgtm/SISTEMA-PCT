@@ -14,49 +14,34 @@ class FaqSeeder extends Seeder
     {
         $faqs = [
             [
-                'question' => 'O PCT é de esquerda ou direita?',
-                'answer' => 'O PCT não nasce como um movimento de esquerda ou direita. Nosso foco é ouvir o povo, organizar as demandas e buscar soluções reais para a cidade. Mais importante do que rótulo político é fazer as coisas funcionarem.',
+                'question' => 'Quem criou o PCT?',
+                'answer' => 'O PCT foi criado em Taquara/RS por membros da própria comunidade, com o objetivo de organizar cidadãos e desenvolver lideranças locais e nacionais.',
                 'order' => 1
             ],
             [
-                'question' => 'Quem está organizando o PCT?',
-                'answer' => 'O movimento está sendo construído por pessoas da própria cidade — trabalhadores, empreendedores e cidadãos que vivem os problemas no dia a dia e decidiram se organizar para buscar soluções reais.',
+                'question' => 'O PCT é um partido político?',
+                'answer' => 'Não. O PCT é uma associação civil e movimento cívico independente, não sendo um partido político.',
                 'order' => 2
             ],
             [
-                'question' => 'Qual é o objetivo do PCT?',
-                'answer' => 'Unir a população, defender direitos e transformar a realidade das cidades através de organização, participação e ação prática.',
+                'question' => 'O PCT tem ligação com partidos?',
+                'answer' => 'Não. O movimento é independente e não possui vínculo com partidos políticos (nem nacionais nem estrangeiros).',
                 'order' => 3
             ],
             [
-                'question' => 'O que o PCT faz na prática?',
-                'answer' => "• Ouve a população\n• Registra problemas da cidade\n• Organiza demandas\n• Conecta pessoas\n• Busca soluções reais",
+                'question' => 'Existe projeto de partido?',
+                'answer' => "Pode existir no futuro, mas isso é separado do movimento e totalmente opcional.\nParticipar do PCT não obriga ninguém a apoiar partido.",
                 'order' => 4
             ],
             [
-                'question' => 'O PCT é um partido político?',
-                'answer' => 'Ainda não. O PCT nasce como um movimento organizado da população, com o objetivo de estruturar uma base forte e, futuramente, avançar para uma estrutura política formal.',
+                'question' => 'Participar obriga apoiar partido?',
+                'answer' => 'Não. A participação no movimento não obriga apoio a qualquer partido. Você permanece totalmente livre.',
                 'order' => 5
             ],
             [
-                'question' => 'Como posso participar?',
-                'answer' => 'Você pode participar se cadastrando no site, acompanhando as ações, divulgando o movimento e ajudando a organizar sua cidade.',
+                'question' => 'Por que existe contador de apoios?',
+                'answer' => 'O contador representa pessoas interessadas no movimento e, opcionalmente, no apoio à futura formalização partidária.',
                 'order' => 6
-            ],
-            [
-                'question' => 'Preciso pagar algo para participar?',
-                'answer' => 'Não. A participação é livre e aberta. Qualquer apoio é voluntário.',
-                'order' => 7
-            ],
-            [
-                'question' => 'O que diferencia o PCT de outros movimentos?',
-                'answer' => 'O foco em organização real, uso de tecnologia, escuta da população e construção prática de soluções — não apenas discurso.',
-                'order' => 8
-            ],
-            [
-                'question' => 'Problemas para acessar o site ou fazer login?',
-                'answer' => "Se você encontrou erro ao fazer login em www.pct.social.br, não desista!\n\nEntre em contato conosco e faça parte do movimento: 👉 Sua participação é essencial para a mudança!",
-                'order' => 9
             ],
         ];
 

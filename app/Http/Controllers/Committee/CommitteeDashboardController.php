@@ -125,8 +125,9 @@ class CommitteeDashboardController extends Controller
             'cpf' => $request->cpf,
             'phone' => $request->phone,
             'birth_date' => $request->birth_date,
-            'password' => \Illuminate\Support\Facades\Hash::make('PCT@2026'), // Senha padrão atualizada
-            'role' => 'affiliate', // Mudado para affiliate para dar acesso à área
+            'password' => \Illuminate\Support\Facades\Hash::make('PCT@2026'),
+            'role' => 'affiliate',
+            'status' => 'active', // Ativo imediatamente — cadastrado pelo gestor
             'committee_id' => $directoryId,
             'registration_number' => 'PCT-2026-' . str_pad(User::max('id') + 1, 5, '0', STR_PAD_LEFT),
         ]);
@@ -322,6 +323,7 @@ class CommitteeDashboardController extends Controller
         
         auth()->login($user);
         
-        return redirect()->route('affiliate.dashboard');
+        // Redireciona para o painel do afiliado na mesma origem
+        return redirect('/dashboard');
     }
 }
