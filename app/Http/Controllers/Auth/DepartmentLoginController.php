@@ -89,12 +89,16 @@ class DepartmentLoginController extends Controller
                 if ($user->hasRole('admin')) {
                     $targetHost = 'administrativo.' . $host;
                     if (!str_starts_with($fullHost, 'administrativo.')) {
-                        return redirect()->away($scheme . '://' . $targetHost . ($port ? ':' . $port : '') . '/dashboard');
+                        $targetUrl = $scheme . '://' . $targetHost . ($port ? ':' . $port : '') . '/dashboard';
+                        \Illuminate\Support\Facades\Log::info("Redirecting Admin to: " . $targetUrl);
+                        return redirect()->away($targetUrl);
                     }
                 } elseif ($user->hasRole('affiliate')) {
                     $targetHost = 'afiliado.' . $host;
                     if (!str_starts_with($fullHost, 'afiliado.')) {
-                        return redirect()->away($scheme . '://' . $targetHost . ($port ? ':' . $port : '') . '/dashboard');
+                        $targetUrl = $scheme . '://' . $targetHost . ($port ? ':' . $port : '') . '/dashboard';
+                        \Illuminate\Support\Facades\Log::info("Redirecting Affiliate to: " . $targetUrl);
+                        return redirect()->away($targetUrl);
                     }
                 }
 
