@@ -61,7 +61,6 @@
                         <a href="{{ route('home') }}" class="px-3 py-2 text-sm text-gray-600 hover:text-pct-blue font-semibold rounded-lg hover:bg-slate-50 transition-all">Home</a>
                         <a href="https://drive.google.com/file/d/1aGtnjECienMe3hjDoFSYeeMm8e7n6Wvo/view?usp=sharing" target="_blank" class="px-3 py-2 text-sm text-gray-600 hover:text-pct-blue font-semibold rounded-lg hover:bg-slate-50 transition-all">Cartilha</a>
                         <a href="https://drive.google.com/file/d/1i0UZreBix6cktRShr4DW2VE6GbrdmlFO/view?usp=sharing" target="_blank" class="px-3 py-2 text-sm text-gray-600 hover:text-pct-blue font-semibold rounded-lg hover:bg-slate-50 transition-all">Estatuto</a>
-                        <a href="{{ route('campaign.water.index') }}" class="px-3 py-2 text-sm text-gray-600 hover:text-pct-blue font-semibold rounded-lg hover:bg-slate-50 transition-all whitespace-nowrap">Relatar Problema</a>
                     </div>
 
 
@@ -92,15 +91,6 @@
                     <a href="{{ route('home') }}" class="block px-4 py-3 text-base font-bold text-gray-700 hover:bg-slate-50 rounded-xl transition-all">Home</a>
                     <a href="https://drive.google.com/file/d/1aGtnjECienMe3hjDoFSYeeMm8e7n6Wvo/view?usp=sharing" target="_blank" class="block px-4 py-3 text-base font-bold text-gray-700 hover:bg-slate-50 rounded-xl transition-all">Cartilha</a>
                     <a href="https://drive.google.com/file/d/1i0UZreBix6cktRShr4DW2VE6GbrdmlFO/view?usp=sharing" target="_blank" class="block px-4 py-3 text-base font-bold text-gray-700 hover:bg-slate-50 rounded-xl transition-all">Estatuto</a>
-                    <div class="px-4 pt-2 pb-1">
-                        <p class="text-xs font-black text-slate-400 uppercase tracking-widest mb-2">Projetos</p>
-                        <a href="{{ route('proposta.sndah') }}" class="flex items-center gap-3 px-3 py-3 text-sm font-black text-emerald-600 bg-emerald-50 rounded-xl mb-2">
-                            <span class="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                            SNDAH 2026 — Projeto de Lei
-                        </a>
-                        <a href="{{ route('petition.show') }}" class="block px-3 py-3 text-sm font-bold text-gray-700 hover:bg-slate-50 rounded-xl">✍️ Abaixo-Assinado</a>
-                    </div>
-                    <a href="{{ route('campaign.water.index') }}" class="block px-4 py-3 text-base font-bold text-gray-700 hover:bg-slate-50 rounded-xl transition-all">🚨 Relatar Problema</a>
                     <div class="pt-4 border-t border-slate-100 grid grid-cols-2 gap-3">
                         <a href="{{ route('login') }}" class="flex items-center justify-center py-3 text-pct-blue font-black uppercase tracking-widest text-xs border-2 border-pct-blue/20 rounded-xl">Entrar</a>
                         <a href="{{ route('register.index') }}" class="flex items-center justify-center py-3 bg-pct-blue text-white font-black uppercase tracking-widest text-xs rounded-xl shadow-lg shadow-blue-900/20">Cadastre-se no Movimento</a>
@@ -133,9 +123,6 @@
                             <li><a href="{{ route('home') }}" class="hover:text-white transition-colors">Página Inicial</a></li>
                             <li><a href="https://drive.google.com/file/d/1aGtnjECienMe3hjDoFSYeeMm8e7n6Wvo/view?usp=sharing" target="_blank" class="hover:text-white transition-colors">Cartilha Oficial</a></li>
                             <li><a href="https://drive.google.com/file/d/1i0UZreBix6cktRShr4DW2VE6GbrdmlFO/view?usp=sharing" target="_blank" class="hover:text-white transition-colors">Estatuto Social</a></li>
-                            <li><a href="{{ route('proposta.sndah') }}" class="text-pct-green font-bold hover:text-white transition-colors uppercase text-xs tracking-widest">📋 SNDAH 2026 (Projeto de Lei)</a></li>
-                            <li><a href="{{ route('petition.show') }}" class="hover:text-white transition-colors">✍️ Abaixo-Assinado</a></li>
-                            <li><a href="{{ route('campaign.water.index') }}" class="hover:text-white transition-colors">🚨 Relatar Problema Hídrico</a></li>
                             <li><a href="{{ route('register.index') }}" class="hover:text-white transition-colors">Cadastre-se no PCT</a></li>
                         </ul>
                     </div>
