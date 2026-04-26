@@ -138,7 +138,7 @@
                     </div>
                 </div>
                 <div class="mt-12 pt-8 border-t border-blue-800 flex flex-col md:flex-row justify-between items-center text-blue-200 text-sm gap-4">
-                    <p>&copy; {{ date('Y') }} PCT - Movimento Político. Todos os direitos reservados.</p>
+                    <p>&copy; {{ date('Y') }} PCT &ndash; Movimento Cidadania e Trabalho. Associa&ccedil;&atilde;o civil sem fins lucrativos.</p>
                     <div class="flex space-x-6">
                         <a href="{{ route('terms') }}" class="hover:text-white transition-colors">Termos de Uso</a>
                         <a href="{{ route('privacy') }}" class="hover:text-white transition-colors">Privacidade (LGPD)</a>
